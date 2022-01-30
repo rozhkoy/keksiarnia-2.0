@@ -7,7 +7,8 @@ import styled from "@emotion/styled";
 import { css } from '@emotion/react';
 import {Container} from "./components/container";
 import {Header} from "./components/Header/Header";
-
+import {Banner} from "./components/HomePage/Baner";
+import { Global } from '@emotion/react'
 
 
 
@@ -15,11 +16,23 @@ import {Header} from "./components/Header/Header";
 
 
 function App() {
-  return (
-	<div className="App">
-		<Container>
-			<Header/>
 
+  return (
+
+	<div css={css`height: 200vh;`}>
+		<Global styles={css`
+			body{
+				font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+			}
+			*{
+				padding: 0;
+				margin: 0;
+			}
+		`
+		}/>
+		<Header/>
+		<Banner/>
+		<Container>
 		</Container>
 	</div>
   );

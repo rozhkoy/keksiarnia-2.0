@@ -1,7 +1,12 @@
 import {css} from "@emotion/react"
-import {useRef} from "react";
+import React from "react";
+import {Container} from "../container";
 
-export const Navbar = () => {
+type Props = {
+	stateNavBar: boolean
+}
+
+export const Navbar:React.FC<Props> = (props) => {
 	const navBar = css`
 	  display: flex;
 	  justify-content: flex-end;
@@ -11,6 +16,11 @@ export const Navbar = () => {
 	    grid-row: 2;
 	    display: grid;
 	    grid-template-columns: 1fr;
+	    grid-gap: 20px;
+	    transition: all 0.3s;
+	    height: 100vh;
+	    align-content: start;
+	    padding: 20px 0 0 0 ;
 	  }
 	`;
 
@@ -22,15 +32,24 @@ export const Navbar = () => {
         color: #5b5b5b;
         text-decoration: underline;
       }
+	  
 	`;
 
-	const test = css`
-	  background-color: red
+	const close = css`
+      @media(max-width: 1000px) {
+      	transform: translateX(0%);
+      }
+	`;
+
+	const open = css`
+	  @media(max-width: 1000px) {
+        transform: translateX(-100%);
+      }
 	`;
 
 
 	return(
-		<div css={[navBar, false ? test : navBarLink]}>
+		<div css={[navBar, props.stateNavBar ? close : open]}>
 			<a href="#" css={navBarLink}>HOME</a>
 			<a href="#" css={navBarLink}>HOME</a>
 			<a href="#" css={navBarLink}>HOME</a>
