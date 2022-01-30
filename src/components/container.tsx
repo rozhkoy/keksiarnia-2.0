@@ -10,6 +10,10 @@ export const Container = (props: AuxProps) => {
 	return(
 		<div css={css`
 			background-color: #ccc3;
+			width: 100%;
+			z-index: -1;
+			box-sizing: border-box;
+			position: relative;
 			@media (min-width: 575.98px){
 				  margin: auto;
 				  padding: 0;
@@ -23,7 +27,6 @@ export const Container = (props: AuxProps) => {
 			@media (min-width: 1199.98px){
 			  max-width: 1140px;
 			}
-			
 		`}>
 			{props.children}
 		</div>
