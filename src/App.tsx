@@ -1,10 +1,29 @@
+
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import styled from "@emotion/styled";
+import { css } from '@emotion/react';
+
+
+
+
+
 
 
 function App() {
+
+  const Link = styled('a')`
+  color: red;
+`
+
+  const test = css`
+    color: red;
+    background:  blue;
+  `
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -14,6 +33,10 @@ function App() {
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <span>
+          <Link href="#">Click me</Link>
+          <div css={test}>
+            redbkue
+          </div>
           <span>Learn </span>
           <a
             className="App-link"
