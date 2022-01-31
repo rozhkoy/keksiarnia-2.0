@@ -30,7 +30,7 @@ export const Navbar:React.FC<Props> = (props) => {
 	`;
 
 	const navBarLink = css`
-      padding: 0 0 0 10px;
+      padding: 0 0 0 20px;
       text-decoration: none;
       color: #000;
       &:hover {
