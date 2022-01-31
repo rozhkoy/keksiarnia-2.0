@@ -2,8 +2,7 @@ import {css} from "@emotion/react"
 import styled from "@emotion/styled";
 import bannerImg from "./banner.png"
 
-
-const BanerBttn = styled.button`
+const BannerBttn = styled.button`
 	text-align: center;
   	background: transparent;
   	border: 1px solid #fff;
@@ -16,15 +15,13 @@ const BanerBttn = styled.button`
   &:hover{
     color:  #502424;
     background: #fff;
-    
   }
-  	
 `;
 
 const banner = css`
   background: #502424;
-  padding: 240px 0 150px 0;
-  max-width: 1200px;
+  padding: 200px 0 200px 0;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -39,9 +36,9 @@ const banner = css`
 export const Banner = () => {
 	return(
 		<div css={banner}>
-			<h1 css={css`color: #fff; text-align: center; font-size: 56px; `}>Cake and brownies made for You</h1>
-			<h3 css={css`color: #fff`}>Our piece of art for any occasion!</h3>
-				<BanerBttn>Catalog</BanerBttn>
+			<h1 css={css`color: #fff; text-align: center; font-size: 59px; `}>Cake and brownies made for You</h1>
+			<h2 css={css`color: #fff`}>Our piece of art for any occasion!</h2>
+				<BannerBttn>Catalog</BannerBttn>
 		</div>
 	)
 }
