@@ -11,6 +11,11 @@ import {Banner} from "./components/HomePage/Banner/Baner";
 import { Global } from '@emotion/react'
 import { Wrapp } from './components/Wrapp/Wrapp';
 import {Offer} from "./components/HomePage/Offers/Offers";
+import {Homepage} from "./components/HomePage/Homepage";
+import {Route, Routes} from "react-router-dom";
+import {Catalog} from "./components/Catalog/Catalog";
+import {CatalogCake} from "./components/CatalogCake/CatalogCake";
+import {CatalogBrownies} from "./components/CatalogBrownies/CatalogBrownies";
 
 
 
@@ -82,12 +87,12 @@ function App() {
 			}
 		`}/>
 		<Header/>
-		<Wrapp>
-			<Container>
-				<Banner/>
-				<Offer mainText={"Cake for you"}/>
-			</Container>
-		</Wrapp>
+		<Routes>
+			<Route path="/" element={<Homepage />} />
+			<Route path="/Catalog" element={<Catalog />} />
+			<Route path="/Cake" element={<CatalogCake />} />
+			<Route path="/Brownies" element={<CatalogBrownies />} />
+		</Routes>
 	</div>
   );
 }

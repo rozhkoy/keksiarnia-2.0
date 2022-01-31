@@ -10,30 +10,44 @@ type Props = {
 export const OfferItem:React.FC<Props> = (props) => {
 
 	const ItemImg = css`
-		height: 430px;
+		height: 100%;
 	  	width: 100%;
 	  	object-fit: cover;
+	  	object-position: center center;
 	`
 
 	const item = css`
 		border-radius: 25px;
-	    background: #fff;
-	    overflow: hidden;
+		background: #fff;
+		overflow: hidden;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-auto-rows: 430px 1fr;
+	  	max-width: 420px;
 	`
 
 	const ItemTextBlock = css`	
 		padding: 0 20px 20px 20px;
 		display: grid;
 		grid-template-columns: 1fr;
+		grid-auto-rows: 100px 50px 60px;
+		grid-gap: 15px;
 		justify-items: center;
+		 
 	`
 
 	const ItemBttn = css`
 		padding: 10px 30px;
-	  	margin: 20px 0 0 0;
-	    border-radius: 25px;
-	  	background: #fff;
-	  	color: #000;
+		border-radius: 25px;
+		background: #fff;
+		color: #000;
+		align-self: center;
+	  	border: 1px solid #000;
+	  	transition: 0.3s;
+	  	:hover{
+		    background: black;
+		    color: #fff;
+	  	}
 	`
 
 	return(

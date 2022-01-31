@@ -1,6 +1,7 @@
 import {css} from "@emotion/react"
 import React from "react";
 import {Container} from "../container";
+import {Link} from "react-router-dom";
 
 type Props = {
 	stateNavBar: boolean
@@ -11,7 +12,8 @@ export const Navbar:React.FC<Props> = (props) => {
 	  display: flex;
 	  justify-content: flex-end;
 	  align-items: center;
-	  @media (max-width: 1000px){
+	  padding: 0 15px 0 0 ;
+	  @media (max-width: 780px){
 	    grid-column: 1/3;
 	    grid-row: 2;
 	    display: grid;
@@ -21,6 +23,9 @@ export const Navbar:React.FC<Props> = (props) => {
 	    height: 100vh;
 	    align-content: start;
 	    padding: 20px 0 0 0 ;
+	    position: absolute;
+	    width: 100%;
+	    background: #fff;
 	  }
 	`;
 
@@ -36,23 +41,24 @@ export const Navbar:React.FC<Props> = (props) => {
 	`;
 
 	const close = css`
-      @media(max-width: 1000px) {
-      	transform: translateX(0%);
+      @media(max-width: 780px) {
+      	left: 0;
       }
 	`;
 
 	const open = css`
-	  @media(max-width: 1000px) {
-        transform: translateX(-100%);
+	  @media(max-width: 780px) {
+        left: -100%;
       }
 	`;
 
 
 	return(
 		<div css={[navBar, props.stateNavBar ? close : open]}>
-			<a href="#" css={navBarLink}>HOME</a>
-			<a href="#" css={navBarLink}>HOME</a>
-			<a href="#" css={navBarLink}>HOME</a>
+			<Link  css={navBarLink} to="/">Home</Link>
+			<Link  css={navBarLink} to="/Catalog">Catalog</Link>
+			<Link  css={navBarLink} to="/Cake">Cake</Link>
+			<Link  css={navBarLink} to="/Brownies">Brownies</Link>
 		</div>
 	)
 }
