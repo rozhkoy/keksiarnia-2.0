@@ -20,7 +20,7 @@ const BannerBttn = styled.button`
 
 const banner = css`
   background: #502424;
-  padding: 200px 0 200px 0;
+  padding: 200px 20px 200px 20px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -36,8 +36,8 @@ const banner = css`
 export const Banner = () => {
 	return(
 		<div css={banner}>
-			<h1 css={css`color: #fff; text-align: center; font-size: 59px; `}>Cake and brownies made for You</h1>
-			<h2 css={css`color: #fff`}>Our piece of art for any occasion!</h2>
+			<h1 css={css`color: #fff; text-align: center; font-size: 59px; @media(max-width: 540px){font-size: 46px; line-height: 1.5em} `}>Cake and brownies made for You</h1>
+			<h2 css={css`color: #fff; font-weight: 300`}>Our piece of art for any occasion!</h2>
 				<BannerBttn>Catalog</BannerBttn>
 		</div>
 	)

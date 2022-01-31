@@ -8,12 +8,11 @@ type Props = {
 
 export const Offer:React.FC<Props> = (props) => {
 	const offer = css`
-		padding: 125px 0;
+		padding: 125px 15px 75px 15px;
 	  	display: grid;
 	  	grid-template-columns: 1fr;
 	  	grid-auto-rows: auto;
 	  	justify-items: center;
-	  	padding: 0 15px;
 	`
 
 	const buttonWatchMore = css`

@@ -11,6 +11,7 @@ import {Banner} from "./components/HomePage/Banner/Baner";
 import { Global } from '@emotion/react'
 import { Wrapp } from './components/Wrapp/Wrapp';
 import {Offer} from "./components/HomePage/Offers/Offers";
+import {Homepage} from "./components/HomePage/Homepage";
 
 
 
@@ -82,12 +83,7 @@ function App() {
 			}
 		`}/>
 		<Header/>
-		<Wrapp>
-			<Container>
-				<Banner/>
-				<Offer mainText={"Cake for you"}/>
-			</Container>
-		</Wrapp>
+		<Homepage/>
 	</div>
   );
 }

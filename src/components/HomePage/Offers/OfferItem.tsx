@@ -13,6 +13,7 @@ export const OfferItem:React.FC<Props> = (props) => {
 		height: 100%;
 	  	width: 100%;
 	  	object-fit: cover;
+	  	object-position: center center;
 	`
 
 	const item = css`
@@ -22,7 +23,7 @@ export const OfferItem:React.FC<Props> = (props) => {
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-auto-rows: 430px 1fr;
-	  max-width: 420px;
+	  	max-width: 420px;
 	`
 
 	const ItemTextBlock = css`	
@@ -41,12 +42,12 @@ export const OfferItem:React.FC<Props> = (props) => {
 		background: #fff;
 		color: #000;
 		align-self: center;
-	  border: 1px solid #000;
-	  transition: 0.3s;
-	  :hover{
-	    background: black;
-	    color: #fff;
-	  }
+	  	border: 1px solid #000;
+	  	transition: 0.3s;
+	  	:hover{
+		    background: black;
+		    color: #fff;
+	  	}
 	`
 
 	return(

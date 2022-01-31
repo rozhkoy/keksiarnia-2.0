@@ -3,6 +3,7 @@ import {css} from "@emotion/react"
 import {Navbar} from "./Navbar";
 import {MobBttn} from "./MobBttn";
 import {useState} from "react";
+import {Container} from "../container";
 
 export const Header = () => {
 
@@ -14,17 +15,8 @@ export const Header = () => {
 		box-sizing: border-box;
 		margin: 0 auto;
 	    padding: 10px 0;
-		@media (min-width: 575.98px){
-		};
-		@media (min-width: 768.98px){
-			max-width: 720px;
-		};
-		@media (min-width: 991.98px) {
-			max-width: 960px;	
-		};
-		@media (min-width: 1199.98px){
-			max-width: 1140px;
-		}
+	    position: relative;
+	  
 	`;
 
 	const [stateNavBar, setStateNavbar] = useState<boolean>(false)
@@ -36,11 +28,13 @@ export const Header = () => {
 
 	return(
 		<div  css={css`width: 100%; position: fixed; top: 0; border-bottom: 1px solid #000; background: #fff; z-index: 999`}>
-			<div css={header}>
-				<Logo />
-				<Navbar stateNavBar={stateNavBar}/>
-				<MobBttn openCloseNavbar={openCLoseNavbar}/>
-			</div>
+			<Container>
+				<div css={header}>
+					<Logo />
+					<Navbar stateNavBar={stateNavBar}/>
+					<MobBttn openCloseNavbar={openCLoseNavbar}/>
+				</div>
+			</Container>
 		</div>
 	)
 }
