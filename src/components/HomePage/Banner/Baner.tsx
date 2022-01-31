@@ -19,18 +19,18 @@ const BannerBttn = styled.button`
 `;
 
 const banner = css`
-  background: #502424;
-  padding: 200px 20px 200px 20px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-image: url(${bannerImg});
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+	  background: #502424;
+	  padding: 200px 20px 200px 20px;
+	  width: 100%;
+	  margin: 0 auto;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  flex-direction: column;
+	  background-image: url(${bannerImg});
+	  background-position: center center;
+	  background-size: cover;
+	  background-repeat: no-repeat;
 `;
 
 export const Banner = () => {
