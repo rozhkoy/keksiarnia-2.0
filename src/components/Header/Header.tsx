@@ -14,7 +14,6 @@ export const Header = () => {
 		box-sizing: border-box;
 		margin: 0 auto;
 	    padding: 10px 0;
-	  	z-index: 889;
 		@media (min-width: 575.98px){
 		};
 		@media (min-width: 768.98px){
@@ -36,7 +35,7 @@ export const Header = () => {
 	}
 
 	return(
-		<div  css={css`width: 100%; position: fixed; top: 0; border-bottom: 1px solid #000; background: #fff`}>
+		<div  css={css`width: 100%; position: fixed; top: 0; border-bottom: 1px solid #000; background: #fff; z-index: 999`}>
 			<div css={header}>
 				<Logo />
 				<Navbar stateNavBar={stateNavBar}/>
