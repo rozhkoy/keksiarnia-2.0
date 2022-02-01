@@ -1,31 +1,14 @@
-
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
 import './App.css';
-import styled from "@emotion/styled";
 import { css } from '@emotion/react';
-import {Container} from "./components/container";
 import {Header} from "./components/Header/Header";
-import {Banner} from "./components/HomePage/Banner/Baner";
 import { Global } from '@emotion/react'
-import { Wrapp } from './components/Wrapp/Wrapp';
-import {Offer} from "./components/HomePage/Offers/Offers";
 import {Homepage} from "./components/HomePage/Homepage";
 import {Route, Routes} from "react-router-dom";
 import {Catalog} from "./components/Catalog/Catalog";
-import {CatalogCake} from "./components/CatalogCake/CatalogCake";
-import {CatalogBrownies} from "./components/CatalogBrownies/CatalogBrownies";
-
-
-
-
-
 
 function App() {
-
   return (
-
 	<div css={css`background: #eeeeee`}>
 		<Global styles={css`
 			*,
@@ -90,8 +73,8 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Homepage />} />
 			<Route path="/Catalog" element={<Catalog />} />
-			<Route path="/Cake" element={<CatalogCake />} />
-			<Route path="/Brownies" element={<CatalogBrownies />} />
+			<Route path="/Cake" element={<Catalog />} />
+			<Route path="/Brownies" element={<Catalog />} />
 		</Routes>
 	</div>
   );
