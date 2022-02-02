@@ -39,6 +39,7 @@ const filterTagForSearch = sequelize.define("filterTagForSearch", {
 
 
 
+
 product.hasMany(filterTagForSearch)
 filterTagForSearch.belongsTo(product)
 
