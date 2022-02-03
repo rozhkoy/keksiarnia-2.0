@@ -36,6 +36,11 @@ const filterTagForSearch = sequelize.define("filterTagForSearch", {
   productID: {type: DataTypes.INTEGER, allowNull: false}
 })
 
+const test = sequelize.define("test", {
+  id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  field: {type: DataTypes.STRING, allowNull: false},
+})
+
 
 
 
@@ -55,5 +60,5 @@ type.belongsTo(product)
 
 
 module.exports = {
-  product, filterItem, filterCategory, type, filterTagForSearch
+  product, filterItem, filterCategory, type, filterTagForSearch, test
 }

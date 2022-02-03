@@ -1,11 +1,16 @@
 const Router = require('express')
+const {test} = require("../models/models");
 const router = new Router()
 
-router.post("/",(req, res) => {
-  res.status(200).json({massage: "dok"})
+router.post("/",async (req, res) => {
+  const field = req.query.name
+  const brand = await test.create({field: field})
+  res.json(brand)
+
 })
-router.get("/",(req, res) => {
-  res.status(200).json({massage: "cup"})
+router.get("/", async (req, res) => {
+  const brands = await test.findAll()
+  return res.json(brands)
 })
 
 
