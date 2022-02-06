@@ -57,9 +57,8 @@ const test = sequelize.define("test", {
 // product.hasOne(type)
 // type.belongsTo(product)
 
-type.hasMany(product)
-product.belongsTo(type)
-
+type.hasMany(product,  {foreignKey: 'typeID'})
+product.belongsTo(type, {foreignKey: 'typeID'})
 
 
 

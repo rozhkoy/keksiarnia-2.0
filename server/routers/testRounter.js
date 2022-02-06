@@ -12,12 +12,10 @@ router.post("/",async (req, res) => {
 
 
 router.get("/", async (req, res) => {
-  const brands = await type.findAll(
-    // {
-    // where: {
-    //   id: {[Op.gt]: 3}
-    // }}
-    )
+  const brands = await type.findAll({
+      include: [type]
+      }
+  )
   return res.json(brands)
 })
 

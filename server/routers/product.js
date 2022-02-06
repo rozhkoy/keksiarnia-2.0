@@ -13,7 +13,14 @@ router.post("/", async (req, res) => {
 	res.json(prod)
 })
 router.get("/", async (req, res) => {
-	const prod = await product.findAll()
+	const prod = await product.findAll({
+		where: {name: "cake"},
+		include: [{
+			model: type,
+			where: {name: "Cake"},
+		}]
+		}
+	)
 	return res.json(prod)
 })
 
