@@ -13,7 +13,10 @@ router.post("/", async (req, res) => {
 	res.json(prod)
 })
 router.get("/", async (req, res) => {
-	const prod = await product.findAll()
+	const prod = await product.findAll({
+			include: [type]
+		}
+	)
 	return res.json(prod)
 })
 
