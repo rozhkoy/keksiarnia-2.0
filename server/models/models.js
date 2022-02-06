@@ -63,8 +63,6 @@ product.belongsTo(type, {foreignKey: 'typeID'})
 
 
 
-
-
 module.exports = {
   product, filterItem, filterCategory, type, filterTagForSearch, test
 }
