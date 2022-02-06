@@ -8,7 +8,7 @@ const product = sequelize.define("product", {
   name: {type:DataTypes.STRING, allowNull: false},
   price: {type:DataTypes.INTEGER, allowNull: false},
   img: {type:DataTypes.STRING, allowNull: false},
-  typeID: {type:DataTypes.INTEGER, allowNull: false},
+  typeID: {type:DataTypes.INTEGER},
   description: {type:DataTypes.STRING, allowNull: false}
 })
 
@@ -44,18 +44,23 @@ const test = sequelize.define("test", {
 
 
 
+//
+// product.hasMany(filterTagForSearch)
+// filterTagForSearch.belongsTo(product)
+//
+// filterCategory.hasMany(filterItem)
+// filterItem.belongsTo(filterCategory)
 
-product.hasMany(filterTagForSearch)
-filterTagForSearch.belongsTo(product)
+// filterCategory.hasMany(type)
+// type.belongsTo(filterCategory)
+//
+// product.hasOne(type)
+// type.belongsTo(product)
 
-filterCategory.hasMany(filterItem)
-filterItem.belongsTo(filterCategory)
+type.hasMany(product)
+product.belongsTo(type)
 
-filterCategory.hasMany(type)
-type.belongsTo(filterCategory)
 
-product.hasOne(type)
-type.belongsTo(product)
 
 
 
