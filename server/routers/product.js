@@ -13,15 +13,25 @@ router.post("/", async (req, res) => {
 	res.json(prod)
 })
 router.get("/", async (req, res) => {
-	const prod = await product.findAll({
-		where: {name: "cake"},
-		include: [{
-			model: type,
-			where: {name: "Cake"},
-		}]
+	const {category} = req.query;
+	let queryForProduct
+	if(category){
+		try {
+			queryForProduct = await product.findAll({
+					include: [{
+						model: type,
+						where: {name: category},
+					}]
+				}
+			)
+			return res.json(queryForProduct)
+		} catch (e){
+			console.log("error")
 		}
-	)
-	return res.json(prod)
+	} else {
+		queryForProduct = await product.findAll()
+		return res.json(queryForProduct)
+	}
 })
 
 

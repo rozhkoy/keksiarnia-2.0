@@ -3,6 +3,8 @@ import {Container} from "../container";
 import {FilterItemCheckbox} from "../FilterItem/FilterItemCheckbox";
 import {CatalogItem} from "../CatalogItem/CatalogItem";
 import {css} from "@emotion/react"
+import {fetchAllProduct} from "../../store/setCatalogDate";
+import {useDispatch} from "react-redux";
 
 export  const Catalog = () => {
 
@@ -33,7 +35,7 @@ export  const Catalog = () => {
 	  
 	`
 
-
+	const dispatch = useDispatch()
 	return(
 			<Wrapp>
 				<Container>
@@ -64,16 +66,7 @@ export  const Catalog = () => {
 							</div>
 						</div>
 						<div css={catalogGrid}>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
-							<CatalogItem/>
+							<button onClick={() => {dispatch(fetchAllProduct())}}>test</button>
 						</div>
 					</div>
 				</Container>
