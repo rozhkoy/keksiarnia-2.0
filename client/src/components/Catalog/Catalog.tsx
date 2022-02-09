@@ -3,11 +3,16 @@ import {Container} from "../container";
 import {FilterItemCheckbox} from "../FilterItem/FilterItemCheckbox";
 import {CatalogItem} from "../CatalogItem/CatalogItem";
 import {css} from "@emotion/react"
-import {fetchAllProduct} from "../../store/setCatalogDate";
+import {fetchAllProduct, productItemALL} from "../../store/setCatalogDate";
 import {useDispatch} from "react-redux";
+import {useAppSelector} from "../../app/hooks";
+import {useLocation} from "react-router-dom";
+
 
 export  const Catalog = () => {
 
+	const catalogItems = useAppSelector((state => state.catalog))
+	console.log(catalogItems)
 	const catalog = css`
 		display: grid;
     	grid-template-columns: repeat(12, 1fr);
@@ -19,6 +24,7 @@ export  const Catalog = () => {
 	  display: grid;
 	  grid-template-columns: repeat(3, 1fr);
 	  grid-gap: 15px;
+	  align-items: start;
 	`
 
 	const catalogFilter = css`
@@ -34,6 +40,7 @@ export  const Catalog = () => {
 	  background: #fff;
 	  
 	`
+
 
 	const dispatch = useDispatch()
 	return(
@@ -66,9 +73,16 @@ export  const Catalog = () => {
 							</div>
 						</div>
 						<div css={catalogGrid}>
-							<button onClick={() => {dispatch(fetchAllProduct())}}>test</button>
+							{
+								catalogItems.arrayProduct.map((item: productItemALL) =>(
+										<CatalogItem img={process.env.REACT_APP_API_URL + item.img} name={item.name} price={item.price}  key={item.id}/>
+									)
+								)
+							}
+
 						</div>
 					</div>
+					<button onClick={() => {dispatch(fetchAllProduct())}}>test</button>
 				</Container>
 			</Wrapp>
 	)

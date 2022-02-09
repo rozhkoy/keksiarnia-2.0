@@ -1,14 +1,15 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import {$host} from "../http";
 
 
-
-interface productItemALL {
-	id?: number,
-	name?: string,
-	price?: number,
-	img?: string,
-	typeID?: number,
-	description?: string,
+ export interface productItemALL {
+	id: number,
+	name: string,
+	price: number,
+	img: string,
+	typeID: number,
+	description: string,
 }
 
 interface state {
@@ -24,8 +25,8 @@ export const fetchAllProduct = createAsyncThunk(
 	async function():Promise<any> {
 		console.log("eee")
 		try{
-			const response = await  fetch(`http://localhost:5000/api/product`)
-			return await response.json()
+			const response = await $host.get(`api/product`)
+			return  response.data
 		} catch (e) {
 			console.log(e)
 		}
@@ -42,6 +43,7 @@ const catalog = createSlice({
 			})
 			builder.addCase(fetchAllProduct.fulfilled, (state, {payload}) => {
 				console.log(payload)
+				state.arrayProduct = payload
 			})
 		})
 	})
