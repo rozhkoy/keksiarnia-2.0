@@ -2,7 +2,14 @@ import caImg from "./catalog-itemImg.jpg"
 import {css} from "@emotion/react"
 import React from "react";
 
-export const CatalogItem = () => {
+type Props = {
+	price: number,
+	name: string,
+	img: string,
+	key: number
+}
+
+export const CatalogItem:React.FC<Props> = (props) => {
 
 	const item = css`
 	  display: grid;
@@ -19,10 +26,10 @@ export const CatalogItem = () => {
 
 	return(
 		<div css={item} >
-			<img css={ItemImg} src={caImg} alt=""/>
+			<img css={ItemImg} src={props.img} alt=""/>
 			<div>
-				<h3>Lorem ipsum dolor sit amet</h3>
-				<p>2.4$</p>
+				<h3>{props.name}</h3>
+				<p>{props.price}$</p>
 				<button>Add to cart</button>
 			</div>
 		</div>
