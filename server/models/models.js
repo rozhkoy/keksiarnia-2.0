@@ -60,7 +60,11 @@ const test = sequelize.define("test", {
 type.hasMany(product,  {foreignKey: 'typeID'})
 product.belongsTo(type, {foreignKey: 'typeID'})
 
+filterCategory.hasMany(filterItem, {foreignKey: "CategoryID"})
+filterItem.belongsTo(filterCategory, {foreignKey: 'CategoryID'})
 
+type.hasMany(filterCategory,  {foreignKey: 'typeID'})
+filterCategory.belongsTo(type, {foreignKey: 'typeID'})
 
 
 module.exports = {
