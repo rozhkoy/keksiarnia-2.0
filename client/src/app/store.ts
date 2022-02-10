@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import setCatalogDate from "../store/setCatalogDate";
+import setCatalogDate from "../store/setCatalogData";
 
 
 export const store = configureStore({
