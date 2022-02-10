@@ -6,6 +6,7 @@ import { Global } from '@emotion/react'
 import {Homepage} from "./components/HomePage/Homepage";
 import {Route, Routes} from "react-router-dom";
 import {Catalog} from "./components/Catalog/Catalog";
+import {CatalogOfOneCategory} from "./components/Catalog/CatalogOfOneCategory";
 
 function App() {
   return (
@@ -73,8 +74,8 @@ function App() {
 		<Routes>
 			<Route path="/" element={<Homepage />} />
 			<Route path="/Catalog" element={<Catalog />} />
-			<Route path="/Cake" element={<Catalog />} />
-			<Route path="/Brownies" element={<Catalog />} />
+			<Route path="/Cake" element={<CatalogOfOneCategory/>} />
+			<Route path="/Muffin"element={<CatalogOfOneCategory/>}/>
 		</Routes>
 	</div>
   );

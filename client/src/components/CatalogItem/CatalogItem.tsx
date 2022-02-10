@@ -26,7 +26,7 @@ export const CatalogItem:React.FC<Props> = (props) => {
 
 	return(
 		<div css={item} >
-			<img css={ItemImg} src={props.img} alt=""/>
+			<img css={ItemImg} src={props.img} alt="" loading="lazy" />
 			<div>
 				<h3>{props.name}</h3>
 				<p>{props.price}$</p>

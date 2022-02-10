@@ -2,19 +2,19 @@ import React from "react";
 import {Banner} from "./Banner/Baner";
 import {Container} from "../container";
 import {Offer} from "./Offers/Offers";
-import {Wrapp} from "../Wrapp/Wrapp";
+import {Wrap} from "../Wrap/Wrapp";
 
 
 export const Homepage = () => {
 	return(
 		<div>
-			<Wrapp>
+			<Wrap>
 				<Container>
 					<Banner/>
 					<Offer mainText={"Cake for you"}/>
 					<Offer mainText={"Cake for you"}/>
 				</Container>
-			</Wrapp>
+			</Wrap>
 		</div>
 	)
 }

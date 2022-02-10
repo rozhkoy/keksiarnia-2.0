@@ -58,7 +58,7 @@ export const Navbar:React.FC<Props> = (props) => {
 			<Link  css={navBarLink} to="/">Home</Link>
 			<Link  css={navBarLink} to="/Catalog">Catalog</Link>
 			<Link  css={navBarLink} to="/Cake">Cake</Link>
-			<Link  css={navBarLink} to="/Brownies">Brownies</Link>
+			<Link  css={navBarLink} to="/Muffin">Brownies</Link>
 		</div>
 	)
 }

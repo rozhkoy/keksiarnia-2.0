@@ -13,14 +13,16 @@ router.post("/", async (req, res) => {
 	res.json(prod)
 })
 router.get("/", async (req, res) => {
-	const {category} = req.query;
+	const {Category} = req.query;
 	let queryForProduct
-	if(category){
+
+	if(Category){
+		console.log("test")
 		try {
 			queryForProduct = await product.findAll({
 					include: [{
 						model: type,
-						where: {name: category},
+						where: {name: Category},
 					}]
 				}
 			)
@@ -33,6 +35,7 @@ router.get("/", async (req, res) => {
 		return res.json(queryForProduct)
 	}
 })
+
 
 
 module.exports = router
