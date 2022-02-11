@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {$host} from "../http";
 
 
- export interface productItemALL {
+export interface productItemALL {
 	id: number,
 	name: string,
 	price: number,
@@ -13,13 +13,34 @@ import {$host} from "../http";
 
 interface state {
 	arrayProduct: Array<productItemALL>,
-	currentPath: string
+	currentPath: string,
+	arrayFilterField: Array<filterItems>
 }
+
+interface filterItems {
+	id: number,
+	typeID: number,
+	Category: string,
+	filterItems: Array<filterItem>,
+	type: type
+}
+
+interface filterItem {
+	id: number,
+	field: string,
+	CategoryID: number,
+}
+
+interface type {
+	id: number,
+	name: string
+}
+
 
 const initialState = {
 	arrayProduct: [],
-	currentPath: ""
-
+	currentPath: "",
+	arrayFilterField: []
 } as state
 
 export const fetchAllProduct = createAsyncThunk(
@@ -35,7 +56,7 @@ export const fetchAllProduct = createAsyncThunk(
 )
 
 export const fetchOnlyOneCategory = createAsyncThunk(
-	"fetchAllProduct",
+	"fetchOnlyOneCategory",
 	async function(category: string):Promise<any> {
 		try{
 			const response = await $host.get(`api/product/?Category=${category}`)
@@ -45,6 +66,20 @@ export const fetchOnlyOneCategory = createAsyncThunk(
 		}
 	}
 )
+
+export const fetchFilterField = createAsyncThunk(
+	"fetchFilterField",
+	async function (category: string):Promise<any> {
+		try{
+			const response = await $host.get(`/api/filter/?Category=${category}`)
+			return  response.data
+		} catch (e) {
+			console.log(e)
+		}
+	}
+)
+
+
 
 const catalog = createSlice({
 		name: "catalog",
@@ -60,8 +95,17 @@ const catalog = createSlice({
 				console.log(payload)
 				state.arrayProduct = payload
 			})
+			builder.addCase(fetchOnlyOneCategory.fulfilled, (state, {payload}) => {
+				console.log(payload)
+				state.arrayProduct = payload
+			})
+			builder.addCase(fetchFilterField.fulfilled, (state, {payload}) => {
+				console.log(payload)
+				state.arrayFilterField = payload
+			})
+
 		})
 	})
 
-export const {setCurrentPath} = catalog.actions
+export const { setCurrentPath } = catalog.actions
 export default catalog.reducer

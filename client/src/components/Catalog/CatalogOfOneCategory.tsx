@@ -3,18 +3,17 @@ import {Container} from "../container";
 import {FilterItemCheckbox} from "../FilterItem/FilterItemCheckbox";
 import {CatalogItem} from "../CatalogItem/CatalogItem";
 import {css} from "@emotion/react"
-import {fetchAllProduct, fetchOnlyOneCategory, productItemALL, setCurrentPath} from "../../store/setCatalogData";
+import {fetchFilterField, fetchOnlyOneCategory, productItemALL} from "../../store/setCatalogData";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../app/hooks";
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
-import * as path from "path";
+import {FilterItemInputRange} from "../FilterItem/FilterItemInputRange";
 
 
 
 export  const CatalogOfOneCategory = () => {
-	const [queryStatus, setQueryStatus] = useState<boolean>(false)
-	const catalogItems = useAppSelector((state => state.catalog))
+	const catalogDate = useAppSelector((state => state.catalog))
 
 	const catalog = css`
 		display: grid;
@@ -64,40 +63,26 @@ export  const CatalogOfOneCategory = () => {
 			<Container>
 				<div css={catalog}>
 					<div css={catalogFilter}>
-						<div css={filterGroup}>
-							<FilterItemCheckbox text={"cake"}/>
-							<FilterItemCheckbox text={"dfsdfsdf"}/>
-							<FilterItemCheckbox text={"casdfsdfke"}/>
-							<FilterItemCheckbox text={"sdfsdfsdf"}/>
-							<FilterItemCheckbox text={"sdfdsfsdf"}/>
-						</div>
-
-						<div css={filterGroup}>
-							<FilterItemCheckbox text={"cake"}/>
-							<FilterItemCheckbox text={"dfsdfsdf"}/>
-							<FilterItemCheckbox text={"casdfsdfke"}/>
-							<FilterItemCheckbox text={"sdfsdfsdf"}/>
-							<FilterItemCheckbox text={"sdfdsfsdf"}/>
-						</div>
-
-						<div css={filterGroup}>
-							<FilterItemCheckbox text={"cake"}/>
-							<FilterItemCheckbox text={"dfsdfsdf"}/>
-							<FilterItemCheckbox text={"casdfsdfke"}/>
-							<FilterItemCheckbox text={"sdfsdfsdf"}/>
-							<FilterItemCheckbox text={"sdfdsfsdf"}/>
-						</div>
+						{catalogDate.arrayFilterField.map((item) => (
+							<div key={item.id}> {item.Category}
+								{item.Category == "Price" ?
+									<FilterItemInputRange/> :
+									item.filterItems.map((element) => (
+										<FilterItemCheckbox  key={element.id} text={element.field}/>
+									))}
+							</div>
+						))}
 					</div>
 					<div css={catalogGrid}>
 						{
-							catalogItems.arrayProduct.map((item: productItemALL) =>(
+							catalogDate.arrayProduct.map((item: productItemALL) =>(
 									<CatalogItem img={item.img} name={item.name} price={item.price}  key={item.id}/>
 								)
 							)
 						}
 					</div>
 				</div>
-				<button onClick={() => fetchProduct()}>test</button>
+				<button onClick={() => dispatch(fetchFilterField(pathname.split("/").join("")))}>test</button>
 			</Container>
 		</Wrap>
 	)
