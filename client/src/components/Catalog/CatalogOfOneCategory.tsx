@@ -3,7 +3,12 @@ import {Container} from "../container";
 import {FilterItemCheckbox} from "../FilterItem/FilterItemCheckbox";
 import {CatalogItem} from "../CatalogItem/CatalogItem";
 import {css} from "@emotion/react"
-import {fetchFilterField, fetchOnlyOneCategory, productItemALL} from "../../store/setCatalogData";
+import {
+	fetchFilteredProducts,
+	fetchFilterField,
+	fetchOnlyOneCategory,
+	productItemALL
+} from "../../store/setCatalogData";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "../../app/hooks";
 import {useEffect, useState} from "react";
@@ -72,11 +77,12 @@ export  const CatalogOfOneCategory = () => {
 									))}
 							</div>
 						))}
+						<button onClick={() => dispatch(fetchFilteredProducts())}>go</button>
 					</div>
 					<div css={catalogGrid}>
 						{
 							catalogDate.arrayProduct.map((item: productItemALL) =>(
-									<CatalogItem img={item.img} name={item.name} price={item.price}  key={item.id}/>
+									<CatalogItem img={item.img} name={item.name} price={item.price}  key={Math.random() * item.id}/>
 								)
 							)
 						}

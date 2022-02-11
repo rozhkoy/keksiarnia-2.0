@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, current} from "@reduxjs/toolkit";
 import {$host} from "../http";
 
 
@@ -79,6 +79,18 @@ export const fetchFilterField = createAsyncThunk(
 	}
 )
 
+export const fetchFilteredProducts = createAsyncThunk(
+	"fetchFilteredProducts",
+	async function ():Promise<any> {
+		try{
+			const response = await $host.get(`/api/filtered/`)
+			return  response.data
+		} catch (e) {
+			console.log(e)
+		}
+	}
+)
+
 
 
 const catalog = createSlice({
@@ -102,6 +114,15 @@ const catalog = createSlice({
 			builder.addCase(fetchFilterField.fulfilled, (state, {payload}) => {
 				console.log(payload)
 				state.arrayFilterField = payload
+			})
+			builder.addCase(fetchFilteredProducts.fulfilled, (state, {payload}) => {
+				state.arrayProduct.length = 0;
+				for(let i = 0; i < payload.length; i++){
+					console.log(payload[i].product)
+					state.arrayProduct[i] = payload[i].product
+				}
+				console.log(current(state.arrayProduct));
+
 			})
 
 		})
