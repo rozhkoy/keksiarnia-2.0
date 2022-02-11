@@ -49,6 +49,9 @@ filterItem.belongsTo(filterCategory, {foreignKey: 'CategoryID'})
 type.hasMany(filterCategory,  {foreignKey: 'typeID'})
 filterCategory.belongsTo(type, {foreignKey: 'typeID'})
 
+product.hasMany(filterTagForSearch, {foreignKey: 'productID'})
+filterTagForSearch.belongsTo(product, {foreignKey: 'productID'})
+
 
 module.exports = {
   product, filterItem, filterCategory, type, filterTagForSearch, test

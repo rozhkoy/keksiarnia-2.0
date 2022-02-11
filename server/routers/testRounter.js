@@ -1,22 +1,22 @@
 const Router = require('express')
-const {test, type, filterCategory, filterItem} = require("../models/models");
+const {test, type, filterCategory, filterItem, filterTagForSearch, product} = require("../models/models");
 const { Op } = require("sequelize");
 const router = new Router()
 
 
 router.post("/",async (req, res) => {
-  const {field, CategoryID} = req.query
-  const brand = await filterItem.create({field: field, CategoryID: CategoryID})
+  const {field, productID} = req.query
+  const brand = await filterTagForSearch.create({field: field, productID: productID})
   res.json(brand)
 })
 
 
 router.get("/", async (req, res) => {
-  const brands = await filterCategory.findAll({
-    include: [
-      { model: filterItem},
-      { model: type, where: {name: "Muffin"}}]
-
+  const brands = await filterTagForSearch.findAll({
+    where: {field: "Сhocolate"},
+    include: {
+      model: product
+    }
   })
   return res.json(brands)
 })
