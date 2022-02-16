@@ -1,5 +1,69 @@
 const sequelize = require("../db")
 const {DataTypes} = require("sequelize")
+const {contentDisposition} = require("express/lib/utils");
+
+
+
+const brand = sequelize.define("branc", {
+  brandID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  isActiveID: {type: DataTypes.BIGINT, allowNull: false},
+  brandName: {type: DataTypes.STRING, allowNull: false}
+})
+
+const mainTypeProduct = sequelize.define("mainTypeProduct", {
+  mainTypeProductID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  isActiveID: {type: DataTypes.BIGINT, allowNull: false},
+  subTypeProductID: {type: DataTypes.BIGINT, allowNull: false},
+  mainTypeProductPictureID: { type: DataTypes.BIGINT, allowNull: false},
+  mainTypeProductName: {type: DataTypes.BIGINT, allowNull: false},
+})
+
+const subTypeProduct = sequelize.define("subTypeProduct", {
+  subTypeProductID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  isActiveID: {type: DataTypes.BIGINT, allowNull: false},
+  subTypeProductPicture: {type: DataTypes.BIGINT, allowNull: false},
+  subTypeProductName: {type: DataTypes.STRING, allowNull: false}
+})
+
+const mainTypeProductPicture = sequelize.define("mainTypeProductPicture", {
+  mainTypeProductPictureID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  mainTypeProductPictureName: {type: DataTypes.STRING, allowNull: false}
+})
+
+const subTypeProductPicture = sequelize.define("mainTypeProductPicture", {
+  subTypeProductPictureID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  subTypeProductPictureName: {type: DataTypes.STRING, allowNull: false}
+})
+
+const productPicture = sequelize.define("productPicture", {
+  productPictureID: {type: DataTypes.BIGINT, allowNull: false},
+  productID: {type: DataTypes.BIGINT, allowNull: false},
+  productPictureName: {type: DataTypes.STRING, allowNull: false},
+  firstPicture: {type: DataTypes.BOOLEAN, allowNull: false},
+  orderOfPicture: {type: DataTypes.INTEGER, allowNull: false}
+})
+
+const isActive = sequelize.define("isActive", {
+  isActiveID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  value: {type: DataTypes.STRING, allowNull: false}
+})
+
+const filterTagForSearch = sequelize.define("filterTagForSearch", {
+  filterTagForSearchID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  isActiveID: {type: DataTypes.BIGINT, allowNull: false},
+  productID: {type: DataTypes.BIGINT, allowNull: false},
+  filterCategoryID: {type: DataTypes.BIGINT, allowNull: false},
+  tagName: {type: DataTypes.STRING, allowNull: false}
+})
+
+const filterCategory= sequelize.define("filterCategory", {
+  filterCategoryID: {type: DataTypes.BIGINT, }
+})
+
+
+
+
+
 
 const product = sequelize.define("product", {
   id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
