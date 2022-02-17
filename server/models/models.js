@@ -13,15 +13,15 @@ const brand = sequelize.define("brand", {
 const mainTypeProduct = sequelize.define("mainTypeProduct", {
   mainTypeProductID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActiveID: {type: DataTypes.BIGINT, allowNull: false},
-  subTypeProductID: {type: DataTypes.BIGINT, allowNull: false},
   mainTypeProductPictureID: { type: DataTypes.BIGINT, allowNull: false},
-  mainTypeProductName: {type: DataTypes.BIGINT, allowNull: false},
+  mainTypeProductName: {type: DataTypes.STRING, allowNull: false},
 })
 
 const subTypeProduct = sequelize.define("subTypeProduct", {
   subTypeProductID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActiveID: {type: DataTypes.BIGINT, allowNull: false},
-  subTypeProductPicture: {type: DataTypes.BIGINT, allowNull: false},
+  mainTypeProductID: {type: DataTypes.BIGINT, allowNull: false},
+  subTypeProductPictureID: {type: DataTypes.BIGINT, allowNull: false},
   subTypeProductName: {type: DataTypes.STRING, allowNull: false}
 })
 
@@ -148,6 +148,10 @@ const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filte
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
 })
 
+// brand.belongsToMany(subTypeProduct, {through: brand_mainTypeProduct_subTypeProduct})
+mainTypeProduct.belongsToMany(subTypeProduct, {through: brand_mainTypeProduct_subTypeProduct})
+subTypeProduct.belongsToMany(mainTypeProduct, {through: brand_mainTypeProduct_subTypeProduct})
+subTypeProduct.belongsToMany(brand, {through: brand_mainTypeProduct_subTypeProduct})
 
 
 module.exports = {
