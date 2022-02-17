@@ -59,7 +59,7 @@ export const fetchOnlyOneCategory = createAsyncThunk(
 	"fetchOnlyOneCategory",
 	async function(category: string):Promise<any> {
 		try{
-			const response = await $host.get(`api/product/?Category=${category}`)
+			const response = await $host.get(``)
 			return  response.data
 		} catch (e) {
 			console.log(e)
@@ -71,7 +71,7 @@ export const fetchFilterField = createAsyncThunk(
 	"fetchFilterField",
 	async function (category: string):Promise<any> {
 		try{
-			const response = await $host.get(`/api/filter/?Category=${category}`)
+			const response = await $host.get(``)
 			return  response.data
 		} catch (e) {
 			console.log(e)
@@ -83,7 +83,7 @@ export const fetchFilteredProducts = createAsyncThunk(
 	"fetchFilteredProducts",
 	async function ():Promise<any> {
 		try{
-			const response = await $host.get(`/api/filtered/`)
+			const response = await $host.get(``)
 			return  response.data
 		} catch (e) {
 			console.log(e)
