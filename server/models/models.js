@@ -140,22 +140,16 @@ const product = sequelize.define("product", {
   numberProduct: {type: DataTypes.STRING, allowNull: false}
 })
 
-const brand_mainTypeProduct_subTypeProduct = sequelize.define("brand_mainTypeProduct_subTypeProduct", {
-    id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
-})
 
 const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filterTagForSearch", {
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
 })
 
-// brand.belongsToMany(subTypeProduct, {through: brand_mainTypeProduct_subTypeProduct})
-mainTypeProduct.belongsToMany(subTypeProduct, {through: brand_mainTypeProduct_subTypeProduct})
-subTypeProduct.belongsToMany(mainTypeProduct, {through: brand_mainTypeProduct_subTypeProduct})
-subTypeProduct.belongsToMany(brand, {through: brand_mainTypeProduct_subTypeProduct})
 
+subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "mainTypeProductID"})
+mainTypeProduct.hasMany(subTypeProduct, {foreignKey:  "mainTypeProductID"})
 
 module.exports = {
-  brand_mainTypeProduct_subTypeProduct,
   filterCategory_filterTagForSearch,
   brand,
   mainTypeProduct,
