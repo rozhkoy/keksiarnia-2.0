@@ -1,12 +1,10 @@
 import React from 'react';
 import './App.css';
 import { css } from '@emotion/react';
-import {Header} from "./components/Header/Header";
 import { Global } from '@emotion/react'
-import {Homepage} from "./components/HomePage/Homepage";
-import {Route, Routes} from "react-router-dom";
-import {Catalog} from "./components/Catalog/Catalog";
-import {CatalogOfOneCategory} from "./components/Catalog/CatalogOfOneCategory";
+import {Route} from "react-router-dom";
+import Admin from "./components/adminPages/Admin";
+import Shop from "./components/shopPages/Shop";
 
 function App() {
   return (
@@ -70,13 +68,8 @@ function App() {
 			  font: inherit;
 			}
 		`}/>
-		<Header/>
-		<Routes>
-			<Route path="/" element={<Homepage />} />
-			<Route path="/Catalog" element={<Catalog />} />
-			<Route path="/Cake" element={<CatalogOfOneCategory/>} />
-			<Route path="/Muffin"element={<CatalogOfOneCategory/>}/>
-		</Routes>
+		<Route path="/admin" element={<Admin/>}/>
+		<Route path="/" element={<Shop/>}/>
 	</div>
   );
 }
