@@ -1,7 +1,7 @@
 
 const Shop = () => {
 	return (
-		<div>Admin</div>
+		<div>shop</div>
 	)
 }
 

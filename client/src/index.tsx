@@ -8,7 +8,6 @@ import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
 
 
-console.log(process.env.REACT_APP_API_URL)
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>

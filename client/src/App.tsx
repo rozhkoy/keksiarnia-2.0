@@ -2,9 +2,10 @@ import React from 'react';
 import './App.css';
 import { css } from '@emotion/react';
 import { Global } from '@emotion/react'
-import {Route} from "react-router-dom";
-import Admin from "./components/adminPages/Admin";
+import {Route, Routes} from "react-router-dom";
+import Admin from "./components/admin/Admin";
 import Shop from "./components/shopPages/Shop";
+import Categories from "./components/admin/components/pages/categories/Categories";
 
 function App() {
   return (
@@ -68,8 +69,10 @@ function App() {
 			  font: inherit;
 			}
 		`}/>
-		<Route path="/admin" element={<Admin/>}/>
-		<Route path="/" element={<Shop/>}/>
+		<Routes>
+			<Route path="/admin/*" element={<Admin/>}/>
+			<Route path="/" element={<Shop/>}/>
+		</Routes>
 	</div>
   );
 }

@@ -11,7 +11,8 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
 	const response = await subTypeProduct.findAll({
 		include: [{
-			model: mainTypeProduct
+			model: mainTypeProduct,
+			// attributes: ['mainTypeProductID']
 		}]
 	})
 	res.json(response)
