@@ -11,18 +11,18 @@ const brand = sequelize.define("brand", {
 })
 
 const mainTypeProduct = sequelize.define("mainTypeProduct", {
-  mainTypeProductID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  id_mainTypeProduct: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActiveID: {type: DataTypes.BIGINT, allowNull: false},
-  mainTypeProductPictureID: { type: DataTypes.BIGINT, allowNull: false},
-  mainTypeProductName: {type: DataTypes.STRING, allowNull: false},
+  picture_ID: { type: DataTypes.BIGINT, allowNull: false},
+  title: {type: DataTypes.STRING, allowNull: false},
 })
 
 const subTypeProduct = sequelize.define("subTypeProduct", {
-  subTypeProductID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  id_subTypeProduct: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActiveID: {type: DataTypes.BIGINT, allowNull: false},
-  mainTypeProductID: {type: DataTypes.BIGINT, allowNull: false},
-  subTypeProductPictureID: {type: DataTypes.BIGINT, allowNull: false},
-  subTypeProductName: {type: DataTypes.STRING, allowNull: false}
+  id_mainTypeProduct: {type: DataTypes.BIGINT, allowNull: false},
+  picture_ID: {type: DataTypes.BIGINT, allowNull: false},
+  title: {type: DataTypes.STRING, allowNull: false}
 })
 
 const mainTypeProductPicture = sequelize.define("mainTypeProductPicture", {
@@ -36,7 +36,7 @@ const subTypeProductPicture = sequelize.define("subTypeProductPicture", {
 })
 
 const productPicture = sequelize.define("productPicture", {
-  productPictureID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  picture_ID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   productID: {type: DataTypes.BIGINT, allowNull: false},
   productPictureName: {type: DataTypes.STRING, allowNull: false},
   firstPicture: {type: DataTypes.BOOLEAN, allowNull: false},
@@ -146,8 +146,8 @@ const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filte
 })
 
 
-subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "mainTypeProductID"})
-mainTypeProduct.hasMany(subTypeProduct, {foreignKey:  "mainTypeProductID"})
+subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "id_mainTypeProduct"})
+mainTypeProduct.hasMany(subTypeProduct, {foreignKey:  "id_mainTypeProduct"})
 
 module.exports = {
   filterCategory_filterTagForSearch,
