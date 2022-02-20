@@ -1,6 +1,6 @@
-import ButtonGroup from "../../buttonGroup/ButtonGroup";
+import ButtonGroup from "../../common/buttonGroup/ButtonGroup";
 import {Route, Routes} from "react-router-dom";
-import List from "../../list/List";
+import List from "../../common/list/List";
 import AddNewCategory from "./addNewCategory/AddNewCategory";
 import {css} from "@emotion/react"
 
@@ -17,8 +17,8 @@ const Categories = () => {
 			</div>
 			<ButtonGroup button={[{buttonName: "List", buttonLink: "list"}, {buttonName: "Add new", buttonLink: "new"}]}/>
 			<Routes>
-				<Route path="/list" element={<List/>}/>
-				<Route path="/new" element={<AddNewCategory/>}/>
+				<Route path="list" element={<List/>}/>
+				<Route path="new" element={<AddNewCategory/>}/>
 			</Routes>
 		</div>
 	)
