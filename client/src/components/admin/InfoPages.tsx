@@ -20,5 +20,4 @@ const InfoPages = () => {
 	)
 }
 
-// @ts-ignore
 export default InfoPages

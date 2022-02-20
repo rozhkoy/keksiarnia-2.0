@@ -145,9 +145,11 @@ const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filte
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
 })
 
-
-subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "id_mainTypeProduct"})
 mainTypeProduct.hasMany(subTypeProduct, {foreignKey:  "id_mainTypeProduct"})
+subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "id_mainTypeProduct"})
+
+
+
 
 module.exports = {
   filterCategory_filterTagForSearch,
