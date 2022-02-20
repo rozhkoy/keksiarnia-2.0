@@ -29,7 +29,7 @@ const ButtonGroup:React.FC<Props> = (props) => {
 	return (
 		<div css={buttonGroup}>
 			{props.button.map((item) => (
-				<NavLink css={button} to={item.buttonLink}>{item.buttonName}</NavLink>
+				<NavLink key={item.buttonLink} css={button} to={item.buttonLink}>{item.buttonName}</NavLink>
 			))}
 		</div>
 	)

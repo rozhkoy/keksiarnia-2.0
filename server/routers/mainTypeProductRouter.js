@@ -3,8 +3,9 @@ const {mainTypeProduct} = require("../models/models");
 const router = new Router
 
 router.post('/', async (req, res) => {
-	const {mainTypeProductName, } = req.query
-	const response = await mainTypeProduct.create({mainTypeProductName: mainTypeProductName, isActiveID: 2, mainTypeProductPictureID: 1})
+	const {isActive_ID, picture_ID, title} = req.body
+	console.log(isActive_ID, picture_ID)
+	const response = await mainTypeProduct.create({title: title, isActive_ID: isActive_ID, picture_ID: 1})
 	res.json(response)
 })
 
