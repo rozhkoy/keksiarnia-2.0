@@ -151,6 +151,9 @@ subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "id_mainTypeProduct"})
 isActive.hasMany(mainTypeProduct, {foreignKey: "isActive_ID"})
 mainTypeProduct.belongsTo(isActive, {foreignKey: "isActive_ID"})
 
+mainTypeProductPicture.hasMany(mainTypeProduct, {foreignKey: "picture_ID"})
+mainTypeProduct.belongsTo(mainTypeProductPicture, {foreignKey: "picture_ID"})
+
 
 module.exports = {
   filterCategory_filterTagForSearch,

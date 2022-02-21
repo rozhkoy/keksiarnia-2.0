@@ -2,7 +2,7 @@ import {css} from "@emotion/react"
 import {fetchIsActiveData} from "../../../../../../store/adminStore/isActiveStore";
 import {useAppDispatch, useAppSelector} from "../../../../../../app/hooks";
 import React, {useEffect, useState} from "react";
-import {changeMainTypeDate} from "../../../../../../store/adminStore/mainTypeStore";
+import {sendMainTypeDate} from "../../../../../../store/adminStore/mainTypeStore";
 import {sendPicturesMainCategory} from "../../../../../../store/adminStore/categoriesPicturesStore";
 
 
@@ -17,18 +17,18 @@ const AddNewCategory = () => {
 	`
 
 	const label = css`
-		grid-column: 1/4;
+		grid-column: 1/3;
 	  	text-align: end;
 	  
 	`
 
 	const button = css`
-      grid-column: 4/13;
+      grid-column: 3/13;
       align-self: end;
 	`
 
 	const input = css`
-		grid-column: 4/13;
+		grid-column: 3/13;
 	  	&:hover ${button}  { 
 		  border: 3px solid red
 		}
@@ -50,7 +50,7 @@ const AddNewCategory = () => {
 		formImg.append("img", fileState)
 		dispatch(sendPicturesMainCategory(formImg)).then(response => {
 			formData.append("picture_ID", response.payload.picture_ID)
-			dispatch(changeMainTypeDate(formData))
+			dispatch(sendMainTypeDate(formData))
 		})
 		event.preventDefault();
 	}

@@ -1,6 +1,6 @@
 import ButtonGroup from "../../common/buttonGroup/ButtonGroup";
 import {Route, Routes} from "react-router-dom";
-import List from "../../common/list/List";
+import List from "./list/List";
 import AddNewCategory from "./addNewCategory/AddNewCategory";
 import {css} from "@emotion/react"
 
