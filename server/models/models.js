@@ -26,13 +26,13 @@ const subTypeProduct = sequelize.define("subTypeProduct", {
 })
 
 const mainTypeProductPicture = sequelize.define("mainTypeProductPicture", {
-  mainTypeProductPictureID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
-  mainTypeProductPictureName: {type: DataTypes.STRING, allowNull: false}
+  picture_ID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  name: {type: DataTypes.STRING, allowNull: false}
 })
 
 const subTypeProductPicture = sequelize.define("subTypeProductPicture", {
-  subTypeProductPictureID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
-  subTypeProductPictureName: {type: DataTypes.STRING, allowNull: false}
+  picture_ID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  name: {type: DataTypes.STRING, allowNull: false}
 })
 
 const productPicture = sequelize.define("productPicture", {
