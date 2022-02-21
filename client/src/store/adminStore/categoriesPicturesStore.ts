@@ -18,6 +18,7 @@ export const sendPicturesMainCategory = createAsyncThunk(
 )
 
 
+
 export const CategoriesPicturesStore = createSlice({
 	name: "PicturesStore",
 	initialState: initialState,
