@@ -11,7 +11,7 @@ const initialState = {
 
 export const sendPicturesMainCategory = createAsyncThunk(
 	"sendPicturesMainCategory",
-	async function foo(form){
+	async function foo(form: FormData){
 		const response = await $host.post("api/mainTypePictures", form)
 		return response.data
 	}

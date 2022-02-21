@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {changeMainTypeDate} from "../../../../../../store/adminStore/mainTypeStore";
 import {sendPicturesMainCategory} from "../../../../../../store/adminStore/categoriesPicturesStore";
 
+
 const AddNewCategory = () => {
 
 	const layoutItem = css`
@@ -37,27 +38,21 @@ const AddNewCategory = () => {
 	const [isActiveState, setIsActiveState] = useState<string>("1")
 	const [fileState, setFileState] = useState<Blob | string >("")
 	const [titleState, setTitleState] = useState<string>('')
-	const [idPicture, setIdPicture] = useState<number>(0)
 	const dispatch = useAppDispatch()
 
 
 	function sendData(event: React.SyntheticEvent) {
-		console.log("test")
 		console.log(fileState);
 		const formData = new FormData()
 		formData.append("isActive_ID", isActiveState)
-		formData.append("picture_ID", "1")
 		formData.append("title", titleState)
-
 		const formImg = new FormData()
 		formImg.append("img", fileState)
-		dispatch(sendPicturesMainCategory())
-
-		dispatch(changeMainTypeDate(formData)).then((response) => {
-			console.log(response.payload)
+		dispatch(sendPicturesMainCategory(formImg)).then(response => {
+			formData.append("picture_ID", response.payload.picture_ID)
+			dispatch(changeMainTypeDate(formData))
 		})
 		event.preventDefault();
-
 	}
 
 	function selectOption(event: React.ChangeEvent<HTMLSelectElement>) {

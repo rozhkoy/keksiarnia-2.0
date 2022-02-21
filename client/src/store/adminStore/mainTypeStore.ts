@@ -19,8 +19,8 @@ const initialState: initialStateValue = {
 
 export const changeMainTypeDate = createAsyncThunk(
 	"changeMainTypeDate",
-	 async function foo(form) {
-		const response = await $host.post("api/mainTypeProduct", form);
+	 async function foo(form: FormData) {
+		const response =  await $host.post("api/mainTypeProduct", form);
 		return response.data
 	 }
 )
@@ -34,9 +34,9 @@ export const mainTypeStore = createSlice({
 		}
 	},
 	extraReducers: (builder => {
-			builder.addCase(changeMainTypeDate.fulfilled, (state, {payload}) => {
-				console.log(payload)
-			})
+			// builder.addCase(changeMainTypeDate.fulfilled, (state, {payload}) => {
+			// 	console.log(payload)
+			// })
 	})
 })
 export const {test} = mainTypeStore.actions

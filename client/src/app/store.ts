@@ -8,7 +8,7 @@ export const store = configureStore({
   reducer: {
     isActive: isActive,
     mainTypeStore: mainTypeStore,
-    CategoriesPicturesStore: CategoriesPicturesStore
+    // CategoriesPicturesStore: CategoriesPicturesStore
   },
 });
 
