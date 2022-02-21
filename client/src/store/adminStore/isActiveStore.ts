@@ -24,7 +24,7 @@ const initialState:initialStateValue = {
 
 export const fetchIsActiveData = createAsyncThunk(
 	"fetchIsActiveData",
-	async function foo():Promise<any> {
+	async function foo() {
 		const response = await $host.get("api/isActive")
 		return response.data
 	}

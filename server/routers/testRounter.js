@@ -8,8 +8,12 @@ const router = new Router()
 
 router.post("/",async (req, res) => {
 
-  const brand = await mainTypeProductPicture.create({brandIDBrandID: 1, mainTypeProductIDMainTypeProductID: 1, subTypeProductIDSubTypeProductID: 1})
-  res.json(brand)
+ const response =  await mainTypeProduct.update({ title: "Dosdfsdfe" }, {
+    where: {
+      id_mainTypeProduct: 11
+    }
+  });
+ res.json(response)
 })
 
 

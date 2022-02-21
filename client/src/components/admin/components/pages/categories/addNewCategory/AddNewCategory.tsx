@@ -3,6 +3,7 @@ import {fetchIsActiveData} from "../../../../../../store/adminStore/isActiveStor
 import {useAppDispatch, useAppSelector} from "../../../../../../app/hooks";
 import React, {useEffect, useState} from "react";
 import {changeMainTypeDate} from "../../../../../../store/adminStore/mainTypeStore";
+import {sendPicturesMainCategory} from "../../../../../../store/adminStore/categoriesPicturesStore";
 
 const AddNewCategory = () => {
 
@@ -20,30 +21,41 @@ const AddNewCategory = () => {
 	  
 	`
 
-	const input = css`
-		grid-column: 4/13
+	const button = css`
+      grid-column: 4/13;
+      align-self: end;
 	`
 
-	const button = css`
+	const input = css`
 		grid-column: 4/13;
-	  	align-self: end;
+	  	&:hover ${button}  { 
+		  border: 3px solid red
+		}
 	`
+
 	const isActive = useAppSelector((state) => state.isActive)
-	const [isActiveState, setIsActiveState] = useState<string>("Yes")
-	const [fileState, setFileState] = useState<File | null>(null)
+	const [isActiveState, setIsActiveState] = useState<string>("1")
+	const [fileState, setFileState] = useState<Blob | string >("")
 	const [titleState, setTitleState] = useState<string>('')
+	const [idPicture, setIdPicture] = useState<number>(0)
 	const dispatch = useAppDispatch()
 
 
 	function sendData(event: React.SyntheticEvent) {
 		console.log("test")
-		console.log(isActiveState);
+		console.log(fileState);
 		const formData = new FormData()
-		formData.append("isActive_ID", "1")
+		formData.append("isActive_ID", isActiveState)
 		formData.append("picture_ID", "1")
 		formData.append("title", titleState)
-		console.log(formData.get("isActive_ID"));
-		dispatch(changeMainTypeDate(formData))
+
+		const formImg = new FormData()
+		formImg.append("img", fileState)
+		dispatch(sendPicturesMainCategory())
+
+		dispatch(changeMainTypeDate(formData)).then((response) => {
+			console.log(response.payload)
+		})
 		event.preventDefault();
 
 	}
@@ -53,9 +65,7 @@ const AddNewCategory = () => {
 	}
 
 	function selectFile(event: React.ChangeEvent<HTMLInputElement>) {
-		console.log(event)
 		const files = event.target.files;
-		console.log(files)
 		files && setFileState(files[0]);
 	}
 
@@ -87,7 +97,7 @@ const AddNewCategory = () => {
 				</div>
 				<div css={layoutItem}>
 					<label  css={label}>Title</label>
-					<input onChange={changeTitle} value={titleState}  css={input} type="text"/>
+					<input onChange={changeTitle} value={titleState}  css={input} type="text" required/>
 				</div>
 				<div css={layoutItem}>
 					<button type="submit" css={button}>Submit</button>
