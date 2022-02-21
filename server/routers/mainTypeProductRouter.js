@@ -1,5 +1,5 @@
 const Router = require('express')
-const {mainTypeProduct} = require("../models/models");
+const {mainTypeProduct, mainTypeProductPicture, isActive} = require("../models/models");
 const router = new Router
 
 router.post('/', async (req, res) => {
@@ -11,7 +11,16 @@ router.post('/', async (req, res) => {
 
 
 router.get('/', async (req, res) => {
-	const response = await mainTypeProduct.findAll()
+	const response = await mainTypeProduct.findAll({
+		attributes: ["id_mainTypeProduct", "title"],
+		include: [{
+			attributes: ["name"],
+			model: mainTypeProductPicture,
+		}, {
+			attributes: ["value"],
+			model: isActive,
+		}],
+	})
 	res.json(response)
 })
 

@@ -15,7 +15,7 @@ interface button  {
 const ButtonGroup:React.FC<Props> = (props) => {
 
 	const button = css`
-		margin: 10px;
+		margin:  10px 10px 10px 0;
 		border: 1px solid red;
 		padding: 5px;
 		border-radius: 5px;

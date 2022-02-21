@@ -1,28 +1,41 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, current} from "@reduxjs/toolkit";
 import {$host} from "../../http";
 
 
+
+
 interface initialStateValue {
-	mainType: Array<typeValue>
+	mainType: typeValue[],
+	mainTypeObjectFields: string[]
 }
 
-interface typeValue {
-	id_mainTypeProduct: number,
-	isActive_id: number,
-	picture_id: number,
+export interface typeValue {
+	[key: string]: string | number
+	id: string,
+	isActive: string,
+	picture: string,
 	title: string
 }
 
 const initialState: initialStateValue = {
-	mainType: []
+	mainType: [],
+	mainTypeObjectFields: []
 }
 
-export const changeMainTypeDate = createAsyncThunk(
-	"changeMainTypeDate",
+export const sendMainTypeDate = createAsyncThunk(
+	"sendMainTypeDate",
 	 async function foo(form: FormData) {
 		const response =  await $host.post("api/mainTypeProduct", form);
 		return response.data
 	 }
+)
+
+export const fetchMainTypeData = createAsyncThunk(
+	"fetchMainTypeData",
+	async function() {
+		const response = await $host.get("api/mainTypeProduct");
+		return response.data
+	}
 )
 
 export const mainTypeStore = createSlice({
@@ -34,9 +47,27 @@ export const mainTypeStore = createSlice({
 		}
 	},
 	extraReducers: (builder => {
-			// builder.addCase(changeMainTypeDate.fulfilled, (state, {payload}) => {
-			// 	console.log(payload)
-			// })
+		builder.addCase(sendMainTypeDate.fulfilled, (state, {payload}) => {
+			console.log(payload)
+		})
+		builder.addCase(fetchMainTypeData.fulfilled, (state, {payload}) => {
+			for(let i = 0; i < payload.length; i++) {
+				state.mainType[i] = {
+					id: payload[i].id_mainTypeProduct,
+					isActive: payload[i].isActive.value,
+					title: payload[i].title,
+					picture: payload[i].mainTypeProductPicture.name
+				}
+			}
+
+			if(state.mainType.length > 0 ){
+				for( let field in state.mainType[0]) {
+					state.mainTypeObjectFields.push(field)
+				}
+			}
+
+			console.log(current(state));
+		})
 	})
 })
 export const {test} = mainTypeStore.actions
