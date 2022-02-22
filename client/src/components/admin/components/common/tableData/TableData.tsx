@@ -1,33 +1,45 @@
 import {useAppSelector} from "../../../../../app/hooks";
 import {css} from "@emotion/react"
 import {typeValue} from "../../../../../store/adminStore/mainTypeStore";
+import React from "react";
 
-const TableData = () => {
-	const mainTypeData = useAppSelector((state) => state.mainTypeStore)
+type Props = {
+	dataForTable: Array<typeValue>
+}
+
+const TableData: React.FC<Props> = (props) => {
+
 
 	const table = css`
-      width: 100%;
-	  border: 1px solid #000;
-      caption-side: bottom;
-      border-collapse: collapse;
+	      width: 100%;
+		  border: 1px solid #000;
+	      caption-side: bottom;
+	      border-collapse: collapse;
 
 	`
 	const border = css`
-	border: 1px solid red
+		border: 1px solid red;
+	  	padding: 5px;
 	`
+
 	const td = css`
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 150px;
+	  	white-space: nowrap;
+	      overflow: hidden;
+	      text-overflow: ellipsis;
+
 	`
+
 	const edit = css`
 		position: sticky;
-	  right: 0;
+	    right: 0;
+	    background: #fff;
+	  	display: flex;
+	  	justify-content: center;
 	`
 
 	const tableWrap = css`
-	overflow: scroll`
+		overflow: auto
+	`
 
 
 
@@ -35,28 +47,29 @@ const TableData = () => {
 		<div css={tableWrap}>
 			{
 				<table css={table}>
+					<tbody>
 					<tr>
 						{
-							mainTypeData.mainType.length > 0 &&
-							Object.keys(mainTypeData.mainType[0]).map((item: string) =>(
-								<th css={border} key={item}>{item}</th>
+							props.dataForTable.length > 0 &&
+							Object.keys(props.dataForTable[0]).map((item: string) =>(
+								<th css={border} key={item}>{item.toUpperCase()}</th>
 							))
 						}
-						<th css={border}>Edit</th>
 					</tr>
 					{
-						mainTypeData.mainType.map((item: typeValue) => (
-							<tr>
+						props.dataForTable.map((item: typeValue) => (
+							<tr key={item.id}>
 								{
 									Object.keys(item).map((elem) =>(
 										<td css={[border, td]} key={item[elem]}>{item[elem]}</td>
 									))
 
 								}
-								<td css={[border, td]} ><button>Edit</button></td>
+								<td css={[border, edit]} ><button>Edit</button></td>
 							</tr>
 						))
 					}
+					</tbody>
 				</table>
 			}
 		</div>
