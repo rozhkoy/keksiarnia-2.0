@@ -6,7 +6,6 @@ import {$host} from "../../http";
 
 interface initialStateValue {
 	mainType: typeValue[],
-	mainTypeObjectFields: string[]
 }
 
 export interface typeValue {
@@ -19,7 +18,6 @@ export interface typeValue {
 
 const initialState: initialStateValue = {
 	mainType: [],
-	mainTypeObjectFields: []
 }
 
 export const sendMainTypeDate = createAsyncThunk(
@@ -59,13 +57,6 @@ export const mainTypeStore = createSlice({
 					picture: payload[i].mainTypeProductPicture.name
 				}
 			}
-
-			if(state.mainType.length > 0 ){
-				for( let field in state.mainType[0]) {
-					state.mainTypeObjectFields.push(field)
-				}
-			}
-
 			console.log(current(state));
 		})
 	})
