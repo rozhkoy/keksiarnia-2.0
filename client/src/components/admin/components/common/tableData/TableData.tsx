@@ -2,13 +2,13 @@ import {useAppSelector} from "../../../../../app/hooks";
 import {css} from "@emotion/react"
 import {typeValue} from "../../../../../store/adminStore/mainTypeStore";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 type Props = {
 	dataForTable: Array<typeValue>
 }
 
 const TableData: React.FC<Props> = (props) => {
-
 
 	const table = css`
 	      width: 100%;
@@ -17,6 +17,7 @@ const TableData: React.FC<Props> = (props) => {
 	      border-collapse: collapse;
 
 	`
+
 	const border = css`
 		border: 1px solid red;
 	  	padding: 5px;
@@ -40,9 +41,6 @@ const TableData: React.FC<Props> = (props) => {
 	const tableWrap = css`
 		overflow: auto
 	`
-
-
-
 	return (
 		<div css={tableWrap}>
 			{
@@ -63,9 +61,8 @@ const TableData: React.FC<Props> = (props) => {
 									Object.keys(item).map((elem) =>(
 										<td css={[border, td]} key={item[elem]}>{item[elem]}</td>
 									))
-
 								}
-								<td css={[border, edit]} ><button>Edit</button></td>
+								<td css={[border, edit]} ><NavLink to="edit">Edit</NavLink></td>
 							</tr>
 						))
 					}

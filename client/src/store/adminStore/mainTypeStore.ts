@@ -6,6 +6,7 @@ import {$host} from "../../http";
 
 interface initialStateValue {
 	mainType: typeValue[],
+	mainTypeItem: typeValue
 }
 
 export interface typeValue {
@@ -18,6 +19,13 @@ export interface typeValue {
 
 const initialState: initialStateValue = {
 	mainType: [],
+	mainTypeItem: {
+		id: "",
+		isActive: "",
+		picture: "",
+		title: ""
+	}
+
 }
 
 export const sendMainTypeDate = createAsyncThunk(
@@ -28,10 +36,25 @@ export const sendMainTypeDate = createAsyncThunk(
 	 }
 )
 
+export const rewriteMainTypeData = createAsyncThunk(
+	"rewriteMainTypeData",
+	async function (form: FormData) {
+		const response = await $host.post("api/mainTypeProductById", form)
+		return response.data
+	}
+)
 export const fetchMainTypeData = createAsyncThunk(
 	"fetchMainTypeData",
 	async function() {
 		const response = await $host.get("api/mainTypeProduct");
+		return response.data
+	}
+)
+
+export const fetchMainTypeDataByID = createAsyncThunk(
+	"fetchMainTypeDataByID",
+	async function (id: number) {
+		const response = await $host.get(`api/mainTypeProductById?id=${id}`)
 		return response.data
 	}
 )
@@ -56,6 +79,15 @@ export const mainTypeStore = createSlice({
 					title: payload[i].title,
 					picture: payload[i].mainTypeProductPicture.name
 				}
+			}
+			console.log(current(state));
+		})
+		builder.addCase(fetchMainTypeDataByID.fulfilled, (state , {payload}) => {
+			state.mainTypeItem =  {
+				id: payload.id_mainTypeProduct,
+				isActive: payload.isActive.isActive_ID,
+				title: payload.title,
+				picture: payload.mainTypeProductPicture.name
 			}
 			console.log(current(state));
 		})
