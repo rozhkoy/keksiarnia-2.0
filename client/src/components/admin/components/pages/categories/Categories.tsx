@@ -20,7 +20,7 @@ const Categories = () => {
 			<Routes>
 				<Route path="list" element={<List/>}/>
 				<Route path="new" element={<AddNewCategory/>}/>
-				<Route path="list/edit" element={<EditProduct/>}/>
+				<Route path="list/edit/:id" element={<EditProduct/>}/>
 			</Routes>
 		</div>
 	)

@@ -8,6 +8,7 @@ import {
 	sendMainTypeDate
 } from "../../../../../../store/adminStore/mainTypeStore";
 import {fetchIsActiveData} from "../../../../../../store/adminStore/isActiveStore";
+import {useParams} from "react-router-dom";
 
 const EditProduct = () => {
 	const layoutItem = css`
@@ -36,6 +37,7 @@ const EditProduct = () => {
 	const dispatch = useAppDispatch()
 	const mainTypeItemData = useAppSelector((state) => state.mainTypeStore.mainTypeItem )
 	const isActive = useAppSelector((state) => state.isActive)
+	const { id } = useParams()
 	const [isActiveState, setIsActiveState] = useState<string>("")
 	const [fileState, setFileState] = useState<Blob | string >("")
 	const [titleState, setTitleState] = useState<string>('')
@@ -82,7 +84,7 @@ const EditProduct = () => {
 			dispatch(fetchIsActiveData())
 		}
 		if(!apiStatusFetchByID){
-			dispatch(fetchMainTypeDataByID(15))
+			dispatch(fetchMainTypeDataByID(Number(id)))
 			setApiStatusFetchByID(true)
 		}
 		if(mainTypeItemData){

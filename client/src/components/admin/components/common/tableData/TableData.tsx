@@ -62,7 +62,7 @@ const TableData: React.FC<Props> = (props) => {
 										<td css={[border, td]} key={item[elem]}>{item[elem]}</td>
 									))
 								}
-								<td css={[border, edit]} ><NavLink to="edit">Edit</NavLink></td>
+								<td css={[border, edit]} ><NavLink to={`edit/${item.id}`}>Edit</NavLink></td>
 							</tr>
 						))
 					}
