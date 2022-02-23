@@ -51,12 +51,9 @@ const EditProduct = () => {
 		formData.append("id", mainTypeItemData.id)
 		const formImg = new FormData()
 		formImg.append("img", fileState)
-		dispatch(sendPicturesMainCategory(formImg)).then(response => {
-			formData.append("picture_ID", response.payload.picture_ID)
-			dispatch(sendMainTypeDate(formData))
-		})
 		if(formImg.get("img") != ""){
 			dispatch(sendPicturesMainCategory(formImg)).then(response => {
+				console.log(response.payload.picture_ID)
 				formData.append("picture_ID", response.payload.picture_ID)
 				dispatch(rewriteMainTypeData(formData))
 			})

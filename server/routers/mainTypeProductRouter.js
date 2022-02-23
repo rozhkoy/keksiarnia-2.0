@@ -13,6 +13,8 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
 	const response = await mainTypeProduct.findAll({
 		attributes: ["id_mainTypeProduct", "title"],
+		order: [
+			['id_mainTypeProduct', 'DESC']],
 		include: [{
 			attributes: ["name"],
 			model: mainTypeProductPicture,
