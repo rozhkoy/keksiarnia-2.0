@@ -18,8 +18,9 @@ router.post("/",async (req, res) => {
 
 
 router.get("/", async (req, res) => {
-  const brands = await mainTypeProduct.findOne({
-
+  const brands = await mainTypeProduct.findAndCountAll({
+      offset: 2,
+      limit: 2
   })
   return res.json(brands)
 })

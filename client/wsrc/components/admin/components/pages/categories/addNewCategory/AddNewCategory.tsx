@@ -1,16 +1,13 @@
-import {css} from "@emotion/react";
+import {css} from "@emotion/react"
+import {fetchIsActiveData} from "../../../../../../store/adminStore/isActiveStore";
 import {useAppDispatch, useAppSelector} from "../../../../../../app/hooks";
 import React, {useEffect, useState} from "react";
+import {sendMainTypeDate} from "../../../../../../store/adminStore/mainTypeStore";
 import {sendPicturesMainCategory} from "../../../../../../store/adminStore/categoriesPicturesStore";
-import {
-	fetchMainTypeDataByID,
-	rewriteMainTypeData,
-	sendMainTypeDate
-} from "../../../../../../store/adminStore/mainTypeStore";
-import {fetchIsActiveData} from "../../../../../../store/adminStore/isActiveStore";
-import {useParams} from "react-router-dom";
 
-const EditProduct = () => {
+
+const AddNewCategory = () => {
+
 	const layoutItem = css`
 		display: grid;
 		grid-template-columns:  repeat(12, 1fr);
@@ -32,17 +29,16 @@ const EditProduct = () => {
 
 	const input = css`
 		grid-column: 3/13;
+	  	&:hover ${button}  { 
+		  border: 3px solid red
+		}
 	`
 
-	const dispatch = useAppDispatch()
-	const mainTypeItemData = useAppSelector((state) => state.mainTypeStore.mainTypeItem )
 	const isActive = useAppSelector((state) => state.isActive)
-	const { id } = useParams()
-	const [isActiveState, setIsActiveState] = useState<string>("")
+	const [isActiveState, setIsActiveState] = useState<string>("1")
 	const [fileState, setFileState] = useState<Blob | string >("")
 	const [titleState, setTitleState] = useState<string>('')
-	const [apiStatusFetchByID, setApiStatusFetchByID] = useState(false)
-
+	const dispatch = useAppDispatch()
 
 
 	function sendData(event: React.SyntheticEvent) {
@@ -50,19 +46,12 @@ const EditProduct = () => {
 		const formData = new FormData()
 		formData.append("isActive_ID", isActiveState)
 		formData.append("title", titleState)
-		formData.append("id", mainTypeItemData.id)
 		const formImg = new FormData()
 		formImg.append("img", fileState)
-		if(formImg.get("img") != ""){
-			dispatch(sendPicturesMainCategory(formImg)).then(response => {
-				console.log(response.payload.picture_ID)
-				formData.append("picture_ID", response.payload.picture_ID)
-				dispatch(rewriteMainTypeData(formData))
-			})
-		} else {
-			console.log("go")
-			dispatch(rewriteMainTypeData(formData))
-		}
+		dispatch(sendPicturesMainCategory(formImg)).then(response => {
+			formData.append("picture_ID", response.payload.picture_ID)
+			dispatch(sendMainTypeDate(formData))
+		})
 		event.preventDefault();
 	}
 
@@ -83,22 +72,11 @@ const EditProduct = () => {
 		if (!isActive.apiStatus){
 			dispatch(fetchIsActiveData())
 		}
-		if(!apiStatusFetchByID){
-			dispatch(fetchMainTypeDataByID(Number(id)))
-			setApiStatusFetchByID(true)
-		}
-		if(mainTypeItemData){
-			setApiStatusFetchByID(true)
-			setIsActiveState(mainTypeItemData.isActive)
-			setTitleState(mainTypeItemData.title)
-		}
 
-
-	}, [mainTypeItemData, isActive])
+	}, [])
 
 	return (
 		<div>
-			<button onClick={() => console.log(isActiveState)}>test</button>
 			<form onSubmit={sendData} >
 				<div css={layoutItem}>
 					<label css={label}>Is Active</label>
@@ -123,5 +101,5 @@ const EditProduct = () => {
 		</div>
 	)
 }
-
-export default EditProduct
+// @ts-ignore
+export default AddNewCategory
