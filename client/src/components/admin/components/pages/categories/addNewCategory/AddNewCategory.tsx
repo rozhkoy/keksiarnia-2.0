@@ -1,6 +1,6 @@
 import {css} from "@emotion/react"
 import {fetchIsActiveData} from "../../../../../../store/adminStore/isActiveStore";
-import {useAppDispatch, useAppSelector} from "../../../../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../../../shared/hooks/hooks";
 import React, {useEffect, useState} from "react";
 import {sendMainTypeDate} from "../../../../../../store/adminStore/mainTypeStore";
 import {sendPicturesMainCategory} from "../../../../../../store/adminStore/categoriesPicturesStore";

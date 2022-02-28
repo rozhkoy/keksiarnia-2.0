@@ -6,7 +6,7 @@ export interface AuxProps  {
 	children: React.ReactNode
 }
 
-export const Container = (props: AuxProps) => {
+export const Ui = (props: AuxProps) => {
 
 	return(
 		<div css={css`

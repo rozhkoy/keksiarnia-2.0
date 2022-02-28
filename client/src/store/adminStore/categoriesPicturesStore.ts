@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {$host} from "../../http";
+import {$host} from "../../shared/api";
 
 interface initialStateValue {
 
