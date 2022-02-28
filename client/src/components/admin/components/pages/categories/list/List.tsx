@@ -1,5 +1,5 @@
 import TableData from "../../../common/tableData/TableData";
-import {useAppDispatch, useAppSelector} from "../../../../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../../../shared/hooks/hooks";
 import {fetchMainTypeData} from "../../../../../../store/adminStore/mainTypeStore";
 import {css} from "@emotion/react"
 import {useEffect, useState} from "react";

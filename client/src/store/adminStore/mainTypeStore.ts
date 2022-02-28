@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, current} from "@reduxjs/toolkit";
-import {$host} from "../../http";
+import {$host} from "../../shared/api";
 
 
 

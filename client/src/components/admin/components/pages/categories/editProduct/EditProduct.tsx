@@ -1,5 +1,5 @@
 import {css} from "@emotion/react";
-import {useAppDispatch, useAppSelector} from "../../../../../../app/hooks";
+import {useAppDispatch, useAppSelector} from "../../../../../../shared/hooks/hooks";
 import React, {useEffect, useState} from "react";
 import {sendPicturesMainCategory} from "../../../../../../store/adminStore/categoriesPicturesStore";
 import {

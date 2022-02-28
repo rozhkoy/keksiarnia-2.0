@@ -80,7 +80,7 @@ checkBrowsers(paths.appPath, isInteractive)
     }
 
     const config = configFactory('development');
-    const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
+    const protocol = process.env.HTTPS === 'true' ? 'https' : 'api';
     const appName = require(paths.appPackageJson).name;
 
     const useTypeScript = fs.existsSync(paths.appTsConfig);
