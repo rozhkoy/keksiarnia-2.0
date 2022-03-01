@@ -1,6 +1,7 @@
-import Sideba from "./Sideba";
-import InfoPages from "./InfoPages";
-import {css} from "@emotion/react"
+import Sideba from "../AdminSidebar/ui";
+import {css} from "@emotion/react";
+import {AdminInfoPage} from "../AdminInfoPage";
+
 
 const Admin = () => {
 
@@ -12,9 +13,10 @@ const Admin = () => {
 	return (
 		<div css={adminPage}>
 			<Sideba />
-			<InfoPages />
+			<AdminInfoPage/>
 		</div>
 	)
 }
 
-export default Admin;
+export default Admin
+

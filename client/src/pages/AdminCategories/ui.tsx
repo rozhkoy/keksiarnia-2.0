@@ -1,9 +1,9 @@
-import ButtonGroup from "../../common/buttonGroup/ButtonGroup";
+import ButtonGroup from "../../shared/buttonGroup/ButtonGroup";
 import {Route, Routes} from "react-router-dom";
-import List from "./list/List";
-import AddNewCategory from "./addNewCategory/AddNewCategory";
+import List from "../list/ui";
+import AddNewCategory from "../AddNewCategory/ui";
 import {css} from "@emotion/react"
-import EditProduct from "./editProduct/EditProduct";
+import EditProduct from "../EditProduct/EditProduct";
 
 const Categories = () => {
 	const categories = css`
