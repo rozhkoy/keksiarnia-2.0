@@ -1,10 +1,8 @@
 import {css} from "@emotion/react";
 import {Route, Routes} from "react-router-dom";
-import Categories from "./components/pages/categories/Categories";
-import Sideba from "./Sideba";
-import Admin from "./Admin";
+import Categories from "../AdminCategories/ui";
 
-const InfoPages = () => {
+export const AdminInfoPage = () => {
 
 	const infoPage = css`
 		grid-column: 4/13;
@@ -20,4 +18,3 @@ const InfoPages = () => {
 	)
 }
 
-export default InfoPages

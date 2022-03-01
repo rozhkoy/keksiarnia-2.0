@@ -1,6 +1,6 @@
-import {useAppSelector} from "../../../../../shared/hooks/hooks";
+import {useAppSelector} from "../hooks/hooks";
 import {css} from "@emotion/react"
-import {typeValue} from "../../../../../store/adminStore/mainTypeStore";
+import {typeValue} from "../../store/adminStore/mainTypeStore";
 import React from "react";
 import {NavLink} from "react-router-dom";
 
