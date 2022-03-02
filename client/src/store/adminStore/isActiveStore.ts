@@ -26,6 +26,7 @@ export const fetchIsActiveData = createAsyncThunk(
 	"fetchIsActiveData",
 	async function foo() {
 		const response = await $host.get("api/isActive")
+		console.log("adsfasdf")
 		return response.data
 	}
 )
