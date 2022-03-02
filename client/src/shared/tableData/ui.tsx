@@ -8,7 +8,7 @@ type Props = {
 	dataForTable: Array<typeValue>
 }
 
-const TableData: React.FC<Props> = (props) => {
+const Ui: React.FC<Props> = (props) => {
 
 	const table = css`
 	      width: 100%;
@@ -73,4 +73,4 @@ const TableData: React.FC<Props> = (props) => {
 	)
 }
 
-export default TableData
+export default Ui

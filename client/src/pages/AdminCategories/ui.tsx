@@ -1,9 +1,10 @@
-import ButtonGroup from "../../shared/buttonGroup/ButtonGroup";
+import ButtonGroup from "../../shared/buttonGroup/ui";
 import {Route, Routes} from "react-router-dom";
 import List from "../list/ui";
 import AddNewCategory from "../AddNewCategory/ui";
 import {css} from "@emotion/react"
 import EditProduct from "../EditProduct/EditProduct";
+import {her} from "./model/model";
 
 const Categories = () => {
 	const categories = css`
@@ -22,6 +23,9 @@ const Categories = () => {
 				<Route path="new" element={<AddNewCategory/>}/>
 				<Route path="list/edit/:id" element={<EditProduct/>}/>
 			</Routes>
+			<button onClick={her}>
+fsdfsdf
+			</button>
 		</div>
 	)
 }
