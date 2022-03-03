@@ -7,7 +7,7 @@ import {
 	rewriteMainTypeData,
 	sendMainTypeDate
 } from "../../store/adminStore/mainTypeStore";
-import {fetchIsActiveData} from "../../store/adminStore/isActiveStore";
+// import {fetchIsActiveData} from "../../store/adminStore/isActiveStore";
 import {useParams} from "react-router-dom";
 
 const EditProduct = () => {
@@ -81,7 +81,7 @@ const EditProduct = () => {
 
 	useEffect(() => {
 		if (!isActive.apiStatus){
-			dispatch(fetchIsActiveData())
+			// dispatch(fetchIsActiveData())
 		}
 		if(!apiStatusFetchByID){
 			dispatch(fetchMainTypeDataByID(Number(id)))
@@ -103,9 +103,9 @@ const EditProduct = () => {
 				<div css={layoutItem}>
 					<label css={label}>Is Active</label>
 					<select onChange={selectOption} value={isActiveState} css={input}>
-						{isActive.ActiveData.map((item) => (
-							<option value={item.isActive_ID} key={item.value}>{item.value}</option>
-						))}
+						{/*{isActive.ActiveData.map((item) => (*/}
+						{/*	<option value={item.isActive_ID} key={item.value}>{item.value}</option>*/}
+						{/*))}*/}
 					</select>
 				</div>
 				<div css={layoutItem}>

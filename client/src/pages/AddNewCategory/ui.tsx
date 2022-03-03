@@ -1,9 +1,13 @@
 import {css} from "@emotion/react"
-import {fetchIsActiveData} from "../../store/adminStore/isActiveStore";
 import {useAppDispatch, useAppSelector} from "../../shared/hooks/hooks";
 import React, {useEffect, useState} from "react";
 import {sendMainTypeDate} from "../../store/adminStore/mainTypeStore";
 import {sendPicturesMainCategory} from "../../store/adminStore/categoriesPicturesStore";
+import {useQuery, useQueryClient} from "react-query";
+import {$host} from "../../shared/api";
+import {fetchIsActiveData} from "./model";
+import {isActiveValue} from "./config";
+
 
 
 const AddNewCategory = () => {
@@ -34,24 +38,26 @@ const AddNewCategory = () => {
 		}
 	`
 
+	const {status, data, error , isSuccess } = useQuery("isActive" , fetchIsActiveData )
+
+
 	const isActive = useAppSelector((state) => state.isActive)
 	const [isActiveState, setIsActiveState] = useState<string>("1")
 	const [fileState, setFileState] = useState<Blob | string >("")
 	const [titleState, setTitleState] = useState<string>('')
-	const dispatch = useAppDispatch()
+
 
 
 	function sendData(event: React.SyntheticEvent) {
-		console.log(fileState);
 		const formData = new FormData()
 		formData.append("isActive_ID", isActiveState)
 		formData.append("title", titleState)
 		const formImg = new FormData()
 		formImg.append("img", fileState)
-		dispatch(sendPicturesMainCategory(formImg)).then(response => {
-			formData.append("picture_ID", response.payload.picture_ID)
-			dispatch(sendMainTypeDate(formData))
-		})
+		// dispatch(sendPicturesMainCategory(formImg)).then(response => {
+		// 	formData.append("picture_ID", response.payload.picture_ID)
+		// 	dispatch(sendMainTypeDate(formData))
+		// })
 		event.preventDefault();
 	}
 
@@ -68,20 +74,20 @@ const AddNewCategory = () => {
 		setTitleState(event.target.value)
 	}
 
-	useEffect(() => {
-		if (!isActive.apiStatus){
-			dispatch(fetchIsActiveData())
-		}
+	const queryClient = useQueryClient()
 
-	}, [])
+	useEffect(() => {
+		console.log("isActive",data, isSuccess);
+	}, )
 
 	return (
 		<div>
 			<form onSubmit={sendData} >
 				<div css={layoutItem}>
+
 					<label css={label}>Is Active</label>
 					<select onChange={selectOption} value={isActiveState} css={input}>
-						{isActive.ActiveData.map((item) => (
+						{isSuccess && data.map((item: isActiveValue) => (
 							<option value={item.isActive_ID} key={item.value}>{item.value}</option>
 						))}
 					</select>
