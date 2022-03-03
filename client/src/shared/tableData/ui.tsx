@@ -1,14 +1,14 @@
 import {useAppSelector} from "../hooks/hooks";
 import {css} from "@emotion/react"
 import {typeValue} from "../../store/adminStore/mainTypeStore";
-import React from "react";
+import React, {useEffect} from "react";
 import {NavLink} from "react-router-dom";
 
 type Props = {
-	dataForTable: Array<typeValue>
+	dataForTable: Array<any>
 }
 
-const Ui: React.FC<Props> = (props) => {
+const TableData: React.FC<Props> = (props) => {
 
 	const table = css`
 	      width: 100%;
@@ -41,36 +41,40 @@ const Ui: React.FC<Props> = (props) => {
 	const tableWrap = css`
 		overflow: auto
 	`
+
+	useEffect(() => {
+
+	})
 	return (
 		<div css={tableWrap}>
 			{
-				<table css={table}>
-					<tbody>
-					<tr>
-						{
-							props.dataForTable.length > 0 &&
-							Object.keys(props.dataForTable[0]).map((item: string) =>(
-								<th css={border} key={item}>{item.toUpperCase()}</th>
-							))
-						}
-					</tr>
-					{
-						props.dataForTable.map((item: typeValue) => (
-							<tr key={item.id}>
-								{
-									Object.keys(item).map((elem) =>(
-										<td css={[border, td]} key={item[elem]}>{item[elem]}</td>
-									))
-								}
-								<td css={[border, edit]} ><NavLink to={`edit/${item.id}`}>Edit</NavLink></td>
-							</tr>
-						))
-					}
-					</tbody>
-				</table>
+				// <table css={table}>
+				// 	<tbody>
+				// 	<tr>
+				// 		{
+				// 			props.dataForTable.length > 0 &&
+				// 			Object.keys(props.dataForTable[0]).map((item: string) =>(
+				// 				<th css={border} key={item}>{item.toUpperCase()}</th>
+				// 			))
+				// 		}
+				// 	</tr>
+				// 	{
+				// 		props.dataForTable.map((item: typeValue) => (
+				// 			<tr key={item.id}>
+				// 				{
+				// 					Object.keys(item).map((elem) =>(
+				// 						<td css={[border, td]} key={item[elem]}>{item[elem]}</td>
+				// 					))
+				// 				}
+				// 				<td css={[border, edit]} ><NavLink to={`edit/${item.id}`}>Edit</NavLink></td>
+				// 			</tr>
+				// 		))
+				// 	}
+				// 	</tbody>
+				// </table>
 			}
 		</div>
 	)
 }
 
-export default Ui
+export default TableData

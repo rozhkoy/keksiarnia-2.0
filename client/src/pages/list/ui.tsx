@@ -1,20 +1,17 @@
-import Ui from "../../shared/tableData/ui";
-import {useAppDispatch, useAppSelector} from "../../shared/hooks/hooks";
-import {fetchMainTypeData} from "../../store/adminStore/mainTypeStore";
+
 import {css} from "@emotion/react"
 import {useEffect, useState} from "react";
 import {useQuery} from "react-query";
 import {$host} from "../../shared/api";
+import TableData from "../../shared/tableData/ui";
 
 const List = () => {
-	// const mainTypeData = useAppSelector((state) => state.mainTypeStore)
-	// const dispatch = useAppDispatch()
-	// const [apiStatus , setApiStatus] = useState(false)
-	const {status, data, error} = useQuery('test', foo )
+	const {data} = useQuery('test', test )
 
-	function foo() {
-		const response = $host.get("api/mainTypeProduct");
-		return response
+	 async function test() {
+		const response = await $host.get("api/mainTypeProduct");
+		console.log("request" ,response)
+		return response.data
 	}
 
 	const list = css`
@@ -22,19 +19,13 @@ const List = () => {
 		grid-template-columns: 1fr
 	`
 
-
 	useEffect(() => {
 		console.log(data)
-		// if(!apiStatus){
-		// 	console.log("fetch")
-		// 	dispatch(fetchMainTypeData())
-		// 	setApiStatus(true)
-		// }
 	})
 
 	return (
 		<div css={list}>
-			{/*<Ui dataForTable={data} />*/}
+			<TableData dataForTable={data}/>
 		</div>
 	)
 }

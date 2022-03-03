@@ -22,14 +22,14 @@ const initialState:initialStateValue = {
 }
 
 
-export const fetchIsActiveData = createAsyncThunk(
-	"fetchIsActiveData",
-	async function foo() {
-		const response = await $host.get("api/isActive")
-		console.log("adsfasdf")
-		return response.data
-	}
-)
+// export const fetchIsActiveData = createAsyncThunk(
+// 	"fetchIsActiveData",
+// 	async function foo() {
+// 		const response = await $host.get("api/isActive")
+// 		console.log("adsfasdf")
+// 		return response.data
+// 	}
+// )
 
  export const isActive = createSlice({
 	name: "isActive",
@@ -39,13 +39,13 @@ export const fetchIsActiveData = createAsyncThunk(
 			state.test = "dfs"
 		}
 	},
-	extraReducers: (builder => {
-		builder.addCase(fetchIsActiveData.fulfilled, (state, {payload}) => {
-			console.log(payload);
-			state.ActiveData = payload;
-			state.apiStatus = true;
-		})
-	})
+	// extraReducers: (builder => {
+	// 	builder.addCase(fetchIsActiveData.fulfilled, (state, {payload}) => {
+	// 		console.log(payload);
+	// 		state.ActiveData = payload;
+	// 		state.apiStatus = true;
+	// 	})
+	// })
 
 })
 
