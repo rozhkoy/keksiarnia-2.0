@@ -4,17 +4,9 @@ const {test, type, filterCategory, filterItem, filterTagForSearch, product, bran
 } = require("../models/models");
 const { Op } = require("sequelize");
 const router = new Router()
+const userController = require('../controller/userController')
 
-
-router.post("/",async (req, res) => {
-
- const response =  await mainTypeProduct.update({ title: "Dosdfsdfe" }, {
-    where: {
-      id_mainTypeProduct: 11
-    }
-  });
- res.json(response)
-})
+router.post("/", userController.registration)
 
 
 router.get("/", async (req, res) => {
