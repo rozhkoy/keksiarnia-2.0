@@ -10,7 +10,10 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-	const response = await isActive.findAll()
+	const response = await isActive.findAll({
+			attributes: ["isActive_ID", "value"]
+		}
+	)
 	res.json(response)
 })
 

@@ -140,6 +140,17 @@ const product = sequelize.define("product", {
   numberProduct: {type: DataTypes.STRING, allowNull: false}
 })
 
+const userData = sequelize.define("user", {
+  id_user: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+  email: {type: DataTypes.STRING, allowNull: false},
+  password: {type: DataTypes.STRING, allowNull: false}
+})
+
+const tokenData  = sequelize.define("token", {
+  id_token: {type: DataTypes.BIGINT,primaryKey: true, autoIncrement: true},
+  user_id: {type: DataTypes.BIGINT},
+  refreshToken: {type: DataTypes.STRING, allowNull: false}
+})
 
 const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filterTagForSearch", {
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
@@ -176,4 +187,6 @@ module.exports = {
   propertyProduct,
   propertyProductItem,
   price,
+  userData,
+  tokenData
 }
