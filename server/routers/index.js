@@ -8,7 +8,7 @@ const isActive = require("./isActiveRouter")
 const mainTypePictures = require("./mainTypePictures")
 const mainTypeProductById = require("./mainTypeProductByIdRouter")
 const userController = require('../controller/userController')
-
+const {body} = require('express-validator')
 
 router.use("/test", test)
 router.use("/brand", brand)
@@ -17,6 +17,10 @@ router.use("/subTypeProduct", subTypeProduct)
 router.use("/isActive", isActive)
 router.use("/mainTypePictures", mainTypePictures)
 router.use("/mainTypeProductById", mainTypeProductById)
-// router.post("/reg", userController.registration)
+router.post("/registration",
+	body('email').isEmail(),
+	body('password').isLength({min: 3, max: 32}),
+	userController.registration)
+router.post("/login", userController.login)
 
 module.exports = router

@@ -1,8 +1,5 @@
 const Router = require('express')
-const {test, type, filterCategory, filterItem, filterTagForSearch, product, brand_mainTypeProduct_subTypeProduct,
-  mainTypeProductPicture, mainTypeProduct
-} = require("../models/models");
-const { Op } = require("sequelize");
+const {mainTypeProduct} = require("../models/models");
 const router = new Router()
 const userController = require('../controller/userController')
 
