@@ -13,14 +13,14 @@ class UserService {
 			}
 		})
 		if (candidate) {
-			throw ApiError.BadRequest("test")
+			throw ApiError.BadRequest("use to be")
 		}
+		console.log(email, password)
 		const hashPassword = await bcrypt.hash(password, 3)
 		const user = await userData.create({email, password: hashPassword})
 		const userDto = new UserDto(user)
 		const tokens = tokenService.generateToken({...userDto})
-		const writeRefreshToken = tokenService.saveToken( userDto.id, tokens.refreshToken)
-
+		const test = await tokenService.saveToken( userDto.id, tokens.refreshToken)
 		return {...tokens, user: userDto}
 	}
 
@@ -33,14 +33,20 @@ class UserService {
 		if (!user) {
 			throw ApiError.BadRequest('user not found')
 		}
+		console.log("sdfsdfffffffffffffffffffffffffffffffffffffff", user, password)
 		const isPassEquals = await bcrypt.compare(password, user.password);
 		if (!isPassEquals) {
 			throw ApiError.BadRequest('incorrect password')
 		}
 		const userDto = new UserDto(user)
 		const tokens = tokenService.generateToken({...userDto})
-		const writeRefreshToken = tokenService.saveToken( userDto.id, tokens.refreshToken)
+		const test = await tokenService.saveToken( userDto.id, tokens.refreshToken)
 		return {...tokens, user: userDto}
+	}
+
+	async logout(refreshToken) {
+		const token = await tokenService.removeToken(refreshToken);
+		return token
 	}
 }
 

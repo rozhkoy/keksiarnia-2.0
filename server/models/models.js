@@ -2,8 +2,6 @@ const sequelize = require("../db")
 const {DataTypes} = require("sequelize")
 const {contentDisposition} = require("express/lib/utils");
 
-
-
 const brand = sequelize.define("brand", {
   brandID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActive_ID: {type: DataTypes.BIGINT, allowNull: false},
@@ -140,15 +138,15 @@ const product = sequelize.define("product", {
   numberProduct: {type: DataTypes.STRING, allowNull: false}
 })
 
-const userData = sequelize.define("user", {
+const userData = sequelize.define("userData", {
   id_user: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   email: {type: DataTypes.STRING, allowNull: false},
   password: {type: DataTypes.STRING, allowNull: false}
 })
 
-const tokenData  = sequelize.define("token", {
+const tokenData  = sequelize.define("tokenData", {
   id_token: {type: DataTypes.BIGINT,primaryKey: true, autoIncrement: true},
-  user_id: {type: DataTypes.BIGINT},
+  user_id: {type: DataTypes.BIGINT, allowNull: false},
   refreshToken: {type: DataTypes.STRING, allowNull: false}
 })
 
@@ -164,7 +162,6 @@ mainTypeProduct.belongsTo(isActive, {foreignKey: "isActive_ID"})
 
 mainTypeProductPicture.hasMany(mainTypeProduct, {foreignKey: "picture_ID"})
 mainTypeProduct.belongsTo(mainTypeProductPicture, {foreignKey: "picture_ID"})
-
 
 module.exports = {
   filterCategory_filterTagForSearch,

@@ -3,7 +3,6 @@ const {validationResult} = require("express-validator");
 const ApiError = require('../exceptions/apiErrors')
 
 class UserController  {
-
 	async registration(req, res, next) {
 		try {
 			const errors = validationResult(req)
@@ -11,8 +10,9 @@ class UserController  {
 				return next(ApiError.BadRequest("incorrect password or login", errors.array()))
 			}
 			const {email, password} = req.body;
+			console.log(email, password)
 			const userReg = await userService.registration(email, password)
-			res.cookie('refreshToken', userReg.refreshToken, {maxAge: 30000000, httpOnly: true })
+			res.cookie('refreshToken', userReg.refreshToken, {maxAge: 30000000, httpOnly: true})
 			return res.json(userReg)
 		}
 		catch (e) {
@@ -29,6 +29,18 @@ class UserController  {
 		} catch (e) {
 			next(e)
 		}
+	}
+
+	async logout (req, res, next) {
+		try {
+			const {refreshToken} = req.cookies;
+			const token = await userService.logout(refreshToken)
+			res.clearCookie("refreshToken");
+			return res.json(token)
+		} catch (e) {
+			next(e)
+		}
+
 	}
 }
 
