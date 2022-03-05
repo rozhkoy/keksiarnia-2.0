@@ -4,6 +4,7 @@ const tokenService = require('./tokenService')
 const UserDto = require('../dtos/user-dto')
 const ApiError = require('../exceptions/apiErrors')
 
+
 class UserService {
 
 	async registration(email, password) {
@@ -33,7 +34,6 @@ class UserService {
 		if (!user) {
 			throw ApiError.BadRequest('user not found')
 		}
-		console.log("sdfsdfffffffffffffffffffffffffffffffffffffff", user, password)
 		const isPassEquals = await bcrypt.compare(password, user.password);
 		if (!isPassEquals) {
 			throw ApiError.BadRequest('incorrect password')
@@ -48,6 +48,33 @@ class UserService {
 		const token = await tokenService.removeToken(refreshToken);
 		return token
 	}
+
+	async refresh(refreshToken) {
+		if (!refreshToken) {
+			throw ApiError.BadRequest("token not found")
+		}
+		const verifyToken = tokenService.validateRefreshToken(refreshToken)
+		const tokenFromBD = await tokenService.findToken(refreshToken)
+		if (!verifyToken || !tokenFromBD) {
+			throw ApiError.UnauthorizedError()
+		}
+		const user = await userData.findOne({
+			where: {
+				id_user: verifyToken.id
+			}
+		})
+		const userDto = new UserDto(user)
+		const tokens = tokenService.generateToken({...userDto})
+		const test = await tokenService.saveToken( userDto.id, tokens.refreshToken)
+		return {...tokens, user: userDto}
+
+	}
+
+	async gerAllUsers() {
+		const users = await userData.findAll()
+		return users
+	}
+
 }
 
 module.exports =  new UserService()
