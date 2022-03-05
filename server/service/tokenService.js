@@ -3,7 +3,7 @@ const {userData,  tokenData} = require('../models/models')
 
 class TokenService {
 	generateToken(payload) {
-		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_KEY, {expiresIn: '30m'})
+		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_KEY, {expiresIn: '30s'})
 		const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_KEY, {expiresIn: "30d"})
 		return {
 			refreshToken,
@@ -20,7 +20,6 @@ class TokenService {
 		})
 		console.log("found", foundToken)
 		if (foundToken) {
-			console.log("sdfsdfsdfsdfsdfgdfsdfdfdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdf", foundToken)
 			const rewriteToken =  await tokenData.update({refreshToken}, {
 				where: {
 					user_id: userID
@@ -44,6 +43,33 @@ class TokenService {
 				refreshToken: refreshToken
 			}})
 		return remoteToken
+	}
+
+	validateAccessToken(token) {
+		try {
+			const verifyToken = jwt.verify(token, process.env.JWT_ACCESS_KEY)
+			return verifyToken
+		} catch (e) {
+			return null
+		}
+	}
+
+	validateRefreshToken(token) {
+		try {
+			const verifyToken = jwt.verify(token, process.env.JWT_REFRESH_KEY)
+			return verifyToken
+		} catch (e) {
+			return null
+		}
+	}
+
+	async findToken(refreshToken) {
+		const foundToken = await tokenData.findOne({
+			where: {
+				refreshToken: refreshToken
+			}
+		})
+		return foundToken
 	}
 }
 
