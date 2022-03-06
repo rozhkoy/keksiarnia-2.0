@@ -75,7 +75,7 @@ function App() {
 			`}/>
 			<Providers/>
 
-			<ReactQueryDevtools initialIsOpen={false} />
+			{/*<ReactQueryDevtools initialIsOpen={false} />*/}
 		</QueryClientProvider>
 
 	</div>
