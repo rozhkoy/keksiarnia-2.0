@@ -9,15 +9,12 @@ const Providers = () => {
 	return(
 		<Routes>
 			<Route path="/admin/*" element={<Ui/>}/>
-			<Route path="Auth" element={<Auth/>}/>
+			<Route path="/Singin" element={<Auth/>}/>
+			<Route path="/Singup" element={<Auth/>}/>
 			{/*<Route*/}
 			{/*	path="*"*/}
-			{/*	element={<Navigate to="/admin/Categories"/>}*/}
+			{/*	element={<Navigate to="/Singin"/>}*/}
 			{/*/>*/}
-			<Route
-				path="*"
-				element={<Navigate to="/Auth"/>}
-			/>
 		</Routes>
 	)
 }
