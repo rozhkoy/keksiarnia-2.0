@@ -31,7 +31,7 @@ const Auth = () => {
 	return (
 		<div className="wrap-container">
 			<Container>
-				<div className="auth__wrap">
+				<div className="auth auth__wrap">
 					<form onSubmit={handlerSubmit} className="auth__form">
 						<p className="auth__form-label">{ path.pathname == "/Singup" ? "Sing in" : "Sing up"}</p>
 						<input placeholder="Email" onChange={emailHandler} value={email} type="text" className="auth__input"/>
