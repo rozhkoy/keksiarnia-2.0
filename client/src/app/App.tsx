@@ -1,14 +1,14 @@
 import React from 'react';
-import { css } from '@emotion/react';
+import styled from '@emotion/react/macro'
+import { css } from '@emotion/react/macro';
 import { Global } from '@emotion/react'
 import Providers from "./providers";
-import {QueryClient, QueryClientProvider} from "react-query";
-import {ReactQueryDevtools} from "react-query/devtools";
+import {QueryClient, QueryClientProvider} from "react-query";	
 
 
+const queryClient = new QueryClient();
 
 function App() {
-	const queryClient = new QueryClient()
 
   return (
 
