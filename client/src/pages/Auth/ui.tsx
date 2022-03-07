@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {css} from  '@emotion/react'
 import {Container} from "../../shared/container";
 import './style.scss'
 import {Link, NavLink, useLocation} from "react-router-dom";
-import {useQuery} from "react-query";
 
 const Auth = () => {
 
