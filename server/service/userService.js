@@ -16,7 +16,6 @@ class UserService {
 		if (candidate) {
 			throw ApiError.BadRequest("use to be")
 		}
-		console.log(email, password)
 		const hashPassword = await bcrypt.hash(password, 3)
 		const user = await userData.create({email, password: hashPassword, firstName, lastName, role})
 		const userDto = new UserDto(user)
@@ -67,11 +66,12 @@ class UserService {
 		const tokens = tokenService.generateToken({...userDto})
 		const test = await tokenService.saveToken( userDto.id, tokens.refreshToken)
 		return {...tokens, user: userDto}
-
 	}
 
 	async gerAllUsers() {
-		const users = await userData.findAll()
+		const users = await userData.findAll({
+			attributes: ['email', 'password']
+		})
 		return users
 	}
 

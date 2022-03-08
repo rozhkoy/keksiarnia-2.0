@@ -3,7 +3,7 @@ const {userData,  tokenData} = require('../models/models')
 
 class TokenService {
 	generateToken(payload) {
-		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_KEY, {expiresIn: '30m'})
+		const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_KEY, {expiresIn: '10s'})
 		const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_KEY, {expiresIn: "30d"})
 		return {
 			refreshToken,
@@ -18,7 +18,6 @@ class TokenService {
 				 user_id: userID
 			 }
 		})
-		console.log("found", foundToken)
 		if (foundToken) {
 			const rewriteToken =  await tokenData.update({refreshToken}, {
 				where: {
@@ -31,14 +30,12 @@ class TokenService {
 			user_id: userID,
 			refreshToken: refreshToken
 		})
-		console.log("token",token)
 
 
 		return token
 	}
 
 	async removeToken(refreshToken) {
-		console.log(refreshToken)
 		const remoteToken = await tokenData.destroy({where: {
 				refreshToken: refreshToken
 			}})

@@ -3,7 +3,7 @@ import { Container } from '../../shared/container';
 import './style.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../shared/hooks';
-import { SingIn, SingUp } from './api';
+import { her, SingIn, SingUp } from './api';
 
 const Auth = () => {
 	const [firstName, setFirstName] = useState<string>('');
@@ -61,6 +61,7 @@ const Auth = () => {
 							<button className="auth__bttn auth__bttn--with-border">{path.pathname == '/Sing_up' ? 'Sing in' : 'Sing up'}</button>
 						</div>
 					</form>
+					<button onClick={() => dispatch(her())}>testset</button>
 				</div>
 			</Container>
 		</div>
