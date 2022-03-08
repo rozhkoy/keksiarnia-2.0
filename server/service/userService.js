@@ -7,7 +7,7 @@ const ApiError = require('../exceptions/apiErrors')
 
 class UserService {
 
-	async registration(email, password) {
+	async registration(email, password, firstName, lastName, role) {
 		const candidate = await userData.findOne( {
 			where:  {
 				email: email
@@ -18,7 +18,7 @@ class UserService {
 		}
 		console.log(email, password)
 		const hashPassword = await bcrypt.hash(password, 3)
-		const user = await userData.create({email, password: hashPassword})
+		const user = await userData.create({email, password: hashPassword, firstName, lastName, role})
 		const userDto = new UserDto(user)
 		const tokens = tokenService.generateToken({...userDto})
 		const test = await tokenService.saveToken( userDto.id, tokens.refreshToken)

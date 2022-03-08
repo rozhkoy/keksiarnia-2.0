@@ -5,7 +5,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "prettier"
   ],
   "parserOptions": {
     "project": ["./tsconfig.json"]
@@ -13,8 +14,7 @@
   "rules": {
     "react-hooks/exhaustive-deps": "error",
     "@typescript-eslint/no-floating-promises": "off",
-    "@typescript-eslint/no-explicit-any": "error",
-    "no-mixed-spaces-and-tabs": 0
+    "@typescript-eslint/no-explicit-any": "error"
   },
   "settings": {
     "react": {
