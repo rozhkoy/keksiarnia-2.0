@@ -72,6 +72,7 @@ class UserService {
 		const users = await userData.findAll({
 			attributes: ['email', 'password']
 		})
+
 		return users
 	}
 
