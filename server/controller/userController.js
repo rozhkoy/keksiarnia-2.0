@@ -23,7 +23,8 @@ class UserController  {
 		try {
 			const {email, password} = req.body;
 			const userLogin = await userService.login(email, password)
-			res.cookie('refreshToken', userLogin.refreshToken, {maxAge: 30000000, httpOnly: true })
+			console.log("sssssssssssssssssssssssssssssssssssssssssssssss", userLogin)
+			res.cookie('refreshToken', userLogin.refreshToken, {maxAge: 30000000, httpOnly: true, sameSite: "none", secure: true })
 			return res.json(userLogin)
 		} catch (e) {
 			next(e)
@@ -46,7 +47,6 @@ class UserController  {
 			const {refreshToken} = req.cookies
 			console.log("dfdfdfdfdfffffffffffffffffffffffffffff",refreshToken);
 			const userRefresh =  await userService.refresh(refreshToken)
-			console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",userRefresh)
 			res.cookie('refreshToken', userRefresh.refreshToken, {maxAge: 30000000, httpOnly: true })
 			return res.json(userRefresh)
 		} catch (e) {
@@ -56,6 +56,8 @@ class UserController  {
 
 	async gerUsers(req, res, next) {
 		try {
+			const {refreshToken} = req.cookies
+			console.log("=========================================================================================",refreshToken)
 			const users = await userService.gerAllUsers()
 			return res.json(users)
 		} catch (e){
