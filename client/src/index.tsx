@@ -4,15 +4,21 @@ import App from './app/App';
 import { store } from './entities/store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from "react-router-dom";
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <App/>
-        </Provider>
-      </BrowserRouter>
+    <React.StrictMode>
+        <BrowserRouter>
+            <Provider store={store}>
+                <QueryClientProvider client={queryClient}>
+                    <App />
+                    {/*<ReactQueryDevtools initialIsOpen={false} />*/}
+                </QueryClientProvider>
+            </Provider>
+        </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
