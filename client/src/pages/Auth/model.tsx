@@ -1,15 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { IUser } from './types';
-import { $host } from '../../shared/api';
+import { SingUp } from './api';
 
 const initialState = {};
-
-export const registration = createAsyncThunk('registration', async (userData: IUser) => {
-	console.log(userData);
-	const response = await $host.post<IUser>('/', userData);
-	return response.data;
-});
 
 export const authState = createSlice({
 	name: 'authState',
@@ -20,7 +13,7 @@ export const authState = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		builder.addCase(registration.fulfilled, (state, { payload }) => {
+		builder.addCase(SingUp.fulfilled, (state, { payload }) => {
 			console.log(payload);
 		});
 	},

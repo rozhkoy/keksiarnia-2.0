@@ -141,7 +141,10 @@ const product = sequelize.define("product", {
 const userData = sequelize.define("userData", {
   id_user: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   email: {type: DataTypes.STRING, allowNull: false},
-  password: {type: DataTypes.STRING, allowNull: false}
+  password: {type: DataTypes.STRING, allowNull: false},
+  firstName: {type: DataTypes.STRING, allowNull: false},
+  lastName: {type: DataTypes.STRING, allowNull:false},
+  role: {type: DataTypes.STRING, allowNull: false}
 })
 
 const tokenData  = sequelize.define("tokenData", {
