@@ -10,7 +10,6 @@ class UserController  {
 				return next(ApiError.BadRequest("incorrect password or login", errors.array()))
 			}
 			const {email, password, firstName, lastName, role} = req.body;
-			console.log(email, password)
 			const userReg = await userService.registration(email, password, firstName, lastName, role)
 			res.cookie('refreshToken', userReg.refreshToken, {maxAge: 30000000, httpOnly: true})
 			return res.json(userReg)
@@ -41,11 +40,13 @@ class UserController  {
 			next(e)
 		}
 	}
-	
+
 	async refresh(req, res, next) {
 		try {
 			const {refreshToken} = req.cookies
-			const userRefresh = userService.refresh(refreshToken)
+			console.log("dfdfdfdfdfffffffffffffffffffffffffffff",refreshToken);
+			const userRefresh =  await userService.refresh(refreshToken)
+			console.log("userrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",userRefresh)
 			res.cookie('refreshToken', userRefresh.refreshToken, {maxAge: 30000000, httpOnly: true })
 			return res.json(userRefresh)
 		} catch (e) {

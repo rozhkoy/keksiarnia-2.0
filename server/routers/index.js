@@ -10,7 +10,6 @@ const mainTypeProductById = require("./mainTypeProductByIdRouter")
 const userController = require('../controller/userController')
 const {body} = require('express-validator')
 const authorization = require('../middleware/AuthMiddlleaware')
-const testMid =  require('../middleware/testMid')
 
 router.use("/test", test)
 router.use("/brand", brand)
@@ -25,8 +24,8 @@ router.post("/registration",
 	userController.registration)
 router.post("/login", userController.login)
 router.post("/logout", userController.logout)
-router.post("/refresh", userController.refresh)
-router.get("/users", authorization, testMid,  userController.gerUsers)
+router.get("/refresh", userController.refresh)
+router.get("/users", authorization,  userController.gerUsers)
 
 
 module.exports = router

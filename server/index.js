@@ -11,9 +11,13 @@ const app = express();
 const path = require("path");
 const errorMiddleware = require('./middleware/errorMiddlleware');
 
-app.use(cors())
+
 app.use(express.json())
 app.use(cookieParse())
+app.use(cors({
+  credentials: true,
+  origin: "http://localhost:3000"
+}))
 app.use(express.static(path.resolve(__dirname, "static")))
 app.use(fileUpload({}))
 app.use("/api", router)

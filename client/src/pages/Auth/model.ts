@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { SingUp } from './api';
+import { SingIn, SingUp, her } from './api';
 
 const initialState = {};
 
@@ -14,6 +14,12 @@ export const authState = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(SingUp.fulfilled, (state, { payload }) => {
+			console.log(payload);
+		});
+		builder.addCase(SingIn.fulfilled, (state, { payload }) => {
+			console.log(payload);
+		});
+		builder.addCase(her.fulfilled, (state, { payload }) => {
 			console.log(payload);
 		});
 	},
