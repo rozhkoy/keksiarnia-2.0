@@ -40,8 +40,9 @@ const Auth = () => {
 				}
 			});
 		} else {
-			console.log('sing-up');
+			console.log('sing-in');
 			dispatch(SingIn({ email, password })).then((response) => {
+				console.log(response);
 				if (response.meta.requestStatus === 'fulfilled') {
 					console.log('test');
 					navigate('/');
