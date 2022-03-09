@@ -1,10 +1,13 @@
 import './style.scss';
 import { her, Logout } from '../Auth/api';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../shared/hooks';
+import { useQuery } from 'react-query';
+import { $host } from '../../shared/api';
 
 export const MainPage = () => {
 	const dispatch = useAppDispatch();
+
 	const authData = useAppSelector((state) => state.authState);
 	return (
 		<div className="mainPage__wrap">

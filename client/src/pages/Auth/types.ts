@@ -24,3 +24,8 @@ export interface UserDTO {
 export interface IAuthState {
 	auth: boolean;
 }
+
+export type DataError = {
+	errors: string[];
+	message: string;
+};
