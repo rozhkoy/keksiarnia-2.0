@@ -19,7 +19,6 @@ export const SingIn = createAsyncThunk('SingIn', async (userData: IUser) => {
 		throw e;
 	});
 	localStorage.setItem('token', response.data.accessToken);
-
 	return response.data;
 });
 

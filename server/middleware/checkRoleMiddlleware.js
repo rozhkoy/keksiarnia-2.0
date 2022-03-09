@@ -1,9 +1,9 @@
-const ApiError = require('../exceptions/apiErrors')
-const tokenService = require('../service/tokenService')
-
+const ApiError = require("../exceptions/apiErrors");
+const tokenService = require("../service/tokenService");
 module.exports = function (req, res, next) {
 	try {
 		const authorizationHeader = req.headers.authorization;
+		console.log("test")
 		if (!authorizationHeader) {
 			return next(ApiError.UnauthorizedError())
 		}
@@ -12,10 +12,18 @@ module.exports = function (req, res, next) {
 			return next(ApiError.UnauthorizedError())
 		}
 		const verifyToken = tokenService.validateAccessToken(accessToken)
+		console.log(verifyToken)
 		if (!verifyToken) {
 			return next(ApiError.UnauthorizedError())
 		}
-		next()
+		console.log(verifyToken)
+		if(verifyToken.role == "ADMIN") {
+			next()
+		} else {
+			return next(ApiError.BadRequest("no access"))
+		}
+
+
 	} catch (e) {
 		return next(ApiError.UnauthorizedError())
 	}
