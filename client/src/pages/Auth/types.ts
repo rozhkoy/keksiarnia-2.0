@@ -9,14 +9,18 @@ export interface IUserSingUp extends IUser {
 	lastName: string;
 }
 
-export interface registrationResponse {
+export interface AuthResponse {
 	refreshToken: string;
 	accessToken: string;
-	user: userDTO;
+	user: UserDTO;
 }
 
-export interface userDTO {
+export interface UserDTO {
 	email: string;
 	id: string;
 	role: string;
+}
+
+export interface IAuthState {
+	auth: boolean;
 }
