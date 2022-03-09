@@ -23,8 +23,6 @@ app.use(fileUpload({}))
 app.use("/api", router)
 app.use(errorMiddleware)
 
-
-
 const start = async () => {
   try{
     await sequelize.authenticate()

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from '../../shared/container';
 import './style.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../shared/hooks';
 import { her, SingIn, SingUp } from './api';
 
@@ -12,6 +12,7 @@ const Auth = () => {
 	const [password, setPassword] = useState<string>('');
 	const path = useLocation();
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	function emailHandler(event: React.ChangeEvent<HTMLInputElement>) {
 		setEmail(event.target.value);
@@ -32,10 +33,20 @@ const Auth = () => {
 	function handlerSubmit(event: React.SyntheticEvent) {
 		if (path.pathname == '/Sing_up') {
 			console.log('test');
-			dispatch(SingUp({ firstName: firstName, lastName: lastName, email: email, password: password, role: 'ADMIN' }));
+			dispatch(SingUp({ firstName: firstName, lastName: lastName, email: email, password: password, role: 'ADMIN' })).then((response) => {
+				if (response.meta.requestStatus === 'fulfilled') {
+					console.log('test');
+					navigate('/');
+				}
+			});
 		} else {
 			console.log('sing-up');
-			dispatch(SingIn({ email, password }));
+			dispatch(SingIn({ email, password })).then((response) => {
+				if (response.meta.requestStatus === 'fulfilled') {
+					console.log('test');
+					navigate('/');
+				}
+			});
 		}
 		event.preventDefault();
 	}
@@ -61,7 +72,6 @@ const Auth = () => {
 							<button className="auth__bttn auth__bttn--with-border">{path.pathname == '/Sing_up' ? 'Sing in' : 'Sing up'}</button>
 						</div>
 					</form>
-					<button onClick={() => dispatch(her())}>testset</button>
 				</div>
 			</Container>
 		</div>
