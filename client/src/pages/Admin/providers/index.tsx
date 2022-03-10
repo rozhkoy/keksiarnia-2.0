@@ -6,7 +6,7 @@ export const AdminProviders = () => {
 	return (
 		<div>
 			<Routes>
-				<Route path="categories" element={<Category />} />
+				<Route path="categories/*" element={<Category />} />
 			</Routes>
 		</div>
 	);
