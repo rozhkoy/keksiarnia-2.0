@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from '../../shared/ui/container';
 import './style.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../shared/hooks';
+import { useAppDispatch } from '../../shared/lib/hooks';
 import { her, SingIn, SingUp } from './api';
+import { Container } from 'src/shared/ui/container';
 
 const Auth = () => {
 	const [firstName, setFirstName] = useState<string>('');

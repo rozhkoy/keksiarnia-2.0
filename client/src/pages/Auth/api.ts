@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { $auth, $host } from '../../shared/api';
 import { AuthResponse, IUser, IUserSingUp } from './types';
 import { AxiosError } from 'axios';
-import { AlertError } from '../../shared/AlertError';
+import { AlertError } from '../../shared/lib/AlertError';
 
 export const SingUp = createAsyncThunk('SingUp', async (userData: IUserSingUp) => {
 	console.log(userData);
