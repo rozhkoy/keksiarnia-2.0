@@ -1,4 +1,4 @@
-import { DataError } from '../../pages/Auth/types';
+import { DataError } from '../../../pages/Auth/types';
 import { AxiosError } from 'axios';
 
 export function AlertError(error: AxiosError) {

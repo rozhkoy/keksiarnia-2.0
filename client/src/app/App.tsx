@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './style.scss';
 import Providers from './providers';
-import { useAppDispatch, useAppSelector } from '../shared/hooks';
+import { useAppDispatch, useAppSelector } from '../shared/lib/hooks';
 import { CheckAuth } from '../pages/Auth/api';
 
 function App() {

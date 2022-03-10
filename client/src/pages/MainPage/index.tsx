@@ -1,7 +1,7 @@
 import './style.scss';
 import { her, Logout } from '../Auth/api';
 import React, { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../shared/hooks';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
 import { useQuery } from 'react-query';
 import { $host } from '../../shared/api';
 

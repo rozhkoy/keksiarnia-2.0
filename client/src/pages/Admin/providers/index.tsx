@@ -1,6 +1,6 @@
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router';
-import { Category } from '../../Category/ui';
+import { Category } from '../../Category';
 
 export const AdminProviders = () => {
 	return (

@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
-import Auth from '../../pages/Auth/ui';
+import Auth from '../../pages/Auth';
 import { MainPage } from '../../pages/MainPage';
-import { Admin } from '../../pages/Admin/ui';
+import { Admin } from '../../pages/Admin';
 
 const Providers = () => {
 	return (
