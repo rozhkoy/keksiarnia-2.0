@@ -21,6 +21,9 @@ export const authState = createSlice({
 		});
 		builder.addCase(SingIn.fulfilled, (state, { payload }) => {
 			console.log(payload);
+			if (payload) {
+				state.auth = true;
+			}
 		});
 		builder.addCase(CheckAuth.fulfilled, (state, { payload }) => {
 			console.log(payload);
