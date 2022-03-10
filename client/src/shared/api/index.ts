@@ -42,14 +42,4 @@ $auth.interceptors.response.use(
 	}
 );
 
-// $host.interceptors.response.use(
-// 	(config) => {
-// 		return config;
-// 	},
-// 	(error: AxiosError) => {
-// 		const originalRequest = error.config;
-// 		console.log(error.config, error.response);
-// 	}
-// );
-
 export { $host, $auth };
