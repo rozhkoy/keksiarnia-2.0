@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from '../../shared/container';
+import { Container } from '../../shared/ui/container';
 import './style.scss';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../shared/hooks';
