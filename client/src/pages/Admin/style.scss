@@ -1,4 +1,16 @@
 .admin {
   width: 100%;
   height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  &__sidebar {
+    grid-column: 1/3;
+    padding: 20px 10px;
+    border-right: 1px solid #000;
+    background: #faf8f8;
+  }
+  &__frame {
+    grid-column: 3/13;
+    padding: 20px 10px;
+  }
 }

@@ -1,5 +1,1 @@
-export const AdminProviders () => {
-	return (
-		div
-	)
-}
+export * from './ui';
