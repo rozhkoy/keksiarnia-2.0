@@ -1,5 +1,4 @@
 const Router = require('express')
-const {response} = require("express");
 const {isActive} = require("../models/models");
 const router = new Router;
 const isActiveController = require('../controller/isActiveController')
