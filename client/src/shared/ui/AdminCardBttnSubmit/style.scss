@@ -1,0 +1,13 @@
+.AdminCardBttnSubmit {
+  padding: 20px 0;
+  display: flex;
+  justify-content: end;
+
+  &__bttn {
+    background: #31373D;
+    border: 1px solid #31373D;
+    color: #fff;
+    padding: 5px 16px;
+    border-radius: 7px;
+  }
+}

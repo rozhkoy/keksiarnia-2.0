@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { AdminPanelHeading } from 'src/shared/ui/AdminPanelHeading';
-import { BttnGroup } from 'src/shared/ui/BttnGroup';
+import { BttnGroup } from 'src/shared/ui/AdminPanelBttnGroup';
 import { DataTable } from 'src/shared/ui/DataTabel';
 
 import { AddNewCategory } from '../AddNewCategory';
