@@ -2,6 +2,7 @@ const Router = require('express')
 const {response} = require("express");
 const {isActive} = require("../models/models");
 const router = new Router;
+const isActiveController = require('../controller/isActiveController')
 
 router.post('/', async (req, res) => {
 	const {value} = req.query
@@ -9,12 +10,6 @@ router.post('/', async (req, res) => {
 	res.json(response)
 })
 
-router.get('/', async (req, res) => {
-	const response = await isActive.findAll({
-			attributes: ["isActive_ID", "value"]
-		}
-	)
-	res.json(response)
-})
+router.get('/', isActiveController.getIsActiveState )
 
 module.exports = router

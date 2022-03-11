@@ -9,7 +9,7 @@
     "prettier"
   ],
   "parserOptions": {
-    "project": ["./tsconfig.json"]
+    "project": "tsconfig.json"
   },
   "rules": {
     "react-hooks/exhaustive-deps": "error",
