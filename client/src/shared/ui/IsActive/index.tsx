@@ -1,7 +1,7 @@
 import { AdminCardSelect } from '../AdminCardSelect';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { getIsActiveState } from './model';
+import { getIsActiveState } from './api';
 import { IOptionArray } from '../AdminCardSelect/types';
 import { IIsActive, isActiveProps } from './types';
 
@@ -25,10 +25,6 @@ export const IsActive: React.FC<isActiveProps> = (props) => {
 		setSelectData(e.target.value);
 		props.getValue(e.target.value);
 	}
-
-	useEffect(() => {
-		console.log(selectData);
-	});
 
 	return <AdminCardSelect value={selectData} change={selectHandler} optionArray={isActiveData} field={' Is active'} />;
 };

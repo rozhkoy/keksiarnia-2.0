@@ -8,14 +8,21 @@ import { IsActive } from '../../shared/ui/IsActive';
 import { useEffect, useState } from 'react';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { createFormData } from '../../shared/lib/createFormData';
+import { useMutation } from 'react-query';
+import { sendDataNewCategory } from './api';
 
 export const AddNewCategory = () => {
 	const [isActiveData, setIsActiveData] = useState<string>('');
 	const [titleState, setTitleState] = useState<string>('');
 	const [imageState, setImageState] = useState<File | null>(null);
+	const mutation = useMutation(sendDataNewCategory, {
+		onError: () => {
+			console.log('ree');
+		},
+	});
 
 	function formHandler(e: React.SyntheticEvent) {
-		alert('her');
+		alert('send');
 		const formData = createFormData([
 			{
 				key: 'isActive_ID',
@@ -25,15 +32,16 @@ export const AddNewCategory = () => {
 				key: 'title',
 				value: titleState,
 			},
+			{
+				key: 'picture_ID',
+				value: '1',
+			},
 		]);
+
+		mutation.mutate(formData);
+
 		e.preventDefault();
 	}
-
-	useEffect(() => {
-		console.log('test', isActiveData);
-		console.log(titleState);
-		console.log(imageState);
-	});
 
 	return (
 		<AdminPanelCard>
