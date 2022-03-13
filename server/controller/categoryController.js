@@ -3,7 +3,7 @@ const {mainTypeProduct} = require("../models/models");
 
 class categoryController {
 	async addNewCategory(req, res) {
-		try{
+		try {
 			const {isActive_ID, title, picture_ID} = req.body
 			const response = await mainTypeProduct.create({isActive_ID, title, picture_ID})
 			return  res.json(response)
@@ -11,7 +11,6 @@ class categoryController {
 			console.log(e)
 			throw ApiError.BadRequest('Error Database')
 		}
-
 	}
 }
 

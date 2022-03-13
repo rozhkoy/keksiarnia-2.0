@@ -7,6 +7,7 @@ import { AdminCardFile } from '../../shared/ui/AdminCardFile';
 import { IsActive } from '../../shared/ui/IsActive';
 import { useEffect, useState } from 'react';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
+import { createFormData } from '../../shared/lib/createFormData';
 
 export const AddNewCategory = () => {
 	const [isActiveData, setIsActiveData] = useState<string>('');
@@ -15,6 +16,16 @@ export const AddNewCategory = () => {
 
 	function formHandler(e: React.SyntheticEvent) {
 		alert('her');
+		const formData = createFormData([
+			{
+				key: 'isActive_ID',
+				value: isActiveData,
+			},
+			{
+				key: 'title',
+				value: titleState,
+			},
+		]);
 		e.preventDefault();
 	}
 
@@ -23,6 +34,7 @@ export const AddNewCategory = () => {
 		console.log(titleState);
 		console.log(imageState);
 	});
+
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>Add new Category</AdminCardHeading>
