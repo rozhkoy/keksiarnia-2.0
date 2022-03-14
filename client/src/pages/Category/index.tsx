@@ -1,11 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import { AdminPanelHeading } from 'src/shared/ui/AdminPanelHeading';
 import { BttnGroup } from 'src/shared/ui/AdminPanelBttnGroup';
-import { DataTable } from 'src/shared/ui/DataTabel';
+import { DataTable } from 'src/shared/ui/DataTable';
 
-import { AddNewCategory } from '../AddNewCategory';
+import { AddNewCategory } from '../../features/AddNewCategory';
+import { useEffect } from 'react';
+import { ListCategories } from '../../features/ListCategories';
 
 export const Category = () => {
+	useEffect(() => {
+		console.log('test');
+	});
+
 	return (
 		<div>
 			<AdminPanelHeading>Category</AdminPanelHeading>
@@ -16,7 +22,7 @@ export const Category = () => {
 				]}
 			/>
 			<Routes>
-				<Route path="" element={<DataTable />} />
+				<Route path="" element={<ListCategories />} />
 				<Route path="add" element={<AddNewCategory />} />
 			</Routes>
 		</div>

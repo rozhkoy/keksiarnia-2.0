@@ -12,6 +12,15 @@ class categoryController {
 			throw ApiError.BadRequest('Error Database')
 		}
 	}
+	async getAllCategories(req, res) {
+		try {
+			const response = await mainTypeProduct.findAll()
+			return res.json(response)
+		} catch (e) {
+			console.log(e)
+			throw ApiError.BadRequest('Error Database')
+		}
+	}
 }
 
 module.exports = new categoryController()
