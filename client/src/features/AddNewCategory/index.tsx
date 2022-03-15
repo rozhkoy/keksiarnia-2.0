@@ -63,7 +63,7 @@ export const AddNewCategory = () => {
 				<IsActive getValue={setIsActiveData} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				<AdminCardFile field={'Image'} change={setPictureState} />
-				<AdminCardBttnSubmit field={'ADD'} />
+				<AdminCardBttnSubmit field={'Add'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

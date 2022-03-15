@@ -7,3 +7,10 @@ export interface IMainCategory extends CreateUpdate {
 	picture_ID: string;
 	title: string;
 }
+
+export type IMainCategoryTable = {
+	id:string,
+	title: string,
+	picture: string,
+	isActive: string
+}
