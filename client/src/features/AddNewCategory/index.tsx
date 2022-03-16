@@ -43,6 +43,7 @@ export const AddNewCategory = () => {
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
+		console.log(e);
 		alert('send');
 		if (pictureState) {
 			const formData = createFormData([
