@@ -8,27 +8,27 @@ const brand = sequelize.define("brand", {
   brandName: {type: DataTypes.STRING, allowNull: false}
 })
 
-const mainTypeProduct = sequelize.define("mainTypeProduct", {
-  id_mainTypeProduct: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+const category = sequelize.define("category", {
+  id_category: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActive_ID: {type: DataTypes.BIGINT, allowNull: false},
   picture_ID: {type: DataTypes.BIGINT, allowNull: false},
   title: {type: DataTypes.STRING, allowNull: false},
 })
 
-const subTypeProduct = sequelize.define("subTypeProduct", {
-  id_subTypeProduct: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+const subCategory = sequelize.define("subCategory", {
+  id_subCategory: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActive_ID: {type: DataTypes.BIGINT, allowNull: false},
-  id_mainTypeProduct: {type: DataTypes.BIGINT, allowNull: false},
+  id_category: {type: DataTypes.BIGINT, allowNull: false},
   picture_ID: {type: DataTypes.BIGINT, allowNull: false},
   title: {type: DataTypes.STRING, allowNull: false}
 })
 
-const mainTypeProductPicture = sequelize.define("mainTypeProductPicture", {
+const categoryPicture = sequelize.define("categoryPicture", {
   picture_ID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   name: {type: DataTypes.STRING, allowNull: false}
 })
 
-const subTypeProductPicture = sequelize.define("subTypeProductPicture", {
+const subCategoryPicture = sequelize.define("subCategoryPicture", {
   picture_ID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   name: {type: DataTypes.STRING, allowNull: false}
 })
@@ -57,7 +57,7 @@ const filterTagForSearch = sequelize.define("filterTagForSearch", {
 const filterCategory = sequelize.define("filterCategory", {
   filterCategoryID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActive_ID: {type: DataTypes.BIGINT, allowNull: false},
-  subTypeProductID: {type: DataTypes.BIGINT, allowNull: false},
+  id_subCategory: {type: DataTypes.BIGINT, allowNull: false},
   filterCategoryName: {type: DataTypes.BIGINT, allowNull: false},
   filterTitle: {type: DataTypes.BIGINT, allowNull: false}
 })
@@ -127,9 +127,9 @@ const price = sequelize.define("price", {
 const product = sequelize.define("product", {
   productID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActive_ID: {type: DataTypes.BIGINT, allowNull: false},
-  mainTypeProductID: {type: DataTypes.BIGINT, allowNull: false},
+  id_category: {type: DataTypes.BIGINT, allowNull: false},
   brandID: {type: DataTypes.BIGINT, allowNull: false},
-  subTypeProduct: {type: DataTypes.BIGINT, allowNull: false},
+  id_subCategory: {type: DataTypes.BIGINT, allowNull: false},
   supplierID: {type: DataTypes.BIGINT, allowNull: false},
   priceID: {type: DataTypes.BIGINT, allowNull: false},
   productGroupID: {type: DataTypes.BIGINT, allowNull: false},
@@ -157,22 +157,13 @@ const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filte
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
 })
 
-mainTypeProduct.hasMany(subTypeProduct, {foreignKey:  "id_mainTypeProduct"})
-subTypeProduct.belongsTo(mainTypeProduct, {foreignKey:  "id_mainTypeProduct"})
-
-isActive.hasMany(mainTypeProduct, {foreignKey: "isActive_ID"})
-mainTypeProduct.belongsTo(isActive, {foreignKey: "isActive_ID"})
-
-mainTypeProductPicture.hasMany(mainTypeProduct, {foreignKey: "picture_ID"})
-mainTypeProduct.belongsTo(mainTypeProductPicture, {foreignKey: "picture_ID"})
-
 module.exports = {
+  category,
+  subCategory,
+  categoryPicture,
+  subCategoryPicture,
   filterCategory_filterTagForSearch,
   brand,
-  mainTypeProduct,
-  subTypeProduct,
-  mainTypeProductPicture,
-  subTypeProductPicture,
   productPicture,
   isActive,
   filterTagForSearch,
