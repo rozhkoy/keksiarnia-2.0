@@ -12,6 +12,16 @@ class isActiveController {
 			throw ApiError.BadRequest('Error Database')
 		}
 	}
+
+	async sendIsActiveState(req, res) {
+		try {
+			const {value} = req.body
+			const response = await isActive.create({value: value})
+			return res.json(response)
+		} catch (e) {
+			throw ApiError.BadRequest('Error Database')
+		}
+	}
 }
 
 module.exports = new isActiveController()

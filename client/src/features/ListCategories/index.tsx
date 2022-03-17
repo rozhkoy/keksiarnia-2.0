@@ -8,7 +8,6 @@ import { IMainCategory } from '../../pages/Category/model';
 
 export const ListCategories = () => {
 	const [mainCategory, setMainCategory] = useState<IMainCategory[]>([]);
-
 	const { isLoading } = useQuery('mainTypeData', getMainCategory, {
 		onSuccess: ({ data }) => {
 			console.log(data);
@@ -19,7 +18,7 @@ export const ListCategories = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List of Categories</AdminCardHeading>
-			{isLoading ? 'Loading...' : <DataTable data={mainCategory} />}
+			{isLoading ? 'Loading...' : (mainCategory.length > 0 ? <DataTable data={mainCategory}/> : "No Data")}
 		</AdminPanelCard>
 	);
 };
