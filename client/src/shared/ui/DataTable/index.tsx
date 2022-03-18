@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataTableProps } from './types';
 import './style.scss';
 import { Link } from "react-router-dom";
 import { IMainCategoryTable } from "../../../features/ListCategories/model";
+
+export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, getPage, count }: DataTableProps<T>) => {
+	function incrementOffset() {
+		if (page * limit < count) {
+			getPage((state: number) => state + 1);
+		}
+	}
+	function decrementOffset() {
+		if (page >= 1) {
+			getPage((state: number) => state - 1);
+		}
+	}
 
 export const DataTable = <T extends Record<string, string | number>>({ data, linkToEdit }: DataTableProps<T>) => {
 	return (
@@ -27,8 +39,12 @@ export const DataTable = <T extends Record<string, string | number>>({ data, lin
 				</table>
 			</div>
 			<div className="table__pagination-bttns">
-				<button className="table__pagination-bttn">prev</button>
-				<button className="table__pagination-bttn">next</button>
+				<button className="table__pagination-bttn" onClick={decrementOffset}>
+					prev
+				</button>
+				<button className="table__pagination-bttn" onClick={incrementOffset}>
+					next
+				</button>
 			</div>
 		</div>
 	);

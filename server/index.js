@@ -17,6 +17,7 @@ app.use(cookieParse())
 app.use(cors({
   credentials: true,
   origin: "http://localhost:3000"
+  // origin: false
 }))
 app.use(express.static(path.resolve(__dirname, "static")))
 app.use(fileUpload({}))

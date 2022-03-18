@@ -3,35 +3,36 @@ import { AdminCardHeading } from '../../shared/ui/AdminCardHeading';
 import { DataTable } from '../../shared/ui/DataTable';
 import { useQuery } from 'react-query';
 import { getMainCategory } from './api';
-import { useEffect, useState } from "react";
-import { IMainCategory, IMainCategoryTable } from "./model";
-
+import { useEffect, useState } from 'react';
+import { ICategoriesTable } from './types';
 export const ListCategories = () => {
-	const [mainCategory, setMainCategory] = useState<IMainCategoryTable[]>([]);
-
-	const { isLoading } = useQuery('mainTypeData', getMainCategory, {
+	const [categories, setCategories] = useState<ICategoriesTable[]>([]);
+	const [page, setPage] = useState<number>(1);
+	const [limit, setLimit] = useState<number>(10);
+	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
+	const { isLoading } = useQuery(['mainTypeData', limit, page], () => getMainCategory(limit, page), {
 		onSuccess: ({ data }) => {
-			console.log(data);
-			const array = data.map((item) => {
+			console.log(data.rows);
+			setCountPositionOnTable(data.count);
+			const array: Array<ICategoriesTable> = data.rows.map((item) => {
 				return {
-					id: item.id_mainTypeProduct,
+					id: item.id_category,
+					isActive: item.isActive_ID,
+					pictures: item.picture_ID,
 					title: item.title,
-					picture: item.picture_ID,
-					isActive: item.isActive_ID
-				}
-			})
-			setMainCategory(array);
+					updatedAt: item.createdAt,
+					createdAt: item.updatedAt,
+				};
+			});
+			console.log(array);
+			setCategories(array);
 		},
 	});
-
-	useEffect(() => {
-		console.log(mainCategory);
-	})
 
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List of Categories</AdminCardHeading>
-			{isLoading ? 'Loading...' : <DataTable data={mainCategory} linkToEdit={"test"} />}
+			{isLoading ? 'Loading...' : categories.length > 0 ? <DataTable count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={categories} /> : 'No Data'}
 		</AdminPanelCard>
 	);
 };

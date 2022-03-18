@@ -4,7 +4,7 @@ import { AdminCardInput } from 'src/shared/ui/AdminCardInput';
 import { AdminPanelCard } from 'src/shared/ui/AdminPanelCard';
 import { AdminCardFile } from '../../shared/ui/AdminCardFile';
 import { IsActive } from '../../shared/ui/IsActive';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { createFormData } from '../../shared/lib/createFormData';
 import { useMutation, useQueryClient } from 'react-query';
@@ -15,9 +15,10 @@ export const AddNewCategory = () => {
 	const [titleState, setTitleState] = useState<string>('');
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
 	const queryClient = useQueryClient();
+
 	const mutationTextData = useMutation(sendDataNewCategory, {
 		onSuccess: ({ data }) => {
-			console.log(data);
+			console.log(isActiveData);
 			queryClient.setQueryData('mainTypeData', data);
 		},
 	});
@@ -43,8 +44,7 @@ export const AddNewCategory = () => {
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
-		console.log(e);
-		alert('send');
+		e.preventDefault();
 		if (pictureState) {
 			const formData = createFormData([
 				{
@@ -54,7 +54,6 @@ export const AddNewCategory = () => {
 			]);
 			mutationPicturesData.mutate(formData);
 		}
-		e.preventDefault();
 	}
 
 	return (

@@ -1,7 +1,13 @@
 import { $auth } from '../../shared/api';
-import { IMainCategory } from './model';
-import { AxiosResponse } from "axios";
+import { findAndCountAll } from '../../shared/ui/types';
+import { IResponseCategory } from './types';
 
-export async function getMainCategory(): Promise<AxiosResponse<IMainCategory[]>>{
-	return await $auth.get<IMainCategory[]>('api/mainType');
-}
+export async function getMainCategory(limit: number, page: number) {
+	return await $auth.get<findAndCountAll<IResponseCategory>>('api/categories', {
+		params: {
+			limit,
+			page,
+		},
+	});
+
+  
