@@ -6,4 +6,5 @@ export interface DataTableProps<T> {
 	getPage: Dispatch<SetStateAction<number>>;
 	page: number;
 	count: number;
+	linkToEdit: string
 }

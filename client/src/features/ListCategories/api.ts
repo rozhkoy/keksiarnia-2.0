@@ -9,4 +9,5 @@ export async function getMainCategory(limit: number, page: number) {
 			page,
 		},
 	});
-}
+
+  
