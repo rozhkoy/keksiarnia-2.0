@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataTableProps } from './types';
 import './style.scss';
 
-export const DataTable = <T extends Record<string, string | number>>({ data }: DataTableProps<T>) => {
+export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, getPage, count }: DataTableProps<T>) => {
+	function incrementOffset() {
+		if (page * limit < count) {
+			getPage((state: number) => state + 1);
+		}
+	}
+	function decrementOffset() {
+		if (page >= 1) {
+			getPage((state: number) => state - 1);
+		}
+	}
+
+	useEffect(() => {
+		console.log('page', page);
+	});
 	return (
 		<div className="table__container">
 			<div className="table__wrap">
@@ -24,8 +38,12 @@ export const DataTable = <T extends Record<string, string | number>>({ data }: D
 				</table>
 			</div>
 			<div className="table__pagination-bttns">
-				<button className="table__pagination-bttn">prev</button>
-				<button className="table__pagination-bttn">next</button>
+				<button className="table__pagination-bttn" onClick={decrementOffset}>
+					prev
+				</button>
+				<button className="table__pagination-bttn" onClick={incrementOffset}>
+					next
+				</button>
 			</div>
 		</div>
 	);

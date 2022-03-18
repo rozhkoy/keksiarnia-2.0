@@ -15,13 +15,13 @@ export const AddNewCategory = () => {
 	const [titleState, setTitleState] = useState<string>('');
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
 	const queryClient = useQueryClient();
+
 	const mutationTextData = useMutation(sendDataNewCategory, {
 		onSuccess: ({ data }) => {
 			console.log(isActiveData);
 			queryClient.setQueryData('mainTypeData', data);
 		},
 	});
-
 
 	const mutationPicturesData = useMutation(sendCategoryPictures, {
 		onSuccess: ({ data }) => {
