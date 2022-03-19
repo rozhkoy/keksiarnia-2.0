@@ -156,6 +156,11 @@ const tokenData  = sequelize.define("tokenData", {
 const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filterTagForSearch", {
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
 })
+isActive.hasMany(category, {foreignKey: "isActive_ID"})
+category.belongsTo(isActive, {foreignKey: "isActive_ID"})
+
+categoryPicture.hasMany(category, {foreignKey: "picture_ID"})
+category.belongsTo(categoryPicture, {foreignKey: "picture_ID"})
 
 module.exports = {
   category,

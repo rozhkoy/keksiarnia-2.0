@@ -1,5 +1,5 @@
 const ApiError = require("../exceptions/apiErrors");
-const {mainTypeProduct, category} = require("../models/models");
+const {mainTypeProduct, category, isActive, categoryPicture} = require("../models/models");
 
 class categoryController {
     async addNewCategory(req, res) {
@@ -21,13 +21,18 @@ class categoryController {
                 page = 1
             }
             if (limit <= 0) {
-				limit = 1
+                limit = 1
             }
             console.log(limit, page)
             let offset = page * limit - limit
             const response = await category.findAndCountAll({
-            	offset: offset,
-            	limit: limit
+             attributes: ["id_category", "title", "createdAt", "updatedAt"],
+                include: [
+                    {model: isActive, attributes: ["isActive_ID", "value"]},
+                    {model: categoryPicture, attributes: ["picture_ID", "name"]}
+                ],
+                offset: offset,
+                limit: limit
             })
 
             return res.json(response)

@@ -4,7 +4,7 @@ import { AdminCardInput } from 'src/shared/ui/AdminCardInput';
 import { AdminPanelCard } from 'src/shared/ui/AdminPanelCard';
 import { AdminCardFile } from '../../shared/ui/AdminCardFile';
 import { IsActive } from '../../shared/ui/IsActive';
-import { useEffect, useState } from "react";
+import { useState } from 'react';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { createFormData } from '../../shared/lib/createFormData';
 import { useMutation, useQueryClient } from 'react-query';

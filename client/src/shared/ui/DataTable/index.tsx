@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataTableProps } from './types';
 import './style.scss';
+import { Link } from 'react-router-dom';
 
 export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, getPage, count }: DataTableProps<T>) => {
 	function incrementOffset() {
@@ -9,7 +10,7 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 		}
 	}
 	function decrementOffset() {
-		if (page >= 1) {
+		if (page > 1) {
 			getPage((state: number) => state - 1);
 		}
 	}
@@ -19,6 +20,14 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 	});
 	return (
 		<div className="table__container">
+			<div className="table__pagination-bttns">
+				<button className="table__pagination-bttn" onClick={decrementOffset}>
+					prev
+				</button>
+				<button className="table__pagination-bttn" onClick={incrementOffset}>
+					next
+				</button>
+			</div>
 			<div className="table__wrap">
 				<table className="table">
 					<tbody>
@@ -31,19 +40,13 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 								{Object.keys(ObjectItem).map((ArrayItem) => (
 									<td key={ArrayItem}>{ObjectItem[ArrayItem]}</td>
 								))}
-								<td className="table__edit">Edit</td>
+								<td className="table__edit">
+									<Link to={`edit/${ObjectItem.id}`}>Edit</Link>{' '}
+								</td>
 							</tr>
 						))}
 					</tbody>
 				</table>
-			</div>
-			<div className="table__pagination-bttns">
-				<button className="table__pagination-bttn" onClick={decrementOffset}>
-					prev
-				</button>
-				<button className="table__pagination-bttn" onClick={incrementOffset}>
-					next
-				</button>
 			</div>
 		</div>
 	);
