@@ -12,13 +12,12 @@ export const ListCategories = () => {
 	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
 	const { isLoading } = useQuery(['mainTypeData', limit, page], () => getMainCategory(limit, page), {
 		onSuccess: ({ data }) => {
-			console.log(data.rows);
 			setCountPositionOnTable(data.count);
 			const array: Array<ICategoriesTable> = data.rows.map((item) => {
 				return {
 					id: item.id_category,
-					isActive: item.isActive_ID,
-					pictures: item.picture_ID,
+					isActive: item.isActive.value,
+					pictures: item.categoryPicture.name,
 					title: item.title,
 					updatedAt: item.createdAt,
 					createdAt: item.updatedAt,

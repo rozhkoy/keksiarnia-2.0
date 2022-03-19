@@ -4,11 +4,13 @@
   border-collapse: collapse;
   margin: 50px 0 0 0;
   touch-action: auto;
+
   &__pagination-bttns {
-     display: flex;
-     justify-content: flex-end;
-     margin: 50px 0 0 0;
-   }
+    display: flex;
+    justify-content: flex-end;
+    margin: 50px 0 0 0;
+  }
+
   &__pagination-bttn {
     background: #31373D;
     padding: 4px 7px;
@@ -19,19 +21,23 @@
     min-width: 100px;
     border: 1px solid #31373D;
   }
+
   &__pagination-bttn:active {
     transition: all .2s;
     color: #fff;
     background: #838383;
   }
+
   &__pagination-bttn:nth-child(1) {
     border-radius: 5px 0 0 5px;
     border-right: 1px solid #fff;
   }
+
   &__pagination-bttn:nth-child(2) {
     border-radius: 0 5px 5px 0;
     border-left: 1px solid #fff;
   }
+
   &__edit {
     position: sticky;
     right: 0;
@@ -39,28 +45,34 @@
     display: flex;
     justify-content: center;
   }
+
   &__wrap {
     width: 100%;
-    overflow-x:auto;
+    overflow-x: auto;
   }
+
   &__container {
-      overflow: hidden;
+    overflow: hidden;
   }
 
 }
 
 .table tr td {
-  padding: 5px 20px;
+  padding: 5px 10px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
+  min-width: 100px;
+  max-width: 200px;
 }
 
 .table th {
   background: #31373D;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 10px;
+  min-width: 100px;
+
 }
 
 .table tr:nth-child(odd) {
