@@ -5,7 +5,6 @@ import { useQuery } from 'react-query';
 import { getMainCategory } from './api';
 import { useEffect, useState } from 'react';
 import { ICategoriesTable } from './types';
-
 export const ListCategories = () => {
 	const [categories, setCategories] = useState<ICategoriesTable[]>([]);
 	const [page, setPage] = useState<number>(1);
@@ -27,10 +26,6 @@ export const ListCategories = () => {
 			console.log(array);
 			setCategories(array);
 		},
-	});
-
-	useEffect(() => {
-		console.log(page);
 	});
 
 	return (
