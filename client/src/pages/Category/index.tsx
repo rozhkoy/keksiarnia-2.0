@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { ListCategories } from '../../features/ListCategories';
 import { EditCategory } from '../../features/EditCategory';
 
+
 export const Category = () => {
 	useEffect(() => {
 		console.log('test');
