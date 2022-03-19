@@ -12,13 +12,15 @@ export const AdminCardFile: React.FC<AdminCardFileProps> = (props) => {
 	}
 
 	function deletePicture() {
-		setUrl('null');
-		props.change(new Blob());
+		if (props.img) {
+			setUrl('null');
+			props.change(new Blob());
+		}
 	}
 
 	useEffect(() => {
 		console.log(props.img, 'img link');
-		if (props.img && props.img !== '' && url == '') {
+		if (props.img && props.img !== '') {
 			const createLink: string | undefined = process.env.REACT_APP_API_URL;
 			createLink && setUrl(`${String(createLink)}${String(props.img)}`);
 		}
@@ -28,12 +30,14 @@ export const AdminCardFile: React.FC<AdminCardFileProps> = (props) => {
 	return (
 		<div className="AdminCardFile">
 			<div className="AdminCardFile__preview">
-				{url !== 'null' && (
+				{url && (
 					<div className="preview__card">
 						<img src={url} alt="" className="preview__img" />
-						<button onClick={deletePicture} className="preview__bttn">
-							×
-						</button>
+						{!props.img && (
+							<button onClick={deletePicture} className="preview__bttn">
+								×
+							</button>
+						)}
 					</div>
 				)}
 			</div>
