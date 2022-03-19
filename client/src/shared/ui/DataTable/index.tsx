@@ -9,6 +9,7 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 			getPage((state: number) => state + 1);
 		}
 	}
+
 	function decrementOffset() {
 		if (page > 1) {
 			getPage((state: number) => state - 1);
