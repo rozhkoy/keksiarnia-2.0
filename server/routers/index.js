@@ -7,6 +7,7 @@ const isActiveRouter = require('../routers/isActiveRouter')
 const checkRole = require('../middleware/checkRoleMiddlleware')
 const categoriesRouter = require('./categories')
 const mainTypePicturesRouter = require('../routers/mainTypePicturesRouter')
+const CategoryByIdController = require('../controller/CategoryByIdController')
 
 router.use("/test", test)
 
@@ -21,5 +22,6 @@ router.get("/users", checkRole, userController.gerUsers)
 router.use("/isActive", isActiveRouter)
 router.use('/categories', categoriesRouter)
 router.use('/mainTypePictures', mainTypePicturesRouter)
+router.use('/CategoryById', CategoryByIdController.GetCategoryById)
 
 module.exports = router

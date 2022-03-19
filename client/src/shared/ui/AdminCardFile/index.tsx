@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { AdminCardFileProps } from "./types";
-import "./style.scss";
+import React, { useEffect, useState } from 'react';
+import { AdminCardFileProps } from './types';
+import './style.scss';
 
 export const AdminCardFile: React.FC<AdminCardFileProps> = (props) => {
-	// const reader = new FileReader()
-	const [url, setUrl] = useState("");
+	const [url, setUrl] = useState<string>('');
 
 	function AdminCardFileHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		const files = e.target.files;
@@ -13,19 +12,30 @@ export const AdminCardFile: React.FC<AdminCardFileProps> = (props) => {
 	}
 
 	function deletePicture() {
-		setUrl('');
+		setUrl('null');
 		props.change(new Blob());
 	}
+
+	useEffect(() => {
+		console.log(props.img, 'img link');
+		if (props.img && props.img !== '' && url == '') {
+			const createLink: string | undefined = process.env.REACT_APP_API_URL;
+			createLink && setUrl(`${String(createLink)}${String(props.img)}`);
+		}
+		console.log('limk', url);
+	}, [url, props.img]);
 
 	return (
 		<div className="AdminCardFile">
 			<div className="AdminCardFile__preview">
-				{url &&
+				{url !== 'null' && (
 					<div className="preview__card">
 						<img src={url} alt="" className="preview__img" />
-						<button onClick={deletePicture} className="preview__bttn">×</button>
+						<button onClick={deletePicture} className="preview__bttn">
+							×
+						</button>
 					</div>
-				}
+				)}
 			</div>
 			<p className="AdminCardFile__field">{props.field}</p>
 			<input type="file" onChange={AdminCardFileHandler} className="AdminCardFile__file" />
