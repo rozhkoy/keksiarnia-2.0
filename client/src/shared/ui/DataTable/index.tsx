@@ -3,12 +3,13 @@ import { DataTableProps } from './types';
 import './style.scss';
 import { Link } from 'react-router-dom';
 
-export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, getPage, count }: DataTableProps<T>) => {
+export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, getPage, count, linkToEdit }: DataTableProps<T>) => {
 	function incrementOffset() {
 		if (page * limit < count) {
 			getPage((state: number) => state + 1);
 		}
 	}
+
 	function decrementOffset() {
 		if (page > 1) {
 			getPage((state: number) => state - 1);
@@ -41,7 +42,7 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 									<td key={ArrayItem}>{ObjectItem[ArrayItem]}</td>
 								))}
 								<td className="table__edit">
-									<Link to={`edit/${ObjectItem.id}`}>Edit</Link>{' '}
+									<Link to={`${linkToEdit}/${ObjectItem.id}`}>Edit</Link>
 								</td>
 							</tr>
 						))}

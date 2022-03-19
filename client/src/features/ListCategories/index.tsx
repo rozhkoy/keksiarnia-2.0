@@ -31,7 +31,7 @@ export const ListCategories = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List of Categories</AdminCardHeading>
-			{isLoading ? 'Loading...' : categories.length > 0 ? <DataTable count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={categories} /> : 'No Data'}
+			{isLoading ? 'Loading...' : categories.length > 0 ? <DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={categories} /> : 'No Data'}
 		</AdminPanelCard>
 	);
 };
