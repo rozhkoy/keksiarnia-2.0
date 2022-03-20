@@ -20,11 +20,11 @@ export const AdminCardFile: React.FC<AdminCardFileProps> = (props) => {
 
 	useEffect(() => {
 		console.log(props.img, 'img link');
-		if (props.img && props.img !== '') {
+		if (props.img && props.img !== '' && url === '') {
 			const createLink: string | undefined = process.env.REACT_APP_API_URL;
 			createLink && setUrl(`${String(createLink)}${String(props.img)}`);
 		}
-		console.log('limk', url);
+		console.log('link', url);
 	}, [url, props.img]);
 
 	return (

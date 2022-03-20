@@ -31,6 +31,9 @@ class categoryController {
                     {model: isActive, attributes: ["isActive_ID", "value"]},
                     {model: categoryPicture, attributes: ["picture_ID", "name"]}
                 ],
+                order: [
+                    ['id_category', 'DESC']
+                ],
                 offset: offset,
                 limit: limit
             })
