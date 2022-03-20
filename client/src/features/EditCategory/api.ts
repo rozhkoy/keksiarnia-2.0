@@ -9,3 +9,11 @@ export async function getCategoryById(id: string) {
 		},
 	});
 }
+
+export async function changePictureCategoryById(formData: FormData) {
+	return await $host.post('api/pictureCategoryById', formData);
+}
+
+export async function changeCategoryById(formData: FormData) {
+	return await $host.post('api/CategoryById', formData);
+}

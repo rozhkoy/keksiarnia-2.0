@@ -7,9 +7,9 @@ import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { AdminCardForm } from '../../shared/ui/AdminCardForm';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { getCategoryById } from './api';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { changeCategoryById, changePictureCategoryById, getCategoryById } from './api';
+import { createFormData } from '../../shared/lib/createFormData';
 
 export const EditCategory = () => {
 	const [isActiveData, setIsActiveData] = useState<string>('');
@@ -17,6 +17,7 @@ export const EditCategory = () => {
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
 	const [pictureLink, setPictureLink] = useState<string>('');
 	const { id } = useParams();
+	const queryClient = useQueryClient();
 
 	const { isLoading } = useQuery(['getCategoryById', id], () => getCategoryById(id ? id : '1'), {
 		onSuccess: ({ data }) => {
@@ -27,14 +28,51 @@ export const EditCategory = () => {
 		},
 	});
 
+	const changePictureById = useMutation(changePictureCategoryById, {
+		onSuccess: ({ data }) => {
+			console.log('ok');
+			queryClient.setQueryData('mainTypeData', data);
+		},
+	});
+	const changeCategoryDataById = useMutation(changeCategoryById, {
+		onSuccess: ({ data }) => {
+			console.log('ok');
+		},
+	});
+
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
+		if (pictureState) {
+			const formData = createFormData([
+				{
+					key: 'img',
+					value: pictureState,
+				},
+				{
+					key: 'picture_ID',
+					value: String(id),
+				},
+			]);
+			changePictureById.mutate(formData);
+		}
+		if (isActiveData && titleState && id) {
+			const formData = createFormData([
+				{
+					key: 'title',
+					value: titleState,
+				},
+				{
+					key: 'isActive_ID',
+					value: String(isActiveData),
+				},
+				{
+					key: 'id_category',
+					value: String(id),
+				},
+			]);
+			changeCategoryDataById.mutate(formData);
+		}
 	}
-
-	useEffect(() => {
-		console.log(typeof id);
-		console.log('test', isActiveData, titleState, pictureLink);
-	});
 
 	return (
 		<AdminPanelCard>
@@ -43,7 +81,7 @@ export const EditCategory = () => {
 				<IsActive getValue={setIsActiveData} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				<AdminCardFile img={pictureLink} field={'Image'} change={setPictureState} />
-				<AdminCardBttnSubmit field={'ADD'} />
+				<AdminCardBttnSubmit field={'EDIT'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

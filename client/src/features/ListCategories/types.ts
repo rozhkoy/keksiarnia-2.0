@@ -21,5 +21,3 @@ export interface ICategoryPicture {
 	picture_ID: string;
 	name: string;
 }
-
-export type testType = 'id' | 'isActive' | 'pictures' | 'title';
