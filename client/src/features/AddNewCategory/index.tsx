@@ -9,43 +9,50 @@ import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { createFormData } from '../../shared/lib/createFormData';
 import { useMutation, useQueryClient } from 'react-query';
 import { sendCategoryPictures, sendDataNewCategory } from './api';
+import { useNavigate } from 'react-router-dom';
 
 export const AddNewCategory = () => {
 	const [isActiveData, setIsActiveData] = useState<string>('');
 	const [titleState, setTitleState] = useState<string>('');
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
 	const queryClient = useQueryClient();
+	const navigation = useNavigate();
 
 	const mutationTextData = useMutation(sendDataNewCategory, {
 		onSuccess: ({ data }) => {
 			console.log(isActiveData);
 			queryClient.setQueryData('mainTypeData', data);
+			navigation(-1);
 		},
 	});
 
 	const mutationPicturesData = useMutation(sendCategoryPictures, {
 		onSuccess: ({ data }) => {
-			const formData = createFormData([
-				{
-					key: 'isActive_ID',
-					value: isActiveData,
-				},
-				{
-					key: 'title',
-					value: titleState,
-				},
-				{
-					key: 'picture_ID',
-					value: data.picture_ID,
-				},
-			]);
-			mutationTextData.mutate(formData);
+			if (isActiveData && titleState) {
+				const formData = createFormData([
+					{
+						key: 'isActive_ID',
+						value: isActiveData,
+					},
+					{
+						key: 'title',
+						value: titleState,
+					},
+					{
+						key: 'picture_ID',
+						value: data.picture_ID,
+					},
+				]);
+				mutationTextData.mutate(formData);
+			} else {
+				alert('please fill in the fields');
+			}
 		},
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		if (pictureState) {
+		if (pictureState.size) {
 			const formData = createFormData([
 				{
 					key: 'img',
@@ -53,6 +60,8 @@ export const AddNewCategory = () => {
 				},
 			]);
 			mutationPicturesData.mutate(formData);
+		} else {
+			alert('Select img');
 		}
 	}
 

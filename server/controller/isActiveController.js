@@ -12,7 +12,7 @@ class isActiveController {
 			throw ApiError.BadRequest('Error Database')
 		}
 	}
-
+я
 	async sendIsActiveState(req, res) {
 		try {
 			const {value} = req.body
