@@ -10,6 +10,7 @@ import { useParams } from 'react-router';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { changeCategoryById, changePictureCategoryById, getCategoryById } from './api';
 import { createFormData } from '../../shared/lib/createFormData';
+import { useNavigate } from 'react-router-dom';
 
 export const EditCategory = () => {
 	const [isActiveData, setIsActiveData] = useState<string>('');
@@ -17,61 +18,63 @@ export const EditCategory = () => {
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
 	const [pictureLink, setPictureLink] = useState<string>('');
 	const { id } = useParams();
+	const navigation = useNavigate();
 	const queryClient = useQueryClient();
 
-	const { isLoading } = useQuery(['getCategoryById', id], () => getCategoryById(id ? id : '1'), {
+	useQuery(['getCategoryById', id], () => getCategoryById(id ? id : '1'), {
 		onSuccess: ({ data }) => {
 			setIsActiveData(data.isActive_ID);
 			setTitleState(data.title);
 			setPictureLink(data.categoryPicture.name);
-			console.log('test', isActiveData, titleState, data);
+			console.log('loading tesssssssssssssssssssssssssss', isActiveData, titleState);
 		},
 	});
 
 	const changePictureById = useMutation(changePictureCategoryById, {
 		onSuccess: ({ data }) => {
 			console.log('ok');
-			queryClient.setQueryData('mainTypeData', data);
+			if (isActiveData && titleState && id) {
+				const formData = createFormData([
+					{
+						key: 'title',
+						value: titleState,
+					},
+					{
+						key: 'isActive_ID',
+						value: String(isActiveData),
+					},
+					{
+						key: 'id_category',
+						value: String(id),
+					},
+				]);
+				changeCategoryDataById.mutate(formData);
+			} else {
+				alert('please fill in the fields');
+			}
 		},
 	});
+
 	const changeCategoryDataById = useMutation(changeCategoryById, {
 		onSuccess: ({ data }) => {
 			console.log('ok');
+			navigation(-1);
 		},
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		if (pictureState) {
-			const formData = createFormData([
-				{
-					key: 'img',
-					value: pictureState,
-				},
-				{
-					key: 'picture_ID',
-					value: String(id),
-				},
-			]);
-			changePictureById.mutate(formData);
-		}
-		if (isActiveData && titleState && id) {
-			const formData = createFormData([
-				{
-					key: 'title',
-					value: titleState,
-				},
-				{
-					key: 'isActive_ID',
-					value: String(isActiveData),
-				},
-				{
-					key: 'id_category',
-					value: String(id),
-				},
-			]);
-			changeCategoryDataById.mutate(formData);
-		}
+		const formData = createFormData([
+			{
+				key: 'img',
+				value: pictureState,
+			},
+			{
+				key: 'picture_ID',
+				value: String(id),
+			},
+		]);
+		changePictureById.mutate(formData);
 	}
 
 	return (
