@@ -9,6 +9,9 @@ export const Admin = () => {
 					<NavLink to="categories" className={({ isActive }) => (isActive ? 'active' : 'noActive')}>
 						Categories
 					</NavLink>
+					<NavLink to="subCategories" className={({ isActive }) => (isActive ? 'active' : 'noActive')}>
+						Subcategories
+					</NavLink>
 				</div>
 			</div>
 			<div className="admin__frame">
