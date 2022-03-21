@@ -20,13 +20,25 @@
     padding: 4px;
     border-radius: 5px;
   }
-
-  &__hints {
+  &__hints{
     position: absolute;
     background: #DDDDDD;
     width: 100%;
     padding: 0;
   }
+  &__hints--active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+  &__hints--inactive {
+    position: absolute;
+    background: #DDDDDD;
+    width: 100%;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
 
   &__hints-item {
     padding: 4px;
