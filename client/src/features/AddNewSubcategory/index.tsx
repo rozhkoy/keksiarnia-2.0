@@ -12,7 +12,7 @@ export const AddNewSubcategory = () => {
 			<AdminCardForm onSubmitFunction={() => console.log('Red')}>
 				<AdminCardHeading>Add new subcategory</AdminCardHeading>
 				<IsActive getValue={() => console.log('Red')} />
-				<AdminCardInput value={''} change={() => console.log('Red')} type={'text'} field={''} />
+				<AdminCardInput value={''} change={() => console.log('Red')} type={'text'} field={'Title'} />
 				<AdminCardSelectWithSearch />
 				<AdminCardFile field={''} change={() => console.log('Red')} />
 			</AdminCardForm>
