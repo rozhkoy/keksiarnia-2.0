@@ -49,6 +49,22 @@ export const AdminCardSelectWithSearch = () => {
 				hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
 			}
 		}
+
+		if (event.keyCode == 38) {
+			if (hintListItems.current[numberSelectedHint - 1]) {
+				hintListItems.current[numberSelectedHint - 1].classList.add('selectWithSearch__hints-item--active');
+			}
+			if (numberSelectedHint <= 0) {
+				console.log('end');
+				selNumberSelectedHint(hintListItems.current.length);
+			} else {
+				console.log('+1');
+				selNumberSelectedHint((state: number) => state - 1);
+			}
+			if (hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.contains('selectWithSearch__hints-item--active')) {
+				hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
+			}
+		}
 	}
 
 	useEffect(() => {
@@ -65,11 +81,6 @@ export const AdminCardSelectWithSearch = () => {
 			<div className="selectWithSearch__search">
 				<input onFocus={setStateHint} onKeyDown={selectHint} className="selectWithSearch__input" type="text" />
 				<ul className="selectWithSearch__hints--inactive selectWithSearch__hints" ref={hintListRef}>
-					{/*<li className="selectWithSearch__hints-item">test</li>*/}
-					{/*<li className="selectWithSearch__hints-item">test</li>*/}
-					{/*<li className="selectWithSearch__hints-item">test</li>*/}
-					{/*<li className="selectWithSearch__hints-item">test</li>*/}
-					{/*<li className="selectWithSearch__hints-item">test</li>*/}
 					{testArray.map((item, index: number) => (
 						<li
 							className="selectWithSearch__hints-item"
