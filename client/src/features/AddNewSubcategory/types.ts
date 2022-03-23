@@ -1,4 +1,4 @@
 export interface ICustomSelectData {
-	id: number | string;
+	id: string;
 	title: string;
 }
