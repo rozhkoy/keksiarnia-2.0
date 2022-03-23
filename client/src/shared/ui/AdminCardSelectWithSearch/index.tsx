@@ -1,6 +1,8 @@
 import './style.scss';
 import React, { useEffect, useRef, useState } from 'react';
 import { AdminCardSelectWithSearchType } from './types';
+import { ICustomSelectData } from '../../../features/AddNewSubcategory/types';
+import { log } from 'util';
 
 export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> = (props) => {
 	const hintListRef = useRef<HTMLUListElement>(null);
@@ -8,13 +10,17 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	const hintListItems = useRef<Array<HTMLLIElement>>([]);
 	const [shownHints, setShownHint] = useState<boolean>(false);
 	const [inputValue, setInputValue] = useState<string>('');
+	const [filteredArray, setFilteredArray] = useState<Array<ICustomSelectData>>([]);
 	const wrapRef = useRef<HTMLDivElement>(null);
 
 	function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		setInputValue(e.target.value);
+		toFilterArray(e.target.value);
+		console.log('focus');
 	}
 
 	function setStateHint() {
+		toFilterArray(inputValue);
 		hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
 		selNumberSelectedHint(-1);
 		if (hintListRef.current) {
@@ -25,7 +31,6 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	}
 
 	function hideHintsResult(event: MouseEvent) {
-		console.log(event.target);
 		if (wrapRef.current) {
 			if (!wrapRef?.current?.contains(event.target as Node)) {
 				hintListRef.current && hintListRef.current.classList.remove('selectWithSearch__hints--active');
@@ -33,6 +38,23 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 				setShownHint(false);
 			}
 		}
+	}
+	function hideHintsResultAfterChange() {
+		hintListRef.current && hintListRef.current.classList.remove('selectWithSearch__hints--active');
+		hintListRef.current && hintListRef.current.classList.add('selectWithSearch__hints--inactive');
+		setShownHint(false);
+	}
+
+	function toFilterArray(text: string) {
+		const regex = new RegExp(`^${text}`, 'im');
+		const array: Array<ICustomSelectData> = [];
+		props.list.forEach((item) => {
+			if (item.title.match(regex)) {
+				array.push(item);
+			}
+		});
+		setFilteredArray(array);
+		console.log(array);
 	}
 
 	function upDataInputFromSelect(title: string) {
@@ -86,11 +108,11 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 
 	return (
 		<div className="selectWithSearch" ref={wrapRef}>
-			<p className="selectWithSearch__field">test</p>
+			<p className="selectWithSearch__field">{props.field}</p>
 			<div className="selectWithSearch__search">
-				<input onFocus={setStateHint} value={inputValue} onChange={inputHandler} onKeyDown={selectHint} className="selectWithSearch__input" type="text" />
+				<input onFocus={setStateHint} placeholder="Search" value={inputValue} onChange={inputHandler} onKeyDown={selectHint} className="selectWithSearch__input" type="text" />
 				<ul className="selectWithSearch__hints--inactive selectWithSearch__hints" ref={hintListRef}>
-					{props.list.map((item, index: number) => (
+					{filteredArray.map((item, index: number) => (
 						<li
 							className="selectWithSearch__hints-item"
 							key={item.id}
@@ -100,12 +122,13 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 							onClick={() => {
 								console.log(item.title);
 								upDataInputFromSelect(item.title);
+								hideHintsResultAfterChange();
 							}}>
 							{item.title}
-							{item.id}
 						</li>
 					))}
 				</ul>
+				<button onClick={() => (shownHints ? hideHintsResultAfterChange() : setStateHint())} className="selectWithSearch__bttn-show-list"></button>
 			</div>
 		</div>
 	);

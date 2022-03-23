@@ -17,18 +17,20 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 	}
 
 	useEffect(() => {
-		console.log('page', page);
+		console.log('page', page, limit, data.length);
 	});
 	return (
 		<div className="table__container">
-			<div className="table__pagination-bttns">
-				<button className="table__pagination-bttn" onClick={decrementOffset}>
-					prev
-				</button>
-				<button className="table__pagination-bttn" onClick={incrementOffset}>
-					next
-				</button>
-			</div>
+			{count >= limit && (
+				<div className="table__pagination-bttns">
+					<button className="table__pagination-bttn" onClick={decrementOffset}>
+						prev
+					</button>
+					<button className="table__pagination-bttn" onClick={incrementOffset}>
+						next
+					</button>
+				</div>
+			)}
 			<div className="table__wrap">
 				<table className="table">
 					<tbody>
