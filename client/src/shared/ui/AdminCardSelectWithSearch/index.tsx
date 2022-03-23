@@ -8,7 +8,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	const hintListItems = useRef<Array<HTMLLIElement>>([]);
 	const [shownHints, setShownHint] = useState<boolean>(false);
 	const [inputValue, setInputValue] = useState<string>('');
-	const [rememberValue, setRememberValue] = useState<string>('');
+	const wrapRef = useRef<HTMLDivElement>(null);
 
 	function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		setInputValue(e.target.value);
@@ -25,9 +25,14 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	}
 
 	function hideHintsResult(event: MouseEvent) {
-		hintListRef.current && hintListRef.current.classList.remove('selectWithSearch__hints--active');
-		hintListRef.current && hintListRef.current.classList.add('selectWithSearch__hints--inactive');
-		setShownHint(false);
+		console.log(event.target);
+		if (wrapRef.current) {
+			if (!wrapRef?.current?.contains(event.target as Node)) {
+				hintListRef.current && hintListRef.current.classList.remove('selectWithSearch__hints--active');
+				hintListRef.current && hintListRef.current.classList.add('selectWithSearch__hints--inactive');
+				setShownHint(false);
+			}
+		}
 	}
 
 	function upDataInputFromSelect(title: string) {
@@ -40,6 +45,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 				if (hintListItems.current[numberSelectedHint + 1]) {
 					hintListItems.current[numberSelectedHint + 1] && hintListItems.current[numberSelectedHint + 1].classList.add('selectWithSearch__hints-item--active');
 					upDataInputFromSelect(props.list[numberSelectedHint + 1].title);
+					props.getValue(props.list[numberSelectedHint + 1].id);
 				}
 				if (numberSelectedHint >= hintListItems.current.length - 1) {
 					selNumberSelectedHint(-1);
@@ -56,6 +62,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 				if (hintListItems.current[numberSelectedHint - 1]) {
 					hintListItems.current[numberSelectedHint - 1].classList.add('selectWithSearch__hints-item--active');
 					upDataInputFromSelect(props.list[numberSelectedHint - 1].title);
+					props.getValue(props.list[numberSelectedHint - 1].id);
 				}
 				if (numberSelectedHint <= 0) {
 					selNumberSelectedHint(hintListItems.current.length);
@@ -78,7 +85,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	});
 
 	return (
-		<div className="selectWithSearch">
+		<div className="selectWithSearch" ref={wrapRef}>
 			<p className="selectWithSearch__field">test</p>
 			<div className="selectWithSearch__search">
 				<input onFocus={setStateHint} value={inputValue} onChange={inputHandler} onKeyDown={selectHint} className="selectWithSearch__input" type="text" />
@@ -89,6 +96,10 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 							key={item.id}
 							ref={(elRef: HTMLLIElement) => {
 								hintListItems.current[index] = elRef;
+							}}
+							onClick={() => {
+								console.log(item.title);
+								upDataInputFromSelect(item.title);
 							}}>
 							{item.title}
 							{item.id}

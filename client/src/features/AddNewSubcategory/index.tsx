@@ -13,6 +13,7 @@ import { ICustomSelectData } from './types';
 
 export const AddNewSubcategory = () => {
 	const [allCategories, setAllCategories] = useState<ICustomSelectData[]>([]);
+	const [categoryID, setCategoryID] = useState<string>('');
 	const { isSuccess } = useQuery('getAllCategories', getAllCategories, {
 		onSuccess: ({ data }) => {
 			console.log(data);
@@ -33,7 +34,7 @@ export const AddNewSubcategory = () => {
 				<AdminCardHeading>Add new subcategory</AdminCardHeading>
 				<IsActive getValue={() => console.log('Red')} />
 				<AdminCardInput value={''} change={() => console.log('Red')} type={'text'} field={'Title'} />
-				{isSuccess && <AdminCardSelectWithSearch list={allCategories} />}
+				{isSuccess && <AdminCardSelectWithSearch getValue={setCategoryID} list={allCategories} />}
 				<AdminCardFile field={''} change={() => console.log('Red')} />
 			</AdminCardForm>
 		</AdminPanelCard>
