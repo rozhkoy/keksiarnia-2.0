@@ -1,74 +1,76 @@
 import './style.scss';
 import React, { useEffect, useRef, useState } from 'react';
+import { AdminCardSelectWithSearchType } from './types';
 
-export const AdminCardSelectWithSearch = () => {
-	const [hintListState, setHintListState] = useState<boolean>(false);
+export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> = (props) => {
 	const hintListRef = useRef<HTMLUListElement>(null);
 	const [numberSelectedHint, selNumberSelectedHint] = useState<number>(-1);
 	const hintListItems = useRef<Array<HTMLLIElement>>([]);
-	const [testArray, setTestArray] = useState([
-		{ id: 0, text: 'asd' },
-		{ id: 1, text: 'asd' },
-		{ id: 2, text: 'asd' },
-		{ id: 4, text: 'asd' },
-		{ id: 5, text: 'asd' },
-		{ id: 6, text: 'asd' },
-		{ id: 7, text: 'asd' },
-		{ id: 8, text: 'asd' },
-		{ id: 9, text: 'asd' },
-	]);
+	const [shownHints, setShownHint] = useState<boolean>(false);
+	const [inputValue, setInputValue] = useState<string>('');
+	const [rememberValue, setRememberValue] = useState<string>('');
+
+	function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
+		setInputValue(e.target.value);
+	}
 
 	function setStateHint() {
-		console.log('focus');
+		hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
+		selNumberSelectedHint(-1);
 		if (hintListRef.current) {
 			hintListRef.current.classList.remove('selectWithSearch__hints--inactive');
 			hintListRef.current.classList.add('selectWithSearch__hints--active');
 		}
+		setShownHint(true);
 	}
 
 	function hideHintsResult(event: MouseEvent) {
 		hintListRef.current && hintListRef.current.classList.remove('selectWithSearch__hints--active');
 		hintListRef.current && hintListRef.current.classList.add('selectWithSearch__hints--inactive');
-		console.log('test');
+		setShownHint(false);
+	}
+
+	function upDataInputFromSelect(title: string) {
+		setInputValue(title);
 	}
 
 	function selectHint(event: React.KeyboardEvent<HTMLInputElement>) {
-		if (event.keyCode == 40) {
-			console.log(numberSelectedHint + 1, hintListItems.current.length);
-			if (hintListItems.current[numberSelectedHint + 1]) {
-				hintListItems.current[numberSelectedHint + 1].classList.add('selectWithSearch__hints-item--active');
+		if (shownHints) {
+			if (event.keyCode == 40) {
+				if (hintListItems.current[numberSelectedHint + 1]) {
+					hintListItems.current[numberSelectedHint + 1] && hintListItems.current[numberSelectedHint + 1].classList.add('selectWithSearch__hints-item--active');
+					upDataInputFromSelect(props.list[numberSelectedHint + 1].title);
+				}
+				if (numberSelectedHint >= hintListItems.current.length - 1) {
+					selNumberSelectedHint(-1);
+					setInputValue('');
+				} else {
+					selNumberSelectedHint((state: number) => state + 1);
+				}
+				if (hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.contains('selectWithSearch__hints-item--active')) {
+					hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
+				}
 			}
-			if (numberSelectedHint >= hintListItems.current.length - 1) {
-				console.log('end');
-				selNumberSelectedHint(-1);
-			} else {
-				console.log('+1');
-				selNumberSelectedHint((state: number) => state + 1);
-			}
-			if (hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.contains('selectWithSearch__hints-item--active')) {
-				hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
-			}
-		}
 
-		if (event.keyCode == 38) {
-			if (hintListItems.current[numberSelectedHint - 1]) {
-				hintListItems.current[numberSelectedHint - 1].classList.add('selectWithSearch__hints-item--active');
-			}
-			if (numberSelectedHint <= 0) {
-				console.log('end');
-				selNumberSelectedHint(hintListItems.current.length);
-			} else {
-				console.log('+1');
-				selNumberSelectedHint((state: number) => state - 1);
-			}
-			if (hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.contains('selectWithSearch__hints-item--active')) {
-				hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
+			if (event.keyCode == 38) {
+				if (hintListItems.current[numberSelectedHint - 1]) {
+					hintListItems.current[numberSelectedHint - 1].classList.add('selectWithSearch__hints-item--active');
+					upDataInputFromSelect(props.list[numberSelectedHint - 1].title);
+				}
+				if (numberSelectedHint <= 0) {
+					selNumberSelectedHint(hintListItems.current.length);
+					setInputValue('');
+				} else {
+					selNumberSelectedHint((state: number) => state - 1);
+				}
+				if (hintListItems.current[numberSelectedHint] && hintListItems.current[numberSelectedHint].classList.contains('selectWithSearch__hints-item--active')) {
+					hintListItems.current[numberSelectedHint].classList.remove('selectWithSearch__hints-item--active');
+				}
 			}
 		}
 	}
 
 	useEffect(() => {
-		console.log(hintListItems, numberSelectedHint);
 		document.addEventListener('mousedown', (e: MouseEvent) => hideHintsResult(e));
 		return () => {
 			document.removeEventListener('mousedown', (e: MouseEvent) => hideHintsResult(e));
@@ -79,16 +81,16 @@ export const AdminCardSelectWithSearch = () => {
 		<div className="selectWithSearch">
 			<p className="selectWithSearch__field">test</p>
 			<div className="selectWithSearch__search">
-				<input onFocus={setStateHint} onKeyDown={selectHint} className="selectWithSearch__input" type="text" />
+				<input onFocus={setStateHint} value={inputValue} onChange={inputHandler} onKeyDown={selectHint} className="selectWithSearch__input" type="text" />
 				<ul className="selectWithSearch__hints--inactive selectWithSearch__hints" ref={hintListRef}>
-					{testArray.map((item, index: number) => (
+					{props.list.map((item, index: number) => (
 						<li
 							className="selectWithSearch__hints-item"
 							key={item.id}
 							ref={(elRef: HTMLLIElement) => {
 								hintListItems.current[index] = elRef;
 							}}>
-							{item.text}
+							{item.title}
 							{item.id}
 						</li>
 					))}
