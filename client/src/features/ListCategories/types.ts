@@ -21,3 +21,10 @@ export interface ICategoryPicture {
 	picture_ID: string;
 	name: string;
 }
+
+export type IMainCategoryTable = {
+	id: string;
+	title: string;
+	picture: string;
+	isActive: string;
+};

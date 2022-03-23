@@ -10,10 +10,14 @@ import { getAllCategories } from './api';
 import { useState } from 'react';
 import { IOptionArray } from '../../shared/ui/AdminCardSelect/types';
 import { ICustomSelectData } from './types';
+import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 
 export const AddNewSubcategory = () => {
 	const [allCategories, setAllCategories] = useState<ICustomSelectData[]>([]);
 	const [categoryID, setCategoryID] = useState<string>('');
+	const [titleState, setTitleState] = useState<string>('');
+	const [isActive, setIsActive] = useState<string>('');
+	const [fileState, setFileState] = useState<Blob>(new Blob());
 	const { isSuccess } = useQuery('getAllCategories', getAllCategories, {
 		onSuccess: ({ data }) => {
 			console.log(data);
@@ -28,14 +32,20 @@ export const AddNewSubcategory = () => {
 		},
 	});
 
+	function formHandler(e: React.SyntheticEvent) {
+		e.preventDefault();
+		console.log(categoryID, titleState, isActive);
+	}
+
 	return (
 		<AdminPanelCard>
-			<AdminCardForm onSubmitFunction={() => console.log('Red')}>
+			<AdminCardForm onSubmitFunction={formHandler}>
 				<AdminCardHeading>Add new subcategory</AdminCardHeading>
-				<IsActive getValue={() => console.log('Red')} />
-				<AdminCardInput value={''} change={() => console.log('Red')} type={'text'} field={'Title'} />
-				{isSuccess && <AdminCardSelectWithSearch getValue={setCategoryID} list={allCategories} />}
-				<AdminCardFile field={''} change={() => console.log('Red')} />
+				<IsActive getValue={setIsActive} />
+				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
+				{isSuccess && <AdminCardSelectWithSearch field={'Category'} getValue={setCategoryID} list={allCategories} />}
+				<AdminCardFile field={''} change={setFileState} />
+				<AdminCardBttnSubmit field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);
