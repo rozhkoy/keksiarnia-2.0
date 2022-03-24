@@ -119,11 +119,12 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 								hintListItems.current[index] = elRef;
 							}}
 							onClick={() => {
-								console.log(item.title);
 								upDataInputFromSelect(item.title);
 								hideHintsResultAfterChange();
+								props.getValue(item.id);
 							}}>
 							{item.title}
+							{item.id}
 						</li>
 					))}
 				</ul>
