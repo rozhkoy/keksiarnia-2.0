@@ -16,7 +16,6 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		setInputValue(e.target.value);
 		toFilterArray(e.target.value);
-		console.log('focus');
 	}
 
 	function setStateHint() {

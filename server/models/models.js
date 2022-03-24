@@ -15,8 +15,8 @@ const category = sequelize.define("category", {
   title: {type: DataTypes.STRING, allowNull: false},
 })
 
-const subCategory = sequelize.define("subCategory", {
-  id_subCategory: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+const subcategory = sequelize.define("subcategory", {
+  id_subcategory: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   isActive_ID: {type: DataTypes.BIGINT, allowNull: false},
   id_category: {type: DataTypes.BIGINT, allowNull: false},
   picture_ID: {type: DataTypes.BIGINT, allowNull: false},
@@ -28,7 +28,7 @@ const categoryPicture = sequelize.define("categoryPicture", {
   name: {type: DataTypes.STRING, allowNull: false}
 })
 
-const subCategoryPicture = sequelize.define("subCategoryPicture", {
+const subcategoryPicture = sequelize.define("subcategoryPicture", {
   picture_ID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
   name: {type: DataTypes.STRING, allowNull: false}
 })
@@ -156,6 +156,7 @@ const tokenData  = sequelize.define("tokenData", {
 const filterCategory_filterTagForSearch = sequelize.define("filterCategory_filterTagForSearch", {
   id:  {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true}
 })
+
 isActive.hasMany(category, {foreignKey: "isActive_ID"})
 category.belongsTo(isActive, {foreignKey: "isActive_ID"})
 
@@ -165,9 +166,9 @@ category.belongsTo(categoryPicture, {foreignKey: "picture_ID"})
 
 module.exports = {
   category,
-  subCategory,
+  subcategory,
   categoryPicture,
-  subCategoryPicture,
+  subcategoryPicture,
   filterCategory_filterTagForSearch,
   brand,
   productPicture,
