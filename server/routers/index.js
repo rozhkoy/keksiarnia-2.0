@@ -10,6 +10,7 @@ const mainTypePicturesRouter = require('../routers/mainTypePicturesRouter')
 const categoryByIdRouter = require('../routers/categoryByIdRouter')
 const pictureCategoryByIdRouter = require('../routers/pictureCategoryByIdRouter')
 const getAllCategories = require('../controller/categoryController')
+const subcategoriesRouter = require('../routers/subcategoriesRouter')
 
 router.use("/test", test)
 
@@ -27,6 +28,7 @@ router.use('/mainTypePictures', mainTypePicturesRouter)
 router.use('/CategoryById', categoryByIdRouter )
 router.use('/pictureCategoryById', pictureCategoryByIdRouter)
 router.get('/getAllCategories', getAllCategories.getAllCategories)
+router.use('/subcategories', subcategoriesRouter)
 
 
 module.exports = router
