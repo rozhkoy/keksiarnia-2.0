@@ -44,7 +44,7 @@ class categoryController {
             throw ApiError.BadRequest('Error Database')
         }
     }
-
+    
     async getAllCategories(req, res) {
         try {
             const response = await category.findAll()
