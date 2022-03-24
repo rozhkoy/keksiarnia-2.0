@@ -7,7 +7,7 @@ import { AdminCardForm } from '../../shared/ui/AdminCardForm';
 import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSearch';
 import { useMutation, useQuery } from 'react-query';
 import { getAllCategories, sendSubcategoryData, sendSubcategoryPicture } from './api';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ICustomSelectData } from './types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { createFormData } from '../../shared/lib/createFormData';
@@ -42,11 +42,11 @@ export const AddNewSubcategory = () => {
 				},
 				{
 					key: 'id_category',
-					value: '2',
+					value: categoryID,
 				},
 				{
 					key: 'picture_ID',
-					value: '2',
+					value: data.picture_ID,
 				},
 				{
 					key: 'title',
@@ -74,6 +74,10 @@ export const AddNewSubcategory = () => {
 		]);
 		mutationCategoryPicture.mutate(formData);
 	}
+
+	useEffect(() => {
+		console.log(categoryID);
+	});
 
 	return (
 		<AdminPanelCard>
