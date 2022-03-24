@@ -5,12 +5,12 @@ import { AdminCardFile } from '../../shared/ui/AdminCardFile';
 import { AdminCardInput } from '../../shared/ui/AdminCardInput';
 import { AdminCardForm } from '../../shared/ui/AdminCardForm';
 import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSearch';
-import { useQuery } from 'react-query';
-import { getAllCategories } from './api';
+import { useMutation, useQuery } from 'react-query';
+import { getAllCategories, sendSubcategoryData, sendSubcategoryPicture } from './api';
 import { useState } from 'react';
-import { IOptionArray } from '../../shared/ui/AdminCardSelect/types';
 import { ICustomSelectData } from './types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
+import { createFormData } from '../../shared/lib/createFormData';
 
 export const AddNewSubcategory = () => {
 	const [allCategories, setAllCategories] = useState<ICustomSelectData[]>([]);
@@ -32,9 +32,47 @@ export const AddNewSubcategory = () => {
 		},
 	});
 
+	const mutationCategoryPicture = useMutation(sendSubcategoryPicture, {
+		onSuccess: ({ data }) => {
+			console.log('test', data);
+			const formData = createFormData([
+				{
+					key: 'isActive_ID',
+					value: isActive,
+				},
+				{
+					key: 'id_category',
+					value: '2',
+				},
+				{
+					key: 'picture_ID',
+					value: '2',
+				},
+				{
+					key: 'title',
+					value: titleState,
+				},
+			]);
+			mutationCategoryData.mutate(formData);
+		},
+	});
+
+	const mutationCategoryData = useMutation(sendSubcategoryData, {
+		onSuccess: ({ data }) => {
+			console.log('post', data);
+		},
+	});
+
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		console.log(categoryID, titleState, isActive);
+		console.log('handler', categoryID, titleState, isActive);
+		const formData = createFormData([
+			{
+				key: 'img',
+				value: fileState,
+			},
+		]);
+		mutationCategoryPicture.mutate(formData);
 	}
 
 	return (

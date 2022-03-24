@@ -1,5 +1,5 @@
 import { $auth } from 'src/shared/api';
-import { mainCategoryPictures } from './types';
+import { ICategoryPictures } from './types';
 import { AxiosError } from 'axios';
 import { AlertError } from '../../shared/lib/AlertError';
 
@@ -12,5 +12,5 @@ export async function sendDataNewCategory(data: FormData) {
 }
 
 export async function sendCategoryPictures(data: FormData) {
-	return await $auth.post<mainCategoryPictures>('api/mainTypePictures', data);
+	return await $auth.post<ICategoryPictures>('api/mainTypePictures', data);
 }

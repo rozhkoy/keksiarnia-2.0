@@ -13,7 +13,6 @@ const getAllCategories = require('../controller/categoryController')
 const subcategoriesRouter = require('../routers/subcategoriesRouter')
 const subcategoriesPicturesRouter  = require('../routers/subcategoriesPicturesRouter')
 
-router.use("/test", test)
 
 router.post("/registration",
 	body('email').isEmail(),
