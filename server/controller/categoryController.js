@@ -13,6 +13,7 @@ class categoryController {
         }
     }
 
+
     async getAllCategoriesWithPagination(req, res) {
         try {
             let {page, limit} = req.query
@@ -44,7 +45,7 @@ class categoryController {
             throw ApiError.BadRequest('Error Database')
         }
     }
-    
+
     async getAllCategories(req, res) {
         try {
             const response = await category.findAll()
