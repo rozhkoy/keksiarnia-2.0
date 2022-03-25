@@ -18,5 +18,6 @@ export interface ISubcategoriesFullResponse extends CreateUpdate {
 	subcategoryPicture: ICategoryPicture;
 	category: {
 		title: string;
+		id_category: string;
 	};
 }

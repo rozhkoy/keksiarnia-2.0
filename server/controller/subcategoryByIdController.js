@@ -5,13 +5,13 @@ class SubcategoryByIdController {
         const {id} = req.query
         const response = await subcategory.findOne({
             where: {
-             id_subcategory: id
+                id_subcategory: id
             },
             attributes: ["id_subcategory", "title", "createdAt", "updatedAt"],
             include: [
                 {model: isActive, attributes: ["isActive_ID", "value"]},
                 {model: subcategoryPicture, attributes: ["picture_ID", "name"]},
-                {model: category, attributes: ['title']}
+                {model: category, attributes: ['title', "id_category"]}
             ],
         })
         return res.json(response)

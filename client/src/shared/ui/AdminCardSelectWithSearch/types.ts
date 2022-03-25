@@ -5,4 +5,5 @@ export type AdminCardSelectWithSearchType = {
 	list: Array<ICustomSelectData>;
 	getValue: Dispatch<SetStateAction<string>>;
 	field: string;
+	data?: string;
 };
