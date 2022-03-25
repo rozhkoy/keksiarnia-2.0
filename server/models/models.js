@@ -163,6 +163,15 @@ category.belongsTo(isActive, {foreignKey: "isActive_ID"})
 categoryPicture.hasMany(category, {foreignKey: "picture_ID"})
 category.belongsTo(categoryPicture, {foreignKey: "picture_ID"})
 
+isActive.hasMany(subcategory, {foreignKey: "isActive_ID"})
+subcategory.belongsTo(isActive, {foreignKey: "isActive_ID"})
+
+subcategoryPicture.hasMany(subcategory, {foreignKey: "picture_ID"})
+subcategory.belongsTo(subcategoryPicture, {foreignKey: "picture_ID"})
+
+category.hasMany(subcategory, {foreignKey: "id_category"})
+subcategory.belongsTo(category, {foreignKey: "id_category"})
+
 
 module.exports = {
   category,
