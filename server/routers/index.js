@@ -11,7 +11,8 @@ const categoryByIdRouter = require('../routers/categoryByIdRouter')
 const pictureCategoryByIdRouter = require('../routers/pictureCategoryByIdRouter')
 const getAllCategories = require('../controller/categoryController')
 const subcategoriesRouter = require('../routers/subcategoriesRouter')
-const subcategoriesPicturesRouter  = require('../routers/subcategoriesPicturesRouter')
+const subcategoriesPicturesRouter  = require('./subcategoriesPicturesRouter')
+const subcategoryByIdRouter = require('./subcategoryByIdRouter')
 
 
 router.post("/registration",
@@ -30,6 +31,8 @@ router.use('/pictureCategoryById', pictureCategoryByIdRouter)
 router.get('/getAllCategories', getAllCategories.getAllCategories)
 router.use('/subcategories', subcategoriesRouter)
 router.use('/subcategoriesPictures', subcategoriesPicturesRouter)
+router.use('/subcategoryById', subcategoryByIdRouter)
+
 
 
 module.exports = router

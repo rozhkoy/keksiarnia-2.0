@@ -124,9 +124,8 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 						<li
 							className="selectWithSearch__hints-item"
 							key={item.id}
-							ref={(elRef: HTMLLIElement) => {
-								hintListItems.current[index] = elRef;
-								// console.log('array ----------', index + 1, filteredArray, hintListItems.current, inputValue);
+							ref={() => {
+								return hintListItems.current[index];
 							}}
 							onClick={() => {
 								upDataInputFromSelect(item.title);
