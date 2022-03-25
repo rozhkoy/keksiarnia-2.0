@@ -1,5 +1,5 @@
 import './style.scss';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { AdminCardSelectWithSearchType } from './types';
 import { ICustomSelectData } from '../../../features/AddNewSubcategory/types';
 
@@ -109,6 +109,11 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 		};
 	});
 
+	if (hintListItems.current.length !== filteredArray.length) {
+		hintListItems.current = Array(filteredArray.length).map((item, index) => hintListItems.current[index] || createRef());
+		console.log(hintListItems.current);
+	}
+
 	return (
 		<div className="selectWithSearch" ref={wrapRef}>
 			<p className="selectWithSearch__field">{props.field}</p>
@@ -121,7 +126,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 							key={item.id}
 							ref={(elRef: HTMLLIElement) => {
 								hintListItems.current[index] = elRef;
-								console.log('array ----------', index, filteredArray, hintListItems.current, inputValue);
+								// console.log('array ----------', index + 1, filteredArray, hintListItems.current, inputValue);
 							}}
 							onClick={() => {
 								upDataInputFromSelect(item.title);
