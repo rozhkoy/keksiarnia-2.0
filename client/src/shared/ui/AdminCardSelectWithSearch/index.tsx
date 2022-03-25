@@ -8,7 +8,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	const [numberSelectedHint, setNumberSelectedHint] = useState<number>(-1);
 	const hintListItems = useRef<Array<HTMLLIElement>>([]);
 	const [shownHints, setShownHint] = useState<boolean>(false);
-	const [inputValue, setInputValue] = useState<string>('');
+	const [inputValue, setInputValue] = useState<string>(props.data ? props.data : '');
 	const [filteredArray, setFilteredArray] = useState<Array<ICustomSelectData>>([]);
 	const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -103,6 +103,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	}
 
 	useEffect(() => {
+		console.log('adfasdfasdf', inputValue, props.data);
 		document.addEventListener('mousedown', (e: MouseEvent) => hideHintsResult(e));
 		return () => {
 			document.removeEventListener('mousedown', (e: MouseEvent) => hideHintsResult(e));
@@ -111,7 +112,6 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 
 	if (hintListItems.current.length !== filteredArray.length) {
 		hintListItems.current = Array(filteredArray.length).map((item, index) => hintListItems.current[index] || createRef());
-		console.log(hintListItems.current);
 	}
 
 	return (

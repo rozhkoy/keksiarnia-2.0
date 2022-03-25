@@ -13,15 +13,17 @@ import { getAllCategories } from '../AddNewSubcategory/api';
 import { useParams } from 'react-router';
 import { getSubcategoryById } from './api';
 
-export const EditSubcategory = () => {
+export const Index = () => {
 	const [allCategories, setAllCategories] = useState<ICustomSelectData[]>([]);
 	const [categoryID, setCategoryID] = useState<string>('');
 	const [titleState, setTitleState] = useState<string>('');
 	const [isActive, setIsActive] = useState<string>('');
 	const [fileState, setFileState] = useState<Blob>(new Blob());
+	const [selectTitle, setSelectTitle] = useState<string>('');
+	const [pictureLink, setPictureLink] = useState<string>('');
 	const { id } = useParams();
 
-	const { isSuccess } = useQuery('getAllCategories', getAllCategories, {
+	const getAllCategoriesQuery = useQuery('getAllCategories', getAllCategories, {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			const array = data.map((obj) => {
@@ -31,24 +33,27 @@ export const EditSubcategory = () => {
 				};
 			});
 			setAllCategories(array);
+
 			console.log(array);
 		},
 	});
 
-	const { isLoading } = useQuery(['getSubcategoryById', id], () => getSubcategoryById(id ? String(id) : '1'), {
+	const getSubcategoryByIdQuery = useQuery(['getSubcategoryById', id], () => getSubcategoryById(id ? String(id) : '1'), {
 		onSuccess: ({ data }) => {
 			console.log(data);
+			setCategoryID(data.category.id_category);
+			setTitleState(data.title);
+			setSelectTitle(data.category.title);
+			setPictureLink(data.subcategoryPicture.name);
 		},
 	});
-
-	const sendData = useMutation();
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
 	}
 
 	useEffect(() => {
-		console.log(id);
+		console.log(getAllCategoriesQuery, getSubcategoryByIdQuery);
 	});
 
 	return (
@@ -57,9 +62,9 @@ export const EditSubcategory = () => {
 				<AdminCardHeading>Edit subcategory</AdminCardHeading>
 				<IsActive getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
-				{isSuccess && <AdminCardSelectWithSearch field={'Category'} getValue={setCategoryID} list={allCategories} />}
-				<AdminCardFile field={''} change={setFileState} />
-				<AdminCardBttnSubmit field={'ADD'} />
+				{getAllCategoriesQuery.isSuccess && getSubcategoryByIdQuery.isSuccess && <AdminCardSelectWithSearch data={selectTitle} field={'Category'} getValue={setCategoryID} list={allCategories} />}
+				<AdminCardFile img={pictureLink} field={'Pictures'} change={setFileState} />
+				<AdminCardBttnSubmit field={'EDIT'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);
