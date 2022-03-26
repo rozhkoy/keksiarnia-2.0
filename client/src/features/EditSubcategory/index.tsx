@@ -40,7 +40,6 @@ export const Index = () => {
 
 	const getSubcategoryByIdQuery = useQuery(['getSubcategoryById', id], () => getSubcategoryById(id ? String(id) : '1'), {
 		onSuccess: ({ data }) => {
-			console.log(data);
 			setCategoryID(data.category.id_category);
 			setTitleState(data.title);
 			setSelectTitle(data.category.title);
@@ -51,10 +50,6 @@ export const Index = () => {
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
 	}
-
-	useEffect(() => {
-		console.log(getAllCategoriesQuery, getSubcategoryByIdQuery);
-	});
 
 	return (
 		<AdminPanelCard>
