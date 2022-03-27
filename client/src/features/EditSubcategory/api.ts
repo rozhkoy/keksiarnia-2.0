@@ -8,3 +8,10 @@ export async function getSubcategoryById(id: string) {
 		},
 	});
 }
+export async function changeSubcategoryById(form: FormData) {
+	return await $host.post('api/subcategoryById', form);
+}
+
+export async function changeSubcategoryPictureById(form: FormData) {
+	return await $host.post('api/pictureSubcategoryById', form);
+}

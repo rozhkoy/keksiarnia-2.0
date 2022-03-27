@@ -11,7 +11,8 @@ import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { useMutation, useQuery } from 'react-query';
 import { getAllCategories } from '../AddNewSubcategory/api';
 import { useParams } from 'react-router';
-import { getSubcategoryById } from './api';
+import { changeSubcategoryById, changeSubcategoryPictureById, getSubcategoryById } from './api';
+import { createFormData } from '../../shared/lib/createFormData';
 
 export const Index = () => {
 	const [allCategories, setAllCategories] = useState<ICustomSelectData[]>([]);
@@ -21,6 +22,7 @@ export const Index = () => {
 	const [fileState, setFileState] = useState<Blob>(new Blob());
 	const [selectTitle, setSelectTitle] = useState<string>('');
 	const [pictureLink, setPictureLink] = useState<string>('');
+	const [pictureID, setPictureID] = useState<string>('');
 	const { id } = useParams();
 
 	const getAllCategoriesQuery = useQuery('getAllCategories', getAllCategories, {
@@ -44,11 +46,58 @@ export const Index = () => {
 			setTitleState(data.title);
 			setSelectTitle(data.category.title);
 			setPictureLink(data.subcategoryPicture.name);
+			setPictureID(data.subcategoryPicture.picture_ID);
+		},
+	});
+
+	const mutationSubcategoryData = useMutation(changeSubcategoryById, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+		},
+	});
+
+	const mutationSubcategoryPicturesById = useMutation(changeSubcategoryPictureById, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+			const formData = createFormData([
+				{
+					key: 'id_subcategory',
+					value: String(id),
+				},
+				{
+					key: 'title',
+					value: titleState,
+				},
+				{
+					key: 'isActive_ID',
+					value: isActive,
+				},
+				{
+					key: 'picture_ID',
+					value: pictureID,
+				},
+				{
+					key: 'id_category',
+					value: categoryID,
+				},
+			]);
+			mutationSubcategoryData.mutate(formData);
 		},
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
+		const formData = createFormData([
+			{
+				key: 'picture_ID',
+				value: pictureID,
+			},
+			{
+				key: 'img',
+				value: fileState,
+			},
+		]);
+		mutationSubcategoryPicturesById.mutate(formData);
 	}
 
 	return (
@@ -57,7 +106,7 @@ export const Index = () => {
 				<AdminCardHeading>Edit subcategory</AdminCardHeading>
 				<IsActive getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
-				{getAllCategoriesQuery.isSuccess && getSubcategoryByIdQuery.isSuccess && <AdminCardSelectWithSearch data={selectTitle} field={'Category'} getValue={setCategoryID} list={allCategories} />}
+				{getAllCategoriesQuery.isSuccess && getSubcategoryByIdQuery.isSuccess ? <AdminCardSelectWithSearch data={selectTitle} field={'Category'} getValue={setCategoryID} list={allCategories} /> : 'Loading'}
 				<AdminCardFile img={pictureLink} field={'Pictures'} change={setFileState} />
 				<AdminCardBttnSubmit field={'EDIT'} />
 			</AdminCardForm>

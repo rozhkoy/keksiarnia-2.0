@@ -1,7 +1,7 @@
-const Router = require('express')
-const router = new Router
-const pictureCategoryByIdController = require('../controller/pictureCategoryByIdController')
+const Router = require('express');
+const router = new Router();
+const pictureCategoryByIdController = require('../controller/pictureCategoryByIdController');
 
-router.post('/', pictureCategoryByIdController.changeSubcategoryPictureById)
+router.post('/', pictureCategoryByIdController.changeSubcategoryPictureById);
 
-module.exports = router
+module.exports = router;
