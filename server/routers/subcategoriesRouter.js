@@ -1,8 +1,8 @@
-const Router = require('express')
-const router = new Router;
-const subcategoryController = require('../controller/subcategoriesController')
+const Router = require('express');
+const router = new Router();
+const subcategoryController = require('../controller/subcategoriesController');
 
-router.post('/', subcategoryController.addNewSubcategory)
-router.get('/', subcategoryController.getAllCategoriesWithPagination)
+router.post('/', subcategoryController.addNewSubcategory);
+router.get('/', subcategoryController.getAllCategoriesWithPagination);
 
-module.exports = router
+module.exports = router;

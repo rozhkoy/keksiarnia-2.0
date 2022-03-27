@@ -1,8 +1,7 @@
-const Router = require('express')
-const picturesController = require('../controller/picturesController')
-const router = new Router
+const Router = require('express');
+const picturesController = require('../controller/picturesController');
+const router = new Router();
 
+router.post('/', picturesController.sendPicturesMainCategory);
 
-router.post('/', picturesController.sendPicturesMainCategory)
-
-module.exports = router
+module.exports = router;

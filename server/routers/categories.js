@@ -1,8 +1,8 @@
-const Router = require('express')
-const router = new Router
-const categoryController = require('../controller/categoryController')
+const Router = require('express');
+const router = new Router();
+const categoryController = require('../controller/categoryController');
 
-router.post('/', categoryController.addNewCategory)
-router.get('/', categoryController.getAllCategoriesWithPagination)
+router.post('/', categoryController.addNewCategory);
+router.get('/', categoryController.getAllCategoriesWithPagination);
 
-module.exports = router
+module.exports = router;
