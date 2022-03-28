@@ -57,24 +57,27 @@ export const EditCategory = () => {
 
 	const changeCategoryDataById = useMutation(changeCategoryById, {
 		onSuccess: ({ data }) => {
-			console.log('ok');
 			navigation(-1);
 		},
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		const formData = createFormData([
-			{
-				key: 'img',
-				value: pictureState,
-			},
-			{
-				key: 'picture_ID',
-				value: String(id),
-			},
-		]);
-		changePictureById.mutate(formData);
+		console.log(isActiveData, titleState, id, pictureState.size !== 0);
+
+		if (isActiveData && titleState && id) {
+			const formData = createFormData([
+				{
+					key: 'img',
+					value: pictureState,
+				},
+				{
+					key: 'picture_ID',
+					value: String(id),
+				},
+			]);
+			changePictureById.mutate(formData);
+		}
 	}
 
 	return (

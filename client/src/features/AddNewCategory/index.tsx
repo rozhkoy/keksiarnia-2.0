@@ -15,20 +15,17 @@ export const AddNewCategory = () => {
 	const [isActiveData, setIsActiveData] = useState<string>('');
 	const [titleState, setTitleState] = useState<string>('');
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
-	const queryClient = useQueryClient();
 	const navigation = useNavigate();
 
 	const mutationTextData = useMutation(sendDataNewCategory, {
 		onSuccess: ({ data }) => {
-			console.log(isActiveData);
-			queryClient.setQueryData('mainTypeData', data);
 			navigation(-1);
 		},
 	});
 
 	const mutationPicturesData = useMutation(sendCategoryPictures, {
 		onSuccess: ({ data }) => {
-			if (isActiveData && titleState) {
+			if (data.picture_ID && isActiveData && titleState) {
 				const formData = createFormData([
 					{
 						key: 'isActive_ID',
@@ -52,7 +49,7 @@ export const AddNewCategory = () => {
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		if (pictureState.size) {
+		if (pictureState.size && isActiveData && titleState) {
 			const formData = createFormData([
 				{
 					key: 'img',
@@ -61,7 +58,7 @@ export const AddNewCategory = () => {
 			]);
 			mutationPicturesData.mutate(formData);
 		} else {
-			alert('Select img');
+			alert('please fill in the fields');
 		}
 	}
 
