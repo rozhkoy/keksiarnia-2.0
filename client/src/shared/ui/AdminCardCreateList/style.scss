@@ -1,0 +1,60 @@
+.adminCardCreateList {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: auto;
+  align-items: center;
+
+
+  &__field {
+    grid-column: 1/3;
+    text-align: right;
+    padding: 5px 15px 0 0;
+    align-self: center;
+    height: 100% ;
+  }
+
+  &__input {
+    grid-column: 1/10;
+    border: 1px solid #31373D;
+    padding: 4px;
+    border-radius: 5px 0 0 5px;
+  }
+  &__bttn {
+    border-radius: 0px 5px 5px 0;
+    border: 1px solid #31373D;
+  }
+
+  &__wrap {
+    grid-column: 3/13;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-row: 1/3;
+  }
+
+  &__list {
+    grid-column: 1/11;
+    padding: 20px 0 0 0;
+
+  }
+  &__list-item {
+    margin: 0 0 10px 0;
+    background: #e7e7e7;
+    padding: 5px 10px ;
+    border-radius: 5px;
+    position: relative;
+  }
+
+  &__list-item-bttn {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    top: 0;
+    border: 1px solid #0000;
+    background: transparent;
+    border-radius: 0 5px 5px 0;
+    padding: 0 10px;
+  }
+
+
+
+}
