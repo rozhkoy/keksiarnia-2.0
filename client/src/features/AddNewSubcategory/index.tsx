@@ -56,7 +56,6 @@ export const AddNewSubcategory = () => {
 					},
 				]);
 				mutationCategoryData.mutate(formData);
-				navigation(-1);
 			} else {
 				alert('please fill in the fields');
 			}

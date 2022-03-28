@@ -12,5 +12,8 @@ export async function sendDataNewCategory(data: FormData) {
 }
 
 export async function sendCategoryPictures(data: FormData) {
-	return await $auth.post<ICategoryPictures>('api/mainTypePictures', data);
+	return await $auth.post<ICategoryPictures>('api/mainTypePictures', data).catch((e: AxiosError) => {
+		AlertError(e);
+		throw e;
+	});
 }

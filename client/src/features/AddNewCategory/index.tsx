@@ -17,13 +17,13 @@ export const AddNewCategory = () => {
 	const [pictureState, setPictureState] = useState<Blob>(new Blob());
 	const navigation = useNavigate();
 
-	const mutationTextData = useMutation(sendDataNewCategory, {
-		onSuccess: ({ data }) => {
+	const mutationCategoryData = useMutation(sendDataNewCategory, {
+		onSuccess: () => {
 			navigation(-1);
 		},
 	});
 
-	const mutationPicturesData = useMutation(sendCategoryPictures, {
+	const mutationCategoryPictures = useMutation(sendCategoryPictures, {
 		onSuccess: ({ data }) => {
 			if (data.picture_ID && isActiveData && titleState) {
 				const formData = createFormData([
@@ -40,7 +40,7 @@ export const AddNewCategory = () => {
 						value: data.picture_ID,
 					},
 				]);
-				mutationTextData.mutate(formData);
+				mutationCategoryData.mutate(formData);
 			} else {
 				alert('please fill in the fields');
 			}
@@ -56,7 +56,7 @@ export const AddNewCategory = () => {
 					value: pictureState,
 				},
 			]);
-			mutationPicturesData.mutate(formData);
+			mutationCategoryPictures.mutate(formData);
 		} else {
 			alert('please fill in the fields');
 		}
