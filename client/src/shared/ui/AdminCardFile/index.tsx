@@ -34,7 +34,7 @@ export const AdminCardFile: React.FC<AdminCardFileProps> = (props) => {
 					<div className="preview__card">
 						<img src={url} alt="" className="preview__img" />
 						{!props.img && (
-							<button onClick={deletePicture} className="preview__bttn">
+							<button type={'button'} onClick={deletePicture} className="preview__bttn">
 								×
 							</button>
 						)}

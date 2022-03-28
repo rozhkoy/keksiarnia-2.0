@@ -136,7 +136,7 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 						</li>
 					))}
 				</ul>
-				<button onClick={() => (shownHints ? hideHintsResultAfterChange() : setStateHint())} className="selectWithSearch__bttn-show-list"></button>
+				<button type="button" onClick={() => (shownHints ? hideHintsResultAfterChange() : setStateHint())} className="selectWithSearch__bttn-show-list"></button>
 			</div>
 		</div>
 	);
