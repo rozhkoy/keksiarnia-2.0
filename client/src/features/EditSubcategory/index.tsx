@@ -92,7 +92,6 @@ export const Index = () => {
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		console.log('check0');
 		if (isActive && titleState && categoryID) {
 			const formData = createFormData([
 				{
