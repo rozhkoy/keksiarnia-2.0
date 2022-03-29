@@ -92,7 +92,7 @@ const productGroup = sequelize.define('productGroup', {
 const propertyGroup = sequelize.define('propertyGroup', {
 	propertyGroupID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	propertyGroupName: { type: DataTypes.STRING, allowNull: false },
+	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const propertyGroupItem = sequelize.define('propertyGroupItem', {
