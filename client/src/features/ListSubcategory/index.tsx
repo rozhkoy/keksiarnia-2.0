@@ -2,10 +2,7 @@ import { AdminPanelCard } from '../../shared/ui/AdminPanelCard';
 import { AdminCardHeading } from '../../shared/ui/AdminCardHeading';
 import { DataTable } from '../../shared/ui/DataTable';
 import { useState } from 'react';
-import { ISubcategoryResponse } from '../AddNewSubcategory/types';
 import { useQuery } from 'react-query';
-import { getMainCategory } from '../ListCategories/api';
-import { ICategoriesTable } from '../ListCategories/types';
 import { ISubcategoriesTable } from './types';
 import { SubcategoriesWithPagination } from './api';
 

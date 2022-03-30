@@ -19,9 +19,7 @@ export const AddProductGroup = () => {
 	const productGroupMutation = useMutation(sendProductGroupData, {
 		onSuccess: ({ data }) => {
 			console.log(data);
-			console.log('send');
 			propertyValueList.forEach((item) => {
-				console.log('send');
 				const formData = createFormData([
 					{
 						key: 'name',
@@ -45,7 +43,7 @@ export const AddProductGroup = () => {
 
 	function formHandler(e: React.SyntheticEvent) {
 		e.preventDefault();
-		if (inputState) {
+		if (inputState && propertyValueList.length > 0) {
 			const formData = createFormData([
 				{
 					key: 'isActive_ID',
@@ -57,6 +55,8 @@ export const AddProductGroup = () => {
 				},
 			]);
 			productGroupMutation.mutate(formData);
+		} else {
+			alert('fill in all fields');
 		}
 	}
 

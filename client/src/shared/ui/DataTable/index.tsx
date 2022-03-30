@@ -16,9 +16,6 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 		}
 	}
 
-	useEffect(() => {
-		console.log('page', page, limit, data.length);
-	});
 	return (
 		<div className="table__container">
 			{count >= limit && (

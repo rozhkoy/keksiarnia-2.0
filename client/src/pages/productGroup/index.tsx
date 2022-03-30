@@ -2,6 +2,7 @@ import { AdminPanelHeading } from '../../shared/ui/AdminPanelHeading';
 import { BttnGroup } from '../../shared/ui/AdminPanelBttnGroup';
 import { Route, Routes } from 'react-router';
 import { AddProductGroup } from '../../features/AddProductGroup';
+import { ListProductGroup } from '../../features/ListProductGroup';
 
 export const ProductGroup = () => {
 	return (
@@ -14,7 +15,8 @@ export const ProductGroup = () => {
 				]}
 			/>
 			<Routes>
-				<Route path="add" element={<AddProductGroup />} />
+				<Route path={'add'} element={<AddProductGroup />} />
+				<Route path={'/'} element={<ListProductGroup />} />
 			</Routes>
 		</div>
 	);
