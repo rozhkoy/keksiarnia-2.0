@@ -32,7 +32,7 @@ export const ListProductGroup = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List product group</AdminCardHeading>
-			<DataTable data={productGroupList} limit={limit} getPage={setPage} page={page} count={countPositionOnTable} linkToEdit={'edit'} />
+			{isSuccess ? <DataTable data={productGroupList} limit={limit} getPage={setPage} page={page} count={countPositionOnTable} linkToEdit={'edit'} /> : 'Loading...'}
 		</AdminPanelCard>
 	);
 };

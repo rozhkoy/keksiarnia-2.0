@@ -21,7 +21,7 @@ class ProductGroupController {
 			},
 			offset: offset,
 			limit: limit,
-			order: [['productGroupID', 'DESC']],
+			order: [['productGroupID	', 'DESC']],
 		});
 		return res.json(response);
 	}

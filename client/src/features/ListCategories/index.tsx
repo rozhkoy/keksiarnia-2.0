@@ -19,8 +19,8 @@ export const ListCategories = () => {
 					isActive: item.isActive.value,
 					pictures: item.categoryPicture.name,
 					title: item.title,
-					updatedAt: item.createdAt,
 					createdAt: item.updatedAt,
+					updatedAt: item.createdAt,
 				};
 			});
 			console.log(array);
