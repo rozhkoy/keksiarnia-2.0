@@ -1,16 +1,18 @@
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router';
-import { Category } from '../../Category';
-import { Subcategory } from '../../Subcategory';
-import { ProductGroup } from '../../productGroup';
+import { AdminCategory } from '../../AdminCategory';
+import { AdminSubcategory } from '../../AdminSubcategory';
+import { AdminProductGroup } from '../../AdminProductGroup';
+import { AdminFilterCategory } from '../../AdminFilterCategory';
 
 export const AdminProviders = () => {
 	return (
 		<div>
 			<Routes>
-				<Route path="categories/*" element={<Category />} />
-				<Route path="subcategories/*" element={<Subcategory />} />
-				<Route path="productGroup/*" element={<ProductGroup />} />
+				<Route path="categories/*" element={<AdminCategory />} />
+				<Route path="subcategories/*" element={<AdminSubcategory />} />
+				<Route path="productsGroups/*" element={<AdminProductGroup />} />
+				<Route path="filtersCategories/*" element={<AdminFilterCategory />} />
 			</Routes>
 		</div>
 	);

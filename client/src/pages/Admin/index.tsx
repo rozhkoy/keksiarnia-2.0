@@ -12,8 +12,11 @@ export const Admin = () => {
 					<NavLink to="subCategories" className={({ isActive }) => (isActive ? 'active' : 'noActive')}>
 						Subcategories
 					</NavLink>
-					<NavLink to="productGroup" className={({ isActive }) => (isActive ? 'active' : 'noActive')}>
-						Product group
+					<NavLink to="productsGroups" className={({ isActive }) => (isActive ? 'active' : 'noActive')}>
+						Products groups
+					</NavLink>
+					<NavLink to="filtersCategories" className={({ isActive }) => (isActive ? 'active' : 'noActive')}>
+						Filters categories
 					</NavLink>
 				</div>
 			</div>
