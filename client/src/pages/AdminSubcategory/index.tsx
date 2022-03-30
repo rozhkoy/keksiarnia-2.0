@@ -6,10 +6,10 @@ import { AddNewSubcategory } from '../../features/AddNewSubcategory';
 import { ListSubcategory } from '../../features/ListSubcategory';
 import { Index } from '../../features/EditSubcategory';
 
-export const Subcategory = () => {
+export const AdminSubcategory = () => {
 	return (
 		<div>
-			<AdminPanelHeading>Sub Categories</AdminPanelHeading>
+			<AdminPanelHeading>Subcategories</AdminPanelHeading>
 			<BttnGroup
 				buttonLabel={[
 					{ path: '', label: 'show' },

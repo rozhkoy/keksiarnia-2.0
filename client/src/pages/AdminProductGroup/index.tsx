@@ -4,10 +4,10 @@ import { Route, Routes } from 'react-router';
 import { AddProductGroup } from '../../features/AddProductGroup';
 import { ListProductGroup } from '../../features/ListProductGroup';
 
-export const ProductGroup = () => {
+export const AdminProductGroup = () => {
 	return (
 		<div>
-			<AdminPanelHeading>Product group</AdminPanelHeading>
+			<AdminPanelHeading>Products groups</AdminPanelHeading>
 			<BttnGroup
 				buttonLabel={[
 					{ path: '', label: 'show' },
