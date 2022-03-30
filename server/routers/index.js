@@ -14,8 +14,10 @@ const subcategoriesRouter = require('../routers/subcategoriesRouter');
 const subcategoriesPicturesRouter = require('./subcategoriesPicturesRouter');
 const subcategoryByIdRouter = require('./subcategoryByIdRouter');
 const pictureSubcategoryByIdRouter = require('./pictureSubcategoryByIdRouter');
-const productGroupRouter = require('./productGroupRouter');
-const productGroupItemRouter = require('./productGroupItemRouter');
+const productGroupRouter = require('./productGroupRouter')
+const productGroupItemRouter = require('./productGroupItemRouter')
+const filterCategoryRouter = require('./filterCategoryRouter')
+const filterCategoryItemRouter = require('./filterCategoryItemRouter')
 
 router.post('/registration', body('email').isEmail(), body('password').isLength({ min: 3, max: 32 }), userController.registration);
 router.post('/login', userController.login);
@@ -32,7 +34,9 @@ router.use('/subcategories', subcategoriesRouter);
 router.use('/subcategoriesPictures', subcategoriesPicturesRouter);
 router.use('/subcategoryById', subcategoryByIdRouter);
 router.use('/pictureSubcategoryById', pictureSubcategoryByIdRouter);
-router.use('/productGroup', productGroupRouter);
-router.use('/productGroupItem', productGroupItemRouter);
+router.use('/productGroup', productGroupRouter)
+router.use('/productGroupItem', productGroupItemRouter)
+router.use('/filterCategory', filterCategoryRouter)
+router.use('/filterCategoryItem', filterCategoryItemRouter)
 
 module.exports = router;
