@@ -1,10 +1,11 @@
 import { $host } from '../../shared/api';
-import { IResponseProductGroupData } from '../AddProductGroup/type';
+import { findAndCountAll } from '../../shared/ui/types';
+import { IResponseProductGroupWithRelationship } from './types';
 
-export async function getAllProductGroupListWithPagination(list: number, page: number) {
-	return await $host.get<IResponseProductGroupData>('api/productGroup', {
+export async function getAllProductGroupListWithPagination(limit: number, page: number) {
+	return await $host.get<findAndCountAll<IResponseProductGroupWithRelationship>>('api/productGroup', {
 		params: {
-			list,
+			limit,
 			page,
 		},
 	});
