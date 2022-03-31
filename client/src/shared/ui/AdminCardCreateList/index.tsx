@@ -30,10 +30,6 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 		props.getValue(arr);
 	}
 
-	if (switchBttnRef.current.length !== props.value.length) {
-		switchBttnRef.current = Array(props.value.length).map((item, index) => switchBttnRef.current[index] || createRef());
-	}
-
 	function setChangeSwitchBttn(index: number) {
 		console.log(index, switchBttnRef.current);
 		switchBttnRef.current[index].classList.toggle('adminCardCreateList__list-item-switch-bttn--active');
@@ -73,7 +69,7 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 										return (switchBttnRef.current[index] = el);
 									}}
 									onClick={() => setChangeSwitchBttn(index)}
-									className={'adminCardCreateList__list-item-switch-bttn'}></button>
+									className={'adminCardCreateList__list-item-switch-bttn adminCardCreateList__list-item-switch-bttn--active'}></button>
 								<button type={'button'} onClick={() => deleteItemFromList(item.id)} className={'adminCardCreateList__list-item-close-bttn'}>
 									×
 								</button>

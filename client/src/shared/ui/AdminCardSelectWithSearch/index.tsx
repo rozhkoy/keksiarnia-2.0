@@ -64,6 +64,10 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 		setInputValue(title);
 	}
 
+	if (hintListItems.current.length !== filteredArray.length) {
+		hintListItems.current = hintListItems.current.slice(0, filteredArray.length);
+	}
+
 	function selectHint(event: React.KeyboardEvent<HTMLInputElement>) {
 		if (shownHints) {
 			if (event.keyCode == 40) {
@@ -103,16 +107,11 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 	}
 
 	useEffect(() => {
-		console.log('adfasdfasdf', inputValue, props.data);
 		document.addEventListener('mousedown', (e: MouseEvent) => hideHintsResult(e));
 		return () => {
 			document.removeEventListener('mousedown', (e: MouseEvent) => hideHintsResult(e));
 		};
 	});
-
-	if (hintListItems.current.length !== filteredArray.length) {
-		hintListItems.current = Array(filteredArray.length).map((item, index) => hintListItems.current[index] || createRef());
-	}
 
 	return (
 		<div className="selectWithSearch" ref={wrapRef}>
@@ -124,15 +123,15 @@ export const AdminCardSelectWithSearch: React.FC<AdminCardSelectWithSearchType> 
 						<li
 							className="selectWithSearch__hints-item"
 							key={item.id}
-							ref={() => {
-								return hintListItems.current[index];
+							ref={(el: HTMLLIElement) => {
+								hintListItems.current[index] = el;
 							}}
 							onClick={() => {
 								upDataInputFromSelect(item.title);
 								hideHintsResultAfterChange();
 								props.getValue(item.id);
 							}}>
-							{item.title}|{index}
+							{item.title}
 						</li>
 					))}
 				</ul>

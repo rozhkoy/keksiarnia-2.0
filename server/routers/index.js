@@ -16,6 +16,7 @@ const subcategoryByIdRouter = require('./subcategoryByIdRouter');
 const pictureSubcategoryByIdRouter = require('./pictureSubcategoryByIdRouter');
 const productGroupRouter = require('./productGroupRouter')
 const productGroupItemRouter = require('./productGroupItemRouter')
+const subcategoriesController  = require("../controller/subcategoriesController")
 const filterCategoryRouter = require('./filterCategoryRouter')
 const filterCategoryItemRouter = require('./filterCategoryItemRouter')
 
@@ -30,6 +31,7 @@ router.use('/mainTypePictures', mainTypePicturesRouter);
 router.use('/CategoryById', categoryByIdRouter);
 router.use('/pictureCategoryById', pictureCategoryByIdRouter);
 router.get('/getAllCategories', getAllCategories.getAllCategories);
+router.get('/getAllSubcategories', subcategoriesController.getAllSubcategories)
 router.use('/subcategories', subcategoriesRouter);
 router.use('/subcategoriesPictures', subcategoriesPicturesRouter);
 router.use('/subcategoryById', subcategoryByIdRouter);
