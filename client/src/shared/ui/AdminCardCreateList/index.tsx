@@ -15,6 +15,7 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 			const arr = props.value.slice();
 			arr.push({
 				id: Date.now(),
+				isActive: '1',
 				value: inputState,
 			});
 			setInputState('');
@@ -36,13 +37,21 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 	function setChangeSwitchBttn(index: number) {
 		console.log(index, switchBttnRef.current);
 		switchBttnRef.current[index].classList.toggle('adminCardCreateList__list-item-switch-bttn--active');
+		const arr = props.value.slice();
+		if (arr[index].isActive == '1') {
+			arr[index].isActive = '2';
+		} else {
+			arr[index].isActive = '1';
+		}
+		props.getValue(arr);
+	}
+
+	if (switchBttnRef.current.length !== props.value.length) {
+		switchBttnRef.current = switchBttnRef.current.slice(0, props.value.length);
 	}
 
 	useEffect(() => {
-		console.log(switchBttnRef.current, props.value);
-		if (switchBttnRef.current.length !== props.value.length) {
-			switchBttnRef.current = Array(props.value.length).map((item, index) => switchBttnRef.current[index] || createRef());
-		}
+		console.log(props.value);
 	});
 
 	return (
@@ -60,8 +69,8 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 							<div className="adminCardCreateList__bttn-group">
 								<button
 									type={'button'}
-									ref={(elRef: HTMLButtonElement) => {
-										switchBttnRef.current[index] = elRef;
+									ref={(el: HTMLButtonElement) => {
+										return (switchBttnRef.current[index] = el);
 									}}
 									onClick={() => setChangeSwitchBttn(index)}
 									className={'adminCardCreateList__list-item-switch-bttn'}></button>
