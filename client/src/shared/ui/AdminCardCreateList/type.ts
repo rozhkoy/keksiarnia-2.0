@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 export interface IListItem {
 	id: number;
+	isActive?: string;
 	value: string;
 }
 
