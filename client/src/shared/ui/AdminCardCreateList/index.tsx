@@ -1,9 +1,10 @@
 import './style.scss';
-import React, { useState } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import { AdminCardCreateListType, IListItem } from './type';
 
 export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) => {
 	const [inputState, setInputState] = useState('');
+	const switchBttnRef = useRef<Array<HTMLButtonElement>>([]);
 
 	function inputHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		setInputState(e.target.value);
@@ -28,6 +29,22 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 		props.getValue(arr);
 	}
 
+	if (switchBttnRef.current.length !== props.value.length) {
+		switchBttnRef.current = Array(props.value.length).map((item, index) => switchBttnRef.current[index] || createRef());
+	}
+
+	function setChangeSwitchBttn(index: number) {
+		console.log(index, switchBttnRef.current);
+		switchBttnRef.current[index].classList.toggle('adminCardCreateList__list-item-switch-bttn--active');
+	}
+
+	useEffect(() => {
+		console.log(switchBttnRef.current, props.value);
+		if (switchBttnRef.current.length !== props.value.length) {
+			switchBttnRef.current = Array(props.value.length).map((item, index) => switchBttnRef.current[index] || createRef());
+		}
+	});
+
 	return (
 		<div className={'adminCardCreateList'}>
 			<p className="adminCardCreateList__field">{props.field}</p>
@@ -37,12 +54,21 @@ export const AdminCardCreateList: React.FC<AdminCardCreateListType> = (props) =>
 					ADD
 				</button>
 				<ul className="adminCardCreateList__list">
-					{props.value.map((item) => (
+					{props.value.map((item, index) => (
 						<li key={item.id} className="adminCardCreateList__list-item">
 							{item.value}
-							<button type={'button'} onClick={() => deleteItemFromList(item.id)} className={'adminCardCreateList__list-item-bttn'}>
-								×
-							</button>
+							<div className="adminCardCreateList__bttn-group">
+								<button
+									type={'button'}
+									ref={(elRef: HTMLButtonElement) => {
+										switchBttnRef.current[index] = elRef;
+									}}
+									onClick={() => setChangeSwitchBttn(index)}
+									className={'adminCardCreateList__list-item-switch-bttn'}></button>
+								<button type={'button'} onClick={() => deleteItemFromList(item.id)} className={'adminCardCreateList__list-item-close-bttn'}>
+									×
+								</button>
+							</div>
 						</li>
 					))}
 				</ul>
