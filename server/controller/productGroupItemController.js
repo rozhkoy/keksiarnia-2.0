@@ -1,4 +1,4 @@
-const { propertyProductItem, productGroupItem } = require('../models/models');
+const { productGroupItem } = require('../models/models');
 
 class ProductGroupItemController {
 	async addProductGroupController(req, res) {

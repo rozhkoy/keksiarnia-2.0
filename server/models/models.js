@@ -58,15 +58,14 @@ const filterCategory = sequelize.define('filterCategory', {
 	filterCategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
 	id_subCategory: { type: DataTypes.BIGINT, allowNull: false },
-	name: { type: DataTypes.BIGINT, allowNull: false },
-	title: { type: DataTypes.BIGINT, allowNull: false }
+	title: { type: DataTypes.STRING, allowNull: false }
 });
 
-const filterCategoryItem = sequelize.define('filterItem', {
-	filterItemI: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+const filterCategoryItem = sequelize.define('filterCategoryItem', {
+	filterItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
 	filterCategoryID: { type: DataTypes.BIGINT, allowNull: false },
-	name: { type: DataTypes.STRING, allowNull: false }
+	title: { type: DataTypes.STRING, allowNull: false }
 });
 
 const supplier = sequelize.define('supplier', {
@@ -176,6 +175,9 @@ subcategory.belongsTo(category, { foreignKey: 'id_category' });
 
 isActive.hasMany(productGroup, {foreignKey:"isActive_ID" })
 productGroup.belongsTo(isActive, {foreignKey:"isActive_ID" })
+
+filterCategoryItem.hasMany(filterCategory, {foreignKey: "filterCategoryID"})
+filterCategory.belongsTo(filterCategoryItem, {foreignKey: "filterCategoryID"})
 
 module.exports = {
 	category,
