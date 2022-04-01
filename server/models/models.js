@@ -176,8 +176,8 @@ subcategory.belongsTo(category, { foreignKey: 'id_category' });
 isActive.hasMany(productGroup, {foreignKey:"isActive_ID" })
 productGroup.belongsTo(isActive, {foreignKey:"isActive_ID" })
 
-filterCategoryItem.hasMany(filterCategory, {foreignKey: "filterCategoryID"})
-filterCategory.belongsTo(filterCategoryItem, {foreignKey: "filterCategoryID"})
+filterCategory.hasMany(filterCategoryItem, {foreignKey: "filterCategoryID"})
+filterCategoryItem.belongsTo(filterCategory, {foreignKey: "filterCategoryID"})
 
 module.exports = {
 	category,

@@ -2,6 +2,7 @@ import { AdminPanelHeading } from '../../shared/ui/AdminPanelHeading';
 import { BttnGroup } from '../../shared/ui/AdminPanelBttnGroup';
 import { Route, Routes } from 'react-router';
 import { AddFilterCategory } from '../../features/AddFilterCategory';
+import { ListFilterCategory } from '../../features/ListFilterCategory';
 
 export const AdminFilterCategory = () => {
 	return (
@@ -15,6 +16,7 @@ export const AdminFilterCategory = () => {
 			/>
 			<Routes>
 				<Route path={'add'} element={<AddFilterCategory />} />
+				<Route path={'/'} element={<ListFilterCategory />} />
 			</Routes>
 		</div>
 	);

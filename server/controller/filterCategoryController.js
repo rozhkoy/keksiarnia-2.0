@@ -1,4 +1,4 @@
-const { filterCategory } = require('../models/models');
+const { filterCategory, filterCategoryItem } = require('../models/models');
 
 class FilterCategoryController {
 	async addFilterCategory(req, res) {

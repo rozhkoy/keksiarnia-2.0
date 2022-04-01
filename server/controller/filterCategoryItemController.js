@@ -1,4 +1,4 @@
-const { filterCategoryItem } = require('../models/models');
+const { filterCategoryItem, filterCategory } = require('../models/models');
 
 class FilterCategoryItemController {
 	async addFilterCategoryItem(req, res) {
@@ -6,6 +6,23 @@ class FilterCategoryItemController {
 		const response = await filterCategoryItem.create({
 			isActive_ID, filterCategoryID, title
 		})
+		return res.json(response)
+	}
+
+	async getAllFilterItems(req, res) {
+		let { page, limit } = req.query;
+		console.log(page, limit);
+		!page && (page = 1);
+		!limit && (limit = 5);
+		let offset = page * limit - limit;
+		const response = await filterCategory.findAndCountAll({
+			include: {
+				model: filterCategoryItem
+			},
+			limit: limit,
+			offset: offset,
+		})
+
 		return res.json(response)
 	}
 }
