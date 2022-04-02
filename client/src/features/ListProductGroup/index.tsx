@@ -8,7 +8,7 @@ import { IProductGroupFormTable } from './types';
 
 export const ListProductGroup = () => {
 	const [productGroupList, setProductGroupList] = useState<Array<IProductGroupFormTable>>([]);
-	const [page, setPage] = useState<number>(2);
+	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(10);
 	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
 

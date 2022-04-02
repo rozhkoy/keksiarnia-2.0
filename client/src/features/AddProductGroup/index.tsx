@@ -10,20 +10,25 @@ import { IsActive } from '../../shared/ui/IsActive';
 import { useMutation } from 'react-query';
 import { sendProductGroupData, sendProductItemData } from './api';
 import { createFormData } from '../../shared/lib/createFormData';
+import { useNavigate } from 'react-router-dom';
 
 export const AddProductGroup = () => {
 	const [propertyValueList, setPropertyValueList] = useState<Array<IListItem>>([]);
 	const [inputState, setInputState] = useState<string>('');
 	const [isActiveState, setIsActiveState] = useState('');
+	const navigation = useNavigate();
 
 	const productGroupMutation = useMutation(sendProductGroupData, {
 		onSuccess: ({ data }) => {
-			console.log(data);
 			propertyValueList.forEach((item) => {
 				const formData = createFormData([
 					{
 						key: 'name',
 						value: item.value,
+					},
+					{
+						key: 'isActive_ID',
+						value: String(item.isActive),
 					},
 					{
 						key: 'productGroupID',
@@ -36,8 +41,8 @@ export const AddProductGroup = () => {
 	});
 
 	const productGroupItemMutation = useMutation(sendProductItemData, {
-		onSuccess: ({ data }) => {
-			console.log(data);
+		onSuccess: () => {
+			navigation(-1);
 		},
 	});
 

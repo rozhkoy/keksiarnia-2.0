@@ -1,16 +1,16 @@
 import { CreateUpdate } from '../../shared/types';
 
-export interface IFilterCategoryResponse extends CreateUpdate {
-	filterCategoryID: string;
+export interface ICategoryFilterResponse extends CreateUpdate {
+	categoryFilterID: string;
 	isActive_ID: string;
 	id_subCategory: string;
 	name: string;
 	title: string;
 }
 
-export interface IFilterCategoryItemResponse extends CreateUpdate {
+export interface ICategoryFilterItemResponse extends CreateUpdate {
 	filterItemID: string;
 	isActive_ID: string;
-	filterCategoryID: string;
+	categoryFilterID: string;
 	title: string;
 }

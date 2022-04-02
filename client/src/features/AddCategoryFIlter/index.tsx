@@ -9,10 +9,11 @@ import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { AdminCardForm } from '../../shared/ui/AdminCardForm';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { useMutation, useQuery } from 'react-query';
-import { getAllSubcategories, sendFilterCategory, sendFilterCategoryItem } from './api';
+import { getAllSubcategories, sendCategoryFilter, sendCategoryFilterMutation } from './api';
 import { create } from 'domain';
 import { createFormData } from '../../shared/lib/createFormData';
 import { IsActive } from '../../shared/ui/IsActive';
+import { useNavigate } from 'react-router-dom';
 
 export const AddFilterCategory = () => {
 	const [listFilterCategoryItem, setListFilterCategoryItem] = useState<Array<IListItem>>([]);
@@ -20,6 +21,7 @@ export const AddFilterCategory = () => {
 	const [subcategoryID, setSubcategoryID] = useState<string>('');
 	const [subcategoryList, setCategoryList] = useState<ICustomSelectData[]>([]);
 	const [isActive, setIsActive] = useState<string>('');
+	const navigation = useNavigate();
 
 	const { isSuccess } = useQuery('getAllSubcategory', getAllSubcategories, {
 		onSuccess: ({ data }) => {
@@ -34,7 +36,7 @@ export const AddFilterCategory = () => {
 		},
 	});
 
-	const filterCategoryMutation = useMutation(sendFilterCategory, {
+	const categoryFilterMutation = useMutation(sendCategoryFilter, {
 		onSuccess: ({ data }) => {
 			listFilterCategoryItem.forEach((item) => {
 				const formData = createFormData([
@@ -43,8 +45,8 @@ export const AddFilterCategory = () => {
 						value: String(item.isActive),
 					},
 					{
-						key: 'filterCategoryID',
-						value: data.filterCategoryID,
+						key: 'categoryFilterID',
+						value: data.categoryFilterID,
 					},
 					{
 						key: 'title',
@@ -56,36 +58,43 @@ export const AddFilterCategory = () => {
 		},
 	});
 
-	const filterCategoryItemMutation = useMutation(sendFilterCategoryItem, {
+	const filterCategoryItemMutation = useMutation(sendCategoryFilterMutation, {
 		onSuccess: ({ data }) => {
 			console.log(data);
+			navigation(-1);
 		},
 	});
 
 	function formHandler(e: React.SyntheticEvent) {
-		const formData = createFormData([
-			{
-				key: 'isActive_ID',
-				value: isActive,
-			},
-			{
-				key: 'id_subCategory',
-				value: subcategoryID,
-			},
-			{
-				key: 'title',
-				value: title,
-			},
-		]);
-		filterCategoryMutation.mutate(formData);
+		console.log(isActive, subcategoryID, title, listFilterCategoryItem.length > 0);
+		if (isActive && subcategoryID && title && listFilterCategoryItem.length > 0) {
+			console.log('jk');
+			const formData = createFormData([
+				{
+					key: 'isActive_ID',
+					value: isActive,
+				},
+				{
+					key: 'id_subCategory',
+					value: subcategoryID,
+				},
+				{
+					key: 'title',
+					value: title,
+				},
+			]);
+			categoryFilterMutation.mutate(formData);
+		} else {
+			alert('please fill in the fields');
+		}
 		e.preventDefault();
 	}
 
 	return (
 		<AdminPanelCard>
 			<AdminCardForm onSubmitFunction={formHandler}>
-				<AdminCardHeading>Filter category</AdminCardHeading>
-				<AdminCardInput value={title} change={setTitle} type={'text'} field={'Filter category title'} />
+				<AdminCardHeading>Category filter</AdminCardHeading>
+				<AdminCardInput value={title} change={setTitle} type={'text'} field={'Category filter title'} />
 				<IsActive getValue={setIsActive} />
 				<AdminCardSelectWithSearch list={subcategoryList} getValue={setSubcategoryID} field={'Select subcategory'} />
 				<AdminCardCreateList field={'Add filter item'} getValue={setListFilterCategoryItem} value={listFilterCategoryItem} />
