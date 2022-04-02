@@ -54,17 +54,17 @@ const filterTagForSearch = sequelize.define('filterTagForSearch', {
 	tagName: { type: DataTypes.STRING, allowNull: false }
 });
 
-const filterCategory = sequelize.define('filterCategory', {
-	filterCategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+const categoryFilter = sequelize.define('categoryFilter', {
+	categoryFilterID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
 	id_subCategory: { type: DataTypes.BIGINT, allowNull: false },
 	title: { type: DataTypes.STRING, allowNull: false }
 });
 
-const filterCategoryItem = sequelize.define('filterCategoryItem', {
+const categoryFilterItem = sequelize.define('categoryFilterItem', {
 	filterItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	filterCategoryID: { type: DataTypes.BIGINT, allowNull: false },
+	categoryFilterID: { type: DataTypes.BIGINT, allowNull: false },
 	title: { type: DataTypes.STRING, allowNull: false }
 });
 
@@ -89,6 +89,7 @@ const productGroup = sequelize.define('productGroup', {
 
 const productGroupItem = sequelize.define('productGroupItem', {
 	productGroupItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
 	productGroupID: { type: DataTypes.BIGINT, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false }
 });
@@ -176,8 +177,11 @@ subcategory.belongsTo(category, { foreignKey: 'id_category' });
 isActive.hasMany(productGroup, {foreignKey:"isActive_ID" })
 productGroup.belongsTo(isActive, {foreignKey:"isActive_ID" })
 
-filterCategory.hasMany(filterCategoryItem, {foreignKey: "filterCategoryID"})
-filterCategoryItem.belongsTo(filterCategory, {foreignKey: "filterCategoryID"})
+isActive.hasMany(categoryFilter, {foreignKey:"isActive_ID" })
+categoryFilter.belongsTo(isActive, {foreignKey:"isActive_ID" })
+
+categoryFilter.hasMany(categoryFilterItem, {foreignKey: "categoryFilterID"})
+categoryFilterItem.belongsTo(categoryFilter, {foreignKey: "categoryFilterID"})
 
 module.exports = {
 	category,
@@ -188,8 +192,8 @@ module.exports = {
 	productPicture,
 	isActive,
 	filterTagForSearch,
-	filterCategory,
-	filterCategoryItem,
+	categoryFilter,
+	categoryFilterItem,
 	product,
 	supplier,
 	supplierCategory,

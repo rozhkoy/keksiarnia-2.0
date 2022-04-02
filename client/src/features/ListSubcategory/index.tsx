@@ -11,7 +11,7 @@ export const ListSubcategory = () => {
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(10);
 	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
-	const { isLoading } = useQuery(['', limit, page], () => SubcategoriesWithPagination(limit, page), {
+	const { isSuccess } = useQuery(['', limit, page], () => SubcategoriesWithPagination(limit, page), {
 		onSuccess: ({ data }) => {
 			setCountPositionOnTable(data.count);
 			console.log(data);
@@ -34,7 +34,7 @@ export const ListSubcategory = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List subcategory</AdminCardHeading>
-			<DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={subcategories} />
+			{isSuccess ? <DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={subcategories} /> : 'Loading...'}
 		</AdminPanelCard>
 	);
 };

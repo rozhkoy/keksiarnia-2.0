@@ -1,8 +1,8 @@
 import { AdminPanelHeading } from '../../shared/ui/AdminPanelHeading';
 import { BttnGroup } from '../../shared/ui/AdminPanelBttnGroup';
 import { Route, Routes } from 'react-router';
-import { AddFilterCategory } from '../../features/AddFilterCategory';
-import { ListFilterCategory } from '../../features/ListFilterCategory';
+import { AddFilterCategory } from '../../features/AddCategoryFIlter';
+import { ListFilterCategory } from '../../features/ListCategoryFIlter';
 
 export const AdminFilterCategory = () => {
 	return (
