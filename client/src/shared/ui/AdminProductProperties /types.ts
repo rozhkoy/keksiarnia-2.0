@@ -1,9 +1,9 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 export type AdminProductPropertiesType = {
 	field: string;
 	listProperties: Array<IListProperties>;
-	getValue: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
+	getValue: Dispatch<SetStateAction<IListProperties[]>>;
 };
 
 export interface IListProperties {
