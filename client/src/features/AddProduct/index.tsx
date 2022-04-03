@@ -9,11 +9,13 @@ import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSe
 import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { getAllSubcategories } from '../AddCategoryFIlter/api';
 import { IsActive } from '../../shared/ui/IsActive';
-import { getAllProductGroup, getProductGroupItemsById } from './api';
+import { getAllProductGroup, getFilterList, getProductGroupItemsById } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { AdminMultiSelect } from '../../shared/ui/AdminMultiSelect';
+import { IFullCategoryFilterResponse } from '../ListCategoryFIlter/types';
+import { IFilterListForMultiSelect } from '../../shared/ui/AdminMultiSelect/types';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -25,6 +27,7 @@ export const AddProduct = () => {
 	const [productGroupId, setProductGroupId] = useState<string>('');
 	const [productTitle, setProductTitle] = useState<string>('');
 	const [ListProductGroupItems, setListProductGroupItems] = useState<Array<IListProperties>>([]);
+	const [listFilter, setListFilter] = useState<Array<IFilterListForMultiSelect>>([]);
 	useQuery('getAllCategoriesForProduct', getAllCategories, {
 		onSuccess: ({ data }) => {
 			console.log(data);
@@ -83,6 +86,26 @@ export const AddProduct = () => {
 		enabled: !!productGroupId,
 	});
 
+	useQuery('getFilterItemForMultiSelect', getFilterList, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+			const arr: Array<IFilterListForMultiSelect> = data.map((item) => {
+				return {
+					id: item.categoryFilterID,
+					listHeading: item.title,
+					list: item.categoryFilterItems.map((elem) => {
+						return {
+							id: elem.filterItemID,
+							value: elem.title,
+						};
+					}),
+				};
+			});
+			console.log(arr);
+			setListFilter(arr);
+		},
+	});
+
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>Add product</AdminCardHeading>
@@ -93,7 +116,7 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
 				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
-				<AdminMultiSelect />
+				<AdminMultiSelect field={'test fpr test'} arrayList={listFilter} />
 				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
 			</AdminCardForm>
 		</AdminPanelCard>
