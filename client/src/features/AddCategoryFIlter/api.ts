@@ -1,9 +1,8 @@
 import { $host } from '../../shared/api';
-import { ISubcategoriesFullResponse } from '../ListSubcategory/types';
-import { ICategoryFilterItemResponse, ICategoryFilterResponse } from './types';
+import { ICategoryFilterItemResponse, ICategoryFilterResponse, ISubcategory } from './types';
 
 export async function getAllSubcategories() {
-	return await $host.get<Array<ISubcategoriesFullResponse>>('api/getAllSubcategories');
+	return await $host.get<Array<ISubcategory>>('api/getAllSubcategories');
 }
 
 export async function sendCategoryFilter(form: FormData) {

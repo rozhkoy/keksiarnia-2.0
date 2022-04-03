@@ -74,8 +74,7 @@ export const AddNewSubcategory = () => {
 		},
 	});
 
-	function formHandler(e: React.SyntheticEvent) {
-		e.preventDefault();
+	function formHandler() {
 		if (pictureState.size && titleState && isActive && categoryID) {
 			const formData = createFormData([
 				{
@@ -95,13 +94,13 @@ export const AddNewSubcategory = () => {
 
 	return (
 		<AdminPanelCard>
-			<AdminCardForm onSubmitFunction={formHandler}>
+			<AdminCardForm>
 				<AdminCardHeading>Add new subcategory</AdminCardHeading>
 				<IsActive getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				{isSuccess && <AdminCardSelectWithSearch field={'Category'} getValue={setCategoryID} list={allCategories} />}
 				<AdminCardFile field={''} change={setPictureState} />
-				<AdminCardBttnSubmit field={'ADD'} />
+				<AdminCardBttnSubmit onClick={formHandler} field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

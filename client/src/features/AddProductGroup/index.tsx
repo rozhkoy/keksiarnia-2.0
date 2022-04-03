@@ -46,8 +46,7 @@ export const AddProductGroup = () => {
 		},
 	});
 
-	function formHandler(e: React.SyntheticEvent) {
-		e.preventDefault();
+	function formHandler() {
 		if (inputState && propertyValueList.length > 0) {
 			const formData = createFormData([
 				{
@@ -68,11 +67,11 @@ export const AddProductGroup = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>Add product group</AdminCardHeading>
-			<AdminCardForm onSubmitFunction={formHandler}>
+			<AdminCardForm>
 				<IsActive getValue={setIsActiveState} />
 				<AdminCardInput field={'Group name'} value={inputState} change={setInputState} type={'text'} />
 				<AdminCardCreateList field={'Add properties'} value={propertyValueList} getValue={setPropertyValueList} />
-				<AdminCardBttnSubmit field={'ADD'} />
+				<AdminCardBttnSubmit onClick={formHandler} field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

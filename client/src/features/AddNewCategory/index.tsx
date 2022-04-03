@@ -47,8 +47,7 @@ export const AddNewCategory = () => {
 		},
 	});
 
-	function formHandler(e: React.SyntheticEvent) {
-		e.preventDefault();
+	function formHandler() {
 		if (pictureState.size && isActiveData && titleState) {
 			const formData = createFormData([
 				{
@@ -65,11 +64,11 @@ export const AddNewCategory = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>New Category</AdminCardHeading>
-			<AdminCardForm onSubmitFunction={formHandler}>
+			<AdminCardForm>
 				<IsActive getValue={setIsActiveData} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				<AdminCardFile field={'Image'} change={setPictureState} />
-				<AdminCardBttnSubmit field={'Add'} />
+				<AdminCardBttnSubmit onClick={formHandler} field={'Add'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

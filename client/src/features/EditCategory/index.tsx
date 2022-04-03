@@ -26,13 +26,11 @@ export const EditCategory = () => {
 			setIsActiveData(data.isActive_ID);
 			setTitleState(data.title);
 			setPictureLink(data.categoryPicture.name);
-			console.log('loading tesssssssssssssssssssssssssss', isActiveData, titleState);
 		},
 	});
 
 	const changePictureById = useMutation(changePictureCategoryById, {
-		onSuccess: ({ data }) => {
-			console.log('ok');
+		onSuccess: () => {
 			if (isActiveData && titleState && id) {
 				const formData = createFormData([
 					{
@@ -56,13 +54,12 @@ export const EditCategory = () => {
 	});
 
 	const changeCategoryDataById = useMutation(changeCategoryById, {
-		onSuccess: ({ data }) => {
+		onSuccess: () => {
 			navigation(-1);
 		},
 	});
 
-	function formHandler(e: React.SyntheticEvent) {
-		e.preventDefault();
+	function formHandler() {
 		console.log(isActiveData, titleState, id, pictureState.size !== 0);
 
 		if (isActiveData && titleState && id) {
@@ -83,11 +80,11 @@ export const EditCategory = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>Edit Category</AdminCardHeading>
-			<AdminCardForm onSubmitFunction={formHandler}>
+			<AdminCardForm>
 				<IsActive getValue={setIsActiveData} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				<AdminCardFile img={pictureLink} field={'Image'} change={setPictureState} />
-				<AdminCardBttnSubmit field={'EDIT'} />
+				<AdminCardBttnSubmit onClick={formHandler} field={'EDIT'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

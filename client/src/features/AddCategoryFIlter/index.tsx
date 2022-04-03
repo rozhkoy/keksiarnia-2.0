@@ -10,7 +10,6 @@ import { AdminCardForm } from '../../shared/ui/AdminCardForm';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { useMutation, useQuery } from 'react-query';
 import { getAllSubcategories, sendCategoryFilter, sendCategoryFilterMutation } from './api';
-import { create } from 'domain';
 import { createFormData } from '../../shared/lib/createFormData';
 import { IsActive } from '../../shared/ui/IsActive';
 import { useNavigate } from 'react-router-dom';
@@ -60,12 +59,11 @@ export const AddFilterCategory = () => {
 
 	const filterCategoryItemMutation = useMutation(sendCategoryFilterMutation, {
 		onSuccess: ({ data }) => {
-			console.log(data);
 			navigation(-1);
 		},
 	});
 
-	function formHandler(e: React.SyntheticEvent) {
+	function formHandler() {
 		console.log(isActive, subcategoryID, title, listFilterCategoryItem.length > 0);
 		if (isActive && subcategoryID && title && listFilterCategoryItem.length > 0) {
 			console.log('jk');
@@ -87,18 +85,17 @@ export const AddFilterCategory = () => {
 		} else {
 			alert('please fill in the fields');
 		}
-		e.preventDefault();
 	}
 
 	return (
 		<AdminPanelCard>
-			<AdminCardForm onSubmitFunction={formHandler}>
+			<AdminCardForm>
 				<AdminCardHeading>Category filter</AdminCardHeading>
 				<AdminCardInput value={title} change={setTitle} type={'text'} field={'Category filter title'} />
 				<IsActive getValue={setIsActive} />
 				<AdminCardSelectWithSearch list={subcategoryList} getValue={setSubcategoryID} field={'Select subcategory'} />
 				<AdminCardCreateList field={'Add filter item'} getValue={setListFilterCategoryItem} value={listFilterCategoryItem} />
-				<AdminCardBttnSubmit field={'ADD'} />
+				<AdminCardBttnSubmit onClick={() => formHandler()} field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);
