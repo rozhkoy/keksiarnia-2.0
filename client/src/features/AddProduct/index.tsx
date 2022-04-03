@@ -12,6 +12,7 @@ import { IsActive } from '../../shared/ui/IsActive';
 import { getAllProductGroup, getProductGroupItemsById } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
+import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -65,14 +66,14 @@ export const AddProduct = () => {
 		},
 	});
 
-	useQuery(['getProductGroupItemsById', productGroupId], () => getProductGroupItemsById(productGroupId), {
+	const productGroupItemsById = useQuery(['getProductGroupItemsById', productGroupId], () => getProductGroupItemsById(productGroupId), {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			setListProductGroupItems(
 				data.map((item) => {
 					return {
 						id: item.productGroupItemID,
-						inputValue: 'huj',
+						inputValue: '',
 						field: item.name,
 					};
 				})
@@ -80,17 +81,6 @@ export const AddProduct = () => {
 		},
 		enabled: !!productGroupId,
 	});
-
-	useEffect(() => {
-		console.log('test test test ', ListProductGroupItems);
-	}, [ListProductGroupItems]);
-
-	function updataFunction(e: React.ChangeEvent<HTMLInputElement>, index: number) {
-		const arr: Array<IListProperties> = ListProductGroupItems;
-		arr[index].inputValue = e.target.value;
-		setListProductGroupItems(arr);
-		console.log(arr);
-	}
 
 	return (
 		<AdminPanelCard>
@@ -100,8 +90,9 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listCategory} getValue={setCategoryId} field={'Select category'} />
 				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId} field={'Select subcategory'} />
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
-				<AdminProductProperties getValue={updataFunction} field={'test for test'} listProperties={ListProductGroupItems} />
+				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
+				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);
