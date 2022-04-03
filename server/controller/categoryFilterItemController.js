@@ -9,6 +9,24 @@ class CategoryFilterItemController {
 		return res.json(response);
 	}
 
+	async getAllFilterWithoutPagination(req, res) {
+		const response = await categoryFilter.findAll({
+			include: [
+				{
+					model: categoryFilterItem,
+					where: {
+						isActive_ID: 1
+					},
+					distinct: true,
+				},
+				{ model: isActive }
+			],
+			distinct: true,
+			order: [['categoryFilterID', 'DESC']]
+		});
+		return res.json(response);
+	}
+
 	async getAllFilterItems(req, res) {
 		let { page, limit } = req.query;
 		console.log(page, limit);
