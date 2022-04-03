@@ -13,6 +13,7 @@ import { getAllProductGroup, getProductGroupItemsById } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
+import { AdminMultiSelect } from '../../shared/ui/AdminMultiSelect';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -21,7 +22,7 @@ export const AddProduct = () => {
 	const [SubcategoryId, setSubcategoryId] = useState<string>('');
 	const [isActive, setIsActive] = useState<string>('');
 	const [listProductGroup, setListProductGroup] = useState<Array<ICustomSelectData>>([]);
-	const [productGroupId, setProductGroupId] = useState<string>('1');
+	const [productGroupId, setProductGroupId] = useState<string>('');
 	const [productTitle, setProductTitle] = useState<string>('');
 	const [ListProductGroupItems, setListProductGroupItems] = useState<Array<IListProperties>>([]);
 	useQuery('getAllCategoriesForProduct', getAllCategories, {
@@ -92,6 +93,7 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
 				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
+				<AdminMultiSelect />
 				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
 			</AdminCardForm>
 		</AdminPanelCard>
