@@ -5,7 +5,7 @@ import './style.scss';
 export const AdminCardBttnSubmit: React.FC<AdminCardBttnSubmitProps> = (props) => {
 	return (
 		<div className="AdminCardBttnSubmit">
-			<button className="AdminCardBttnSubmit__bttn" type="submit">
+			<button onClick={props.onClick} className="AdminCardBttnSubmit__bttn" type="button">
 				{props.field}
 			</button>
 		</div>

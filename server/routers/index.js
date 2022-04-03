@@ -19,6 +19,9 @@ const productGroupItemRouter = require('./productGroupItemRouter')
 const subcategoriesController  = require("../controller/subcategoriesController")
 const categoryFilterRouter = require('./filterCategoryRouter')
 const categoryFilterItemRouter = require('./filterCategoryItemRouter')
+const productGroupController = require('../controller/productGroupController')
+const productGroupItemByIdRouter = require('./productGroupItemByIdRouter')
+
 
 router.post('/registration', body('email').isEmail(), body('password').isLength({ min: 3, max: 32 }), userController.registration);
 router.post('/login', userController.login);
@@ -40,6 +43,9 @@ router.use('/productGroup', productGroupRouter)
 router.use('/productGroupItem', productGroupItemRouter)
 router.use('/categoryFilter', categoryFilterRouter)
 router.use('/categoryFilterItem', categoryFilterItemRouter)
+router.get('/getAllProductGroup', productGroupController.getAllProductGroup)
+router.use('/productGroupItemById', productGroupItemByIdRouter)
+
 
 module.exports = router;
 

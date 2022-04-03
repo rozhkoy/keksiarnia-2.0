@@ -90,8 +90,7 @@ export const Index = () => {
 		},
 	});
 
-	function formHandler(e: React.SyntheticEvent) {
-		e.preventDefault();
+	function formHandler() {
 		if (isActive && titleState && categoryID) {
 			const formData = createFormData([
 				{
@@ -111,13 +110,13 @@ export const Index = () => {
 
 	return (
 		<AdminPanelCard>
-			<AdminCardForm onSubmitFunction={formHandler}>
+			<AdminCardForm>
 				<AdminCardHeading>Edit subcategory</AdminCardHeading>
 				<IsActive getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				{getAllCategoriesQuery.isSuccess && getSubcategoryByIdQuery.isSuccess ? <AdminCardSelectWithSearch data={selectTitle} field={'Category'} getValue={setCategoryID} list={allCategories} /> : 'Loading'}
 				<AdminCardFile img={pictureLink} field={'Pictures'} change={setPictureState} />
-				<AdminCardBttnSubmit field={'EDIT'} />
+				<AdminCardBttnSubmit onClick={formHandler} field={'EDIT'} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

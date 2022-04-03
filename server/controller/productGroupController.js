@@ -7,6 +7,13 @@ class ProductGroupController {
 		return res.json(response);
 	}
 
+	async getAllProductGroup(req, res) {
+		const response = await productGroup.findAll({
+			order: [["name", "ASC"]]
+		})
+		return res.json(response)
+	}
+
 	async getAllProductGroupWithPagination(req, res) {
 		let { page, limit } = req.query;
 		console.log(page, limit);
