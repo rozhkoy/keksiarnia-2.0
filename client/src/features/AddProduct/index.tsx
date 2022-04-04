@@ -14,7 +14,6 @@ import { AdminProductProperties } from '../../shared/ui/AdminProductProperties '
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { AdminMultiSelect } from '../../shared/ui/AdminMultiSelect';
-import { IFullCategoryFilterResponse } from '../ListCategoryFIlter/types';
 import { IFilterListForMultiSelect } from '../../shared/ui/AdminMultiSelect/types';
 
 export const AddProduct = () => {
@@ -116,7 +115,7 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
 				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
-				<AdminMultiSelect field={'test fpr test'} arrayList={listFilter} />
+				<AdminMultiSelect getValue={setListFilter} field={'test fpr test'} arrayList={listFilter} />
 				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
 			</AdminCardForm>
 		</AdminPanelCard>
