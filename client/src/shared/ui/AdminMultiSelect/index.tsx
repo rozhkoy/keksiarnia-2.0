@@ -1,23 +1,71 @@
 import './style.scss';
 import { AdminMultiSelectType, IFilterListForMultiSelect } from './types';
 import { createRef, useEffect, useRef, useState } from 'react';
+import { IListItem } from '../AdminCardCreateList/type';
+
 export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 	const listRefs = useRef<Array<Array<HTMLLIElement>>>([[]]);
+	const [selectedItem, setSelectedItem] = useState<Array<IFilterListForMultiSelect>>([]);
 
 	function selectElement(index: number, nestedIndex: number, id: string) {
 		listRefs.current[index][nestedIndex] && listRefs.current[index][nestedIndex].classList.add('listItemActive');
-		const arr: Array<IFilterListForMultiSelect> = props.arrayList.slice();
-		console.log(arr[index]);
-		arr[index].list = arr[index].list.filter((item) => item.id !== id);
-		props.getValue(arr);
+		if (selectedItem.length > 0) {
+			if (selectedItem.every((item) => item.listHeading !== props.arrayList[index].listHeading)) {
+				const arr: Array<IFilterListForMultiSelect> = [
+					{
+						id: String(index),
+						listHeading: props.arrayList[index].listHeading,
+						list: [],
+					},
+				];
+				arr[0].list.push({
+					id: props.arrayList[index].list[nestedIndex].id,
+					value: props.arrayList[index].list[nestedIndex].value,
+				});
+				setSelectedItem((state) => state.slice().concat(arr));
+			} else {
+				setSelectedItem((state) => {
+					const arr = state.slice();
+					arr[index].list.push({
+						id: props.arrayList[index].list[nestedIndex].id,
+						value: props.arrayList[index].list[nestedIndex].value,
+					});
+					return arr;
+				});
+				// 	arr[index].list.push({
+				// 		id: props.arrayList[index].list[nestedIndex].id,
+				// 		value: props.arrayList[index].list[nestedIndex].value,
+				// 	});
+			}
+		} else {
+			const arr: Array<IFilterListForMultiSelect> = [
+				{
+					id: String(index),
+					listHeading: props.arrayList[index].listHeading,
+					list: [
+						{
+							id: props.arrayList[index].list[nestedIndex].id,
+							value: props.arrayList[index].list[nestedIndex].value,
+						},
+					],
+				},
+			];
+			setSelectedItem(arr);
+		}
+
+		// const arr: Array<IFilterListForMultiSelect> = props.arrayList.slice();
+		// console.log(arr[index]);
+		// arr[index].list = arr[index].list.filter((item) => item.id !== id);
+		// props.getValue(arr);
 	}
 
 	useEffect(() => {
 		props.arrayList.map((item, index: number) => {
-			if (item.list.length != listRefs.current[index].length) {
+			if (item.list.length !== listRefs.current[index].length) {
 				Array(item.list.length).map((item, index) => listRefs.current[index] || createRef<HTMLLIElement>());
 			}
 		});
+		console.log(selectedItem);
 	});
 
 	return (
