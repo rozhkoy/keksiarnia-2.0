@@ -4,6 +4,7 @@ import { createRef, useEffect, useRef, useState } from 'react';
 
 export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 	const listRefs = useRef<Array<Array<HTMLLIElement>>>([[]]);
+	const lisSelectedRefs = useRef<Array<Array<HTMLLIElement>>>([[]]);
 	const [selectedItem, setSelectedItem] = useState<Array<IFilterListForMultiSelect>>([]);
 
 	function selectElement(index: number, nestedIndex: number, id: string) {
@@ -125,7 +126,7 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 				<div className="admin-multi-select__select admin-multi-select__select--right">
 					<div className="admin-multi-select__list-wrap">
 						{selectedItem.map((item, index: number) => {
-							listRefs.current[index] = [];
+							lisSelectedRefs.current[index] = [];
 							if (props.arrayList[index].list.length > 0) {
 								return (
 									<div key={item.id} className="admin-multi-select__select-list">
@@ -137,7 +138,7 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 														onClick={() => selectElement(index, nestedIndex, elem.id)}
 														key={elem.value}
 														ref={(ref: HTMLLIElement) => {
-															return (listRefs.current[index][nestedIndex] = ref);
+															return (lisSelectedRefs.current[index][nestedIndex] = ref);
 														}}
 														className="select-list__list-items">
 														{elem.value}
