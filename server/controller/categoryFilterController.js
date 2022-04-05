@@ -8,8 +8,8 @@ class CategoryFilterController {
 			id_subCategory,
 			title,
 		});
-		return res.json(response)
+		return res.json(response);
 	}
 }
 
-module.exports = new CategoryFilterController()
+module.exports = new CategoryFilterController();
