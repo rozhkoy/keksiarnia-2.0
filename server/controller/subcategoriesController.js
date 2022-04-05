@@ -14,9 +14,9 @@ class subcategoriesController {
 	}
 
 	async getAllSubcategories(req, res) {
-		try{
-			const response = await subcategory.findAll()
-			return res.json(response)
+		try {
+			const response = await subcategory.findAll();
+			return res.json(response);
 		} catch (e) {
 			console.log(e);
 			throw ApiError.BadRequest('Error Database');

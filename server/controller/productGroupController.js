@@ -9,9 +9,9 @@ class ProductGroupController {
 
 	async getAllProductGroup(req, res) {
 		const response = await productGroup.findAll({
-			order: [["name", "ASC"]]
-		})
-		return res.json(response)
+			order: [['name', 'ASC']],
+		});
+		return res.json(response);
 	}
 
 	async getAllProductGroupWithPagination(req, res) {

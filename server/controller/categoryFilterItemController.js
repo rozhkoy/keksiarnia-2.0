@@ -4,7 +4,9 @@ class CategoryFilterItemController {
 	async addFilterCategoryItem(req, res) {
 		const { isActive_ID, categoryFilterID, title } = req.body;
 		const response = await categoryFilterItem.create({
-			isActive_ID, categoryFilterID, title
+			isActive_ID,
+			categoryFilterID,
+			title,
 		});
 		return res.json(response);
 	}
@@ -15,14 +17,14 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActive_ID: 1
+						isActive_ID: 1,
 					},
 					distinct: true,
 				},
-				{ model: isActive }
+				{ model: isActive },
 			],
 			distinct: true,
-			order: [['categoryFilterID', 'DESC']]
+			order: [['categoryFilterID', 'DESC']],
 		});
 		return res.json(response);
 	}
@@ -38,16 +40,16 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActive_ID: 1
+						isActive_ID: 1,
 					},
 					distinct: true,
 				},
-				{ model: isActive }
+				{ model: isActive },
 			],
 			distinct: true,
 			limit: limit,
 			offset: offset,
-			order: [['categoryFilterID', 'DESC']]
+			order: [['categoryFilterID', 'DESC']],
 		});
 		return res.json(response);
 	}
