@@ -1,0 +1,12 @@
+.price {
+    display: grid;
+    grid-gap: 15px;
+  &__block {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__item {
+    text-align: right;
+  }
+}

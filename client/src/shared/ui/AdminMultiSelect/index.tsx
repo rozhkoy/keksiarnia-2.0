@@ -9,46 +9,6 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 
 	function selectElement(index: number, nestedIndex: number, id: string) {
 		listRefs.current[index][nestedIndex] && listRefs.current[index][nestedIndex].classList.add('listItemActive');
-		// if_ (selectedItem.length > 0) {
-		// 	let arrayList = selectedItem.slice();
-		// 	if (selectedItem.every((item) => item.listHeading !== props.arrayList[index].listHeading)) {
-		// 		console.log('top');
-		// 		const arr: Array<IFilterListForMultiSelect> = [
-		// 			{
-		// 				id: String(index),
-		// 				listHeading: props.arrayList[index].listHeading,
-		// 				list: [],
-		// 			},
-		// 		];
-		// 		arrayList = arrayList.concat(arr);
-		// 		setSelectedItem(arrayList);
-		// 	} else {
-		// 		console.log('bottom');
-		// 		setSelectedItem((state) => {
-		// 			const arr = state.slice();
-		// 			arr[index].list.push({
-		// 				id: props.arrayList[index].list[nestedIndex].id,
-		// 				value: props.arrayList[index].list[nestedIndex].value,
-		// 			});
-		// 			return arr;
-		// 		});
-		// 	}
-		// } else {
-		// 	const arr: Array<IFilterListForMultiSelect> = [
-		// 		{
-		// 			id: String(index),
-		// 			listHeading: props.arrayList[index].listHeading,
-		// 			list: [
-		// 				{
-		// 					id: props.arrayList[index].list[nestedIndex].id,
-		// 					value: props.arrayList[index].list[nestedIndex].value,
-		// 				},
-		// 			],
-		// 		},
-		// 	];
-		// 	setSelectedItem(arr);
-		// }
-
 		if (selectedItem.length > 0) {
 			const arrayList = selectedItem.slice();
 			if (arrayList.every((item) => item.listHeading !== props.arrayList[index].listHeading)) {
@@ -127,7 +87,7 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 					<div className="admin-multi-select__list-wrap">
 						{selectedItem.map((item, index: number) => {
 							lisSelectedRefs.current[index] = [];
-							if (props.arrayList[index].list.length > 0) {
+							if (selectedItem[index].list.length > 0) {
 								return (
 									<div key={item.id} className="admin-multi-select__select-list">
 										<p className="select-list__heading">{item.listHeading}</p>
