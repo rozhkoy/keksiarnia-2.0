@@ -15,6 +15,7 @@ import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { AdminMultiSelect } from '../../shared/ui/AdminMultiSelect';
 import { IFilterListForMultiSelect } from '../../shared/ui/AdminMultiSelect/types';
+import { AdminCardPrice } from '../AdminCardPrice';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -116,6 +117,7 @@ export const AddProduct = () => {
 				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
 				<AdminMultiSelect getValue={setListFilter} field={'test fpr test'} arrayList={listFilter} />
+				<AdminCardPrice />
 				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
 			</AdminCardForm>
 		</AdminPanelCard>
