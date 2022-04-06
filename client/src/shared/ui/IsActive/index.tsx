@@ -26,5 +26,5 @@ export const IsActive: React.FC<isActiveProps> = (props) => {
 		props.getValue(e.target.value);
 	}
 
-	return <AdminCardSelect value={selectData} change={selectHandler} optionArray={isActiveData} field={' Is active'} />;
+	return <AdminCardSelect value={selectData} change={selectHandler} optionArray={isActiveData} field={props.field} />;
 };

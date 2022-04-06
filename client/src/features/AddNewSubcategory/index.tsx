@@ -96,7 +96,7 @@ export const AddNewSubcategory = () => {
 		<AdminPanelCard>
 			<AdminCardForm>
 				<AdminCardHeading>Add new subcategory</AdminCardHeading>
-				<IsActive getValue={setIsActive} />
+				<IsActive field={'Is active subcategory'} getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				{isSuccess && <AdminCardSelectWithSearch field={'Category'} getValue={setCategoryID} list={allCategories} />}
 				<AdminCardFile field={''} change={setPictureState} />

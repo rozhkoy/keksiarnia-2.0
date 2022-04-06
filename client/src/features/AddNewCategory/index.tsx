@@ -65,7 +65,7 @@ export const AddNewCategory = () => {
 		<AdminPanelCard>
 			<AdminCardHeading>New Category</AdminCardHeading>
 			<AdminCardForm>
-				<IsActive getValue={setIsActiveData} />
+				<IsActive field={'Is Active category'} getValue={setIsActiveData} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				<AdminCardFile field={'Image'} change={setPictureState} />
 				<AdminCardBttnSubmit onClick={formHandler} field={'Add'} />

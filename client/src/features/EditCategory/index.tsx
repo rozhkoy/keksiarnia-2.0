@@ -81,7 +81,7 @@ export const EditCategory = () => {
 		<AdminPanelCard>
 			<AdminCardHeading>Edit Category</AdminCardHeading>
 			<AdminCardForm>
-				<IsActive getValue={setIsActiveData} />
+				<IsActive field={'Is active category'} getValue={setIsActiveData} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				<AdminCardFile img={pictureLink} field={'Image'} change={setPictureState} />
 				<AdminCardBttnSubmit onClick={formHandler} field={'EDIT'} />

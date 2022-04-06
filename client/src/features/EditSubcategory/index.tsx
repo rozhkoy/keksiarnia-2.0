@@ -112,7 +112,7 @@ export const Index = () => {
 		<AdminPanelCard>
 			<AdminCardForm>
 				<AdminCardHeading>Edit subcategory</AdminCardHeading>
-				<IsActive getValue={setIsActive} />
+				<IsActive field={'Is active subcategory'} getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
 				{getAllCategoriesQuery.isSuccess && getSubcategoryByIdQuery.isSuccess ? <AdminCardSelectWithSearch data={selectTitle} field={'Category'} getValue={setCategoryID} list={allCategories} /> : 'Loading'}
 				<AdminCardFile img={pictureLink} field={'Pictures'} change={setPictureState} />
