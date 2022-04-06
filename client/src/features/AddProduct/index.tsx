@@ -17,6 +17,7 @@ import { AdminMultiSelect } from '../../shared/ui/AdminMultiSelect';
 import { IFilterListForMultiSelect } from '../../shared/ui/AdminMultiSelect/types';
 import './style.scss';
 import { AdminCardTextarea } from '../../shared/ui/AdminCardTextarea';
+import { AdminCardPhotos } from '../../shared/ui/AdminCardPhotos';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -132,6 +133,7 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
 				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
+				<AdminCardPhotos />
 				<AdminMultiSelect getValue={setListFilter} field={'test fpr test'} arrayList={listFilter} />
 				<AdminCardInput value={price} change={setPrice} type={'text'} field={'Price'} />
 				<IsActive field={'Is active discount price'} getValue={setIsActiveDiscountPrice} />
