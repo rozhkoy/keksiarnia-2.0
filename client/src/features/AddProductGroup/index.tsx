@@ -68,7 +68,7 @@ export const AddProductGroup = () => {
 		<AdminPanelCard>
 			<AdminCardHeading>Add product group</AdminCardHeading>
 			<AdminCardForm>
-				<IsActive getValue={setIsActiveState} />
+				<IsActive field={'Is active product group'} getValue={setIsActiveState} />
 				<AdminCardInput field={'Group name'} value={inputState} change={setInputState} type={'text'} />
 				<AdminCardCreateList field={'Add properties'} value={propertyValueList} getValue={setPropertyValueList} />
 				<AdminCardBttnSubmit onClick={formHandler} field={'ADD'} />

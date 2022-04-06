@@ -119,7 +119,7 @@ const propertyProductItem = sequelize.define('propertyProductItem', {
 	propertyProductItemValue: { type: DataTypes.STRING, allowNull: false },
 });
 
-const price = sequelize.define('price', {
+const productPrice = sequelize.define('productPrice', {
 	priceID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	discountPrice: { type: DataTypes.BIGINT, allowNull: false },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
@@ -190,11 +190,11 @@ product.belongsTo(subcategory, { foreignKey: 'id_subcategory' });
 productGroup.hasMany(product, { foreignKey: 'propertyGroup_ID' });
 product.belongsTo(productGroup, { foreignKey: 'propertyGroup_ID' });
 
-price.hasMany(product, {foreignKey: "priceID"})
-product.belongsTo(price, {foreignKey: "priceID"})
+productPrice.hasMany(product, {foreignKey: "priceID"})
+product.belongsTo(productPrice, {foreignKey: "priceID"})
 
-isActive.hasMany(price, { foreignKey: 'isActive_ID' });
-price.belongsTo(isActive, { foreignKey: 'isActive_ID' });
+isActive.hasMany(productPrice, { foreignKey: 'isActive_ID' });
+productPrice.belongsTo(isActive, { foreignKey: 'isActive_ID' });
 
 module.exports = {
 	category,
@@ -215,7 +215,7 @@ module.exports = {
 	propertyGroupItem,
 	propertyProduct,
 	propertyProductItem,
-	price,
+	productPrice,
 	userData,
 	tokenData,
 	productGroupItem,

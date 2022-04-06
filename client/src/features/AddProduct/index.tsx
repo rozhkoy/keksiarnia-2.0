@@ -15,7 +15,8 @@ import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
 import { AdminMultiSelect } from '../../shared/ui/AdminMultiSelect';
 import { IFilterListForMultiSelect } from '../../shared/ui/AdminMultiSelect/types';
-import { AdminCardPrice } from '../AdminCardPrice';
+import './style.scss';
+import { AdminCardTextarea } from '../../shared/ui/AdminCardTextarea';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -28,6 +29,12 @@ export const AddProduct = () => {
 	const [productTitle, setProductTitle] = useState<string>('');
 	const [ListProductGroupItems, setListProductGroupItems] = useState<Array<IListProperties>>([]);
 	const [listFilter, setListFilter] = useState<Array<IFilterListForMultiSelect>>([]);
+	const [price, setPrice] = useState('0');
+	const [discountPrice, setDiscountPrice] = useState<number>(0);
+	const [discountPercent, setDiscountPercent] = useState<string>('0');
+	const [isActiveDiscountPrice, setIsActiveDiscountPrice] = useState<string>('');
+	const [description, setDescription] = useState<string>('');
+
 	useQuery('getAllCategoriesForProduct', getAllCategories, {
 		onSuccess: ({ data }) => {
 			console.log(data);
@@ -106,18 +113,37 @@ export const AddProduct = () => {
 		},
 	});
 
+	useEffect(() => {
+		if (Number(discountPercent) >= 100) {
+			setDiscountPercent('99');
+		}
+		setDiscountPrice((state) => {
+			return Number(price) * (100 - Number(discountPercent) * 0.01);
+		});
+	}, [price, discountPrice, discountPercent]);
+
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>Add product</AdminCardHeading>
 			<AdminCardForm>
-				<IsActive getValue={setIsActive} />
+				<IsActive field={'Is active product'} getValue={setIsActive} />
 				<AdminCardSelectWithSearch list={listCategory} getValue={setCategoryId} field={'Select category'} />
 				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId} field={'Select subcategory'} />
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
 				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
 				<AdminMultiSelect getValue={setListFilter} field={'test fpr test'} arrayList={listFilter} />
-				<AdminCardPrice />
+				<AdminCardInput value={price} change={setPrice} type={'text'} field={'Price'} />
+				<IsActive field={'Is active discount price'} getValue={setIsActiveDiscountPrice} />
+				<AdminCardInput value={discountPercent} change={setDiscountPercent} type={'number'} field={'Discount Percent'} />
+				<div className="price">
+					<ul className="price__list">
+						<li className="price__item">Price: {price}$</li>
+						<li className="price__item">Discount price: {discountPrice}$</li>
+						<li className="price__item">Percent: {discountPercent}%</li>
+					</ul>
+				</div>
+				<AdminCardTextarea field={'Description'} getValue={setDescription} value={description} />
 				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
 			</AdminCardForm>
 		</AdminPanelCard>

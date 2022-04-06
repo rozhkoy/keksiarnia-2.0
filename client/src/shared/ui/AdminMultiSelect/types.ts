@@ -1,4 +1,3 @@
-import { IListItem } from '../AdminCardCreateList/type';
 import { Dispatch, SetStateAction } from 'react';
 
 export type AdminMultiSelectType = {
