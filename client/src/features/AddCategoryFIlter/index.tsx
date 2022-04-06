@@ -73,7 +73,7 @@ export const AddFilterCategory = () => {
 					value: isActive,
 				},
 				{
-					key: 'id_subCategory',
+					key: 'id_subcategory',
 					value: subcategoryID,
 				},
 				{
