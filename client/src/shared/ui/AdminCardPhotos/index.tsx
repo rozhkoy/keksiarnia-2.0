@@ -1,13 +1,14 @@
 import './style.scss';
 import { useEffect, useState } from 'react';
+import { AdminCardFileProps } from '../AdminCardFile/types';
+import { AdminCardPhotosType } from './types';
 
-export const AdminCardPhotos = () => {
+export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 	const [files, setFiles] = useState<FileList | null>(null);
 	const [urls, setUrls] = useState<Array<string>>([]);
 
 	function inputFileHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		const files = e.target.files;
-		console.log(files);
 		if (files) {
 			files.length > 0 && setFiles(files);
 			setUrls((state) => {
@@ -15,10 +16,6 @@ export const AdminCardPhotos = () => {
 			});
 		}
 	}
-
-	useEffect(() => {
-		console.log(urls);
-	});
 
 	return (
 		<div className="admin-card-photos">
