@@ -1,7 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export type AdminCardPhotosType = {
-	value: FileList | null;
-	getValue: Dispatch<SetStateAction<FileList>>;
+	photosInfo: Array<IPhotosInfo>;
+	getPhotosInfo: Dispatch<SetStateAction<Array<IPhotosInfo>>>;
 	field: string;
 };
+
+export interface IPhotosInfo {
+	photoFile: File | null;
+	photoLink: string;
+}
