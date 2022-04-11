@@ -9,4 +9,5 @@ export type AdminCardPhotosType = {
 export interface IPhotosInfo {
 	photoFile: File | null;
 	photoLink: string;
+	isFirst: boolean;
 }

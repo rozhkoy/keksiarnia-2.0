@@ -11,6 +11,7 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 					const photoInfo: IPhotosInfo = {
 						photoFile: item,
 						photoLink: URL.createObjectURL(item),
+						isFirst: false,
 					};
 					return photoInfo;
 				});
@@ -19,10 +20,26 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 		}
 	}
 
-	function deletePhoto(e: React.ChangeEvent<HTMLInputElement>, index: number) {
-		console.log(index);
-		// const arr = props.
+	function deletePhoto(index: number) {
+		props.getPhotosInfo((state) => {
+			return state.filter((item, itemIndex) => index !== itemIndex);
+		});
 	}
+
+	function changeImg(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+		const files = e.target.files;
+		files &&
+			props.getPhotosInfo((state) => {
+				state[index] = {
+					photoFile: files[0],
+					photoLink: URL.createObjectURL(files[0]),
+					isFirst: false,
+				};
+				return [...state];
+			});
+	}
+
+	function changeFirstPhoto(index) {}
 
 	return (
 		<div className="admin-card-photos">
@@ -38,9 +55,11 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 									<label className="admin-card-photos__input-file-label" htmlFor="file">
 										Change
 									</label>
-									<input type="file" onChange={(e: React.ChangeEvent<HTMLInputElement>) => deletePhoto(e, index)} className="admin-card-photos__input-file-input" name="file" />
+									<input onChange={(e) => changeImg(e, index)} type="file" className="admin-card-photos__input-file-input" name="file" />
 								</div>
-								<button className="admin-card-photos__bttn admin-card-photos__bttn--delete">Delete</button>
+								<button onClick={() => deletePhoto(index)} className="admin-card-photos__bttn admin-card-photos__bttn--delete">
+									Delete
+								</button>
 							</div>
 							<div className="admin-card-photos__checkbox">
 								<input type="checkbox" /> <label> First</label>
