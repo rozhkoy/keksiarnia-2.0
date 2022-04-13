@@ -2,14 +2,14 @@ import { AdminPanelCard } from '../../shared/ui/AdminPanelCard';
 import { AdminCardHeading } from '../../shared/ui/AdminCardHeading';
 import { AdminCardForm } from '../../shared/ui/AdminCardForm';
 import { AdminCardInput } from '../../shared/ui/AdminCardInput';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { getAllCategories } from '../AddNewSubcategory/api';
 import React, { useEffect, useState } from 'react';
 import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSearch';
 import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { getAllSubcategories } from '../AddCategoryFIlter/api';
 import { IsActive } from '../../shared/ui/IsActive';
-import { getAllProductGroup, getFilterList, getProductGroupItemsById } from './api';
+import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPrice } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
@@ -19,12 +19,13 @@ import './style.scss';
 import { AdminCardTextarea } from '../../shared/ui/AdminCardTextarea';
 import { AdminCardPhotos } from '../../shared/ui/AdminCardPhotos';
 import { IPhotosInfo } from '../../shared/ui/AdminCardPhotos/types';
+import { createFormData } from '../../shared/lib/createFormData';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
 	const [categoryId, setCategoryId] = useState<string>('');
 	const [listSubcategories, setListSubCategories] = useState<Array<ICustomSelectData>>([]);
-	const [SubcategoryId, setSubcategoryId] = useState<string>('');
+	const [subcategoryId, setSubcategoryId] = useState<string>('');
 	const [isActive, setIsActive] = useState<string>('');
 	const [listProductGroup, setListProductGroup] = useState<Array<ICustomSelectData>>([]);
 	const [productGroupId, setProductGroupId] = useState<string>('');
@@ -116,6 +117,75 @@ export const AddProduct = () => {
 		},
 	});
 
+	const mutationProductPrice = useMutation(sendProductPrice, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+			const formData = createFormData([
+				{
+					key: 'isActive_ID',
+					value: isActive,
+				},
+				{
+					key: 'id_category',
+					value: categoryId,
+				},
+				{
+					key: 'id_subcategory',
+					value: subcategoryId,
+				},
+				{
+					key: 'priceID',
+					value: String(data.priceID),
+				},
+				{
+					key: 'productGroup_ID',
+					value: '5',
+				},
+				{
+					key: 'name',
+					value: productTitle,
+				},
+				{
+					key: 'number',
+					value: String(10),
+				},
+				{
+					key: 'description',
+					value: description,
+				},
+			]);
+			mutationProductData.mutate(formData);
+		},
+	});
+
+	const mutationProductData = useMutation(sendProductData, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+		},
+	});
+
+	function formHandler() {
+		const formData = createFormData([
+			{
+				key: 'price',
+				value: price,
+			},
+			{
+				key: 'isActive_ID',
+				value: isActiveDiscountPrice,
+			},
+			{
+				key: 'discountPrice',
+				value: String(discountPrice),
+			},
+			{
+				key: 'discountPercent',
+				value: discountPercent,
+			},
+		]);
+		mutationProductPrice.mutate(formData);
+	}
+
 	useEffect(() => {
 		if (Number(discountPercent) >= 100) {
 			setDiscountPercent('99');
@@ -148,7 +218,7 @@ export const AddProduct = () => {
 					</ul>
 				</div>
 				<AdminCardTextarea field={'Description'} getValue={setDescription} value={description} />
-				<AdminCardBttnSubmit field={'ADD'} onClick={() => console.log(ListProductGroupItems)} />
+				<AdminCardBttnSubmit field={'ADD'} onClick={formHandler} />
 			</AdminCardForm>
 		</AdminPanelCard>
 	);

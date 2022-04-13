@@ -1,9 +1,9 @@
 import './style.scss';
 import { AdminCardPhotosType, IPhotosInfo } from './types';
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
 export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
-	const checkboxRef = useRef<Array<HTMLInputElement>>([])
+	const checkboxRef = useRef<Array<HTMLInputElement>>([]);
 
 	function inputFileHandler(e: React.ChangeEvent<HTMLInputElement>) {
 		const files = e.target.files;
@@ -41,27 +41,25 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 			});
 	}
 
-	function changeFirstPhoto(e: React.ChangeEvent<HTMLInputElement> , index: number) {
-		const copyState = props.photosInfo.slice()
-		for(let i = 0; i < props.photosInfo.length; i++) {
-			if(checkboxRef.current[i].checked  && index !== i ){
-				checkboxRef.current[i].checked = false
-				copyState[i].isFirst = false
+	function changeFirstPhoto(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+		const copyState = props.photosInfo.slice();
+		for (let i = 0; i < props.photosInfo.length; i++) {
+			if (checkboxRef.current[i].checked && index !== i) {
+				checkboxRef.current[i].checked = false;
+				copyState[i].isFirst = false;
 			}
 		}
-		checkboxRef.current[index].checked = true
-		copyState[index].isFirst = true
-		props.getPhotosInfo(copyState)
+		checkboxRef.current[index].checked = true;
+		copyState[index].isFirst = true;
+		props.getPhotosInfo(copyState);
 	}
-
 
 	useEffect(() => {
 		if (checkboxRef.current.length !== props.photosInfo.length) {
 			checkboxRef.current = checkboxRef.current.slice(0, props.photosInfo.length);
 			console.log(checkboxRef.current.slice(0, props.photosInfo.length));
 		}
-	})
-
+	});
 
 	return (
 		<div className="admin-card-photos">
@@ -84,7 +82,7 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 								</button>
 							</div>
 							<div className="admin-card-photos__checkbox">
-								<input  ref={(elref: HTMLInputElement) => checkboxRef.current[index] = elref} onChange={(e) => changeFirstPhoto(e, index)} type="checkbox" /> <label> First</label>
+								<input ref={(elRef: HTMLInputElement) => (checkboxRef.current[index] = elRef)} onChange={(e) => changeFirstPhoto(e, index)} type="checkbox" /> <label> First</label>
 							</div>
 						</div>
 					))}

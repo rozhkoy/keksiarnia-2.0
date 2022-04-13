@@ -1,26 +1,24 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {$host} from "../../shared/api";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { $host } from "../../shared/api";
 
-
-interface  isActiveValue {
-	isActive_ID: number,
-	value: string,
-	createdAt: string,
-	updatedAt: string
+interface isActiveValue {
+  isActive_ID: number;
+  value: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 interface initialStateValue {
-	ActiveData: Array<isActiveValue>,
-	apiStatus: boolean,
-	test: string
+  ActiveData: Array<isActiveValue>;
+  apiStatus: boolean;
+  test: string;
 }
 
-const initialState:initialStateValue = {
-	ActiveData: [],
-	apiStatus: false,
-	test: ""
-}
-
+const initialState: initialStateValue = {
+  ActiveData: [],
+  apiStatus: false,
+  test: "",
+};
 
 // export const fetchIsActiveData = createAsyncThunk(
 // 	"fetchIsActiveData",
@@ -31,23 +29,22 @@ const initialState:initialStateValue = {
 // 	}
 // )
 
- export const isActive = createSlice({
-	name: "isActive",
-	initialState: initialState,
-	reducers: {
-		test: (state) => {
-			state.test = "dfs"
-		}
-	},
-	// extraReducers: (builder => {
-	// 	builder.addCase(fetchIsActiveData.fulfilled, (state, {payload}) => {
-	// 		console.log(payload);
-	// 		state.ActiveData = payload;
-	// 		state.apiStatus = true;
-	// 	})
-	// })
+export const isActive = createSlice({
+  name: "isActive",
+  initialState: initialState,
+  reducers: {
+    test: (state) => {
+      state.test = "dfs";
+    },
+  },
+  // extraReducers: (builder => {
+  // 	builder.addCase(fetchIsActiveData.fulfilled, (state, {payload}) => {
+  // 		console.log(payload);
+  // 		state.ActiveData = payload;
+  // 		state.apiStatus = true;
+  // 	})
+  // })
+});
 
-})
-
-export const  {test} = isActive.actions
-export default isActive.reducer
+export const { test } = isActive.actions;
+export default isActive.reducer;

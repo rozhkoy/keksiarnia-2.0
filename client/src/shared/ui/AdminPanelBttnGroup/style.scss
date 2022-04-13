@@ -1,17 +1,17 @@
-.bttn-group{
-  &__wrap {
-    display: flex;
-  }
-  &__bttn {
-    margin: 0 10px 0 0;
-    background: #31373D;
-    padding: 4px 7px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: #fff;
-    text-align: center;
-    min-width: 100px;
-    border-radius: 5px;
-    border: 1px solid #31373D;
-  }
+.bttn-group {
+	&__wrap {
+		display: flex;
+	}
+	&__bttn {
+		margin: 0 10px 0 0;
+		background: #31373d;
+		padding: 4px 7px;
+		text-decoration: none;
+		text-transform: uppercase;
+		color: #fff;
+		text-align: center;
+		min-width: 100px;
+		border-radius: 5px;
+		border: 1px solid #31373d;
+	}
 }

@@ -14,16 +14,15 @@ const subcategoriesRouter = require('../routers/subcategoriesRouter');
 const subcategoriesPicturesRouter = require('./subcategoriesPicturesRouter');
 const subcategoryByIdRouter = require('./subcategoryByIdRouter');
 const pictureSubcategoryByIdRouter = require('./pictureSubcategoryByIdRouter');
-const productGroupRouter = require('./productGroupRouter')
-const productGroupItemRouter = require('./productGroupItemRouter')
-const subcategoriesController  = require("../controller/subcategoriesController")
-const categoryFilterRouter = require('./filterCategoryRouter')
-const categoryFilterItemRouter = require('./filterCategoryItemRouter')
-const productGroupController = require('../controller/productGroupController')
-const productGroupItemByIdRouter = require('./productGroupItemByIdRouter')
-const productRouter = require('./productRouter')
-const price = require('./priceRouter')
-
+const productGroupRouter = require('./productGroupRouter');
+const productGroupItemRouter = require('./productGroupItemRouter');
+const subcategoriesController = require('../controller/subcategoriesController');
+const categoryFilterRouter = require('./filterCategoryRouter');
+const categoryFilterItemRouter = require('./filterCategoryItemRouter');
+const productGroupController = require('../controller/productGroupController');
+const productGroupItemByIdRouter = require('./productGroupItemByIdRouter');
+const productRouter = require('./productRouter');
+const price = require('./priceRouter');
 
 router.post('/registration', body('email').isEmail(), body('password').isLength({ min: 3, max: 32 }), userController.registration);
 router.post('/login', userController.login);
@@ -36,19 +35,18 @@ router.use('/mainTypePictures', mainTypePicturesRouter);
 router.use('/CategoryById', categoryByIdRouter);
 router.use('/pictureCategoryById', pictureCategoryByIdRouter);
 router.get('/getAllCategories', getAllCategories.getAllCategories);
-router.get('/getAllSubcategories', subcategoriesController.getAllSubcategories)
+router.get('/getAllSubcategories', subcategoriesController.getAllSubcategories);
 router.use('/subcategories', subcategoriesRouter);
 router.use('/subcategoriesPictures', subcategoriesPicturesRouter);
 router.use('/subcategoryById', subcategoryByIdRouter);
 router.use('/pictureSubcategoryById', pictureSubcategoryByIdRouter);
-router.use('/productGroup', productGroupRouter)
-router.use('/productGroupItem', productGroupItemRouter)
-router.use('/categoryFilter', categoryFilterRouter)
-router.use('/categoryFilterItem', categoryFilterItemRouter)
-router.get('/getAllProductGroup', productGroupController.getAllProductGroup)
-router.use('/productGroupItemById', productGroupItemByIdRouter)
-router.use('/product', productRouter)
-router.use('/price', price)
+router.use('/productGroup', productGroupRouter);
+router.use('/productGroupItem', productGroupItemRouter);
+router.use('/categoryFilter', categoryFilterRouter);
+router.use('/categoryFilterItem', categoryFilterItemRouter);
+router.get('/getAllProductGroup', productGroupController.getAllProductGroup);
+router.use('/productGroupItemById', productGroupItemByIdRouter);
+router.use('/product', productRouter);
+router.use('/price', price);
 
 module.exports = router;
-
