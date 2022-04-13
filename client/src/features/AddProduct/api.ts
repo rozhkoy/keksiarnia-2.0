@@ -1,5 +1,5 @@
 import { $host } from 'src/shared/api';
-import { IProductGroup } from './types';
+import { IProductGroup, IProductPrice } from './types';
 import { IResponseProductGroupItemData } from '../AddProductGroup/type';
 import { IFullCategoryFilterResponse } from '../ListCategoryFIlter/types';
 
@@ -17,4 +17,12 @@ export async function getProductGroupItemsById(id: string) {
 
 export async function getFilterList() {
 	return await $host.get<Array<IFullCategoryFilterResponse>>('api/categoryFilterItem/getAll');
+}
+
+export async function sendProductPrice(formData: FormData) {
+	return await $host.post<IProductPrice>('api/price', formData);
+}
+
+export async function sendProductData(formData: FormData) {
+	return await $host.post('api/product', formData);
 }

@@ -1,9 +1,7 @@
-const Router = require('express')
-const router = new Router
-const priceController = require('../controller/priceController')
-const { productPrice } = require('../models/models');
+const Router = require('express');
+const router = new Router();
+const priceController = require('../controller/priceController');
 
-router.post('/', priceController.addPrice)
-router.get('/', priceController.getAllPrices )
+router.post('/', priceController.addPrice);
 
-module.exports = router
+module.exports = router;

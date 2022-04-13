@@ -1,55 +1,52 @@
 .admin-multi-select {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
 
-  &__field {
-    text-align: right;
-    padding: 0 15px 0 0;
-    grid-column: 1/3;
-    grid-row: 1/3;
-  }
+	&__field {
+		text-align: right;
+		padding: 0 15px 0 0;
+		grid-column: 1/3;
+		grid-row: 1/3;
+	}
 
-  &__selects {
-    grid-column: 3/13;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-  }
-  &__select {
-    border: 1px solid black;
-    overflow: auto;
-    max-height: 300px;
-    padding: 10px;
-    border-radius: 7px;
+	&__selects {
+		grid-column: 3/13;
+		display: grid;
+		grid-template-columns: repeat(10, 1fr);
+	}
+	&__select {
+		border: 1px solid black;
+		overflow: auto;
+		max-height: 300px;
+		padding: 10px;
+		border-radius: 7px;
 
-    &--left {
-      grid-column: 1/5;
-    }
-    &--right {
-      grid-column: 7/11;
-    }
-  }
-  &__buttons {
-    grid-row: 1;
-    grid-column: 5/7;
-    display: grid;
-    grid-gap: 10px;
-    align-content: center;
-    justify-content: center;
-
-  }
-
+		&--left {
+			grid-column: 1/5;
+		}
+		&--right {
+			grid-column: 7/11;
+		}
+	}
+	&__buttons {
+		grid-row: 1;
+		grid-column: 5/7;
+		display: grid;
+		grid-gap: 10px;
+		align-content: center;
+		justify-content: center;
+	}
 }
 
-.select-list{
-  &__heading {
-    font-size: 18px;
-  }
-  &__list-items{
-    font-size: 15px;
-  }
+.select-list {
+	&__heading {
+		font-size: 18px;
+	}
+	&__list-items {
+		font-size: 15px;
+	}
 }
 
 .listItemActive {
-  background: red;
+	background: red;
 }
-

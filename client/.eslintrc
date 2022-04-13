@@ -1,24 +1,17 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "react-hooks", "@typescript-eslint"],
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:react-hooks/recommended",
-    "prettier"
-  ],
-  "parserOptions": {
-    "project": "tsconfig.json"
-  },
-  "rules": {
-    "react-hooks/exhaustive-deps": "error",
-    "@typescript-eslint/no-floating-promises": "off"
-
-  },
-  "settings": {
-    "react": {
-      "version": "require('./package.json').dependencies.react"
-    }
-  }
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["react", "react-hooks", "@typescript-eslint"],
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:@typescript-eslint/recommended-requiring-type-checking", "plugin:react-hooks/recommended", "prettier"],
+	"parserOptions": {
+		"project": "tsconfig.json"
+	},
+	"rules": {
+		"react-hooks/exhaustive-deps": "error",
+		"@typescript-eslint/no-floating-promises": "off"
+	},
+	"settings": {
+		"react": {
+			"version": "require('./package.json').dependencies.react"
+		}
+	}
 }

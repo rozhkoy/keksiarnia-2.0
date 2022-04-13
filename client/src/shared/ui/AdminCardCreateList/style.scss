@@ -1,102 +1,98 @@
 .adminCardCreateList {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: auto;
-  align-items: center;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-auto-rows: auto;
+	align-items: center;
 
+	&__field {
+		grid-column: 1/3;
+		text-align: right;
+		padding: 5px 15px 0 0;
+		align-self: center;
+		height: 100%;
+	}
 
-  &__field {
-    grid-column: 1/3;
-    text-align: right;
-    padding: 5px 15px 0 0;
-    align-self: center;
-    height: 100%;
-  }
+	&__input {
+		grid-column: 1/10;
+		border: 1px solid #31373d;
+		padding: 4px;
+		border-radius: 5px 0 0 5px;
+	}
 
-  &__input {
-    grid-column: 1/10;
-    border: 1px solid #31373D;
-    padding: 4px;
-    border-radius: 5px 0 0 5px;
-  }
+	&__bttn {
+		border-radius: 0px 5px 5px 0;
+		border: 1px solid #31373d;
+	}
 
-  &__bttn {
-    border-radius: 0px 5px 5px 0;
-    border: 1px solid #31373D;
-  }
+	&__wrap {
+		grid-column: 3/13;
+		display: grid;
+		grid-template-columns: repeat(10, 1fr);
+		grid-row: 1/3;
+	}
 
-  &__wrap {
-    grid-column: 3/13;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-row: 1/3;
-  }
+	&__list {
+		grid-column: 1/11;
+		padding: 20px 0 0 0;
+	}
 
-  &__list {
-    grid-column: 1/11;
-    padding: 20px 0 0 0;
+	&__list-item {
+		margin: 0 0 10px 0;
+		background: #e7e7e7;
+		padding: 5px 10px;
+		border-radius: 5px;
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-  }
+	&__bttn-group {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+	}
 
-  &__list-item {
-    margin: 0 0 10px 0;
-    background: #e7e7e7;
-    padding: 5px 10px;
-    border-radius: 5px;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+	&__list-item-close-bttn {
+		height: 100%;
+		border: 1px solid #0000;
+		background: transparent;
+		border-radius: 0 5px 5px 0;
+		padding: 0 10px;
+	}
 
-  &__bttn-group {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
+	&__list-item-switch-bttn {
+		display: block;
+		width: 40px;
+		height: 20px;
+		position: relative;
+		border-radius: 40px;
+		border: 1px solid #fff;
+		padding: 3px;
+		transition: all 0.2s;
+	}
 
-  &__list-item-close-bttn {
-    height: 100%;
-    border: 1px solid #0000;
-    background: transparent;
-    border-radius: 0 5px 5px 0;
-    padding: 0 10px;
-  }
+	&__list-item-switch-bttn:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 50%;
+		height: 100%;
+		background: #fff;
+		border-radius: 50%;
+		transition: all 0.2s;
+		transform: translateX(0%);
+	}
 
-  &__list-item-switch-bttn {
-    display: block;
-    width: 40px;
-    height: 20px;
-    position: relative;
-    border-radius: 40px;
-    border: 1px solid #fff;
-    padding: 3px;
-    transition: all .2s;
-  }
+	&__list-item-switch-bttn--active {
+		background: #6fff1b;
+		transition: all 0.2s;
+	}
 
-  &__list-item-switch-bttn:after {
-    content: '';
-    position: absolute;
-    top:0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    background: #fff;
-    border-radius: 50% ;
-    transition: all .2s;
-    transform: translateX(0%);
-  }
-
-  &__list-item-switch-bttn--active {
-    background: #6fff1b;
-    transition: all .2s;
-  }
-
-  &__list-item-switch-bttn--active:after {
-    transition: all .3s;
-    transform: translateX(100%);
-    background: #fff;
-  }
-
-
+	&__list-item-switch-bttn--active:after {
+		transition: all 0.3s;
+		transform: translateX(100%);
+		background: #fff;
+	}
 }

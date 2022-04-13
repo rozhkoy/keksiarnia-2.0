@@ -67,18 +67,18 @@ const categoryFilterItem = sequelize.define('categoryFilterItem', {
 	title: { type: DataTypes.STRING, allowNull: false },
 });
 
-const supplier = sequelize.define('supplier', {
-	supplierID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	supplierCategoryID: { type: DataTypes.BIGINT, allowNull: false },
-	supplierName: { type: DataTypes.STRING, allowNull: false },
-});
-
-const supplierCategory = sequelize.define('supplierCategory', {
-	supplierCategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	supplierCategoryName: { type: DataTypes.BIGINT, allowNull: false },
-});
+// const supplier = sequelize.define('supplier', {
+// 	supplierID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+// 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+// 	supplierCategoryID: { type: DataTypes.BIGINT, allowNull: false },
+// 	supplierName: { type: DataTypes.STRING, allowNull: false },
+// });
+//
+// const supplierCategory = sequelize.define('supplierCategory', {
+// 	supplierCategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+// 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+// 	supplierCategoryName: { type: DataTypes.BIGINT, allowNull: false },
+// });
 
 const productGroup = sequelize.define('productGroup', {
 	productGroupID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
@@ -121,19 +121,19 @@ const propertyProductItem = sequelize.define('propertyProductItem', {
 
 const productPrice = sequelize.define('productPrice', {
 	priceID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	discountPrice: { type: DataTypes.BIGINT, allowNull: false },
+	discountPrice: { type: DataTypes.STRING, allowNull: false },
 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	price: { type: DataTypes.FLOAT, allowNull: false },
-	discountPercent: { type: DataTypes.FLOAT, allowNull: false },
+	price: { type: DataTypes.STRING, allowNull: false },
+	discountPercent: { type: DataTypes.STRING, allowNull: false },
 });
 
 const product = sequelize.define('product', {
 	productID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	id_category: { type: DataTypes.BIGINT, allowNull: false },
-	id_subcategory: { type: DataTypes.BIGINT, allowNull: false },
-	priceID: { type: DataTypes.BIGINT, allowNull: false },
-	propertyGroup_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActive_ID: { type: DataTypes.STRING, allowNull: false },
+	id_category: { type: DataTypes.STRING, allowNull: false },
+	id_subcategory: { type: DataTypes.STRING, allowNull: false },
+	priceID: { type: DataTypes.STRING, allowNull: false },
+	productGroup_ID: { type: DataTypes.STRING, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 	description: { type: DataTypes.STRING, allowNull: false },
 	number: { type: DataTypes.STRING, allowNull: false },
@@ -181,17 +181,17 @@ categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' })
 isActive.hasMany(product, { foreignKey: 'isActive_ID' });
 product.belongsTo(isActive, { foreignKey: 'isActive_ID' });
 
-category.hasMany(product, { foreignKey: 'id_category' })
+category.hasMany(product, { foreignKey: 'id_category' });
 product.belongsTo(category, { foreignKey: 'id_category' });
 
 subcategory.hasMany(product, { foreignKey: 'id_subcategory' });
 product.belongsTo(subcategory, { foreignKey: 'id_subcategory' });
 
-productGroup.hasMany(product, { foreignKey: 'propertyGroup_ID' });
-product.belongsTo(productGroup, { foreignKey: 'propertyGroup_ID' });
+productGroup.hasMany(product, { foreignKey: 'productGroup_ID' });
+product.belongsTo(productGroup, { foreignKey: 'productGroup_ID' });
 
-productPrice.hasMany(product, {foreignKey: "priceID"})
-product.belongsTo(productPrice, {foreignKey: "priceID"})
+productPrice.hasMany(product, { foreignKey: 'priceID' });
+product.belongsTo(productPrice, { foreignKey: 'priceID' });
 
 isActive.hasMany(productPrice, { foreignKey: 'isActive_ID' });
 productPrice.belongsTo(isActive, { foreignKey: 'isActive_ID' });
@@ -208,8 +208,8 @@ module.exports = {
 	categoryFilter,
 	categoryFilterItem,
 	product,
-	supplier,
-	supplierCategory,
+	// supplier,
+	// supplierCategory,
 	productGroup,
 	propertyGroup,
 	propertyGroupItem,

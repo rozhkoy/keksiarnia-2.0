@@ -5,3 +5,11 @@ export interface IProductGroup extends CreateUpdate {
 	isActive_ID: string;
 	name: string;
 }
+
+export interface IProductPrice extends CreateUpdate {
+	priceID: string;
+	price: string;
+	discountPercent: string;
+	isActive_ID: string;
+	discountPrice: string;
+}
