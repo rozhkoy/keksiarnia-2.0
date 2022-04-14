@@ -7,4 +7,6 @@ export interface DataTableProps<T> {
 	page: number;
 	count: number;
 	linkToEdit: string;
+	isLoading: boolean;
+	isSuccess: boolean;
 }

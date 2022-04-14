@@ -1,7 +1,17 @@
 {
 	"parser": "@typescript-eslint/parser",
-	"plugins": ["react", "react-hooks", "@typescript-eslint"],
-	"extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:@typescript-eslint/recommended-requiring-type-checking", "plugin:react-hooks/recommended", "prettier"],
+	"plugins": [
+		"react",
+		"react-hooks",
+		"@typescript-eslint"
+	],
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
+		"plugin:react-hooks/recommended",
+		"prettier"
+	],
 	"parserOptions": {
 		"project": "tsconfig.json"
 	},
