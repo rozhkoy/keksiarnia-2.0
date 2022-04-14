@@ -35,7 +35,7 @@ class picturesController {
 			let { img } = req.files;
 			let name = uuid.v4() + '.jpg';
 			img.mv(path.resolve(__dirname, '..', 'static', name));
-			const response = await productPicture.create({ name, productID, firstPicture, orderOfPicture });
+			const response = await productPicture.create({ name, productID, firstPicture: JSON.parse(firstPicture), orderOfPicture });
 			console.log(typeof response.orderOfPicture)
 			res.json(response);
 		} catch (e) {

@@ -4,8 +4,8 @@ const ApiError = require('../exceptions/apiErrors');
 class ProductController {
 	async addProduct(req, res) {
 		try {
-			const { isActiveID, categoryID, subcategoryID, priceID, productGroup_ID, name, number, description } = req.body;
-			const response = await product.create({ isActiveID, categoryID, subcategoryID, priceID, productGroup_ID, name, number, description });
+			const { isActiveID, categoryID, subcategoryID, priceID, productGroupID, name, number, description } = req.body;
+			const response = await product.create({ isActiveID, categoryID, subcategoryID, priceID, productGroupID, name, number, description });
 			return res.json(response);
 		} catch (e) {
 			console.log(e);
