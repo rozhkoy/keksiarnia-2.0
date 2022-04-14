@@ -13,7 +13,7 @@ export const ListFilterCategory = () => {
 	const [listFilterCategory, setListFilterCategory] = useState<Array<ICategoryFilterDataForTable>>([]);
 	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
 
-	const { isSuccess } = useQuery(['getAllFilterCategoryWithPagination', page, limit], () => getAllFilterCategory(page, limit), {
+	const filterCategoryQuery = useQuery(['getAllFilterCategoryWithPagination', page, limit], () => getAllFilterCategory(page, limit), {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			setCountPositionOnTable(data.count);
@@ -39,7 +39,7 @@ export const ListFilterCategory = () => {
 		<div>
 			<AdminPanelCard>
 				<AdminCardHeading>List filter category</AdminCardHeading>
-				{isSuccess ? <DataTable data={listFilterCategory} limit={limit} getPage={setPage} page={page} count={countPositionOnTable} linkToEdit={'edit'} /> : 'Loading...'}
+				<DataTable data={listFilterCategory} limit={limit} getPage={setPage} page={page} count={countPositionOnTable} linkToEdit={'edit'} isLoading={filterCategoryQuery.isLoading} isSuccess={filterCategoryQuery.isSuccess} />
 			</AdminPanelCard>
 		</div>
 	);

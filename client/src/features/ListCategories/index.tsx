@@ -11,7 +11,7 @@ export const ListCategories = () => {
 	const [page, setPage] = useState<number>(1);
 	const [limit, setLimit] = useState<number>(10);
 	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
-	const { isLoading } = useQuery(['mainTypeData', limit, page], () => getMainCategory(limit, page), {
+	const categoriesQuery = useQuery(['mainTypeData', limit, page], () => getMainCategory(limit, page), {
 		onSuccess: ({ data }) => {
 			setCountPositionOnTable(data.count);
 			const array: Array<ICategoriesTable> = data.rows.map((item) => {
@@ -24,7 +24,6 @@ export const ListCategories = () => {
 					updatedAt: item.createdAt,
 				};
 			});
-			console.log(array);
 			setCategories(array);
 		},
 	});
@@ -32,9 +31,7 @@ export const ListCategories = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List of Categories</AdminCardHeading>
-			{isLoading ? 'Loading...' : categories.length > 0 ?
-				<DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage}
-				           data={categories} /> : 'No Data'}
+			<DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={categories} isSuccess={categoriesQuery.isSuccess} isLoading={categoriesQuery.isLoading} />
 		</AdminPanelCard>
 	);
 };

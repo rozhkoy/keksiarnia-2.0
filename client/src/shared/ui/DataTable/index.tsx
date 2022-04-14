@@ -3,8 +3,7 @@ import { DataTableProps } from './types';
 import './style.scss';
 import { Link } from 'react-router-dom';
 
-export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, getPage, count, linkToEdit }: DataTableProps<T>) => {
-	console.log(page, limit, count);
+export const DataTable = <T extends Record<string, string | number>>({ data, page, limit, isLoading, isSuccess, getPage, count, linkToEdit }: DataTableProps<T>) => {
 	function incrementOffset() {
 		if (page * limit < count) {
 			getPage((state: number) => state + 1);
@@ -17,42 +16,54 @@ export const DataTable = <T extends Record<string, string | number>>({ data, pag
 		}
 	}
 
+	useEffect(() => {
+		console.log(data);
+	});
+
 	return (
-		<div className="table__container">
-			{count >= limit && (
-				<div className="table__pagination-bttns">
-					<button className="table__pagination-bttn" onClick={decrementOffset}>
-						prev
-					</button>
-					<button className="table__pagination-bttn" onClick={incrementOffset}>
-						next
-					</button>
-				</div>
-			)}
-			<div className="table__wrap">
-				{count > 0 ? (
-					<table className="table">
-						<tbody>
-							<tr>
-								{data.length >= 1 && Object.keys(data[0]).map((item) => <th key={item}>{item.split('_')[0].toUpperCase()}</th>)}
-								<th></th>
-							</tr>
-							{data.map((ObjectItem, index) => (
-								<tr key={index}>
-									{Object.keys(ObjectItem).map((ArrayItem) => (
-										<td key={ArrayItem}>{ObjectItem[ArrayItem]}</td>
+		<div>
+			{isLoading ? (
+				'Loading...'
+			) : isSuccess ? (
+				<div className="table__container">
+					{count >= limit && (
+						<div className="table__pagination-bttns">
+							<button className="table__pagination-bttn" onClick={decrementOffset}>
+								prev
+							</button>
+							<button className="table__pagination-bttn" onClick={incrementOffset}>
+								next
+							</button>
+						</div>
+					)}
+					<div className="table__wrap">
+						{count > 0 ? (
+							<table className="table">
+								<tbody>
+									<tr>
+										{data.length >= 1 && Object.keys(data[0]).map((item) => <th key={item}>{item.split('_')[0].toUpperCase()}</th>)}
+										<th></th>
+									</tr>
+									{data.map((ObjectItem, index) => (
+										<tr key={index}>
+											{Object.keys(ObjectItem).map((ArrayItem) => (
+												<td key={ArrayItem}>{ObjectItem[ArrayItem]}</td>
+											))}
+											<td className="table__edit">
+												<Link to={`${linkToEdit}/${ObjectItem.id}`}>Edit</Link>
+											</td>
+										</tr>
 									))}
-									<td className="table__edit">
-										<Link to={`${linkToEdit}/${ObjectItem.id}`}>Edit</Link>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-				) : (
-					'No data'
-				)}
-			</div>
+								</tbody>
+							</table>
+						) : (
+							'No data'
+						)}
+					</div>
+				</div>
+			) : (
+				'error'
+			)}
 		</div>
 	);
 };

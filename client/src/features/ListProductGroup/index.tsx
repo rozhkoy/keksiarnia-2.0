@@ -12,7 +12,7 @@ export const ListProductGroup = () => {
 	const [limit, setLimit] = useState<number>(10);
 	const [countPositionOnTable, setCountPositionOnTable] = useState<number>(0);
 
-	const { isSuccess } = useQuery(['getAllProductGroupListWithPagination', limit, page], () => getAllProductGroupListWithPagination(limit, page), {
+	const productGroupQuery = useQuery(['getAllProductGroupListWithPagination', limit, page], () => getAllProductGroupListWithPagination(limit, page), {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			setCountPositionOnTable(data.count);
@@ -32,7 +32,7 @@ export const ListProductGroup = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List product group</AdminCardHeading>
-			{isSuccess ? <DataTable data={productGroupList} limit={limit} getPage={setPage} page={page} count={countPositionOnTable} linkToEdit={'edit'} /> : 'Loading...'}
+			<DataTable data={productGroupList} limit={limit} getPage={setPage} page={page} count={countPositionOnTable} linkToEdit={'edit'} isSuccess={productGroupQuery.isSuccess} isLoading={productGroupQuery.isLoading} />
 		</AdminPanelCard>
 	);
 };
