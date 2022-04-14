@@ -127,7 +127,7 @@ const product = sequelize.define('product', {
 	categoryID: { type: DataTypes.STRING, allowNull: false },
 	subcategoryID: { type: DataTypes.STRING, allowNull: false },
 	priceID: { type: DataTypes.STRING, allowNull: false },
-	productGroup_ID: { type: DataTypes.STRING, allowNull: false },
+	productGroupID: { type: DataTypes.STRING, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 	description: { type: DataTypes.STRING, allowNull: false },
 	number: { type: DataTypes.STRING, allowNull: false },
@@ -154,24 +154,24 @@ category.belongsTo(isActive, { foreignKey: 'isActiveID' });
 categoryPicture.hasMany(category, { foreignKey: 'pictureID' });
 category.belongsTo(categoryPicture, { foreignKey: 'pictureID' });
 
-// isActive.hasMany(subcategory, { foreignKey: 'isActiveID' });
-// subcategory.belongsTo(isActive, { foreignKey: 'isActiveID' });
-//
-// subcategoryPicture.hasMany(subcategory, { foreignKey: 'pictureID' });
-// subcategory.belongsTo(subcategoryPicture, { foreignKey: 'pictureID' });
-//
-// category.hasMany(subcategory, { foreignKey: 'categoryID' });
-// subcategory.belongsTo(category, { foreignKey: 'categoryID' });
-//
-// isActive.hasMany(productGroup, { foreignKey: 'isActiveID' });
-// productGroup.belongsTo(isActive, { foreignKey: 'isActiveID' });
-//
-// isActive.hasMany(categoryFilter, { foreignKey: 'isActiveID' });
-// categoryFilter.belongsTo(isActive, { foreignKey: 'isActiveID' });
-//
-// categoryFilter.hasMany(categoryFilterItem, { foreignKey: 'categoryFilterID' });
-// categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' });
-//
+isActive.hasMany(subcategory, { foreignKey: 'isActiveID' });
+subcategory.belongsTo(isActive, { foreignKey: 'isActiveID' });
+
+subcategoryPicture.hasMany(subcategory, { foreignKey: 'pictureID' });
+subcategory.belongsTo(subcategoryPicture, { foreignKey: 'pictureID' });
+
+category.hasMany(subcategory, { foreignKey: 'categoryID' });
+subcategory.belongsTo(category, { foreignKey: 'categoryID' });
+
+isActive.hasMany(productGroup, { foreignKey: 'isActiveID' });
+productGroup.belongsTo(isActive, { foreignKey: 'isActiveID' });
+
+isActive.hasMany(categoryFilter, { foreignKey: 'isActiveID' });
+categoryFilter.belongsTo(isActive, { foreignKey: 'isActiveID' });
+
+categoryFilter.hasMany(categoryFilterItem, { foreignKey: 'categoryFilterID' });
+categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' });
+
 // isActive.hasMany(product, { foreignKey: 'isActiveID' });
 // product.belongsTo(isActive, { foreignKey: 'isActiveID' });
 //
@@ -181,8 +181,8 @@ category.belongsTo(categoryPicture, { foreignKey: 'pictureID' });
 // subcategory.hasMany(product, { foreignKey: 'subcategoryID' });
 // product.belongsTo(subcategory, { foreignKey: 'subcategoryID' });
 //
-// productGroup.hasMany(product, { foreignKey: 'productGroup_ID' });
-// product.belongsTo(productGroup, { foreignKey: 'productGroup_ID' });
+// productGroup.hasMany(product, { foreignKey: 'productGroupID' });
+// product.belongsTo(productGroup, { foreignKey: 'productGroupID' });
 //
 // productPrice.hasMany(product, { foreignKey: 'priceID' });
 // product.belongsTo(productPrice, { foreignKey: 'priceID' });

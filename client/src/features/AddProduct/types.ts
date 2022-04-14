@@ -21,3 +21,15 @@ export interface IProductPicture extends CreateUpdate {
 	firstPicture: boolean;
 	orderOfPicture: number;
 }
+
+export interface IProduct extends CreateUpdate {
+	productID: string;
+	isActiveID: string;
+	categoryID: string;
+	subcategoryID: string;
+	priceID: string;
+	productGroupID: string;
+	name: string;
+	number: string;
+	description: string;
+}

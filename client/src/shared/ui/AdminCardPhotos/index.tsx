@@ -13,7 +13,7 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 					const photoInfo: IPhotosInfo = {
 						photoFile: item,
 						photoLink: URL.createObjectURL(item),
-						isFirst: false,
+						isFirst: 'false',
 						order: 0,
 					};
 					return photoInfo;
@@ -44,7 +44,7 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 				state[index] = {
 					photoFile: files[0],
 					photoLink: URL.createObjectURL(files[0]),
-					isFirst: false,
+					isFirst: 'false',
 					order: order,
 				};
 				return [...state];
@@ -56,11 +56,11 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 		for (let i = 0; i < props.photosInfo.length; i++) {
 			if (checkboxRef.current[i].checked && index !== i) {
 				checkboxRef.current[i].checked = Boolean(0);
-				copyState[i].isFirst = Boolean(0);
+				copyState[i].isFirst = 'false';
 			}
 		}
 		checkboxRef.current[index].checked = Boolean(1);
-		copyState[index].isFirst = true;
+		copyState[index].isFirst = 'true';
 		props.getPhotosInfo(copyState);
 	}
 

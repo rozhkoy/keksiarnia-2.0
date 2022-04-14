@@ -9,14 +9,7 @@ import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSe
 import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { getAllSubcategories } from '../AddCategoryFIlter/api';
 import { IsActive } from '../../shared/ui/IsActive';
-import {
-	getAllProductGroup,
-	getFilterList,
-	getProductGroupItemsById,
-	sendProductData,
-	sendProductPicture,
-	sendProductPrice
-} from './api';
+import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPicture, sendProductPrice } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
@@ -139,7 +132,7 @@ export const AddProduct = () => {
 					value: String(data.priceID),
 				},
 				{
-					key: 'productGroup_ID',
+					key: 'productGroupID',
 					value: '5',
 				},
 				{
@@ -155,11 +148,11 @@ export const AddProduct = () => {
 					value: description,
 				},
 			]);
-			mutationProductData.mutate(formData);
+			productDataMutation.mutate(formData);
 		},
 	});
 
-	const mutationProductData = useMutation(sendProductData, {
+	const productDataMutation = useMutation(sendProductData, {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			photosInfo.forEach((item) => {
@@ -169,7 +162,20 @@ export const AddProduct = () => {
 							key: 'img',
 							value: item.photoFile,
 						},
+						{
+							key: 'productID',
+							value: data.productID,
+						},
+						{
+							key: 'firstPicture',
+							value: item.isFirst,
+						},
+						{
+							key: 'orderOfPicture',
+							value: String(item.order),
+						},
 					]);
+					productPictureMutation.mutate(formData);
 				}
 			});
 		},
@@ -218,20 +224,15 @@ export const AddProduct = () => {
 			<AdminCardForm>
 				<IsActive field={'Is active product'} getValue={setIsActive} />
 				<AdminCardSelectWithSearch list={listCategory} getValue={setCategoryId} field={'Select category'} />
-				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId}
-				                           field={'Select subcategory'} />
-				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId}
-				                           field={'Select product group'} />
-				{productGroupItemsById.isSuccess &&
-					<AdminProductProperties getValue={setListProductGroupItems} field={'test for test'}
-					                        listProperties={ListProductGroupItems} />}
+				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId} field={'Select subcategory'} />
+				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
+				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
 				<AdminCardPhotos getPhotosInfo={setPhotosInfo} photosInfo={photosInfo} field={'Photos'} />
 				<AdminMultiSelect getValue={setListFilter} field={'test fpr test'} arrayList={listFilter} />
 				<AdminCardInput value={price} change={setPrice} type={'text'} field={'Price'} />
 				<IsActive field={'Is active discount price'} getValue={setIsActiveDiscountPrice} />
-				<AdminCardInput value={discountPercent} change={setDiscountPercent} type={'number'}
-				                field={'Discount Percent'} />
+				<AdminCardInput value={discountPercent} change={setDiscountPercent} type={'number'} field={'Discount Percent'} />
 				<div className="price">
 					<ul className="price__list">
 						<li className="price__item">Price: {price}$</li>
