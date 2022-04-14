@@ -2,9 +2,9 @@ const { filterCategoryItem, categoryFilter, categoryFilterItem, isActive } = req
 
 class CategoryFilterItemController {
 	async addFilterCategoryItem(req, res) {
-		const { isActive_ID, categoryFilterID, title } = req.body;
+		const { isActiveID, categoryFilterID, title } = req.body;
 		const response = await categoryFilterItem.create({
-			isActive_ID,
+			isActiveID,
 			categoryFilterID,
 			title,
 		});
@@ -17,7 +17,7 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActive_ID: 1,
+						isActiveID: 1,
 					},
 					distinct: true,
 				},
@@ -40,7 +40,7 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActive_ID: 1,
+						isActiveID: 1,
 					},
 					distinct: true,
 				},

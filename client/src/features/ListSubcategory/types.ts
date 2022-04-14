@@ -4,6 +4,7 @@ import { IIsActive } from '../../shared/ui/IsActive/types';
 
 export interface ISubcategoriesTable extends CreateUpdate {
 	[key: string]: string;
+
 	id: string;
 	isActive: string;
 	title: string;
@@ -12,12 +13,12 @@ export interface ISubcategoriesTable extends CreateUpdate {
 }
 
 export interface ISubcategoriesFullResponse extends CreateUpdate {
-	id_subcategory: string;
+	subcategoryID: string;
 	title: string;
 	isActive: IIsActive;
 	subcategoryPicture: ICategoryPicture;
 	category: {
 		title: string;
-		id_category: string;
+		categoryID: string;
 	};
 }

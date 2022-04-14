@@ -8,6 +8,6 @@ export interface IResponseProductGroupItemData extends CreateUpdate {
 
 export interface IResponseProductGroupData extends CreateUpdate {
 	productGroupID: string;
-	isActive_ID: string;
+	isActiveID: string;
 	name: string;
 }

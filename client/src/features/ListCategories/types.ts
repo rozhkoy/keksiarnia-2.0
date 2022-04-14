@@ -3,7 +3,8 @@ import { IIsActive } from '../../shared/ui/IsActive/types';
 
 export interface IResponseCategory extends CreateUpdate {
 	[key: string]: string | number | IIsActive | ICategoryPicture;
-	id_category: string;
+
+	categoryID: string;
 	title: string;
 	isActive: IIsActive;
 	categoryPicture: ICategoryPicture;
@@ -11,6 +12,7 @@ export interface IResponseCategory extends CreateUpdate {
 
 export interface ICategoriesTable extends CreateUpdate {
 	[key: string]: string;
+
 	id: string;
 	isActive: string;
 	pictures: string;
@@ -18,7 +20,7 @@ export interface ICategoriesTable extends CreateUpdate {
 }
 
 export interface ICategoryPicture {
-	picture_ID: string;
+	pictureID: string;
 	name: string;
 }
 

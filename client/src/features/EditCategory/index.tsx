@@ -23,7 +23,7 @@ export const EditCategory = () => {
 
 	useQuery(['getCategoryById', id], () => getCategoryById(id ? id : '1'), {
 		onSuccess: ({ data }) => {
-			setIsActiveData(data.isActive_ID);
+			setIsActiveData(data.isActiveID);
 			setTitleState(data.title);
 			setPictureLink(data.categoryPicture.name);
 		},
@@ -38,11 +38,11 @@ export const EditCategory = () => {
 						value: titleState,
 					},
 					{
-						key: 'isActive_ID',
+						key: 'isActiveID',
 						value: String(isActiveData),
 					},
 					{
-						key: 'id_category',
+						key: 'categoryID',
 						value: String(id),
 					},
 				]);
@@ -69,7 +69,7 @@ export const EditCategory = () => {
 					value: pictureState,
 				},
 				{
-					key: 'picture_ID',
+					key: 'pictureID',
 					value: String(id),
 				},
 			]);

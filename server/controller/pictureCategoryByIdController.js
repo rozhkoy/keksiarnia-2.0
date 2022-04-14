@@ -6,7 +6,7 @@ const ApiError = require('../exceptions/apiErrors');
 class PictureCategoryByIdController {
 	async changeCategoryPictureById(req, res) {
 		try {
-			let { picture_ID } = req.body;
+			let { pictureID } = req.body;
 			let { img } = req.files;
 			let fileName = uuid.v4() + '.jpg';
 			img.mv(path.resolve(__dirname, '..', 'static', fileName));
@@ -14,7 +14,7 @@ class PictureCategoryByIdController {
 				{ name: fileName },
 				{
 					where: {
-						picture_ID: picture_ID,
+						pictureID: pictureID,
 					},
 				}
 			);
@@ -27,7 +27,7 @@ class PictureCategoryByIdController {
 
 	async changeSubcategoryPictureById(req, res) {
 		try {
-			let { picture_ID } = req.body;
+			let { pictureID } = req.body;
 			let { img } = req.files;
 			let fileName = uuid.v4() + '.jpg';
 			img.mv(path.resolve(__dirname, '..', 'static', fileName));
@@ -35,7 +35,7 @@ class PictureCategoryByIdController {
 				{ name: fileName },
 				{
 					where: {
-						picture_ID: picture_ID,
+						pictureID: pictureID,
 					},
 				}
 			);

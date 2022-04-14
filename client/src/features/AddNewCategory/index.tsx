@@ -25,10 +25,10 @@ export const AddNewCategory = () => {
 
 	const mutationCategoryPictures = useMutation(sendCategoryPictures, {
 		onSuccess: ({ data }) => {
-			if (data.picture_ID && isActiveData && titleState) {
+			if (data.pictureID && isActiveData && titleState) {
 				const formData = createFormData([
 					{
-						key: 'isActive_ID',
+						key: 'isActiveID',
 						value: isActiveData,
 					},
 					{
@@ -36,8 +36,8 @@ export const AddNewCategory = () => {
 						value: titleState,
 					},
 					{
-						key: 'picture_ID',
-						value: data.picture_ID,
+						key: 'pictureID',
+						value: data.pictureID,
 					},
 				]);
 				mutationCategoryData.mutate(formData);

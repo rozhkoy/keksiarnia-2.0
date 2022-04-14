@@ -7,10 +7,10 @@ class CategoryByIdController {
 			const { id } = req.query;
 			const response = await category.findOne({
 				where: {
-					id_category: id,
+					categoryID: id,
 				},
-				attributes: ['id_category', 'isActive_ID', 'title', 'createdAt', 'updatedAt'],
-				include: [{ model: categoryPicture, attributes: ['picture_ID', 'name'] }],
+				attributes: ['categoryID', 'isActiveID', 'title', 'createdAt', 'updatedAt'],
+				include: [{ model: categoryPicture, attributes: ['pictureID', 'name'] }],
 			});
 			res.json(response);
 		} catch (e) {
@@ -20,8 +20,8 @@ class CategoryByIdController {
 	}
 
 	async ChangeCategoryById(req, res) {
-		const { title, isActive_ID, id_category } = req.body;
-		const response = await category.update({ title, isActive_ID }, { where: { id_category: id_category } });
+		const { title, isActiveID, categoryID } = req.body;
+		const response = await category.update({ title, isActiveID }, { where: { categoryID: categoryID } });
 		return res.json(response);
 	}
 }

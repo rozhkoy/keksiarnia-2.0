@@ -1,6 +1,5 @@
 const Router = require('express');
 const router = new Router();
-const test = require('./testRounter');
 const userController = require('../controller/userController');
 const { body } = require('express-validator');
 const isActiveRouter = require('../routers/isActiveRouter');
@@ -23,6 +22,7 @@ const productGroupController = require('../controller/productGroupController');
 const productGroupItemByIdRouter = require('./productGroupItemByIdRouter');
 const productRouter = require('./productRouter');
 const price = require('./priceRouter');
+const productPicture = require("./productPicture")
 
 router.post('/registration', body('email').isEmail(), body('password').isLength({ min: 3, max: 32 }), userController.registration);
 router.post('/login', userController.login);
@@ -48,5 +48,6 @@ router.get('/getAllProductGroup', productGroupController.getAllProductGroup);
 router.use('/productGroupItemById', productGroupItemByIdRouter);
 router.use('/product', productRouter);
 router.use('/price', price);
+router.use('/productPictures', productPicture)
 
 module.exports = router;

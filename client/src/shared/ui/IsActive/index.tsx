@@ -12,7 +12,7 @@ export const IsActive: React.FC<isActiveProps> = (props) => {
 		onSuccess: ({ data }) => {
 			if (data.length > 0) {
 				const array: Array<IOptionArray> = data.map((item: IIsActive) => {
-					return { value: item.isActive_ID, label: item.value };
+					return { value: item.isActiveID, label: item.value };
 				});
 				props.getValue(array[0].value);
 				setSelectData(array[0].value);

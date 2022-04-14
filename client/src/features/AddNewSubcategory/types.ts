@@ -6,9 +6,9 @@ export interface ICustomSelectData {
 }
 
 export interface ISubcategoryResponse extends CreateUpdate {
-	id_subcategory: string;
-	isActive_ID: string;
-	id_category: string;
-	picture_ID: string;
+	subcategoryID: string;
+	isActiveID: string;
+	categoryID: string;
+	pictureID: string;
 	title: string;
 }

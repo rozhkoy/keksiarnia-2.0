@@ -1,8 +1,8 @@
 import { CreateUpdate } from '../../shared/types';
 
 export interface ICategory extends CreateUpdate {
-	id_category: string;
-	isActive_ID: string;
-	picture_ID: string;
+	categoryID: string;
+	isActiveID: string;
+	pictureID: string;
 	title: string;
 }
