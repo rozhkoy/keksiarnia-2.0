@@ -3,10 +3,10 @@ const { mainTypeProduct, mainTypeProductPicture, isActive } = require('../models
 const router = new Router();
 
 router.post('/', async (req, res) => {
-	let { isActive_ID, title, id, picture_ID } = req.body;
-	if (picture_ID) {
+	let { isActiveID, title, id, pictureID } = req.body;
+	if (pictureID) {
 		const response = await mainTypeProduct.update(
-			{ title: title, isActive_ID: isActive_ID, picture_ID: picture_ID },
+			{ title: title, isActiveID: isActiveID, pictureID: pictureID },
 			{
 				where: {
 					id_mainTypeProduct: id,
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 		res.json(response);
 	} else {
 		const response = await mainTypeProduct.update(
-			{ title: title, isActive_ID: isActive_ID },
+			{ title: title, isActiveID: isActiveID },
 			{
 				where: {
 					id_mainTypeProduct: id,
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 				model: mainTypeProductPicture,
 			},
 			{
-				attributes: ['value', 'isActive_ID'],
+				attributes: ['value', 'isActiveID'],
 				model: isActive,
 			},
 		],

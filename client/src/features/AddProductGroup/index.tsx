@@ -27,7 +27,7 @@ export const AddProductGroup = () => {
 						value: item.value,
 					},
 					{
-						key: 'isActive_ID',
+						key: 'isActiveID',
 						value: String(item.isActive),
 					},
 					{
@@ -50,7 +50,7 @@ export const AddProductGroup = () => {
 		if (inputState && propertyValueList.length > 0) {
 			const formData = createFormData([
 				{
-					key: 'isActive_ID',
+					key: 'isActiveID',
 					value: isActiveState,
 				},
 				{
@@ -70,7 +70,8 @@ export const AddProductGroup = () => {
 			<AdminCardForm>
 				<IsActive field={'Is active product group'} getValue={setIsActiveState} />
 				<AdminCardInput field={'Group name'} value={inputState} change={setInputState} type={'text'} />
-				<AdminCardCreateList field={'Add properties'} value={propertyValueList} getValue={setPropertyValueList} />
+				<AdminCardCreateList field={'Add properties'} value={propertyValueList}
+				                     getValue={setPropertyValueList} />
 				<AdminCardBttnSubmit onClick={formHandler} field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>

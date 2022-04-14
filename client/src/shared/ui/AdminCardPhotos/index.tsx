@@ -14,10 +14,19 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 						photoFile: item,
 						photoLink: URL.createObjectURL(item),
 						isFirst: false,
+						order: 0,
 					};
 					return photoInfo;
 				});
-				return state.length > 0 ? arr.concat(state) : arr;
+				if (state.length > 0) {
+					const unitedArr = arr.concat(state);
+					unitedArr.forEach((item, index) => {
+						item.order = index;
+					});
+					return unitedArr;
+				} else {
+					return arr;
+				}
 			});
 		}
 	}
@@ -28,7 +37,7 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 		});
 	}
 
-	function changeImg(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+	function changeImg(e: React.ChangeEvent<HTMLInputElement>, index: number, order: number) {
 		const files = e.target.files;
 		files &&
 			props.getPhotosInfo((state) => {
@@ -36,20 +45,21 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 					photoFile: files[0],
 					photoLink: URL.createObjectURL(files[0]),
 					isFirst: false,
+					order: order,
 				};
 				return [...state];
 			});
 	}
 
-	function changeFirstPhoto(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+	function changeFirstPhoto(index: number) {
 		const copyState = props.photosInfo.slice();
 		for (let i = 0; i < props.photosInfo.length; i++) {
 			if (checkboxRef.current[i].checked && index !== i) {
-				checkboxRef.current[i].checked = false;
-				copyState[i].isFirst = false;
+				checkboxRef.current[i].checked = Boolean(0);
+				copyState[i].isFirst = Boolean(0);
 			}
 		}
-		checkboxRef.current[index].checked = true;
+		checkboxRef.current[index].checked = Boolean(1);
 		copyState[index].isFirst = true;
 		props.getPhotosInfo(copyState);
 	}
@@ -57,7 +67,6 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 	useEffect(() => {
 		if (checkboxRef.current.length !== props.photosInfo.length) {
 			checkboxRef.current = checkboxRef.current.slice(0, props.photosInfo.length);
-			console.log(checkboxRef.current.slice(0, props.photosInfo.length));
 		}
 	});
 
@@ -75,14 +84,15 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 									<label className="admin-card-photos__input-file-label" htmlFor="file">
 										Change
 									</label>
-									<input onChange={(e) => changeImg(e, index)} type="file" className="admin-card-photos__input-file-input" name="file" />
+									<input onChange={(e) => changeImg(e, index, item.order)} type="file" className="admin-card-photos__input-file-input" name="file" />
 								</div>
 								<button onClick={() => deletePhoto(index)} className="admin-card-photos__bttn admin-card-photos__bttn--delete">
 									Delete
 								</button>
 							</div>
 							<div className="admin-card-photos__checkbox">
-								<input ref={(elRef: HTMLInputElement) => (checkboxRef.current[index] = elRef)} onChange={(e) => changeFirstPhoto(e, index)} type="checkbox" /> <label> First</label>
+								<input ref={(elRef: HTMLInputElement) => (checkboxRef.current[index] = elRef)} onChange={() => changeFirstPhoto(index)} type="checkbox" />
+								<label> First</label>
 							</div>
 						</div>
 					))}

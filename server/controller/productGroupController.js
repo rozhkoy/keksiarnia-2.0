@@ -2,8 +2,8 @@ const { propertyGroup, productGroup, isActive } = require('../models/models');
 
 class ProductGroupController {
 	async addProductGroupController(req, res) {
-		const { isActive_ID, name } = req.body;
-		const response = await productGroup.create({ isActive_ID, name });
+		const { isActiveID, name } = req.body;
+		const response = await productGroup.create({ isActiveID, name });
 		return res.json(response);
 	}
 
@@ -24,7 +24,7 @@ class ProductGroupController {
 		const response = await productGroup.findAndCountAll({
 			include: {
 				model: isActive,
-				attributes: ['isActive_ID', 'value'],
+				attributes: ['isActiveID', 'value'],
 			},
 			offset: offset,
 			limit: limit,

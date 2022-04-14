@@ -27,7 +27,7 @@ export const AddFilterCategory = () => {
 			console.log({ data });
 			const arr = data.map((item) => {
 				return {
-					id: item.id_subcategory,
+					id: item.subcategoryID,
 					title: item.title,
 				};
 			});
@@ -40,7 +40,7 @@ export const AddFilterCategory = () => {
 			listFilterCategoryItem.forEach((item) => {
 				const formData = createFormData([
 					{
-						key: 'isActive_ID',
+						key: 'isActiveID',
 						value: String(item.isActive),
 					},
 					{
@@ -69,11 +69,11 @@ export const AddFilterCategory = () => {
 			console.log('jk');
 			const formData = createFormData([
 				{
-					key: 'isActive_ID',
+					key: 'isActiveID',
 					value: isActive,
 				},
 				{
-					key: 'id_subcategory',
+					key: 'subcategoryID',
 					value: subcategoryID,
 				},
 				{
@@ -93,8 +93,10 @@ export const AddFilterCategory = () => {
 				<AdminCardHeading>Category filter</AdminCardHeading>
 				<AdminCardInput value={title} change={setTitle} type={'text'} field={'Category filter title'} />
 				<IsActive field={'is Active filter category'} getValue={setIsActive} />
-				<AdminCardSelectWithSearch list={subcategoryList} getValue={setSubcategoryID} field={'Select subcategory'} />
-				<AdminCardCreateList field={'Add filter item'} getValue={setListFilterCategoryItem} value={listFilterCategoryItem} />
+				<AdminCardSelectWithSearch list={subcategoryList} getValue={setSubcategoryID}
+				                           field={'Select subcategory'} />
+				<AdminCardCreateList field={'Add filter item'} getValue={setListFilterCategoryItem}
+				                     value={listFilterCategoryItem} />
 				<AdminCardBttnSubmit onClick={() => formHandler()} field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>

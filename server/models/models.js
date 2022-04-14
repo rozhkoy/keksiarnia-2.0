@@ -1,107 +1,101 @@
 const sequelize = require('../db');
 const { DataTypes } = require('sequelize');
 
-const brand = sequelize.define('brand', {
-	brandID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	brandName: { type: DataTypes.STRING, allowNull: false },
-});
-
 const category = sequelize.define('category', {
-	id_category: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	picture_ID: { type: DataTypes.BIGINT, allowNull: false },
+	categoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
+	pictureID: { type: DataTypes.BIGINT, allowNull: false },
 	title: { type: DataTypes.STRING, allowNull: false },
 });
 
 const subcategory = sequelize.define('subcategory', {
-	id_subcategory: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	id_category: { type: DataTypes.BIGINT, allowNull: false },
-	picture_ID: { type: DataTypes.BIGINT, allowNull: false },
+	subcategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
+	categoryID: { type: DataTypes.BIGINT, allowNull: false },
+	pictureID: { type: DataTypes.BIGINT, allowNull: false },
 	title: { type: DataTypes.STRING, allowNull: false },
 });
 
 const categoryPicture = sequelize.define('categoryPicture', {
-	picture_ID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	pictureID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const subcategoryPicture = sequelize.define('subcategoryPicture', {
-	picture_ID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	pictureID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const productPicture = sequelize.define('productPicture', {
-	picture_ID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	pictureID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	productID: { type: DataTypes.BIGINT, allowNull: false },
-	productPictureName: { type: DataTypes.STRING, allowNull: false },
+	name: { type: DataTypes.STRING, allowNull: false },
 	firstPicture: { type: DataTypes.BOOLEAN, allowNull: false },
 	orderOfPicture: { type: DataTypes.INTEGER, allowNull: false },
 });
 
 const isActive = sequelize.define('isActive', {
-	isActive_ID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	isActiveID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	value: { type: DataTypes.STRING, allowNull: false },
 });
 
 const filterTagForSearch = sequelize.define('filterTagForSearch', {
 	filterTagForSearchID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	productID: { type: DataTypes.BIGINT, allowNull: false },
 	filterCategoryID: { type: DataTypes.BIGINT, allowNull: false },
-	tagName: { type: DataTypes.STRING, allowNull: false },
+	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const categoryFilter = sequelize.define('categoryFilter', {
 	categoryFilterID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
-	id_subcategory: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
+	subcategoryID: { type: DataTypes.BIGINT, allowNull: false },
 	title: { type: DataTypes.STRING, allowNull: false },
 });
 
 const categoryFilterItem = sequelize.define('categoryFilterItem', {
 	filterItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	categoryFilterID: { type: DataTypes.BIGINT, allowNull: false },
 	title: { type: DataTypes.STRING, allowNull: false },
 });
 
 // const supplier = sequelize.define('supplier', {
 // 	supplierID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-// 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+// 	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 // 	supplierCategoryID: { type: DataTypes.BIGINT, allowNull: false },
 // 	supplierName: { type: DataTypes.STRING, allowNull: false },
 // });
 //
 // const supplierCategory = sequelize.define('supplierCategory', {
 // 	supplierCategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-// 	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+// 	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 // 	supplierCategoryName: { type: DataTypes.BIGINT, allowNull: false },
 // });
 
 const productGroup = sequelize.define('productGroup', {
 	productGroupID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const productGroupItem = sequelize.define('productGroupItem', {
 	productGroupItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	productGroupID: { type: DataTypes.BIGINT, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const propertyGroup = sequelize.define('propertyGroup', {
-	propertyGroup_ID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	propertyGroupID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const propertyGroupItem = sequelize.define('propertyGroupItem', {
 	propertyGroupItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	propertyGroupID: { type: DataTypes.BIGINT, allowNull: false },
 	productGroupID: { type: DataTypes.BIGINT, allowNull: false },
 	propertyGroupItemValue: { type: DataTypes.STRING, allowNull: false },
@@ -109,7 +103,7 @@ const propertyGroupItem = sequelize.define('propertyGroupItem', {
 
 const propertyProduct = sequelize.define('propertyProduct', {
 	propertyProductID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	propertyProductName: { type: DataTypes.STRING, allowNull: false },
 });
 
@@ -122,16 +116,16 @@ const propertyProductItem = sequelize.define('propertyProductItem', {
 const productPrice = sequelize.define('productPrice', {
 	priceID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	discountPrice: { type: DataTypes.STRING, allowNull: false },
-	isActive_ID: { type: DataTypes.BIGINT, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
 	price: { type: DataTypes.STRING, allowNull: false },
 	discountPercent: { type: DataTypes.STRING, allowNull: false },
 });
 
 const product = sequelize.define('product', {
 	productID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActive_ID: { type: DataTypes.STRING, allowNull: false },
-	id_category: { type: DataTypes.STRING, allowNull: false },
-	id_subcategory: { type: DataTypes.STRING, allowNull: false },
+	isActiveID: { type: DataTypes.STRING, allowNull: false },
+	categoryID: { type: DataTypes.STRING, allowNull: false },
+	subcategoryID: { type: DataTypes.STRING, allowNull: false },
 	priceID: { type: DataTypes.STRING, allowNull: false },
 	productGroup_ID: { type: DataTypes.STRING, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
@@ -154,54 +148,53 @@ const tokenData = sequelize.define('tokenData', {
 	refreshToken: { type: DataTypes.STRING, allowNull: false },
 });
 
-isActive.hasMany(category, { foreignKey: 'isActive_ID' });
-category.belongsTo(isActive, { foreignKey: 'isActive_ID' });
+isActive.hasMany(category, { foreignKey: 'isActiveID' });
+category.belongsTo(isActive, { foreignKey: 'isActiveID' });
 
-categoryPicture.hasMany(category, { foreignKey: 'picture_ID' });
-category.belongsTo(categoryPicture, { foreignKey: 'picture_ID' });
+categoryPicture.hasMany(category, { foreignKey: 'pictureID' });
+category.belongsTo(categoryPicture, { foreignKey: 'pictureID' });
 
-isActive.hasMany(subcategory, { foreignKey: 'isActive_ID' });
-subcategory.belongsTo(isActive, { foreignKey: 'isActive_ID' });
-
-subcategoryPicture.hasMany(subcategory, { foreignKey: 'picture_ID' });
-subcategory.belongsTo(subcategoryPicture, { foreignKey: 'picture_ID' });
-
-category.hasMany(subcategory, { foreignKey: 'id_category' });
-subcategory.belongsTo(category, { foreignKey: 'id_category' });
-
-isActive.hasMany(productGroup, { foreignKey: 'isActive_ID' });
-productGroup.belongsTo(isActive, { foreignKey: 'isActive_ID' });
-
-isActive.hasMany(categoryFilter, { foreignKey: 'isActive_ID' });
-categoryFilter.belongsTo(isActive, { foreignKey: 'isActive_ID' });
-
-categoryFilter.hasMany(categoryFilterItem, { foreignKey: 'categoryFilterID' });
-categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' });
-
-isActive.hasMany(product, { foreignKey: 'isActive_ID' });
-product.belongsTo(isActive, { foreignKey: 'isActive_ID' });
-
-category.hasMany(product, { foreignKey: 'id_category' });
-product.belongsTo(category, { foreignKey: 'id_category' });
-
-subcategory.hasMany(product, { foreignKey: 'id_subcategory' });
-product.belongsTo(subcategory, { foreignKey: 'id_subcategory' });
-
-productGroup.hasMany(product, { foreignKey: 'productGroup_ID' });
-product.belongsTo(productGroup, { foreignKey: 'productGroup_ID' });
-
-productPrice.hasMany(product, { foreignKey: 'priceID' });
-product.belongsTo(productPrice, { foreignKey: 'priceID' });
-
-isActive.hasMany(productPrice, { foreignKey: 'isActive_ID' });
-productPrice.belongsTo(isActive, { foreignKey: 'isActive_ID' });
+// isActive.hasMany(subcategory, { foreignKey: 'isActiveID' });
+// subcategory.belongsTo(isActive, { foreignKey: 'isActiveID' });
+//
+// subcategoryPicture.hasMany(subcategory, { foreignKey: 'pictureID' });
+// subcategory.belongsTo(subcategoryPicture, { foreignKey: 'pictureID' });
+//
+// category.hasMany(subcategory, { foreignKey: 'categoryID' });
+// subcategory.belongsTo(category, { foreignKey: 'categoryID' });
+//
+// isActive.hasMany(productGroup, { foreignKey: 'isActiveID' });
+// productGroup.belongsTo(isActive, { foreignKey: 'isActiveID' });
+//
+// isActive.hasMany(categoryFilter, { foreignKey: 'isActiveID' });
+// categoryFilter.belongsTo(isActive, { foreignKey: 'isActiveID' });
+//
+// categoryFilter.hasMany(categoryFilterItem, { foreignKey: 'categoryFilterID' });
+// categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' });
+//
+// isActive.hasMany(product, { foreignKey: 'isActiveID' });
+// product.belongsTo(isActive, { foreignKey: 'isActiveID' });
+//
+// category.hasMany(product, { foreignKey: 'categoryID' });
+// product.belongsTo(category, { foreignKey: 'categoryID' });
+//
+// subcategory.hasMany(product, { foreignKey: 'subcategoryID' });
+// product.belongsTo(subcategory, { foreignKey: 'subcategoryID' });
+//
+// productGroup.hasMany(product, { foreignKey: 'productGroup_ID' });
+// product.belongsTo(productGroup, { foreignKey: 'productGroup_ID' });
+//
+// productPrice.hasMany(product, { foreignKey: 'priceID' });
+// product.belongsTo(productPrice, { foreignKey: 'priceID' });
+//
+// isActive.hasMany(productPrice, { foreignKey: 'isActiveID' });
+// productPrice.belongsTo(isActive, { foreignKey: 'isActiveID' });
 
 module.exports = {
 	category,
 	subcategory,
 	categoryPicture,
 	subcategoryPicture,
-	brand,
 	productPicture,
 	isActive,
 	filterTagForSearch,

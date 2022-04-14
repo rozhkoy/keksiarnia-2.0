@@ -4,8 +4,8 @@ const { mainTypeProduct, category, isActive, categoryPicture } = require('../mod
 class categoryController {
 	async addNewCategory(req, res) {
 		try {
-			const { isActive_ID, title, picture_ID } = req.body;
-			const response = await category.create({ isActive_ID, title, picture_ID });
+			const { isActiveID, title, pictureID } = req.body;
+			const response = await category.create({ isActiveID, title, pictureID });
 			return res.json(response);
 		} catch (e) {
 			console.log(e);
@@ -26,12 +26,12 @@ class categoryController {
 			console.log(limit, page);
 			let offset = page * limit - limit;
 			const response = await category.findAndCountAll({
-				attributes: ['id_category', 'title', 'createdAt', 'updatedAt'],
+				attributes: ['categoryID', 'title', 'createdAt', 'updatedAt'],
 				include: [
-					{ model: isActive, attributes: ['isActive_ID', 'value'] },
-					{ model: categoryPicture, attributes: ['picture_ID', 'name'] },
+					{ model: isActive, attributes: ['isActiveID', 'value'] },
+					{ model: categoryPicture, attributes: ['pictureID', 'name'] },
 				],
-				order: [['id_category', 'DESC']],
+				order: [['categoryID', 'DESC']],
 				offset: offset,
 				limit: limit,
 			});

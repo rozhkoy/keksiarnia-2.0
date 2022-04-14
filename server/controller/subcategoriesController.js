@@ -4,8 +4,8 @@ const { subcategory, category, isActive, categoryPicture, subcategoryPicture } =
 class subcategoriesController {
 	async addNewSubcategory(req, res) {
 		try {
-			const { isActive_ID, id_category, picture_ID, title } = req.body;
-			const response = await subcategory.create({ isActive_ID, id_category, picture_ID, title });
+			const { isActiveID, categoryID, pictureID, title } = req.body;
+			const response = await subcategory.create({ isActiveID, categoryID, pictureID, title });
 			return res.json(response);
 		} catch (e) {
 			console.log(e);
@@ -34,13 +34,13 @@ class subcategoriesController {
 			}
 			let offset = page * limit - limit;
 			const response = await subcategory.findAndCountAll({
-				attributes: ['id_subcategory', 'title', 'createdAt', 'updatedAt'],
+				attributes: ['subcategoryID', 'title', 'createdAt', 'updatedAt'],
 				include: [
-					{ model: isActive, attributes: ['isActive_ID', 'value'] },
-					{ model: subcategoryPicture, attributes: ['picture_ID', 'name'] },
+					{ model: isActive, attributes: ['isActiveID', 'value'] },
+					{ model: subcategoryPicture, attributes: ['pictureID', 'name'] },
 					{ model: category, attributes: ['title'] },
 				],
-				order: [['id_subcategory', 'DESC']],
+				order: [['subcategoryID', 'DESC']],
 				offset: offset,
 				limit: limit,
 			});

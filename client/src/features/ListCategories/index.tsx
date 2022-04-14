@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import { getMainCategory } from './api';
 import { useEffect, useState } from 'react';
 import { ICategoriesTable } from './types';
+
 export const ListCategories = () => {
 	const [categories, setCategories] = useState<ICategoriesTable[]>([]);
 	const [page, setPage] = useState<number>(1);
@@ -15,7 +16,7 @@ export const ListCategories = () => {
 			setCountPositionOnTable(data.count);
 			const array: Array<ICategoriesTable> = data.rows.map((item) => {
 				return {
-					id: item.id_category,
+					id: item.categoryID,
 					isActive: item.isActive.value,
 					pictures: item.categoryPicture.name,
 					title: item.title,
@@ -31,7 +32,9 @@ export const ListCategories = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List of Categories</AdminCardHeading>
-			{isLoading ? 'Loading...' : categories.length > 0 ? <DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={categories} /> : 'No Data'}
+			{isLoading ? 'Loading...' : categories.length > 0 ?
+				<DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage}
+				           data={categories} /> : 'No Data'}
 		</AdminPanelCard>
 	);
 };

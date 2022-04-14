@@ -4,8 +4,8 @@ import { IIsActive } from '../../shared/ui/IsActive/types';
 
 export interface IFullCategoryFilterResponse extends CreateUpdate {
 	categoryFilterID: string;
-	isActive_ID: string;
-	id_subCategory: string;
+	isActiveID: string;
+	subcategoryID: string;
 	title: string;
 	categoryFilterItems: Array<ICategoryFilterItemResponse>;
 	isActive: IIsActive;
@@ -13,6 +13,7 @@ export interface IFullCategoryFilterResponse extends CreateUpdate {
 
 export interface ICategoryFilterDataForTable {
 	[key: string | number]: string;
+
 	id: string;
 	isActive: string;
 	title: string;

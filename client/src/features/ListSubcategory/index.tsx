@@ -17,7 +17,7 @@ export const ListSubcategory = () => {
 			console.log(data);
 			const array: Array<ISubcategoriesTable> = data.rows.map((item) => {
 				return {
-					id: item.id_subcategory,
+					id: item.subcategoryID,
 					isActive: item.isActive.value,
 					category: item.category.title,
 					title: item.title,
@@ -34,7 +34,9 @@ export const ListSubcategory = () => {
 	return (
 		<AdminPanelCard>
 			<AdminCardHeading>List subcategory</AdminCardHeading>
-			{isSuccess ? <DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage} data={subcategories} /> : 'Loading...'}
+			{isSuccess ?
+				<DataTable linkToEdit={'edit'} count={countPositionOnTable} limit={limit} page={page} getPage={setPage}
+				           data={subcategories} /> : 'Loading...'}
 		</AdminPanelCard>
 	);
 };

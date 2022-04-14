@@ -5,30 +5,30 @@ class SubcategoryByIdController {
 		const { id } = req.query;
 		const response = await subcategory.findOne({
 			where: {
-				id_subcategory: id,
+				subcategoryID: id,
 			},
-			attributes: ['id_subcategory', 'title', 'createdAt', 'updatedAt'],
+			attributes: ['subcategoryID', 'title', 'createdAt', 'updatedAt'],
 			include: [
-				{ model: isActive, attributes: ['isActive_ID', 'value'] },
-				{ model: subcategoryPicture, attributes: ['picture_ID', 'name'] },
-				{ model: category, attributes: ['title', 'id_category'] },
+				{ model: isActive, attributes: ['isActiveID', 'value'] },
+				{ model: subcategoryPicture, attributes: ['pictureID', 'name'] },
+				{ model: category, attributes: ['title', 'categoryID'] },
 			],
 		});
 		return res.json(response);
 	}
 
 	async changeSubcategoryById(req, res) {
-		const { id_subcategory, title, isActive_ID, picture_ID, id_category } = req.body;
+		const { subcategoryID, title, isActiveID, pictureID, categoryID } = req.body;
 		const response = await subcategory.update(
 			{
 				title,
-				isActive_ID,
-				picture_ID,
-				id_category,
+				isActiveID,
+				pictureID,
+				categoryID,
 			},
 			{
 				where: {
-					id_subcategory,
+					subcategoryID,
 				},
 			}
 		);

@@ -6,6 +6,6 @@ export type isActiveProps = {
 };
 
 export interface IIsActive {
-	isActive_ID: string;
+	isActiveID: string;
 	value: string;
 }

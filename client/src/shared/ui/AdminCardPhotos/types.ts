@@ -10,4 +10,5 @@ export interface IPhotosInfo {
 	photoFile: File | null;
 	photoLink: string;
 	isFirst: boolean;
+	order: number;
 }

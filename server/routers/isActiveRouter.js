@@ -2,7 +2,7 @@ const Router = require('express');
 const router = new Router();
 const isActiveController = require('../controller/isActiveController');
 
-router.get('/', isActiveController.getIsActiveState);
-router.post('/', isActiveController.sendIsActiveState);
+router.get('/', isActiveController.getIsActiveData);
+router.post('/', isActiveController.sendIsActiveData);
 
 module.exports = router;

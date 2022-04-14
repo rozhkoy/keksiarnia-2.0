@@ -25,7 +25,7 @@ export const AddNewSubcategory = () => {
 			console.log(data);
 			const array = data.map((obj) => {
 				return {
-					id: String(obj.id_category),
+					id: String(obj.categoryID),
 					title: obj.title,
 				};
 			});
@@ -36,19 +36,19 @@ export const AddNewSubcategory = () => {
 
 	const mutationCategoryPicture = useMutation(sendSubcategoryPicture, {
 		onSuccess: ({ data }) => {
-			if (data.picture_ID && titleState && isActive && categoryID) {
+			if (data.pictureID && titleState && isActive && categoryID) {
 				const formData = createFormData([
 					{
-						key: 'isActive_ID',
+						key: 'isActiveID',
 						value: isActive,
 					},
 					{
-						key: 'id_category',
+						key: 'categoryID',
 						value: categoryID,
 					},
 					{
-						key: 'picture_ID',
-						value: data.picture_ID,
+						key: 'pictureID',
+						value: data.pictureID,
 					},
 					{
 						key: 'title',
@@ -98,7 +98,8 @@ export const AddNewSubcategory = () => {
 				<AdminCardHeading>Add new subcategory</AdminCardHeading>
 				<IsActive field={'Is active subcategory'} getValue={setIsActive} />
 				<AdminCardInput value={titleState} change={setTitleState} type={'text'} field={'Title'} />
-				{isSuccess && <AdminCardSelectWithSearch field={'Category'} getValue={setCategoryID} list={allCategories} />}
+				{isSuccess &&
+					<AdminCardSelectWithSearch field={'Category'} getValue={setCategoryID} list={allCategories} />}
 				<AdminCardFile field={''} change={setPictureState} />
 				<AdminCardBttnSubmit onClick={formHandler} field={'ADD'} />
 			</AdminCardForm>

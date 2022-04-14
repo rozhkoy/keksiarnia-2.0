@@ -2,10 +2,10 @@ const { categoryFilter } = require('../models/models');
 
 class CategoryFilterController {
 	async addCategoryFilter(req, res) {
-		const { isActive_ID, id_subcategory, title } = req.body;
+		const { isActiveID, subcategoryID, title } = req.body;
 		const response = await categoryFilter.create({
-			isActive_ID,
-			id_subcategory,
+			isActiveID,
+			subcategoryID,
 			title,
 		});
 		return res.json(response);

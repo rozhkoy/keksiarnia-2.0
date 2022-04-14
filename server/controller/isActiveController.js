@@ -2,10 +2,10 @@ const ApiError = require('../exceptions/apiErrors');
 const { isActive } = require('../models/models');
 
 class isActiveController {
-	async getIsActiveState(req, res) {
+	async getIsActiveData(req, res) {
 		try {
 			const response = await isActive.findAll({
-				attributes: ['isActive_ID', 'value'],
+				attributes: ['isActiveID', 'value'],
 			});
 			return res.json(response);
 		} catch (e) {
@@ -13,7 +13,7 @@ class isActiveController {
 		}
 	}
 	я;
-	async sendIsActiveState(req, res) {
+	async sendIsActiveData(req, res) {
 		try {
 			const { value } = req.body;
 			const response = await isActive.create({ value: value });
