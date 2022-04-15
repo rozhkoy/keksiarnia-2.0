@@ -9,7 +9,7 @@ import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSe
 import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { getAllSubcategories } from '../AddCategoryFIlter/api';
 import { IsActive } from '../../shared/ui/IsActive';
-import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPicture, sendProductPrice, sendTagsOfFilterForProduct } from './api';
+import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPicture, sendProductPrice, sendProductPropertyItem, sendTagsOfFilterForProduct } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
@@ -30,7 +30,7 @@ export const AddProduct = () => {
 	const [listProductGroup, setListProductGroup] = useState<Array<ICustomSelectData>>([]);
 	const [productGroupId, setProductGroupId] = useState<string>('');
 	const [productTitle, setProductTitle] = useState<string>('');
-	const [ListProductGroupItems, setListProductGroupItems] = useState<Array<IListProperties>>([]);
+	const [listProductGroupItems, setListProductGroupItems] = useState<Array<IListProperties>>([]);
 	const [listFilter, setListFilter] = useState<Array<IFilterListForMultiSelect>>([]);
 	const [price, setPrice] = useState('0');
 	const [discountPrice, setDiscountPrice] = useState<number>(0);
@@ -209,6 +209,12 @@ export const AddProduct = () => {
 		},
 	});
 
+	const productPropertyMutation = useMutation(sendProductPropertyItem, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+		},
+	});
+
 	function formHandler() {
 		const formData = createFormData([
 			{
@@ -229,6 +235,19 @@ export const AddProduct = () => {
 			},
 		]);
 		mutationProductPrice.mutate(formData);
+		listProductGroupItems.forEach((item) => {
+			const formData = createFormData([
+				{
+					key: 'value',
+					value: item.inputValue,
+				},
+				{
+					key: 'productGroupItemID',
+					value: item.id,
+				},
+			]);
+			productPropertyMutation.mutate(formData);
+		});
 	}
 
 	useEffect(() => {
@@ -248,7 +267,7 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listCategory} getValue={setCategoryId} field={'Select category'} />
 				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId} field={'Select subcategory'} />
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
-				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'Product property'} listProperties={ListProductGroupItems} />}
+				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'Product property'} listProperties={listProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
 				<AdminCardPhotos getPhotosInfo={setPhotosInfo} photosInfo={photosInfo} field={'Photos'} />
 				<AdminMultiSelect selectedItems={selectedItem} getValue={setSelectedItem} field={'Filter tags for search'} arrayList={listFilter} />

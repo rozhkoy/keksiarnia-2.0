@@ -39,3 +39,9 @@ export interface ITagsOfFilterForProduct extends CreateUpdate {
 	productID: string;
 	name: string;
 }
+
+export interface IPropertyProductItem extends CreateUpdate {
+	propertyProductItemID: string;
+	value: string;
+	productGroupItemID: string;
+}
