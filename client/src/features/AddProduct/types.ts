@@ -33,3 +33,9 @@ export interface IProduct extends CreateUpdate {
 	number: string;
 	description: string;
 }
+
+export interface ITagsOfFilterForProduct extends CreateUpdate {
+	tagOfFilterForProductID: string;
+	productID: string;
+	name: string;
+}

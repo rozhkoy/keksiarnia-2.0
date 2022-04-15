@@ -9,7 +9,7 @@ import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSe
 import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { getAllSubcategories } from '../AddCategoryFIlter/api';
 import { IsActive } from '../../shared/ui/IsActive';
-import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPicture, sendProductPrice } from './api';
+import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPicture, sendProductPrice, sendTagsOfFilterForProduct } from './api';
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
@@ -38,6 +38,7 @@ export const AddProduct = () => {
 	const [isActiveDiscountPrice, setIsActiveDiscountPrice] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 	const [photosInfo, setPhotosInfo] = useState<Array<IPhotosInfo>>([]);
+	const [selectedItem, setSelectedItem] = useState<Array<IFilterListForMultiSelect>>([]);
 
 	useQuery('getAllCategoriesForProduct', getAllCategories, {
 		onSuccess: ({ data }) => {
@@ -178,10 +179,31 @@ export const AddProduct = () => {
 					productPictureMutation.mutate(formData);
 				}
 			});
+			selectedItem.forEach((item) => {
+				item.list.map((item) => {
+					const formData = createFormData([
+						{
+							key: 'productID',
+							value: data.productID,
+						},
+						{
+							key: 'name',
+							value: item.value,
+						},
+					]);
+					tagOfFilterForProductMutation.mutate(formData);
+				});
+			});
 		},
 	});
 
 	const productPictureMutation = useMutation(sendProductPicture, {
+		onSuccess: ({ data }) => {
+			console.log(data);
+		},
+	});
+
+	const tagOfFilterForProductMutation = useMutation(sendTagsOfFilterForProduct, {
 		onSuccess: ({ data }) => {
 			console.log(data);
 		},
@@ -226,10 +248,10 @@ export const AddProduct = () => {
 				<AdminCardSelectWithSearch list={listCategory} getValue={setCategoryId} field={'Select category'} />
 				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId} field={'Select subcategory'} />
 				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
-				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'test for test'} listProperties={ListProductGroupItems} />}
+				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'Product property'} listProperties={ListProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
 				<AdminCardPhotos getPhotosInfo={setPhotosInfo} photosInfo={photosInfo} field={'Photos'} />
-				<AdminMultiSelect getValue={setListFilter} field={'test fpr test'} arrayList={listFilter} />
+				<AdminMultiSelect selectedItems={selectedItem} getValue={setSelectedItem} field={'Filter tags for search'} arrayList={listFilter} />
 				<AdminCardInput value={price} change={setPrice} type={'text'} field={'Price'} />
 				<IsActive field={'Is active discount price'} getValue={setIsActiveDiscountPrice} />
 				<AdminCardInput value={discountPercent} change={setDiscountPercent} type={'number'} field={'Discount Percent'} />

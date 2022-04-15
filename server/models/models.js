@@ -39,11 +39,9 @@ const isActive = sequelize.define('isActive', {
 	value: { type: DataTypes.STRING, allowNull: false },
 });
 
-const filterTagForSearch = sequelize.define('filterTagForSearch', {
-	filterTagForSearchID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
+const tagOfFilterForProduct = sequelize.define('tagOfFilterForProduct', {
+	tagOfFilterForProductID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	productID: { type: DataTypes.BIGINT, allowNull: false },
-	filterCategoryID: { type: DataTypes.BIGINT, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
@@ -197,7 +195,7 @@ module.exports = {
 	subcategoryPicture,
 	productPicture,
 	isActive,
-	filterTagForSearch,
+	tagOfFilterForProduct,
 	categoryFilter,
 	categoryFilterItem,
 	product,
