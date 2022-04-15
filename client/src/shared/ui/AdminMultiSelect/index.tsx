@@ -5,12 +5,11 @@ import { createRef, useEffect, useRef, useState } from 'react';
 export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 	const listRefs = useRef<Array<Array<HTMLLIElement>>>([[]]);
 	const lisSelectedRefs = useRef<Array<Array<HTMLLIElement>>>([[]]);
-	const [selectedItem, setSelectedItem] = useState<Array<IFilterListForMultiSelect>>([]);
 
 	function selectElement(index: number, nestedIndex: number, id: string) {
 		listRefs.current[index][nestedIndex] && listRefs.current[index][nestedIndex].classList.add('listItemActive');
-		if (selectedItem.length > 0) {
-			const arrayList = selectedItem.slice();
+		if (props.selectedItems.length > 0) {
+			const arrayList = props.selectedItems.slice();
 			if (arrayList.every((item) => item.listHeading !== props.arrayList[index].listHeading)) {
 				arrayList.push({
 					id: props.arrayList[index].id,
@@ -29,9 +28,9 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 					listRefs.current[index][nestedIndex] && listRefs.current[index][nestedIndex].classList.remove('listItemActive');
 				}
 			}
-			setSelectedItem(arrayList);
+			props.getValue(arrayList);
 		} else {
-			setSelectedItem([
+			props.getValue([
 				{
 					id: props.arrayList[index].id,
 					listHeading: props.arrayList[index].listHeading,
@@ -47,7 +46,7 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 				Array(item.list.length).map((item, index) => listRefs.current[index] || createRef<HTMLLIElement>());
 			}
 		});
-		console.log(selectedItem);
+		console.log(props.selectedItems);
 	});
 
 	return (
@@ -85,9 +84,9 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 				</div>
 				<div className="admin-multi-select__select admin-multi-select__select--right">
 					<div className="admin-multi-select__list-wrap">
-						{selectedItem.map((item, index: number) => {
+						{props.selectedItems.map((item, index: number) => {
 							lisSelectedRefs.current[index] = [];
-							if (selectedItem[index].list.length > 0) {
+							if (props.selectedItems[index].list.length > 0) {
 								return (
 									<div key={item.id} className="admin-multi-select__select-list">
 										<p className="select-list__heading">{item.listHeading}</p>
