@@ -47,6 +47,10 @@ class categoryController {
 		try {
 			const response = await category.findAll({
 				order: [['title', 'ASC']],
+				include: [
+					{ model: isActive, attributes: ['isActiveID', 'value'], where: {value: "Yes"}},
+					{ model: categoryPicture, attributes: ['pictureID', 'name'] },
+				],
 			});
 			return res.json(response);
 		} catch (e) {

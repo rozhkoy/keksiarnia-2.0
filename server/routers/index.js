@@ -22,8 +22,9 @@ const productGroupController = require('../controller/productGroupController');
 const productGroupItemByIdRouter = require('./productGroupItemByIdRouter');
 const productRouter = require('./productRouter');
 const price = require('./priceRouter');
-const productPicture = require("./productPicture")
-const tagsOfFilerProduct = require('./tagsOfFilerProductRouter')
+const productPicture = require('./productPicture');
+const productPropertyRouter = require('./productPropertyRouter');
+const tagsOfFilerProduct = require('./tagsOfFilerProductRouter');
 
 router.post('/registration', body('email').isEmail(), body('password').isLength({ min: 3, max: 32 }), userController.registration);
 router.post('/login', userController.login);
@@ -49,7 +50,8 @@ router.get('/getAllProductGroup', productGroupController.getAllProductGroup);
 router.use('/productGroupItemById', productGroupItemByIdRouter);
 router.use('/product', productRouter);
 router.use('/price', price);
-router.use('/productPictures', productPicture)
-router.use('/tagsOfFilerProduct', tagsOfFilerProduct)
+router.use('/productPictures', productPicture);
+router.use('/productPropertyRouter', productPropertyRouter);
+router.use('/tagsOfFilerProduct', tagsOfFilerProduct);
 
 module.exports = router;
