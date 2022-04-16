@@ -93,10 +93,8 @@ export const AddFilterCategory = () => {
 				<AdminCardHeading>Category filter</AdminCardHeading>
 				<AdminCardInput value={title} change={setTitle} type={'text'} field={'Category filter title'} />
 				<IsActive field={'is Active filter category'} getValue={setIsActive} />
-				<AdminCardSelectWithSearch list={subcategoryList} getValue={setSubcategoryID}
-				                           field={'Select subcategory'} />
-				<AdminCardCreateList field={'Add filter item'} getValue={setListFilterCategoryItem}
-				                     value={listFilterCategoryItem} />
+				<AdminCardSelectWithSearch list={subcategoryList} getValue={setSubcategoryID} field={'Select subcategory'} />
+				<AdminCardCreateList field={'Add filter item'} getValue={setListFilterCategoryItem} value={listFilterCategoryItem} />
 				<AdminCardBttnSubmit onClick={() => formHandler()} field={'ADD'} />
 			</AdminCardForm>
 		</AdminPanelCard>

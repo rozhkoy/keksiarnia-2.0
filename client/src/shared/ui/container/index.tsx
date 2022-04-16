@@ -6,5 +6,5 @@ export interface AuxProps {
 }
 
 export const Container = (props: AuxProps) => {
-	return <div>{props.children}</div>;
+	return <div className={'container'}>{props.children}</div>;
 };
