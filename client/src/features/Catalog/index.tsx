@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAllCategories } from '../AddNewSubcategory/api';
 import { IResponseCategory } from '../ListCategories/types';
+import { createImgLink } from '../../shared/lib/createImgLink';
 
 export const Catalog = () => {
 	const [categories, setCategories] = useState<IResponseCategory[]>([]);
@@ -20,14 +21,17 @@ export const Catalog = () => {
 				<p className="catalog__title">Catalog</p>
 				<div className="catalog__container">
 					{categoriesQuery.isSuccess &&
-						categories.map((item) => (
-							<div className="catalog__item">
-								<img src={process.env.REACT_APP_API_URL + item.categoryPicture.name} alt="" className="catalog__item-img" />
-								<div className="catalog__item-title-background">
-									<p className="catalog__item-title">man</p>
+						categories.map((item) => {
+							const imgLink = createImgLink(item.categoryPicture.name);
+							return (
+								<div className="catalog__item">
+									<img src={imgLink} alt="" className="catalog__item-img" />
+									<div className="catalog__item-title-background">
+										<p className="catalog__item-title">{item.title}</p>
+									</div>
 								</div>
-							</div>
-						))}
+							);
+						})}
 				</div>
 			</Container>
 		</div>

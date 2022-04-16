@@ -1,9 +1,11 @@
-import { propertyProduct, propertyProductItem } from '../models/models';
+const { propertyProductItem } = require('../models/models');
 
 class ProductPropertyController {
 	async addProductProperty(req, res) {
-		const {} = req.body
-		const response = await propertyProductItem.create()
-		return res.json(response)
+		const { value, productGroupItemID } = req.body;
+		const response = await propertyProductItem.create({ value, productGroupItemID });
+		return res.json(response);
 	}
 }
+
+module.exports = new ProductPropertyController();

@@ -85,30 +85,10 @@ const productGroupItem = sequelize.define('productGroupItem', {
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
-const propertyGroup = sequelize.define('propertyGroup', {
-	propertyGroupID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
-	name: { type: DataTypes.STRING, allowNull: false },
-});
-
-const propertyGroupItem = sequelize.define('propertyGroupItem', {
-	propertyGroupItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
-	propertyGroupID: { type: DataTypes.BIGINT, allowNull: false },
-	productGroupID: { type: DataTypes.BIGINT, allowNull: false },
-	propertyGroupItemValue: { type: DataTypes.STRING, allowNull: false },
-});
-
-const propertyProduct = sequelize.define('propertyProduct', {
-	propertyProductID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
-	propertyProductName: { type: DataTypes.STRING, allowNull: false },
-});
-
 const propertyProductItem = sequelize.define('propertyProductItem', {
 	propertyProductItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	propertyProductID: { type: DataTypes.BIGINT, allowNull: false },
-	propertyProductItemValue: { type: DataTypes.STRING, allowNull: false },
+	productGroupItemID: { type: DataTypes.BIGINT, allowNull: false },
+	value: { type: DataTypes.STRING, allowNull: false },
 });
 
 const productPrice = sequelize.define('productPrice', {
@@ -202,9 +182,6 @@ module.exports = {
 	// supplier,
 	// supplierCategory,
 	productGroup,
-	propertyGroup,
-	propertyGroupItem,
-	propertyProduct,
 	propertyProductItem,
 	productPrice,
 	userData,

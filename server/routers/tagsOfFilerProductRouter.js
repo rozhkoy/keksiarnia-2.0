@@ -1,7 +1,7 @@
-const Router = require('express')
-const router = new Router()
-const tagsOfFilterProductController = require("../controller/tagsOfFilterProductController")
+const Router = require('express');
+const router = new Router();
+const tagsOfFilterProductController = require('../controller/tagsOfFilterProductController');
 
-router.post('/', tagsOfFilterProductController.addTagOfFilterProduct)
+router.post('/', tagsOfFilterProductController.addTagOfFilterProduct);
 
-module.exports = router
+module.exports = router;
