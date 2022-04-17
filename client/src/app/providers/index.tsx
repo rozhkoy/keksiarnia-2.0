@@ -8,7 +8,7 @@ const Providers = () => {
 		<Routes>
 			<Route path="/Sing_in" element={<Auth />} />
 			<Route path="/Sing_up" element={<Auth />} />
-			<Route path="/" element={<MainPage />} />
+			<Route path="/*" element={<MainPage />} />
 			<Route path="/admin/*" element={<Admin />} />
 		</Routes>
 	);
