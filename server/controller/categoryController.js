@@ -48,7 +48,7 @@ class categoryController {
 			const response = await category.findAll({
 				order: [['title', 'ASC']],
 				include: [
-					{ model: isActive, attributes: ['isActiveID', 'value'], where: { value: "Yes" } },
+					{ model: isActive, attributes: ['isActiveID', 'value'], where: { value: 'Yes' } },
 					{ model: categoryPicture, attributes: ['pictureID', 'name'] },
 				],
 			});
@@ -62,10 +62,8 @@ class categoryController {
 	async getAllCategoriesWithSubcategories(req, res) {
 		try {
 			const response = await category.findAll({
-				include: [
-					{model: subcategory}
-				]
-			})
+				include: [{ model: subcategory }],
+			});
 			return res.json(response);
 		} catch (e) {
 			console.log(e);

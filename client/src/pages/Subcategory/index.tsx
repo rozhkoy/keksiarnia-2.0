@@ -32,9 +32,7 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 						const imgLink = createImgLink(item.subcategoryPicture.name);
 						return (
 							<div key={item.subcategoryID} className="subcategory__item">
-								<div className="testimg">
-									<img src={imgLink} alt="" className="subcategory__item-img" />
-								</div>
+								<img src={imgLink} alt="" className="subcategory__item-img" />
 								<div className="subcategory__item-title-background">
 									<p className="subcategory__item-title">{item.title}</p>
 								</div>
