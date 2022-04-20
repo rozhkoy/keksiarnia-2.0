@@ -29,16 +29,15 @@ export const Shop = () => {
 		<div className="mainPage__wrap">
 			<Header />
 			<Routes>
-				<Route path={'/*'}>
+				<Route>
+					<Route path={'catalog/*'} element={<Catalog />} />
 					{categoriesWithSubcategories.map((item, index) => (
-						<>
-							<Route element={<Catalog />} path={item.title.toLowerCase()} />
-							<Route key={item.categoryID} path={item.title.toLowerCase()}>
-								{item.subcategories.map((subcategories) => (
-									<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Subcategory />} />
-								))}
-							</Route>
-						</>
+						<Route path={'catalog/*'} key={item.categoryID}>
+							<Route path={item.title.toLowerCase()} element={<Subcategory />} />
+							{item.subcategories.map((subcategories) => (
+								<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Subcategory />} />
+							))}
+						</Route>
 					))}
 				</Route>
 			</Routes>
