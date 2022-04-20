@@ -1,5 +1,5 @@
 const ApiError = require('../exceptions/apiErrors');
-const { mainTypeProduct, category, isActive, categoryPicture } = require('../models/models');
+const { mainTypeProduct, category, isActive, categoryPicture, subcategory } = require('../models/models');
 
 class categoryController {
 	async addNewCategory(req, res) {
@@ -48,7 +48,7 @@ class categoryController {
 			const response = await category.findAll({
 				order: [['title', 'ASC']],
 				include: [
-					{ model: isActive, attributes: ['isActiveID', 'value'], where: {value: "Yes"}},
+					{ model: isActive, attributes: ['isActiveID', 'value'], where: { value: "Yes" } },
 					{ model: categoryPicture, attributes: ['pictureID', 'name'] },
 				],
 			});
@@ -57,6 +57,21 @@ class categoryController {
 			console.log(e);
 			throw ApiError.BadRequest('Error Database');
 		}
+	}
+
+	async getAllCategoriesWithSubcategories(req, res) {
+		try {
+			const response = await category.findAll({
+				include: [
+					{model: subcategory}
+				]
+			})
+			return res.json(response);
+		} catch (e) {
+			console.log(e);
+			throw ApiError.BadRequest('Error Database');
+		}
+
 	}
 }
 

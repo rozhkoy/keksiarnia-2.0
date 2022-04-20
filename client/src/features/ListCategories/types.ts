@@ -1,7 +1,7 @@
 import { CreateUpdate } from '../../shared/types';
 import { IIsActive } from '../../shared/ui/IsActive/types';
 
-export interface IResponseCategory extends CreateUpdate {
+export interface ICategoryResponse extends CreateUpdate {
 	[key: string]: string | number | IIsActive | ICategoryPicture;
 
 	categoryID: string;

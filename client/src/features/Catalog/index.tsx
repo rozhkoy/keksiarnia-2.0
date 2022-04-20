@@ -3,12 +3,12 @@ import './style.scss';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAllCategories } from '../AddNewSubcategory/api';
-import { IResponseCategory } from '../ListCategories/types';
+import { ICategoryResponse } from '../ListCategories/types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { Link } from 'react-router-dom';
 
 export const Catalog = () => {
-	const [categories, setCategories] = useState<IResponseCategory[]>([]);
+	const [categories, setCategories] = useState<ICategoryResponse[]>([]);
 	const categoriesQuery = useQuery('getAllCategories', getAllCategories, {
 		onSuccess: ({ data }) => {
 			console.log(data);
