@@ -11,11 +11,12 @@ import { getAllSubcategories } from '../../features/AddCategoryFIlter/api';
 import { ICategoryResponse } from '../../features/ListCategories/types';
 import { ISubcategoryResponse } from '../../features/AddNewSubcategory/types';
 import { getAllCategoriesWithSubcategories } from './api';
-import { IAllCategoriesWithSubcategories } from './types';
+import { ICategoriesWithSubcategories } from './types';
+import Auth from '../Auth';
 
 export const Shop = () => {
 	const dispatch = useAppDispatch();
-	const [categoriesWithSubcategories, setCategoriesWithSubcategories] = useState<IAllCategoriesWithSubcategories[]>([]);
+	const [categoriesWithSubcategories, setCategoriesWithSubcategories] = useState<ICategoriesWithSubcategories[]>([]);
 	const authData = useAppSelector((state) => state.authState);
 
 	const categories = useQuery('getAllCategoriesWithSubcategories', getAllCategoriesWithSubcategories, {
@@ -33,9 +34,9 @@ export const Shop = () => {
 					<Route path={'catalog/*'} element={<Catalog />} />
 					{categoriesWithSubcategories.map((item, index) => (
 						<Route path={'catalog/*'} key={item.categoryID}>
-							<Route path={item.title.toLowerCase()} element={<Subcategory />} />
+							<Route path={item.title.toLowerCase()} element={<Subcategory category={item.title} />} />
 							{item.subcategories.map((subcategories) => (
-								<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Subcategory />} />
+								<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Auth />} />
 							))}
 						</Route>
 					))}
