@@ -1,44 +1,41 @@
 .header {
-  width: 100%;
-  border-bottom: 1px solid #000000;
+	width: 100%;
+	border-bottom: 1px solid #000000;
 
-  &__container {
-    display: grid;
-    width: 100%;
-    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
-    grid-gap: 15px;
-    align-items: center;
-  }
+	&__container {
+		display: grid;
+		width: 100%;
+		grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+		grid-gap: 15px;
+		align-items: center;
+	}
 
-  &__logo {
-    padding: 15px 0;
-    font-size: 30px;
-    font-weight: 300;
-    text-transform: uppercase;
-  }
+	&__logo {
+		padding: 15px 0;
+		font-size: 30px;
+		font-weight: 300;
+		text-transform: uppercase;
+	}
 
-  &__nav-links {
-    justify-self: end;
-    display: flex;
-    grid-gap: 15px;
+	&__nav-links {
+		justify-self: end;
+		display: flex;
+		grid-gap: 15px;
+	}
 
-  }
+	&__nav-link {
+		text-transform: uppercase;
+		color: #000000;
+	}
 
-  &__nav-link {
-    text-transform: uppercase;
-    color: #000000;
-  }
+	&__user {
+		padding: 15px 0;
+	}
 
-  &__user {
-    padding: 15px 0;
-  }
-
-  &__user-icon {
-    width: 50px;
-    height: 50px;
-    background: #000000;
-    border-radius: 50%;
-  }
-
+	&__user-icon {
+		width: 50px;
+		height: 50px;
+		background: #000000;
+		border-radius: 50%;
+	}
 }
-

@@ -52,16 +52,19 @@ class subcategoriesController {
 	}
 	async getSubcategoriesByCategory(req, res) {
 		try {
-			const {categoryTitle} = req.query
+			const { categoryTitle } = req.query;
 			const response = await category.findAll({
-				where: {title: categoryTitle},
+				where: { title: categoryTitle },
 				include: [
-					{ model: subcategory, include: [
-							{ model: isActive, attributes: ['isActiveID', 'value'], where: {value: "Yes"} },
+					{
+						model: subcategory,
+						include: [
+							{ model: isActive, attributes: ['isActiveID', 'value'], where: { value: 'Yes' } },
 							{ model: subcategoryPicture, attributes: ['pictureID', 'name'] },
-						] }
-				]
-			})
+						],
+					},
+				],
+			});
 			return res.json(response);
 		} catch (e) {
 			console.log(e);
