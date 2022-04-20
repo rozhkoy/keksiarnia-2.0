@@ -25,7 +25,7 @@ export const Catalog = () => {
 						categories.map((item) => {
 							const imgLink = createImgLink(item.categoryPicture.name);
 							return (
-								<Link key={item.categoryPicture.name} to={`/${item.title.toLowerCase()}`} className={'link'}>
+								<Link key={item.categoryPicture.name} to={item.title.toLowerCase()} className={'link'}>
 									<div className="catalog__item">
 										<img src={imgLink} alt="" className="catalog__item-img" />
 										<div className="catalog__item-title-background">
