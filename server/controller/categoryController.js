@@ -71,7 +71,6 @@ class categoryController {
 			console.log(e);
 			throw ApiError.BadRequest('Error Database');
 		}
-
 	}
 }
 

@@ -150,8 +150,7 @@ categoryFilter.belongsTo(isActive, { foreignKey: 'isActiveID' });
 categoryFilter.hasMany(categoryFilterItem, { foreignKey: 'categoryFilterID' });
 categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' });
 
-category.hasMany(subcategory, {foreignKey:"categoryID"})
-subcategory.belongsTo(category, {foreignKey:"categoryID"})
+
 
 // isActive.hasMany(product, { foreignKey: 'isActiveID' });
 // product.belongsTo(isActive, { foreignKey: 'isActiveID' });
