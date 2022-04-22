@@ -2,10 +2,10 @@ import { Container } from '../../shared/ui/container';
 import './style.scss';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
-import { getAllCategories } from '../AddNewSubcategory/api';
-import { ICategoryResponse } from '../ListCategories/types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { Link } from 'react-router-dom';
+import { getAllCategories } from 'src/features/AddNewSubcategory/api';
+import { ICategoryResponse } from 'src/features/ListCategories/types';
 
 export const Catalog = () => {
 	const [categories, setCategories] = useState<ICategoryResponse[]>([]);
