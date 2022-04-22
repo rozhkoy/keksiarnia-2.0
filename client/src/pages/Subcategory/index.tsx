@@ -8,6 +8,7 @@ import { getSubcategoriesByCategory } from './api';
 import { SubcategoryType } from './types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { ISubcategoriesFullResponse } from '../../features/ListSubcategory/types';
+import { Link } from 'react-router-dom';
 
 export const Subcategory: React.FC<SubcategoryType> = (props) => {
 	const [subcategoriesWithCategory, setSubcategoriesWithCategory] = useState<ISubcategoriesFullResponse[]>([]);
@@ -31,12 +32,14 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 					subcategoriesWithCategory.map((item) => {
 						const imgLink = createImgLink(item.subcategoryPicture.name);
 						return (
-							<div key={item.subcategoryID} className="subcategory__item">
-								<img src={imgLink} alt="" className="subcategory__item-img" />
-								<div className="subcategory__item-title-background">
-									<p className="subcategory__item-title">{item.title}</p>
+							<Link key={item.subcategoryID} to={item.title.toLowerCase()} className={'link'}>
+								<div key={item.subcategoryID} className="subcategory__item">
+									<img src={imgLink} alt="" className="subcategory__item-img" />
+									<div className="subcategory__item-title-background">
+										<p className="subcategory__item-title">{item.title}</p>
+									</div>
 								</div>
-							</div>
+							</Link>
 						);
 					})}
 			</div>

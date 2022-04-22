@@ -2,17 +2,14 @@ import './style.scss';
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
 import { Header } from '../../features/Header';
-import { Catalog } from '../../features/Catalog';
 import { Route, Routes } from 'react-router';
 import { Subcategory } from '../Subcategory';
 import { useQuery } from 'react-query';
-import { getAllCategories } from '../../features/AddNewSubcategory/api';
-import { getAllSubcategories } from '../../features/AddCategoryFIlter/api';
-import { ICategoryResponse } from '../../features/ListCategories/types';
-import { ISubcategoryResponse } from '../../features/AddNewSubcategory/types';
 import { getAllCategoriesWithSubcategories } from './api';
 import { ICategoriesWithSubcategories } from './types';
 import Auth from '../Auth';
+import { Catalog } from '../Catalog';
+import { Products } from '../Products';
 
 export const Shop = () => {
 	const dispatch = useAppDispatch();
@@ -34,10 +31,12 @@ export const Shop = () => {
 					<Route path={'catalog/*'} element={<Catalog />} />
 					{categoriesWithSubcategories.map((item, index) => (
 						<Route path={'catalog/*'} key={item.categoryID}>
-							<Route path={item.title.toLowerCase()} element={<Subcategory category={item.title} />} />
-							{item.subcategories.map((subcategories) => (
-								<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Auth />} />
-							))}
+							<Route path={`${item.title.toLowerCase()}/*`}>
+								{item.subcategories.map((subcategories) => (
+									<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Products subcategory={subcategories.title} />} />
+								))}
+								<Route path={''} element={<Subcategory category={item.title} />} />
+							</Route>
 						</Route>
 					))}
 				</Route>
