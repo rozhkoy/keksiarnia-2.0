@@ -11,14 +11,10 @@ export const Header = () => {
 						<span>Keksiarnia</span>
 					</div>
 					<div className="header__nav-links">
-						<NavLink className={'header__nav-link'} to={'/woman'}>
-							for women
-						</NavLink>
-						<NavLink className={'header__nav-link'} to={'/man'}>
-							for man
+						<NavLink className={'header__nav-link'} to={'/catalog'}>
+							Catalog
 						</NavLink>
 						<NavLink className={'header__nav-link'} to={'/cart'}>
-							{' '}
 							cart
 						</NavLink>
 					</div>
