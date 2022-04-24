@@ -9,7 +9,17 @@ import { AdminCardSelectWithSearch } from '../../shared/ui/AdminCardSelectWithSe
 import { ICustomSelectData } from '../AddNewSubcategory/types';
 import { getAllSubcategories } from '../AddCategoryFIlter/api';
 import { IsActive } from '../../shared/ui/IsActive';
-import { getAllProductGroup, getFilterList, getProductGroupItemsById, sendProductData, sendProductPicture, sendProductPrice, sendProductPropertyItem, sendTagsOfFilterForProduct } from './api';
+import {
+	getAllProductGroup,
+	getFilterList,
+	getProductGroupItemsById,
+	sendPreviewProductPicture,
+	sendProductData,
+	sendProductPicture,
+	sendProductPrice,
+	sendProductPropertyItem,
+	sendTagsOfFilterForProduct
+} from "./api";
 import { AdminProductProperties } from '../../shared/ui/AdminProductProperties ';
 import { IListProperties } from '../../shared/ui/AdminProductProperties /types';
 import { AdminCardBttnSubmit } from '../../shared/ui/AdminCardBttnSubmit';
@@ -20,6 +30,7 @@ import { AdminCardTextarea } from '../../shared/ui/AdminCardTextarea';
 import { AdminCardPhotos } from '../../shared/ui/AdminCardPhotos';
 import { IPhotosInfo } from '../../shared/ui/AdminCardPhotos/types';
 import { createFormData } from '../../shared/lib/createFormData';
+import { AdminCardFile } from '../../shared/ui/AdminCardFile';
 
 export const AddProduct = () => {
 	const [listCategory, setListCategory] = useState<Array<ICustomSelectData>>([]);
@@ -39,6 +50,7 @@ export const AddProduct = () => {
 	const [description, setDescription] = useState<string>('');
 	const [photosInfo, setPhotosInfo] = useState<Array<IPhotosInfo>>([]);
 	const [selectedItem, setSelectedItem] = useState<Array<IFilterListForMultiSelect>>([]);
+	const [previewPhoto, setPreviewPhoto] = useState<Blob>(new Blob());
 
 	useQuery('getAllCategoriesForProduct', getAllCategories, {
 		onSuccess: ({ data }) => {
@@ -215,6 +227,12 @@ export const AddProduct = () => {
 		},
 	});
 
+	const previewProductPictureMutation = useMutation(sendPreviewProductPicture, {
+		onSuccess: ({ data }) => {
+			console.log(data)
+		}
+	})
+
 	function formHandler() {
 		const formData = createFormData([
 			{
@@ -246,7 +264,8 @@ export const AddProduct = () => {
 					value: item.id,
 				},
 			]);
-			productPropertyMutation.mutate(formData);
+			console.log(productPropertyMutation.mutate(formData));
+
 		});
 	}
 
@@ -265,15 +284,22 @@ export const AddProduct = () => {
 			<AdminCardForm>
 				<IsActive field={'Is active product'} getValue={setIsActive} />
 				<AdminCardSelectWithSearch list={listCategory} getValue={setCategoryId} field={'Select category'} />
-				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId} field={'Select subcategory'} />
-				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId} field={'Select product group'} />
-				{productGroupItemsById.isSuccess && <AdminProductProperties getValue={setListProductGroupItems} field={'Product property'} listProperties={listProductGroupItems} />}
+				<AdminCardSelectWithSearch list={listSubcategories} getValue={setSubcategoryId}
+				                           field={'Select subcategory'} />
+				<AdminCardSelectWithSearch list={listProductGroup} getValue={setProductGroupId}
+				                           field={'Select product group'} />
+				{productGroupItemsById.isSuccess &&
+					<AdminProductProperties getValue={setListProductGroupItems} field={'Product property'}
+					                        listProperties={listProductGroupItems} />}
 				<AdminCardInput value={productTitle} change={setProductTitle} type={'text'} field={'Product title'} />
+				<AdminCardFile field={'Preview Photo'} change={setPreviewPhoto} />
 				<AdminCardPhotos getPhotosInfo={setPhotosInfo} photosInfo={photosInfo} field={'Photos'} />
-				<AdminMultiSelect selectedItems={selectedItem} getValue={setSelectedItem} field={'Filter tags for search'} arrayList={listFilter} />
+				<AdminMultiSelect selectedItems={selectedItem} getValue={setSelectedItem}
+				                  field={'Filter tags for search'} arrayList={listFilter} />
 				<AdminCardInput value={price} change={setPrice} type={'text'} field={'Price'} />
 				<IsActive field={'Is active discount price'} getValue={setIsActiveDiscountPrice} />
-				<AdminCardInput value={discountPercent} change={setDiscountPercent} type={'number'} field={'Discount Percent'} />
+				<AdminCardInput value={discountPercent} change={setDiscountPercent} type={'number'}
+				                field={'Discount Percent'} />
 				<div className="price">
 					<ul className="price__list">
 						<li className="price__item">Price: {price}$</li>
