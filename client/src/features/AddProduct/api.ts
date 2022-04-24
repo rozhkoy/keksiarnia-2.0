@@ -38,3 +38,7 @@ export async function sendTagsOfFilterForProduct(formData: FormData) {
 export async function sendProductPropertyItem(formData: FormData) {
 	return await $host.post<IPropertyProductItem>('api/productPropertyRouter', formData);
 }
+
+export async function sendPreviewProductPicture(formData: FormData) {
+	return await $host.post<IProductPicture>('api/previewProductPicture', formData);
+}

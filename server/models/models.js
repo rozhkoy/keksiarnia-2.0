@@ -111,6 +111,11 @@ const product = sequelize.define('product', {
 	number: { type: DataTypes.STRING, allowNull: false },
 });
 
+const previewProductPicture = sequelize.define("previewProductPicture", {
+	pictureID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	name: { type: DataTypes.STRING, allowNull: false },
+})
+
 const userData = sequelize.define('userData', {
 	id_user: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	email: { type: DataTypes.STRING, allowNull: false },
@@ -181,6 +186,7 @@ module.exports = {
 	product,
 	// supplier,
 	// supplierCategory,
+	previewProductPicture,
 	productGroup,
 	propertyProductItem,
 	productPrice,
