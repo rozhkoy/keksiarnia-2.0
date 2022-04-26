@@ -46,10 +46,11 @@ class picturesController {
 
 	async sendPreviewProductPictures(req, res) {
 		try {
+			let { productID } = req.body;
 			let { img } = req.files;
 			let fileName = uuid.v4() + '.jpg';
 			img.mv(path.resolve(__dirname, '..', 'static', fileName));
-			const response = await previewProductPicture.create({ name: fileName });
+			const response = await previewProductPicture.create({ name: fileName, productID });
 			res.json(response);
 		} catch (e) {
 			console.log(e);

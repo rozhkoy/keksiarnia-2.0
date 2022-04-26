@@ -25,7 +25,7 @@ const price = require('./priceRouter');
 const productPicture = require('./productPicture');
 const productPropertyRouter = require('./productPropertyRouter');
 const tagsOfFilerProduct = require('./tagsOfFilerProductRouter');
-const previewProductPictureRouter = require('./previewProductPictureRouter')
+const previewProductPictureRouter = require('./previewProductPictureRouter');
 
 router.post('/registration', body('email').isEmail(), body('password').isLength({ min: 3, max: 32 }), userController.registration);
 router.post('/login', userController.login);
@@ -54,6 +54,6 @@ router.use('/price', price);
 router.use('/productPictures', productPicture);
 router.use('/productPropertyRouter', productPropertyRouter);
 router.use('/tagsOfFilerProduct', tagsOfFilerProduct);
-router.use('/previewProductPicture', previewProductPictureRouter)
+router.use('/previewProductPicture', previewProductPictureRouter);
 
 module.exports = router;
