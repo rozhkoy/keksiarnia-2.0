@@ -1,4 +1,4 @@
-const { product, isActive, subcategory, category } = require('../models/models');
+const { product, isActive, subcategory, category, previewProductPicture, productPrice } = require('../models/models');
 const ApiError = require('../exceptions/apiErrors');
 
 class ProductController {
@@ -15,9 +15,33 @@ class ProductController {
 
 	async getAllProduct(req, res) {
 		const response = await product.findAll({
-			include: [{ model: isActive }, { model: category }, { model: subcategory }],
+			include: [{ model: category }, { model: subcategory }, {model: previewProductPicture}],
 		});
 		return res.json(response);
+	}
+
+	async getAllProductByCategory(req, res) {
+		const {categoryTitle, subcategoryTitle} = req.query
+		const response = await product.findAndCountAll({
+			attributes: ["productID", "name", ],
+			include: [
+				{ model: category, where: {title: categoryTitle}, attributes: [] },
+				{ model: subcategory, where: {title: subcategoryTitle}, attributes: []},
+				{ model: previewProductPicture, attributes: ["pictureID", "name"]},
+				{ model: isActive, where: {value: "Yes"}, attributes: []},
+				{
+					model: productPrice,
+					include: [
+						{
+							model: isActive,
+							attributes: ["value"]
+						}
+					],
+					attributes: ["discountPrice", "price", "discountPercent"]
+				}
+			],
+		});
+		return res.json(response)
 	}
 }
 

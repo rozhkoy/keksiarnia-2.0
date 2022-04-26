@@ -101,11 +101,11 @@ const productPrice = sequelize.define('productPrice', {
 
 const product = sequelize.define('product', {
 	productID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-	isActiveID: { type: DataTypes.STRING, allowNull: false },
-	categoryID: { type: DataTypes.STRING, allowNull: false },
-	subcategoryID: { type: DataTypes.STRING, allowNull: false },
-	priceID: { type: DataTypes.STRING, allowNull: false },
-	productGroupID: { type: DataTypes.STRING, allowNull: false },
+	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
+	categoryID: { type: DataTypes.BIGINT, allowNull: false },
+	subcategoryID: { type: DataTypes.BIGINT, allowNull: false },
+	priceID: { type: DataTypes.BIGINT, allowNull: false },
+	productGroupID: { type: DataTypes.BIGINT, allowNull: false },
 	name: { type: DataTypes.STRING, allowNull: false },
 	description: { type: DataTypes.STRING, allowNull: false },
 	number: { type: DataTypes.STRING, allowNull: false },
@@ -156,23 +156,26 @@ categoryFilter.belongsTo(isActive, { foreignKey: 'isActiveID' });
 categoryFilter.hasMany(categoryFilterItem, { foreignKey: 'categoryFilterID' });
 categoryFilterItem.belongsTo(categoryFilter, { foreignKey: 'categoryFilterID' });
 
-// isActive.hasMany(product, { foreignKey: 'isActiveID' });
-// product.belongsTo(isActive, { foreignKey: 'isActiveID' });
-//
-// category.hasMany(product, { foreignKey: 'categoryID' });
-// product.belongsTo(category, { foreignKey: 'categoryID' });
-//
-// subcategory.hasMany(product, { foreignKey: 'subcategoryID' });
-// product.belongsTo(subcategory, { foreignKey: 'subcategoryID' });
-//
-// productGroup.hasMany(product, { foreignKey: 'productGroupID' });
-// product.belongsTo(productGroup, { foreignKey: 'productGroupID' });
-//
-// productPrice.hasMany(product, { foreignKey: 'priceID' });
-// product.belongsTo(productPrice, { foreignKey: 'priceID' });
-//
-// isActive.hasMany(productPrice, { foreignKey: 'isActiveID' });
-// productPrice.belongsTo(isActive, { foreignKey: 'isActiveID' });
+isActive.hasMany(product, { foreignKey: 'isActiveID' });
+product.belongsTo(isActive, { foreignKey: 'isActiveID' });
+
+category.hasMany(product, { foreignKey: 'categoryID' });
+product.belongsTo(category, { foreignKey: 'categoryID' });
+
+subcategory.hasMany(product, { foreignKey: 'subcategoryID' });
+product.belongsTo(subcategory, { foreignKey: 'subcategoryID' });
+
+productGroup.hasMany(product, { foreignKey: 'productGroupID' });
+product.belongsTo(productGroup, { foreignKey: 'productGroupID' });
+
+productPrice.hasMany(product, { foreignKey: 'priceID' });
+product.belongsTo(productPrice, { foreignKey: 'priceID' });
+
+isActive.hasMany(productPrice, { foreignKey: 'isActiveID' });
+productPrice.belongsTo(isActive, { foreignKey: 'isActiveID' });
+
+product.hasOne(previewProductPicture, {foreignKey: 'pictureID'})
+previewProductPicture.belongsTo(product, {foreignKey: 'pictureID'})
 
 module.exports = {
 	category,
