@@ -72,7 +72,7 @@ export const AdminCardPhotos: React.FC<AdminCardPhotosType> = (props) => {
 
 	return (
 		<div className="admin-card-photos">
-			<p className="admin-card-field">text</p>
+			<p className="admin-card-field">{props.field}</p>
 			<input type="file" onChange={inputFileHandler} className="admin-card-photos__select-bttn" multiple />
 			<div className="admin-card-photos__list-photos">
 				<div className="admin-card-photos__wrap">

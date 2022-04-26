@@ -1,8 +1,7 @@
-const Router = require('express')
-const router = new Router()
-const picturesController = require('../controller/picturesController')
+const Router = require('express');
+const router = new Router();
+const picturesController = require('../controller/picturesController');
 
+router.post('/', picturesController.sendPreviewProductPictures);
 
-router.post('/', picturesController.sendPreviewProductPictures)
-
-module.exports = router
+module.exports = router;
