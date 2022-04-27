@@ -4,6 +4,10 @@
     font-size: 23px;
   }
 
+  &__title::First-letter {
+    text-transform: uppercase;
+  }
+
   &__items {
     display: grid;
     align-items: center;
