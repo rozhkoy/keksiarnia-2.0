@@ -21,7 +21,16 @@ class ProductController {
 	}
 
 	async getAllProductByCategory(req, res) {
-		const {categoryTitle, subcategoryTitle} = req.query
+		let {categoryTitle, subcategoryTitle, page, limit} = req.query
+		console.log(categoryTitle, subcategoryTitle, page, limit);
+		if (page <= 0) {
+			page = 1;
+		}
+		if (limit <= 0) {
+			limit = 1;
+		}
+		console.log(limit, page);
+		let offset = page * limit - limit;
 		const response = await product.findAndCountAll({
 			attributes: ["productID", "name", ],
 			include: [
@@ -40,6 +49,8 @@ class ProductController {
 					attributes: ["discountPrice", "price", "discountPercent"]
 				}
 			],
+			offset: offset,
+			limit: limit,
 		});
 		return res.json(response)
 	}
