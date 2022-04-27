@@ -1,10 +1,10 @@
-import { IProductResponse, ProductsType } from './types';
+import { ICategoryFilterItems, IProductResponse, ProductsType } from './types';
 import { WrapContainer } from '../../shared/ui/WrapContainer';
 import './style.scss';
 import { FilterItems } from '../../features/FilterItems';
 import { useQuery } from 'react-query';
 import { useEffect, useState } from 'react';
-import { getAllProductByCategoryAndSubcategory } from './api';
+import { getAllProductByCategoryAndSubcategory, getCategoryFilterItemsBySubcategory } from './api';
 import { findAndCountAll } from '../../shared/ui/types';
 import { ProductItem } from 'src/features/ProductItem';
 
@@ -12,11 +12,19 @@ export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
 	const [page, setPage] = useState<number>(1);
 	const [products, setProducts] = useState<IProductResponse[]>([]);
+	const [categoryFilterItem, setCategoryFilterItems] = useState<Array<ICategoryFilterItems>>([]);
 
 	const productsQuery = useQuery(['productsQuery', limit, page, props.categoryTitle, props.subcategoryTitle], () => getAllProductByCategoryAndSubcategory(limit, page, props.categoryTitle, props.subcategoryTitle), {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			setProducts(data.rows);
+		},
+	});
+
+	const categoryFilterItemsQuery = useQuery(['categoryFilterItemsQuery', props.subcategoryTitle], () => getCategoryFilterItemsBySubcategory(props.subcategoryTitle), {
+		onSuccess: ({ data }) => {
+			console.log(data);
+			setCategoryFilterItems(data);
 		},
 	});
 
@@ -28,10 +36,11 @@ export const Products: React.FC<ProductsType> = (props) => {
 		<div>
 			<WrapContainer>
 				<div className="products__container">
-					<div className="products__title">test</div>
+					<div className="products__title">{props.subcategoryTitle}</div>
 					<div className="products__filters">
-						<FilterItems />
-						<FilterItems />
+						{categoryFilterItem.map((item) => (
+							<FilterItems data={item} />
+						))}
 					</div>
 					<div className="products__grid">
 						{products.map((item) => (
