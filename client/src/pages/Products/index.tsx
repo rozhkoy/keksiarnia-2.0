@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { getAllProductByCategoryAndSubcategory, getCategoryFilterItemsBySubcategory } from './api';
 import { findAndCountAll } from '../../shared/ui/types';
 import { ProductItem } from 'src/features/ProductItem';
+import { DoubleRangeSlider } from '../../features/DoubleRangeSlider';
 
 export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
@@ -41,6 +42,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 						{categoryFilterItem.map((item) => (
 							<FilterItems data={item} />
 						))}
+						<DoubleRangeSlider />
 					</div>
 					<div className="products__grid">
 						{products.map((item) => (
