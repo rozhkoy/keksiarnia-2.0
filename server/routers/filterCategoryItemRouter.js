@@ -5,5 +5,6 @@ const filterCategoryItemController = require('../controller/categoryFilterItemCo
 router.post('/', filterCategoryItemController.addFilterCategoryItem);
 router.get('/', filterCategoryItemController.getAllFilterItems);
 router.get('/getAll', filterCategoryItemController.getAllFilterWithoutPagination);
+router.get('/bySubcategory', filterCategoryItemController.getFilterListBySubcategory)
 
 module.exports = router;

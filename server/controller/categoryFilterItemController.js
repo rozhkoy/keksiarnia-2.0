@@ -1,4 +1,4 @@
-const { filterCategoryItem, categoryFilter, categoryFilterItem, isActive } = require('../models/models');
+const { filterCategoryItem, categoryFilter, categoryFilterItem, isActive, subcategory } = require('../models/models');
 
 class CategoryFilterItemController {
 	async addFilterCategoryItem(req, res) {
@@ -6,7 +6,7 @@ class CategoryFilterItemController {
 		const response = await categoryFilterItem.create({
 			isActiveID,
 			categoryFilterID,
-			title,
+			title
 		});
 		return res.json(response);
 	}
@@ -17,14 +17,14 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActiveID: 1,
+						isActiveID: 1
 					},
-					distinct: true,
+					distinct: true
 				},
-				{ model: isActive },
+				{ model: isActive }
 			],
 			distinct: true,
-			order: [['categoryFilterID', 'DESC']],
+			order: [['categoryFilterID', 'DESC']]
 		});
 		return res.json(response);
 	}
@@ -40,16 +40,45 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActiveID: 1,
+						isActiveID: 1
 					},
-					distinct: true,
+					distinct: true
 				},
-				{ model: isActive },
+				{ model: isActive }
 			],
 			distinct: true,
 			limit: limit,
 			offset: offset,
-			order: [['categoryFilterID', 'DESC']],
+			order: [['categoryFilterID', 'DESC']]
+		});
+		return res.json(response);
+	}
+
+	async getFilterListBySubcategory(req, res) {
+		const { subcategoryTitle } = req.query;
+		const response = await categoryFilter.findAll({
+			attributes: ['categoryFilterID', 'title'],
+			include: [
+				{
+					model: categoryFilterItem,
+					where: {
+						isActiveID: 1,
+					},
+					include: [
+						{
+							model: isActive,
+							where: {
+								value: 'Yes'
+							},
+							attributes: []
+						}
+					],
+					attributes: ['filterItemID', 'title'],
+					distinct: true
+				},
+				{ model: subcategory, attributes: ["title"], where: {title: subcategoryTitle}},
+				{ model: isActive, attributes: []}
+			]
 		});
 		return res.json(response);
 	}
