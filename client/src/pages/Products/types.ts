@@ -19,3 +19,17 @@ export type IProductResponse = {
 		};
 	};
 };
+
+export interface ICategoryFilterItems {
+	categoryFilterID: string;
+	title: string;
+	subcategory: {
+		title: string;
+	};
+	categoryFilterItems: IFilterItem[];
+}
+
+export interface IFilterItem {
+	filterItemID: string;
+	title: string;
+}
