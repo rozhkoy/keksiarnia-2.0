@@ -136,7 +136,7 @@ export const AddProduct = () => {
 				},
 				{
 					key: 'productGroupID',
-					value: '5',
+					value: productGroupId,
 				},
 				{
 					key: 'name',
@@ -274,7 +274,7 @@ export const AddProduct = () => {
 			setDiscountPercent('99');
 		}
 		setDiscountPrice((state) => {
-			return Number(price) * (100 - Number(discountPercent) * 0.01);
+			return Number(price) * ((100 - Number(discountPercent)) * 0.01);
 		});
 	}, [price, discountPrice, discountPercent]);
 

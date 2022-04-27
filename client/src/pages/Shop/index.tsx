@@ -33,7 +33,7 @@ export const Shop = () => {
 						<Route path={'catalog/*'} key={item.categoryID}>
 							<Route path={`${item.title.toLowerCase()}/*`}>
 								{item.subcategories.map((subcategories) => (
-									<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Products subcategory={subcategories.title} />} />
+									<Route key={subcategories.subcategoryID} path={subcategories.title} element={<Products categoryTitle={item.title} subcategoryTitle={subcategories.title} />} />
 								))}
 								<Route path={''} element={<Subcategory category={item.title} />} />
 							</Route>
