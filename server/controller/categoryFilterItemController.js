@@ -1,4 +1,5 @@
 const { filterCategoryItem, categoryFilter, categoryFilterItem, isActive, subcategory } = require('../models/models');
+const { Op } = require("sequelize");
 
 class CategoryFilterItemController {
 	async addFilterCategoryItem(req, res) {
@@ -55,14 +56,27 @@ class CategoryFilterItemController {
 	}
 
 	async getFilterListBySubcategory(req, res) {
-		const { subcategoryTitle } = req.query;
+		const { subcategoryTitle, filterID } = req.query;
+		console.log(filterID)
+		let filterItemsArray = []
+		if(filterID.length > 0) {
+			filterItemsArray = filterID.map(item => {
+				return {
+					filterItemID: item
+				}
+			})
+		}
+
+		console.log(filterItemsArray)
+
 		const response = await categoryFilter.findAll({
 			attributes: ['categoryFilterID', 'title'],
+			where: {},
 			include: [
 				{
 					model: categoryFilterItem,
 					where: {
-						isActiveID: 1,
+						[Op.or]: filterItemsArray
 					},
 					include: [
 						{
@@ -76,8 +90,8 @@ class CategoryFilterItemController {
 					attributes: ['filterItemID', 'title'],
 					distinct: true
 				},
-				{ model: subcategory, attributes: ["title"], where: {title: subcategoryTitle}},
-				{ model: isActive, attributes: []}
+				{ model: subcategory, attributes: ['title'], where: { title: subcategoryTitle } },
+				{ model: isActive, attributes: [] }
 			]
 		});
 		return res.json(response);
