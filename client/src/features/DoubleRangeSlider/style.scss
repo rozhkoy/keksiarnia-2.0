@@ -60,6 +60,12 @@
     -webkit-appearance: none;
     margin-top: -7px;
     border: 2px solid #000000;
+    transition: all .3s;
+  }
+
+  &__range::-webkit-slider-thumb:active {
+    background: #000000;
+    transition: all .3s;
   }
 
 }
