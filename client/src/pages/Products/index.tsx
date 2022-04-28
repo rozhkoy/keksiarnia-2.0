@@ -8,12 +8,16 @@ import { getAllProductByCategoryAndSubcategory, getCategoryFilterItemsBySubcateg
 import { findAndCountAll } from '../../shared/ui/types';
 import { ProductItem } from 'src/features/ProductItem';
 import { DoubleRangeSlider } from '../../features/DoubleRangeSlider';
+import { IMinMax } from '../../features/FilterItems/types';
 
 export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
 	const [page, setPage] = useState<number>(1);
 	const [products, setProducts] = useState<IProductResponse[]>([]);
 	const [categoryFilterItem, setCategoryFilterItems] = useState<Array<ICategoryFilterItems>>([]);
+	const [minMaxValue, setMinMaxValue] = useState<IMinMax>({ min: 0, max: 100 });
+	const [minValue, setMinValue] = useState<number>(0);
+	const [maxValue, setMaxvalue] = useState<number>(100);
 
 	const productsQuery = useQuery(['productsQuery', limit, page, props.categoryTitle, props.subcategoryTitle], () => getAllProductByCategoryAndSubcategory(limit, page, props.categoryTitle, props.subcategoryTitle), {
 		onSuccess: ({ data }) => {
@@ -40,9 +44,9 @@ export const Products: React.FC<ProductsType> = (props) => {
 					<div className="products__title">{props.subcategoryTitle}</div>
 					<div className="products__filters">
 						{categoryFilterItem.map((item) => (
-							<FilterItems data={item} />
+							<FilterItems key={item.categoryFilterID} data={item} />
 						))}
-						<DoubleRangeSlider />
+						<DoubleRangeSlider min={minMaxValue.min} max={minMaxValue.max} minValue={minValue} maxValue={maxValue} getMinValue={setMinValue} getMaxValue={setMaxvalue} />
 					</div>
 					<div className="products__grid">
 						{products.map((item) => (
