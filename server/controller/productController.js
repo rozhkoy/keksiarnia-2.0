@@ -49,19 +49,18 @@ class ProductController {
 	}
 
 	async getAllProductByCategory(req, res) {
-		let { categoryTitle, subcategoryTitle, page, limit, filterID } = req.query;
+		let { categoryTitle, subcategoryTitle, page, limit, filterID, maxPrice, minPrice} = req.query;
 		console.log(categoryTitle, subcategoryTitle, page, limit);
 
 		let filterItemsArray = [];
-		console.log(filterID);
+		// console.log(filterID);
 
-		if (filterID.length > 0) {
+		if (filterID && filterID.length > 0) {
 			filterItemsArray = filterID.map(item => {
 				return {
 					tagOfFilterForProductID: item
 				};
 			});
-
 		}
 
 		console.log(filterItemsArray);
@@ -75,33 +74,35 @@ class ProductController {
 		console.log(limit, page);
 		let offset = page * limit - limit;
 		const response = await product.findAndCountAll({
-			attributes: ['productID', 'name'],
-			include: [
+				attributes: ['productID', 'name', "priceID"],
+				include: [
 				{ model: category, where: { title: categoryTitle }, attributes: [] },
 				{ model: subcategory, where: { title: subcategoryTitle }, attributes: [] },
-				{ model: previewProductPicture, attributes: ['pictureID', 'name'] },
-				{ model: isActive, where: { value: 'Yes' }, attributes: [] },
+				{ model: previewProductPicture, attributes: ['pictureID', 'name']},
+				{ model: isActive, where: { value: 'Yes' }, attributes: []},
 				{
 					model: productPrice,
-					include: { model: isActive, attributes: ['value'] },
-					attributes: ['discountPrice', 'price', 'discountPercent'],
-					// where: {
-					// 	price: {
-					// 		[Op.between]: [1, 220],
-					// 	}
-					// },
+					attributes: ['priceID', 'discountPrice', 'isActiveID', 'price', 'discountPercent'],
+					include: [{ model: isActive }],
+					where: {
+						price: {
+							[Op.between]: [minPrice, maxPrice],
+						}
+					},
 				},
 				{
 					model: tagOfFilterForProduct,
 					where: {
-						[Op.or]: filterItemsArray
-					}
+						tagOfFilterForProductID: {
+							[Op.or]: []
+						},
+					},
+					attributes: []
 				}
 			],
 			offset: offset,
 			limit: limit,
-	})
-		;
+	});
 		return res.json(response);
 	}
 }
