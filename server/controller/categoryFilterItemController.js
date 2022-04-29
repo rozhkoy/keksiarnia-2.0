@@ -1,5 +1,5 @@
 const { filterCategoryItem, categoryFilter, categoryFilterItem, isActive, subcategory } = require('../models/models');
-const { Op } = require("sequelize");
+const { Op } = require('sequelize');
 
 class CategoryFilterItemController {
 	async addFilterCategoryItem(req, res) {
@@ -7,7 +7,7 @@ class CategoryFilterItemController {
 		const response = await categoryFilterItem.create({
 			isActiveID,
 			categoryFilterID,
-			title
+			title,
 		});
 		return res.json(response);
 	}
@@ -18,14 +18,14 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActiveID: 1
+						isActiveID: 1,
 					},
-					distinct: true
+					distinct: true,
 				},
-				{ model: isActive }
+				{ model: isActive },
 			],
 			distinct: true,
-			order: [['categoryFilterID', 'DESC']]
+			order: [['categoryFilterID', 'DESC']],
 		});
 		return res.json(response);
 	}
@@ -41,58 +41,43 @@ class CategoryFilterItemController {
 				{
 					model: categoryFilterItem,
 					where: {
-						isActiveID: 1
+						isActiveID: 1,
 					},
-					distinct: true
+					distinct: true,
 				},
-				{ model: isActive }
+				{ model: isActive },
 			],
 			distinct: true,
 			limit: limit,
 			offset: offset,
-			order: [['categoryFilterID', 'DESC']]
+			order: [['categoryFilterID', 'DESC']],
 		});
 		return res.json(response);
 	}
 
 	async getFilterListBySubcategory(req, res) {
-		const { subcategoryTitle, filterID } = req.query;
-		console.log(filterID)
-		let filterItemsArray = []
-		if(filterID.length > 0) {
-			filterItemsArray = filterID.map(item => {
-				return {
-					filterItemID: item
-				}
-			})
-		}
-
-		console.log(filterItemsArray)
+		const { subcategoryTitle } = req.query;
 
 		const response = await categoryFilter.findAll({
 			attributes: ['categoryFilterID', 'title'],
-			where: {},
 			include: [
 				{
 					model: categoryFilterItem,
-					where: {
-						[Op.or]: filterItemsArray
-					},
 					include: [
 						{
 							model: isActive,
 							where: {
-								value: 'Yes'
+								value: 'Yes',
 							},
-							attributes: []
-						}
+							attributes: [],
+						},
 					],
 					attributes: ['filterItemID', 'title'],
-					distinct: true
+					distinct: true,
 				},
 				{ model: subcategory, attributes: ['title'], where: { title: subcategoryTitle } },
-				{ model: isActive, attributes: [] }
-			]
+				{ model: isActive, attributes: [], where: { value: 'Yes' } },
+			],
 		});
 		return res.json(response);
 	}
