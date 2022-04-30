@@ -2,13 +2,16 @@ import { $host } from 'src/shared/api';
 import { findAndCountAll } from '../../shared/ui/types';
 import { ICategoryFilterItems, IProductResponse } from './types';
 
-export async function getAllProductByCategoryAndSubcategory(limit: number, page: number, categoryTitle: string, subcategoryTitle: string) {
+export async function getAllProductByCategoryAndSubcategory(limit: number, page: number, categoryTitle: string, subcategoryTitle: string, filterID: Array<string>, maxPrice: number, minPrice: number) {
 	return await $host.get<findAndCountAll<IProductResponse>>('api/product/bySubcategory', {
 		params: {
 			limit,
 			page,
 			categoryTitle,
 			subcategoryTitle,
+			filterID,
+			maxPrice,
+			minPrice,
 		},
 	});
 }
