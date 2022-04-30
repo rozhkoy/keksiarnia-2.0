@@ -2,8 +2,8 @@ const { tagOfFilterForProduct } = require('../models/models');
 
 class TagsOfFilterProductController {
 	async addTagOfFilterProduct(req, res) {
-		const { productID, name } = req.body;
-		const response = await tagOfFilterForProduct.create({ productID, name });
+		const { productID, filterID } = req.body;
+		const response = await tagOfFilterForProduct.create({ productID, filterID });
 		return res.json(response);
 	}
 }

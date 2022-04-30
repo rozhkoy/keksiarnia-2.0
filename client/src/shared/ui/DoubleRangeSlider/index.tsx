@@ -33,8 +33,8 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = (props) => {
 				<input type="text" value={props.maxValue} onChange={inputMax} className="double-range-slider__input" />
 			</div>
 			<div className="double-range-slider__ranges">
-				<input type="range" value={props.minValue} onChange={sliderMin} step={1} className="double-range-slider__range" />
-				<input type="range" value={props.maxValue} onChange={sliderMax} step={1} className="double-range-slider__range" />
+				<input type="range" value={props.minValue} onChange={sliderMin} max={props.max} min={props.min} step={1} className="double-range-slider__range" />
+				<input type="range" value={props.maxValue} onChange={sliderMax} max={props.max} min={props.min} step={1} className="double-range-slider__range" />
 			</div>
 		</div>
 	);

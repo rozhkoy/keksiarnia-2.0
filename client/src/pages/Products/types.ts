@@ -33,3 +33,9 @@ export interface IFilterItem {
 	filterItemID: string;
 	title: string;
 }
+
+export interface maxPrice {
+	productPrice: {
+		price: number;
+	};
+}

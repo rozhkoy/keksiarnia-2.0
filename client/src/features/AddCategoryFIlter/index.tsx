@@ -24,7 +24,6 @@ export const AddFilterCategory = () => {
 
 	const { isSuccess } = useQuery('getAllSubcategory', getAllSubcategories, {
 		onSuccess: ({ data }) => {
-			console.log({ data });
 			const arr = data.map((item) => {
 				return {
 					id: item.subcategoryID,
@@ -64,9 +63,7 @@ export const AddFilterCategory = () => {
 	});
 
 	function formHandler() {
-		console.log(isActive, subcategoryID, title, listFilterCategoryItem.length > 0);
 		if (isActive && subcategoryID && title && listFilterCategoryItem.length > 0) {
-			console.log('jk');
 			const formData = createFormData([
 				{
 					key: 'isActiveID',
