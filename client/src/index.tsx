@@ -13,6 +13,7 @@ const queryClient = new QueryClient({
 		queries: {
 			optimisticResults: true,
 			retry: false,
+			refetchOnMount: false,
 			refetchOnWindowFocus: false,
 		},
 	},

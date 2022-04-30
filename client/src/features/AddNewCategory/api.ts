@@ -4,7 +4,6 @@ import { AxiosError } from 'axios';
 import { AlertError } from '../../shared/lib/AlertError';
 
 export async function sendDataNewCategory(data: FormData) {
-	console.log('api', data.get('isActiveID'));
 	return await $auth.post('api/categories', data).catch((e: AxiosError) => {
 		AlertError(e);
 		throw e;

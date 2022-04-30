@@ -189,8 +189,8 @@ export const AddProduct = () => {
 							value: data.productID,
 						},
 						{
-							key: 'name',
-							value: item.value,
+							key: 'filterID',
+							value: item.id,
 						},
 					]);
 					tagOfFilterForProductMutation.mutate(formData);
