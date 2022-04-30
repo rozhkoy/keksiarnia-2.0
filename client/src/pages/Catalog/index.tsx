@@ -11,7 +11,7 @@ export const Catalog = () => {
 	const [categories, setCategories] = useState<ICategoryResponse[]>([]);
 	const categoriesQuery = useQuery('getAllCategories', getAllCategories, {
 		onSuccess: ({ data }) => {
-
+			console.log(data);
 			setCategories(data);
 		},
 	});

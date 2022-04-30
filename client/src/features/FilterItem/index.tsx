@@ -19,6 +19,10 @@ export const FilterItems: React.FC<FilterItemsType> = (props) => {
 		}
 	}
 
+	useEffect(() => {
+		console.log('filter item', props.value);
+	});
+
 	return (
 		<div className="filter-items">
 			<div className="filter-items__title">{props.data.title}</div>

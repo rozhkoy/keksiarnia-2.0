@@ -22,6 +22,7 @@ export const AddNewSubcategory = () => {
 	const navigation = useNavigate();
 	const { isSuccess } = useQuery('getAllCategories', getAllCategories, {
 		onSuccess: ({ data }) => {
+			console.log(data);
 			const array = data.map((obj) => {
 				return {
 					id: String(obj.categoryID),

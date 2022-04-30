@@ -85,11 +85,11 @@ class ProductController {
 				{
 					model: tagOfFilterForProduct,
 					where: {
-						filterID: {
+						tagOfFilterForProductID: {
 							[Op.or]: filterID
 						},
 					},
-					// attributes: []
+					attributes: []
 				}
 			],
 			offset: offset,

@@ -42,7 +42,7 @@ const isActive = sequelize.define('isActive', {
 const tagOfFilterForProduct = sequelize.define('tagOfFilterForProduct', {
 	tagOfFilterForProductID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	productID: { type: DataTypes.BIGINT, allowNull: false },
-	filterID: { type: DataTypes.STRING, allowNull: false },
+	name: { type: DataTypes.STRING, allowNull: false },
 });
 
 const categoryFilter = sequelize.define('categoryFilter', {
