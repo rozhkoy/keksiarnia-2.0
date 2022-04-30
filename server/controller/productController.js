@@ -92,6 +92,7 @@ class ProductController {
 					// attributes: []
 				}
 			],
+			distinct: true,
 			offset: offset,
 			limit: limit,
 	});

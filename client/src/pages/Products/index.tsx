@@ -12,6 +12,7 @@ import { IFilterItemCheckbox, IMinMax } from '../../features/FilterItem/types';
 export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
 	const [page, setPage] = useState<number>(1);
+	const [countProduct, setCountProduct] = useState<number>(0);
 	const [products, setProducts] = useState<IProductResponse[]>([]);
 	const [categoryFilterItem, setCategoryFilterItems] = useState<Array<ICategoryFilterItems>>([]);
 	const [minMaxValue, setMinMaxValue] = useState<IMinMax>({ min: 0, max: 100 });
@@ -38,6 +39,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 			console.log('products', data);
 			setProducts(data.rows);
 			setQueryStatus(false);
+			setCountProduct(data.count);
 		},
 		enabled: queryStatus,
 	});
@@ -58,8 +60,24 @@ export const Products: React.FC<ProductsType> = (props) => {
 		setQueryStatus(true);
 	}
 
+	function incrementPage() {
+		if (page * limit < countProduct) {
+			setPage((state) => (state += 1));
+			setQueryStatus(true);
+		}
+		console.log(page);
+	}
+
+	function decrementPage() {
+		if (page > 1) {
+			setPage((state) => (state -= 1));
+			setQueryStatus(true);
+		}
+		console.log(page);
+	}
+
 	useEffect(() => {
-		console.log(filterItemID);
+		console.log(filterItemID, page);
 	});
 
 	return (
@@ -79,9 +97,9 @@ export const Products: React.FC<ProductsType> = (props) => {
 							<ProductItem key={item.productID} name={item.name} price={item.productPrice.price} discountPrice={item.productPrice.discountPrice} img={item.previewProductPicture.name} isActiveDiscountPrice={item.productPrice.isActive.value} />
 						))}
 					</div>
-					<div className="products__pagination">
-						<button>{'prev'}</button>
-						<button>{'next'}</button>
+					<div className="products__pag   ination">
+						<button onClick={decrementPage}>{'prev'}</button>
+						<button onClick={incrementPage}>{'next'}</button>
 					</div>
 				</div>
 			</WrapContainer>
