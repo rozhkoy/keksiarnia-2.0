@@ -50,20 +50,12 @@ class ProductController {
 
 	async getAllProductByCategory(req, res) {
 		let { categoryTitle, subcategoryTitle, page, limit, filterID, maxPrice, minPrice} = req.query;
-		console.log(categoryTitle, subcategoryTitle, page, limit);
-
-		let filterItemsArray = [];
-		// console.log(filterID);
-
-		if (filterID && filterID.length > 0) {
-			filterItemsArray = filterID.map(item => {
-				return {
-					tagOfFilterForProductID: item
-				};
-			});
+		console.log(categoryTitle, subcategoryTitle, page, limit, filterID);
+		if(!filterID) {
+			filterID = []
 		}
 
-		console.log(filterItemsArray);
+		console.log(categoryTitle, subcategoryTitle, page, limit, filterID);
 
 		if (page <= 0) {
 			page = 1;
@@ -94,7 +86,7 @@ class ProductController {
 					model: tagOfFilterForProduct,
 					where: {
 						tagOfFilterForProductID: {
-							[Op.or]: []
+							[Op.or]: filterID
 						},
 					},
 					attributes: []
