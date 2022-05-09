@@ -10,6 +10,7 @@ import { ICategoriesWithSubcategories } from './types';
 import Auth from '../Auth';
 import { Catalog } from '../Catalog';
 import { Products } from '../Products';
+import { ProductCard } from '../ProductCard';
 
 export const Shop = () => {
 	const dispatch = useAppDispatch();
@@ -39,6 +40,9 @@ export const Shop = () => {
 							</Route>
 						</Route>
 					))}
+				</Route>
+				<Route path={'product/'}>
+					<Route path={':productID'} element={<ProductCard />} />
 				</Route>
 			</Routes>
 			{/*<button onClick={() => dispatch(Logout())}>logout</button>*/}

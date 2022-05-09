@@ -8,6 +8,7 @@ import { getAllProductByCategoryAndSubcategory, getCategoryFilterItemsBySubcateg
 import { ProductItem } from 'src/features/ProductItem';
 import { DoubleRangeSlider } from '../../shared/ui/DoubleRangeSlider';
 import { IFilterItemCheckbox, IMinMax } from '../../features/FilterItem/types';
+import { Link } from 'react-router-dom';
 
 export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
@@ -94,7 +95,9 @@ export const Products: React.FC<ProductsType> = (props) => {
 					</div>
 					<div className="products__grid">
 						{products.map((item) => (
-							<ProductItem key={item.productID} name={item.name} price={item.productPrice.price} discountPrice={item.productPrice.discountPrice} img={item.previewProductPicture.name} isActiveDiscountPrice={item.productPrice.isActive.value} />
+							<Link key={item.productID} to={`/product/${item.productID}`}>
+								<ProductItem key={item.productID} name={item.name} price={item.productPrice.price} discountPrice={item.productPrice.discountPrice} img={item.previewProductPicture.name} isActiveDiscountPrice={item.productPrice.isActive.value} />
+							</Link>
 						))}
 					</div>
 					<div className="products__pag   ination">

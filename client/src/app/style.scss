@@ -3,7 +3,7 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body,
@@ -20,47 +20,60 @@ figcaption,
 blockquote,
 dl,
 dd {
-	margin: 0;
+  margin: 0;
 }
 
 body {
-	min-height: 100vh;
-	scroll-behavior: smooth;
-	text-rendering: optimizeSpeed;
-	line-height: 1.5;
-	font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: 'Roboto', sans-serif;
 }
 
 ul[class],
 ol[class] {
-	list-style: none;
+  list-style: none;
 }
 
 a:not([class]) {
-	text-decoration-skip-ink: auto;
+  text-decoration-skip-ink: auto;
 }
 
 img {
-	max-width: 100%;
-	display: block;
+  max-width: 100%;
+  display: block;
 }
 
 article > * + * {
-	margin-top: 1em;
+  margin-top: 1em;
 }
 
 input,
 button,
 textarea,
 select {
-	font: inherit;
+  font: inherit;
 }
 
 button,
 a {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .link {
-	text-decoration: none;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
 }
