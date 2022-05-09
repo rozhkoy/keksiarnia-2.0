@@ -6,28 +6,15 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './style.scss';
-import { useState } from 'react';
 
 export const ProductCard = () => {
 	const params = useParams();
-	const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 	return (
 		<div className={'product-card'}>
 			<div className="container product-card__container">
 				<div className="product-card__slider">
-					<Swiper onSwiper={setThumbsSwiper} modules={[Virtual]} slidesPerView={1}>
-						<SwiperSlide>
-							<img width={'100%'} src="https://swiperjs.com/demos/images/nature-1.jpg" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img width={'100%'} src="https://swiperjs.com/demos/images/nature-2.jpg" />
-						</SwiperSlide>
-						<SwiperSlide>
-							<img width={'100%'} src="https://swiperjs.com/demos/images/nature-3.jpg" />
-						</SwiperSlide>
-					</Swiper>
-					<Swiper thumbs={{ swiper: thumbsSwiper }} modules={[Virtual]} navigation={true} slidesPerView={1}>
+					<Swiper className="mySwiper2" modules={[Virtual]} navigation={true} slidesPerView={1}>
 						<SwiperSlide>
 							<img width={'100%'} src="https://swiperjs.com/demos/images/nature-1.jpg" />
 						</SwiperSlide>
