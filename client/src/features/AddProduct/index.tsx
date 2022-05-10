@@ -207,6 +207,24 @@ export const AddProduct = () => {
 				},
 			]);
 			previewProductPictureMutation.mutate(formData);
+
+			listProductGroupItems.forEach((item) => {
+				const formData = createFormData([
+					{
+						key: 'value',
+						value: item.inputValue,
+					},
+					{
+						key: 'productGroupItemID',
+						value: item.id,
+					},
+					{
+						key: 'productID',
+						value: data.productID,
+					},
+				]);
+				productPropertyMutation.mutate(formData);
+			});
 		},
 	});
 
@@ -254,19 +272,6 @@ export const AddProduct = () => {
 			},
 		]);
 		mutationProductPrice.mutate(formData);
-		listProductGroupItems.forEach((item) => {
-			const formData = createFormData([
-				{
-					key: 'value',
-					value: item.inputValue,
-				},
-				{
-					key: 'productGroupItemID',
-					value: item.id,
-				},
-			]);
-			productPropertyMutation.mutate(formData);
-		});
 	}
 
 	useEffect(() => {

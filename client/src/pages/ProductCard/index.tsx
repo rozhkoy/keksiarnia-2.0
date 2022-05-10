@@ -58,7 +58,7 @@ export const ProductCard = () => {
 						</div>
 					</div>
 					<div className="product-card__add-to-cart">
-						<input type="number" className="product-card__count" />
+						<input type="number" value={'1'} className="product-card__count" />
 						<button className="product-card__add-to-card-btn">add to cart</button>
 					</div>
 					<div className="product-card__meta">

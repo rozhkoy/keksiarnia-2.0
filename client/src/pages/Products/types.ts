@@ -6,6 +6,7 @@ export type ProductsType = {
 export type IProductResponse = {
 	productID: string;
 	name: string;
+	description: string;
 	previewProductPicture: {
 		pictureID: string;
 		name: string;

@@ -2,8 +2,8 @@ const { propertyProductItem } = require('../models/models');
 
 class ProductPropertyController {
 	async addProductProperty(req, res) {
-		const { value, productGroupItemID } = req.body;
-		const response = await propertyProductItem.create({ value, productGroupItemID });
+		const { value, productGroupItemID, productID } = req.body;
+		const response = await propertyProductItem.create({ value, productGroupItemID, productID });
 		return res.json(response);
 	}
 }

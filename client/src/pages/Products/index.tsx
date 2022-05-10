@@ -33,6 +33,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 			setQueryStatus(true);
 			setMaxvalue(data.productPrice.price);
 		},
+		refetchOnMount: true,
 	});
 
 	const productsQuery = useQuery(['productsQuery', limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue], () => getAllProductByCategoryAndSubcategory(limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue), {
@@ -43,6 +44,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 			setCountProduct(data.count);
 		},
 		enabled: queryStatus,
+		refetchOnMount: true,
 	});
 
 	const categoryFilterItemsQuery = useQuery(['categoryFilterItemsQuery', props.subcategoryTitle], () => getCategoryFilterItemsBySubcategory(props.subcategoryTitle), {
@@ -50,6 +52,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 			console.log(data);
 			setCategoryFilterItems(data);
 		},
+		refetchOnMount: true,
 	});
 
 	function filterSubmitBtnHandler() {
@@ -87,20 +90,19 @@ export const Products: React.FC<ProductsType> = (props) => {
 				<div className="products__container">
 					<div className="products__title">{props.subcategoryTitle}</div>
 					<div className="products__filters">
-						{categoryFilterItem.map((item, index) => (
-							<FilterItems key={item.categoryFilterID} data={item} getValue={setCheckboxChecked} value={checkboxChecked} filterItemIndex={index} />
-						))}
+						{categoryFilterItem.length > 0 && categoryFilterItem.map((item, index) => <FilterItems key={item.categoryFilterID} data={item} getValue={setCheckboxChecked} value={checkboxChecked} filterItemIndex={index} />)}
 						<DoubleRangeSlider min={minMaxValue.min} max={minMaxValue.max} minValue={minValue} maxValue={maxValue} getMinValue={setMinValue} getMaxValue={setMaxvalue} />
 						<button onClick={filterSubmitBtnHandler}>Submit</button>
 					</div>
 					<div className="products__grid">
-						{products.map((item) => (
-							<Link key={item.productID} to={`/product/${item.productID}`}>
-								<ProductItem key={item.productID} name={item.name} price={item.productPrice.price} discountPrice={item.productPrice.discountPrice} img={item.previewProductPicture.name} isActiveDiscountPrice={item.productPrice.isActive.value} />
-							</Link>
-						))}
+						{products.length > 0 &&
+							products.map((item) => (
+								<Link className={'link'} key={item.productID} to={`/product/${item.productID}`}>
+									<ProductItem key={item.productID} name={item.name} price={item.productPrice.price} discountPrice={item.productPrice.discountPrice} img={item.previewProductPicture.name} isActiveDiscountPrice={item.productPrice.isActive.value} />
+								</Link>
+							))}
 					</div>
-					<div className="products__pag   ination">
+					<div className="products__pagination">
 						<button onClick={decrementPage}>{'prev'}</button>
 						<button onClick={incrementPage}>{'next'}</button>
 					</div>

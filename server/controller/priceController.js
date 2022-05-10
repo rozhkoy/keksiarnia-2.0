@@ -23,9 +23,7 @@ class PriceController {
 					attributes: ['price'],
 				},
 			],
-			order: [
-				[productPrice, "price", 'DESC']
-			]
+			order: [[productPrice, 'price', 'DESC']],
 		});
 
 		return res.json(maxPrice);

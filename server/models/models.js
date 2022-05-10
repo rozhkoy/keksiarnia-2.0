@@ -88,6 +88,7 @@ const productGroupItem = sequelize.define('productGroupItem', {
 const propertyProductItem = sequelize.define('propertyProductItem', {
 	propertyProductItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	productGroupItemID: { type: DataTypes.BIGINT, allowNull: false },
+	productID: { type: DataTypes.BIGINT, allowNull: false },
 	value: { type: DataTypes.STRING, allowNull: false },
 });
 
@@ -185,6 +186,20 @@ categoryFilterItem.belongsTo(isActive, { foreignKey: 'isActiveID' });
 
 product.hasMany(tagOfFilterForProduct, { foreignKey: 'productID' });
 tagOfFilterForProduct.belongsTo(product, { foreignKey: 'productID' });
+
+productGroup.hasMany(productGroupItem, { foreignKey: 'productGroupID' });
+productGroupItem.belongsTo(productGroup, { foreignKey: 'productGroupID' });
+
+productGroupItem.hasMany(propertyProductItem, {foreignKey: 'productGroupItemID'})
+propertyProductItem.belongsTo(productGroupItem, {foreignKey: 'productGroupItemID'})
+
+isActive.hasMany(productGroupItem, { foreignKey: 'isActiveID' });
+productGroupItem.belongsTo(isActive, { foreignKey: 'isActiveID' });
+
+tagOfFilterForProduct.hasMany(categoryFilterItem, {foreignKey: "filterID"})
+categoryFilterItem.belongsTo(tagOfFilterForProduct, {foreignKey: "filterID"})
+
+
 
 module.exports = {
 	category,
