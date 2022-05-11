@@ -36,15 +36,18 @@ class ProductGroupController {
 	async getProductGroupById(req, res) {
 		const { productGroupID } = req.query;
 		const response = await productGroup.findAll({
+			attributes: ['productGroupID', "name"],
 			where: {
 				productGroupID,
 			},
 			include: [
 				{
 					model: productGroupItem,
+					attributes: ['productGroupItemID', 'name'],
 					include: [
 						{
 							model: propertyProductItem,
+							attributes: ['propertyProductItemID', 'value', 'productID']
 						},
 					],
 				},

@@ -1,4 +1,7 @@
-const { product, isActive, subcategory, category, previewProductPicture, productPrice, tagOfFilterForProduct, productGroup, productGroupItem, propertyProductItem, categoryFilterItem } = require('../models/models');
+const { product, isActive, subcategory, category, previewProductPicture, productPrice, tagOfFilterForProduct, productGroup, productGroupItem, propertyProductItem,
+	categoryFilterItem,
+	productPicture
+} = require('../models/models');
 const ApiError = require('../exceptions/apiErrors');
 const { Op } = require('sequelize');
 const { values } = require('pg/lib/native/query');
@@ -83,18 +86,52 @@ class ProductController {
 	}
 
 	async getProductById(req, res) {
+		const { productID } = req.query;
 		const response = await product.findAll({
-			// attributes: ['name', 'description', 'number'],
+			attributes: ["productID", 'name', 'description', 'number'],
+			where: {
+				productID
+			},
 			include: [
 				{
 					model: tagOfFilterForProduct,
+					attributes: ['filterItemID'],
 					include: [
 						{
 							model: categoryFilterItem,
+							attributes: ["title"],
+							include: [
+								{
+									model: isActive,
+									attributes: [],
+									where: {
+										value: "Yes"
+									}
+								}
+							]
+
 						},
-					],
+					]
 				},
-			],
+				{
+					model: productPrice,
+					attributes: ['priceID', "discountPrice", "isActiveID", "price", "discountPercent"],
+					include: [
+						{
+							model: isActive,
+							attributes: ['value']
+						}
+					]
+				},
+				{
+					model: subcategory,
+					attributes: ["subcategoryID", "title"]
+				},
+				{
+					model: productPicture,
+					attributes: ["pictureID", "name"]
+				}
+			]
 		});
 		return res.json(response);
 	}

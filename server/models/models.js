@@ -196,8 +196,14 @@ propertyProductItem.belongsTo(productGroupItem, { foreignKey: 'productGroupItemI
 isActive.hasMany(productGroupItem, { foreignKey: 'isActiveID' });
 productGroupItem.belongsTo(isActive, { foreignKey: 'isActiveID' });
 
-tagOfFilterForProduct.hasMany(categoryFilterItem, { foreignKey: 'filterItemID' });
-categoryFilterItem.belongsTo(tagOfFilterForProduct, { foreignKey: 'filterItemID' });
+categoryFilterItem.hasMany(tagOfFilterForProduct, { foreignKey: 'filterItemID' });
+tagOfFilterForProduct.belongsTo(categoryFilterItem, { foreignKey: 'filterItemID' });
+
+isActive.hasMany(tagOfFilterForProduct, {foreignKey: 'isActiveID'})
+tagOfFilterForProduct.belongsTo(isActive, {foreignKey: 'isActiveID'})
+
+product.hasMany(productPicture, {foreignKey: "productID"})
+productPicture.belongsTo(product, {foreignKey: "productID"})
 
 module.exports = {
 	category,
