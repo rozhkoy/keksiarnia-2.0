@@ -1,4 +1,4 @@
-const { propertyGroup, productGroup, isActive } = require('../models/models');
+const { propertyGroup, productGroup, isActive, productGroupItem, propertyProductItem } = require('../models/models');
 
 class ProductGroupController {
 	async addProductGroupController(req, res) {
@@ -29,6 +29,26 @@ class ProductGroupController {
 			offset: offset,
 			limit: limit,
 			order: [['productGroupID', 'DESC']],
+		});
+		return res.json(response);
+	}
+
+	async getProductGroupById(req, res) {
+		const { productGroupID } = req.query;
+		const response = await productGroup.findAll({
+			where: {
+				productGroupID,
+			},
+			include: [
+				{
+					model: productGroupItem,
+					include: [
+						{
+							model: propertyProductItem,
+						},
+					],
+				},
+			],
 		});
 		return res.json(response);
 	}

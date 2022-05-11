@@ -1,6 +1,4 @@
-const { product, isActive, subcategory, category, previewProductPicture, productPrice, tagOfFilterForProduct, productGroup, productGroupItem, propertyProductItem,
-	categoryFilterItem
-} = require('../models/models');
+const { product, isActive, subcategory, category, previewProductPicture, productPrice, tagOfFilterForProduct, productGroup, productGroupItem, propertyProductItem, categoryFilterItem } = require('../models/models');
 const ApiError = require('../exceptions/apiErrors');
 const { Op } = require('sequelize');
 const { values } = require('pg/lib/native/query');
@@ -85,31 +83,19 @@ class ProductController {
 	}
 
 	async getProductById(req, res) {
-		const response = await product.findAndCountAll({
+		const response = await product.findAll({
 			// attributes: ['name', 'description', 'number'],
 			include: [
 				{
-					model: productGroup,
+					model: tagOfFilterForProduct,
 					include: [
 						{
-							model: productGroupItem,
-							include: [
-								{
-									model: propertyProductItem,
-								}
-							],
+							model: categoryFilterItem,
 						},
 					],
 				},
-				// { model: productPrice, include: [{model: isActive, attributes: ["value"]}], attributes: ["discountPrice", "price", 'discountPercent']},
-				// { model: tagOfFilterForProduct, include: [{model: categoryFilterItem }] },
 			],
-			separate:true
 		});
-		// //
-		// const response = await product.find( {
-		// 	include: [{model: propertyProductItem}]
-		// })
 		return res.json(response);
 	}
 }
