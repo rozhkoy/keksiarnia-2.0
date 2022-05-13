@@ -35,7 +35,7 @@ class ProductGroupController {
 
 	async getProductGroupById(req, res) {
 		const { productGroupID } = req.query;
-		const response = await productGroup.findAll({
+		const response = await productGroup.findOne({
 			attributes: ['productGroupID', "name"],
 			where: {
 				productGroupID,

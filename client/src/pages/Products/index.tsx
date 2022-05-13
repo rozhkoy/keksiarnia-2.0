@@ -14,7 +14,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
 	const [page, setPage] = useState<number>(1);
 	const [countProduct, setCountProduct] = useState<number>(0);
-	const [products, setProducts] = useState<IProductResponse[]>([]);
+	const [products, setProducts] = useState<Array<IProductResponse>>([]);
 	const [categoryFilterItem, setCategoryFilterItems] = useState<Array<ICategoryFilterItems>>([]);
 	const [minMaxValue, setMinMaxValue] = useState<IMinMax>({ min: 0, max: 100 });
 	const [minValue, setMinValue] = useState<number>(0);
@@ -26,12 +26,14 @@ export const Products: React.FC<ProductsType> = (props) => {
 	const maxProductPriceQuery = useQuery(['getMaxProductPriceQuery', props.subcategoryTitle, props.categoryTitle], () => getMaxPrice(props.subcategoryTitle, props.categoryTitle), {
 		onSuccess: ({ data }) => {
 			console.log('price', data);
-			setMinMaxValue((state) => {
-				state.max = data.productPrice.price;
-				return state;
-			});
+			if (data) {
+				setMinMaxValue((state) => {
+					state.max = data.productPrice.price;
+					return state;
+				});
+				setMaxvalue(data.productPrice.price);
+			}
 			setQueryStatus(true);
-			setMaxvalue(data.productPrice.price);
 		},
 		refetchOnMount: true,
 	});

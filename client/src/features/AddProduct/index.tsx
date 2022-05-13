@@ -189,7 +189,7 @@ export const AddProduct = () => {
 							value: data.productID,
 						},
 						{
-							key: 'filterID',
+							key: 'filterItemID',
 							value: item.id,
 						},
 					]);

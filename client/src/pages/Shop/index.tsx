@@ -11,6 +11,7 @@ import Auth from '../Auth';
 import { Catalog } from '../Catalog';
 import { Products } from '../Products';
 import { ProductCard } from '../ProductCard';
+import { Logout } from '../Auth/api';
 
 export const Shop = () => {
 	const dispatch = useAppDispatch();

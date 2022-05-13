@@ -71,8 +71,8 @@ class ProductController {
 				{
 					model: tagOfFilterForProduct,
 					where: {
-						filterID: {
-							[Op.or]: filterID,
+						filterItemID: {
+							[Op.and]: filterID,
 						},
 					},
 					// attributes: []
@@ -87,7 +87,7 @@ class ProductController {
 
 	async getProductById(req, res) {
 		const { productID } = req.query;
-		const response = await product.findAll({
+		const response = await product.findOne({
 			attributes: ["productID", 'name', 'description', 'number'],
 			where: {
 				productID
