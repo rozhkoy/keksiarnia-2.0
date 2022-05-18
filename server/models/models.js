@@ -118,6 +118,19 @@ const previewProductPicture = sequelize.define('previewProductPicture', {
 	name: { type: DataTypes.STRING, allowNull: false },
 });
 
+const cart = sequelize.define('cart', {
+	cartID: {type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true},
+	id_user:  { type: DataTypes.BIGINT, allowNull: false },
+})
+
+const cartItem = sequelize.define('cartItem', {
+	cartItemID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+	productID: { type: DataTypes.BIGINT, allowNull: false },
+	quantity: { type: DataTypes.BIGINT, allowNull: false },
+	order: {type: DataTypes.BIGINT, allowNull: false}
+});
+
+
 const userData = sequelize.define('userData', {
 	id_user: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	email: { type: DataTypes.STRING, allowNull: false },
@@ -225,4 +238,6 @@ module.exports = {
 	userData,
 	tokenData,
 	productGroupItem,
+	cart,
+	cartItem
 };
