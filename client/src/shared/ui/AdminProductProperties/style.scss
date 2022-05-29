@@ -1,0 +1,44 @@
+.admin-product-properties {
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-auto-rows: auto;
+
+	&__field {
+		grid-column: 1/3;
+		grid-row: 1;
+		align-self: center;
+		text-align: right;
+		padding: 0 15px 0 0;
+	}
+
+	&__fields-group-items {
+		grid-column: 3/13;
+		grid-row: 1/3;
+		display: grid;
+		grid-gap: 10px;
+		border: 1px solid black;
+		padding: 5px;
+		background: #dddddd;
+		border-radius: 7px;
+	}
+	&__fields-group-item {
+		display: grid;
+		grid-template-columns: repeat(10, 1fr);
+	}
+}
+
+.fields-group-item {
+	&__field-name {
+		grid-column: 1/3;
+		grid-row: 1;
+		align-self: center;
+		text-align: right;
+		padding: 0 15px 0 0;
+	}
+	&__input {
+		grid-column: 3/11;
+		border: 1px solid #31373d;
+		padding: 4px;
+		border-radius: 5px;
+	}
+}

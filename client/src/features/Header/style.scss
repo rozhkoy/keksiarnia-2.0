@@ -1,0 +1,106 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid #000000;
+
+  &__container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: fit-content(100%) 1fr fit-content(100%);
+    grid-gap: 15px;
+    align-items: center;
+  }
+
+  &__logo {
+    padding: 15px 0;
+    font-size: 30px;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  &__nav-links {
+    justify-self: end;
+    display: flex;
+    grid-gap: 15px;
+  }
+
+  &__nav-link {
+    text-transform: uppercase;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  &__user {
+    padding: 15px 0;
+    position: relative;
+
+    &:hover &-account {
+      display: grid;
+    }
+
+    &-auth-sing-in {
+      padding: 0px 15px;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    &-auth-sing-out {
+      background: #0000;
+      border: 1px solid #000000;
+      text-transform: uppercase;
+      margin: 10px 0 0 0;
+    }
+
+    &-auth-sing-up {
+      background: #000000;
+      padding: 7px 10px;
+      color: #ffffff;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid #000000;
+      transition: all .3s;
+
+    }
+
+    &-account {
+      display: none;
+      position: absolute;
+      padding: 20px;
+      width: max-content;
+      right: 0;
+      top: 100%;
+      background: #ffffff;
+      border: 1px solid #000000;
+      grid-gap: 10px;
+
+
+      &-img {
+        //object-fit: cover;
+        //object-position: center center;
+        width: 50px;
+        height: 50px;
+        background: #000000;
+        border-radius: 50%;
+        margin: 0 15px 0 0;
+      }
+
+      &-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    &-auth-sing-up:hover {
+      background: #ffffff;
+      color: #000000;
+      transition: all .3s;
+    }
+  }
+
+  &__user-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+}
+
