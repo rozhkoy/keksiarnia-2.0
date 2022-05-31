@@ -66,7 +66,7 @@ export const AdminMultiSelect: React.FC<AdminMultiSelectType> = (props) => {
 												return (
 													<li
 														onClick={() => selectElement(index, nestedIndex, elem.id)}
-														key={elem.value}
+														key={elem.value + elem.id}
 														ref={(ref: HTMLLIElement) => {
 															return (listRefs.current[index][nestedIndex] = ref);
 														}}
