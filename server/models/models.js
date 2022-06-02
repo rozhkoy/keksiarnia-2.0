@@ -214,6 +214,9 @@ tagOfFilterForProduct.belongsTo(isActive, {foreignKey: 'isActiveID'})
 product.hasMany(productPicture, {foreignKey: "productID"})
 productPicture.belongsTo(product, {foreignKey: "productID"})
 
+cartItem.hasMany(product, {foreignKey: "productID"})
+product.belongsTo(cartItem, {foreignKey: "productID"})
+
 module.exports = {
 	category,
 	subcategory,
