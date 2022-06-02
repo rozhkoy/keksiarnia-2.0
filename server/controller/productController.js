@@ -1,7 +1,4 @@
-const { product, isActive, subcategory, category, previewProductPicture, productPrice, tagOfFilterForProduct, productGroup, productGroupItem, propertyProductItem,
-	categoryFilterItem,
-	productPicture
-} = require('../models/models');
+const { product, isActive, subcategory, category, previewProductPicture, productPrice, tagOfFilterForProduct, productGroup, productGroupItem, propertyProductItem, categoryFilterItem, productPicture } = require('../models/models');
 const ApiError = require('../exceptions/apiErrors');
 const { Op } = require('sequelize');
 const { values } = require('pg/lib/native/query');
@@ -88,9 +85,9 @@ class ProductController {
 	async getProductById(req, res) {
 		const { productID } = req.query;
 		const response = await product.findOne({
-			attributes: ["productID", 'name', 'description', 'number'],
+			attributes: ['productID', 'name', 'description', 'number'],
 			where: {
-				productID
+				productID,
 			},
 			include: [
 				{
@@ -99,39 +96,38 @@ class ProductController {
 					include: [
 						{
 							model: categoryFilterItem,
-							attributes: ["title"],
+							attributes: ['title'],
 							include: [
 								{
 									model: isActive,
 									attributes: [],
 									where: {
-										value: "Yes"
-									}
-								}
-							]
-
+										value: 'Yes',
+									},
+								},
+							],
 						},
-					]
+					],
 				},
 				{
 					model: productPrice,
-					attributes: ['priceID', "discountPrice", "isActiveID", "price", "discountPercent"],
+					attributes: ['priceID', 'discountPrice', 'isActiveID', 'price', 'discountPercent'],
 					include: [
 						{
 							model: isActive,
-							attributes: ['value']
-						}
-					]
+							attributes: ['value'],
+						},
+					],
 				},
 				{
 					model: subcategory,
-					attributes: ["subcategoryID", "title"]
+					attributes: ['subcategoryID', 'title'],
 				},
 				{
 					model: productPicture,
-					attributes: ["pictureID", "name"]
-				}
-			]
+					attributes: ['pictureID', 'name'],
+				},
+			],
 		});
 		return res.json(response);
 	}
