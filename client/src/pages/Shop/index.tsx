@@ -13,6 +13,7 @@ import { Products } from '../Products';
 import { ProductCard } from '../ProductCard';
 import { Logout } from '../Auth/api';
 import { Cart } from '../Cart';
+import { MainPage } from "../MainPage";
 
 export const Shop = () => {
 	const dispatch = useAppDispatch();
@@ -47,10 +48,8 @@ export const Shop = () => {
 					<Route path={':productID'} element={<ProductCard />} />
 				</Route>
 				<Route path={'cart'} element={<Cart />} />
+				<Route path={'/'} element={<MainPage/>} />
 			</Routes>
-			{/*<button onClick={() => dispatch(Logout())}>logout</button>*/}
-			{/*<p className="title">{authData.auth ? 'log in' : 'log out'}</p>*/}
-			{/*<button onClick={() => dispatch(her())}>test</button>*/}
 		</div>
 	);
 };

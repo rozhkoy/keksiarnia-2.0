@@ -59,19 +59,6 @@ const categoryFilterItem = sequelize.define('categoryFilterItem', {
 	title: { type: DataTypes.STRING, allowNull: false },
 });
 
-// const supplier = sequelize.define('supplier', {
-// 	supplierID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-// 	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
-// 	supplierCategoryID: { type: DataTypes.BIGINT, allowNull: false },
-// 	supplierName: { type: DataTypes.STRING, allowNull: false },
-// });
-//
-// const supplierCategory = sequelize.define('supplierCategory', {
-// 	supplierCategoryID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-// 	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
-// 	supplierCategoryName: { type: DataTypes.BIGINT, allowNull: false },
-// });
-
 const productGroup = sequelize.define('productGroup', {
 	productGroupID: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
 	isActiveID: { type: DataTypes.BIGINT, allowNull: false },
@@ -228,8 +215,6 @@ module.exports = {
 	categoryFilter,
 	categoryFilterItem,
 	product,
-	// supplier,
-	// supplierCategory,
 	previewProductPicture,
 	productGroup,
 	propertyProductItem,
