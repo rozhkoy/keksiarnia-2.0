@@ -1,4 +1,6 @@
 .subcategory {
+  width: 100%;
+  padding: 100px 0;
   &__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
