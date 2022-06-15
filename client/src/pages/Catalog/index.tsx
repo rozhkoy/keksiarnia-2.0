@@ -6,6 +6,7 @@ import { createImgLink } from '../../shared/lib/createImgLink';
 import { Link } from 'react-router-dom';
 import { getAllCategories } from 'src/features/AddNewSubcategory/api';
 import { ICategoryResponse } from 'src/features/ListCategories/types';
+import { CatalogItemSkeleton } from "../../shared/SkeletonUi/CatalogItemSkeleton";
 
 export const Catalog = () => {
 	const [categories, setCategories] = useState<ICategoryResponse[]>([]);
@@ -21,7 +22,8 @@ export const Catalog = () => {
 			<Container>
 				<p className="catalog__title">Catalog</p>
 				<div className="catalog__container">
-					{categoriesQuery.isSuccess &&
+					{categoriesQuery.isSuccess ?
+						(
 						categories.map((item) => {
 							const imgLink = createImgLink(item.categoryPicture.name);
 							return (
@@ -34,7 +36,14 @@ export const Catalog = () => {
 									</div>
 								</Link>
 							);
-						})}
+						})) :
+						(
+							<>
+							<CatalogItemSkeleton/>
+							<CatalogItemSkeleton/>
+							</>
+						)
+					}
 				</div>
 			</Container>
 		</div>

@@ -26,6 +26,7 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 	});
 
 	return (
+		<div>
 		<WrapContainer>
 			<div className="subcategory__container">
 				{subcategoriesWithCategoryQuery.isSuccess &&
@@ -44,5 +45,6 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 					})}
 			</div>
 		</WrapContainer>
+		</div>
 	);
 };
