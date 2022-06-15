@@ -1,14 +1,16 @@
-import { ICategoryFilterItems, IProductResponse, ProductsType } from './types';
-import { WrapContainer } from '../../shared/ui/WrapContainer';
-import './style.scss';
-import { FilterItems } from '../../features/FilterItem';
-import { useQuery } from 'react-query';
-import { useEffect, useState } from 'react';
-import { getAllProductByCategoryAndSubcategory, getCategoryFilterItemsBySubcategory, getMaxPrice } from './api';
-import { ProductItem } from 'src/features/ProductItem';
-import { DoubleRangeSlider } from '../../shared/ui/DoubleRangeSlider';
-import { IFilterItemCheckbox, IMinMax } from '../../features/FilterItem/types';
-import { Link } from 'react-router-dom';
+import { ICategoryFilterItems, IProductResponse, ProductsType } from "./types";
+import { WrapContainer } from "../../shared/ui/WrapContainer";
+import "./style.scss";
+import { FilterItems } from "../../features/FilterItem";
+import { QueryClient, useIsFetching, useQueries, useQuery } from "react-query";
+import { useEffect, useState } from "react";
+import { getAllProductByCategoryAndSubcategory, getCategoryFilterItemsBySubcategory, getMaxPrice } from "./api";
+import { ProductItem } from "src/features/ProductItem";
+import { DoubleRangeSlider } from "../../shared/ui/DoubleRangeSlider";
+import { IFilterItemCheckbox, IMinMax } from "../../features/FilterItem/types";
+import { Link } from "react-router-dom";
+import { SkeletonItem } from "../../shared/SkeletonUi/SkeletonItem";
+import { ProductSkeleton } from "../../shared/SkeletonUi/ProductSkeleton";
 
 export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
@@ -23,9 +25,9 @@ export const Products: React.FC<ProductsType> = (props) => {
 	const [filterItemID, setFilterItemID] = useState<Array<string>>([]);
 	const [queryStatus, setQueryStatus] = useState<boolean>(false);
 
-	const maxProductPriceQuery = useQuery(['getMaxProductPriceQuery', props.subcategoryTitle, props.categoryTitle], () => getMaxPrice(props.subcategoryTitle, props.categoryTitle), {
+	const maxProductPriceQuery = useQuery(["getMaxProductPriceQuery", props.subcategoryTitle, props.categoryTitle], () => getMaxPrice(props.subcategoryTitle, props.categoryTitle), {
 		onSuccess: ({ data }) => {
-			console.log('price', data);
+			console.log("price", data);
 			if (data) {
 				setMinMaxValue((state) => {
 					state.max = data.productPrice.price;
@@ -35,26 +37,26 @@ export const Products: React.FC<ProductsType> = (props) => {
 			}
 			setQueryStatus(true);
 		},
-		refetchOnMount: true,
+		refetchOnMount: true
 	});
 
-	const productsQuery = useQuery(['productsQuery', limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue], () => getAllProductByCategoryAndSubcategory(limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue), {
+	const productsQuery = useQuery(["productsQuery", limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue], () => getAllProductByCategoryAndSubcategory(limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue), {
 		onSuccess: ({ data }) => {
-			console.log('products', data);
+			console.log("products", data);
 			setProducts(data.rows);
 			setQueryStatus(false);
 			setCountProduct(data.count);
 		},
 		enabled: queryStatus,
-		refetchOnMount: true,
+		refetchOnMount: true
 	});
 
-	const categoryFilterItemsQuery = useQuery(['categoryFilterItemsQuery', props.subcategoryTitle], () => getCategoryFilterItemsBySubcategory(props.subcategoryTitle), {
+	const categoryFilterItemsQuery = useQuery(["categoryFilterItemsQuery", props.subcategoryTitle], () => getCategoryFilterItemsBySubcategory(props.subcategoryTitle), {
 		onSuccess: ({ data }) => {
 			console.log(data);
 			setCategoryFilterItems(data);
 		},
-		refetchOnMount: true,
+		refetchOnMount: true
 	});
 
 	function filterSubmitBtnHandler() {
@@ -81,32 +83,45 @@ export const Products: React.FC<ProductsType> = (props) => {
 		}
 		console.log(page);
 	}
-
-	useEffect(() => {
-		console.log(filterItemID, page);
-	});
-
+	
 	return (
 		<div>
 			<WrapContainer>
 				<div className="products__container">
 					<div className="products__title">{props.subcategoryTitle}</div>
 					<div className="products__filters">
-						{categoryFilterItem.length > 0 && categoryFilterItem.map((item, index) => <FilterItems key={item.categoryFilterID} data={item} getValue={setCheckboxChecked} value={checkboxChecked} filterItemIndex={index} />)}
-						<DoubleRangeSlider min={minMaxValue.min} max={minMaxValue.max} minValue={minValue} maxValue={maxValue} getMinValue={setMinValue} getMaxValue={setMaxvalue} />
+						{categoryFilterItem.length > 0 && categoryFilterItem.map((item, index) => <FilterItems
+							key={item.categoryFilterID} data={item} getValue={setCheckboxChecked}
+							value={checkboxChecked} filterItemIndex={index} />)}
+						<DoubleRangeSlider min={minMaxValue.min} max={minMaxValue.max} minValue={minValue}
+						                   maxValue={maxValue} getMinValue={setMinValue} getMaxValue={setMaxvalue} />
 						<button onClick={filterSubmitBtnHandler}>Submit</button>
 					</div>
 					<div className="products__grid">
-						{products.length > 0 &&
-							products.map((item) => (
-								<Link className={'link'} key={item.productID} to={`/product/${item.productID}`}>
-									<ProductItem key={item.productID} name={item.name} price={item.productPrice.price} discountPrice={item.productPrice.discountPrice} img={item.previewProductPicture.name} isActiveDiscountPrice={item.productPrice.isActive.value} />
-								</Link>
-							))}
+						{
+
+							productsQuery.isSuccess ?
+								(
+									products.length > 0 &&
+									products.map((item) => (
+										<Link className={"link"} key={item.productID} to={`/product/${item.productID}`}>
+											<ProductItem key={item.productID} name={item.name}
+											             price={item.productPrice.price}
+											             discountPrice={item.productPrice.discountPrice}
+											             img={item.previewProductPicture.name}
+											             isActiveDiscountPrice={item.productPrice.isActive.value} />
+										</Link>
+									))
+								) : (
+									[1,2,3,4,5,6,7,8,9].map((item) => (
+										<ProductSkeleton key={item}/>
+									))
+								)
+						}
 					</div>
 					<div className="products__pagination">
-						<button onClick={decrementPage}>{'prev'}</button>
-						<button onClick={incrementPage}>{'next'}</button>
+						<button onClick={decrementPage}>{"prev"}</button>
+						<button onClick={incrementPage}>{"next"}</button>
 					</div>
 				</div>
 			</WrapContainer>

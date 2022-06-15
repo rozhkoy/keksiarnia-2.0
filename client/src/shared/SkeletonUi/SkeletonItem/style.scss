@@ -1,7 +1,6 @@
 @import "src/shared/Animation/style";
 
-.catalog-item-skeleton {
-  height: 400px;
+.skeleton-item {
   background: #ccc;
   overflow: hidden;
   position: relative;
@@ -23,3 +22,34 @@
     content: '';
   }
 }
+
+.skeleton-item.catalog {
+  height: 400px;
+}
+
+.skeleton-item.subcatalog {
+  height: 200px;
+}
+.skeleton-item.header2 {
+  height: 2.4rem;
+  width: 20%;
+  border-radius: 5px;
+}
+
+.skeleton-item.product-item-img {
+  width: 100%;
+  height: 300px;
+}
+
+.skeleton-item.header4 {
+  height: 1.5rem;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.skeleton-item.price {
+  height: 2.4rem;
+  border-radius: 5px;
+  width: 30%;
+}
+
