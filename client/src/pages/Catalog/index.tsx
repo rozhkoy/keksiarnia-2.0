@@ -6,7 +6,7 @@ import { createImgLink } from '../../shared/lib/createImgLink';
 import { Link } from 'react-router-dom';
 import { getAllCategories } from 'src/features/AddNewSubcategory/api';
 import { ICategoryResponse } from 'src/features/ListCategories/types';
-import { CatalogItemSkeleton } from "../../shared/SkeletonUi/CatalogItemSkeleton";
+import { SkeletonItem } from "../../shared/SkeletonUi/SkeletonItem";
 
 export const Catalog = () => {
 	const [categories, setCategories] = useState<ICategoryResponse[]>([]);
@@ -39,8 +39,8 @@ export const Catalog = () => {
 						})) :
 						(
 							<>
-							<CatalogItemSkeleton/>
-							<CatalogItemSkeleton/>
+							<SkeletonItem type={"catalog"}/>
+							<SkeletonItem type={"catalog"}/>
 							</>
 						)
 					}

@@ -9,6 +9,7 @@ import { SubcategoryType } from './types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { ISubcategoriesFullResponse } from '../../features/ListSubcategory/types';
 import { Link } from 'react-router-dom';
+import { SkeletonItem } from "../../shared/SkeletonUi/SkeletonItem";
 
 export const Subcategory: React.FC<SubcategoryType> = (props) => {
 	const [subcategoriesWithCategory, setSubcategoriesWithCategory] = useState<ISubcategoriesFullResponse[]>([]);
@@ -29,8 +30,8 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 		<div>
 		<WrapContainer>
 			<div className="subcategory__container">
-				{subcategoriesWithCategoryQuery.isSuccess &&
-					subcategoriesWithCategory.map((item) => {
+				{subcategoriesWithCategoryQuery.isSuccess ?
+					(subcategoriesWithCategory.map((item) => {
 						const imgLink = createImgLink(item.subcategoryPicture.name);
 						return (
 							<Link key={item.subcategoryID} to={item.title.toLowerCase()} className={'link'}>
@@ -42,7 +43,17 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 								</div>
 							</Link>
 						);
-					})}
+					}))
+					:
+					(
+						<>
+							<SkeletonItem type={"subcategory"} />
+							<SkeletonItem type={"subcategory"} />
+							<SkeletonItem type={"subcategory"} />
+							<SkeletonItem type={"subcategory"} />
+						</>
+					)
+				}
 			</div>
 		</WrapContainer>
 		</div>
