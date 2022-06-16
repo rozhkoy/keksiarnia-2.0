@@ -6,7 +6,8 @@
   left: 0;
   right: 0;
   z-index: 999;
-  background: #ffffff ;
+  background: #ffffff;
+  font-size: 1.6rem;
 
   &__container {
     display: grid;
@@ -29,6 +30,7 @@
     justify-self: end;
     display: flex;
     grid-gap: 15px;
+    position: relative;
   }
 
   &__nav-link {
@@ -36,6 +38,22 @@
     color: #000000;
     text-decoration: none;
     margin: 0 20px 0 0;
+    display: block;
+    position: relative;
+    &::after {
+      content: '';
+      width: 0%;
+      height: 4px;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      background: #000000;
+      transition: width .3s;
+    }
+    &:hover::after {
+      width: 100%;
+      transition: width .3s;
+    }
   }
 
   &__btn-container {
