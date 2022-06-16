@@ -1,0 +1,12 @@
+.filter-item-skeleton {
+  padding: 10px 0 20px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+  &__sub-items {
+    padding:  0 0 0 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 10px;
+  }
+}

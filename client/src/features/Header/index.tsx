@@ -23,14 +23,14 @@ export const Header = () => {
 						</button>
 					</div>
 					<div className='header__btn-container'>
-						<div className="header__nav-links">
+						<ul className="header__nav-links">
 							<NavLink className={"header__nav-link"} to={"/catalog"}>
 								Catalog
 							</NavLink>
 							<NavLink className={"header__nav-link"} to={"/cart"}>
 								cart
 							</NavLink>
-						</div>
+						</ul>
 						{authData.auth ? (
 							<div className="header__user">
 								<div className="header__user-icon">

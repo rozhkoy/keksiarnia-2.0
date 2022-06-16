@@ -33,5 +33,36 @@
     padding: 35px 0;
     grid-column: 4/12;
     justify-self: center;
+    &-btn {
+      background: #ffffff;
+      color: #000000;
+      //border: 1px solid #000000;
+      font-size: 1.4rem;
+      padding: 2px 10px;
+      text-transform: uppercase;
+      border-width: 1px 0px 1px 1px;
+      &--prev {
+        border-radius: 5px 0px 0px 5px;
+      }
+      &--next {
+        border-right: 1px solid #000000;
+        border-radius: 0px 5px 5px 0px;
+      }
+    }
+  }
+}
+
+.filter-search-btn {
+  width: 100%;
+  font-size: 1.8rem;
+  background: #ffffff;
+  color: #000;
+  border: 1px solid #000000;
+  padding: 10px 0;
+  transition: color, background .3s;
+  &:hover {
+    background: #000000;
+    color: #fff;
+    transition: color, background .3s;
   }
 }

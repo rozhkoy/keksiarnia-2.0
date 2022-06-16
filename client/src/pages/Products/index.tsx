@@ -11,6 +11,7 @@ import { IFilterItemCheckbox, IMinMax } from "../../features/FilterItem/types";
 import { Link } from "react-router-dom";
 import { SkeletonItem } from "../../shared/SkeletonUi/SkeletonItem";
 import { ProductSkeleton } from "../../shared/SkeletonUi/ProductSkeleton";
+import { FilterItemSkeleton } from "../../shared/SkeletonUi/FilterItemSkeleton";
 
 export const Products: React.FC<ProductsType> = (props) => {
 	const [limit, setLimit] = useState<number>(9);
@@ -83,23 +84,31 @@ export const Products: React.FC<ProductsType> = (props) => {
 		}
 		console.log(page);
 	}
-	
+
 	return (
 		<div>
 			<WrapContainer>
 				<div className="products__container">
 					<div className="products__title">{props.subcategoryTitle}</div>
 					<div className="products__filters">
-						{categoryFilterItem.length > 0 && categoryFilterItem.map((item, index) => <FilterItems
-							key={item.categoryFilterID} data={item} getValue={setCheckboxChecked}
-							value={checkboxChecked} filterItemIndex={index} />)}
-						<DoubleRangeSlider min={minMaxValue.min} max={minMaxValue.max} minValue={minValue}
-						                   maxValue={maxValue} getMinValue={setMinValue} getMaxValue={setMaxvalue} />
-						<button onClick={filterSubmitBtnHandler}>Submit</button>
+						{
+							categoryFilterItemsQuery.isSuccess ? (
+								<>
+									{
+										categoryFilterItem.length > 0 && categoryFilterItem.map((item, index) => <FilterItems key={item.categoryFilterID} data={item} getValue={setCheckboxChecked} value={checkboxChecked} filterItemIndex={index} />)
+									}
+									<DoubleRangeSlider min={minMaxValue.min} max={minMaxValue.max} minValue={minValue} maxValue={maxValue} getMinValue={setMinValue} getMaxValue={setMaxvalue} />
+									<button className={'filter-search-btn'} onClick={filterSubmitBtnHandler}>Search</button>
+									</>
+							) : (
+								[1,2,3].map((item) => (
+									<FilterItemSkeleton key={item}/>
+								))
+							)
+						}
 					</div>
 					<div className="products__grid">
 						{
-
 							productsQuery.isSuccess ?
 								(
 									products.length > 0 &&
@@ -119,9 +128,10 @@ export const Products: React.FC<ProductsType> = (props) => {
 								)
 						}
 					</div>
+
 					<div className="products__pagination">
-						<button onClick={decrementPage}>{"prev"}</button>
-						<button onClick={incrementPage}>{"next"}</button>
+						<button className="products__pagination-btn products__pagination-btn--prev" onClick={decrementPage}>&#706;</button>
+						<button className="products__pagination-btn products__pagination-btn--next" onClick={incrementPage}>&#707;</button>
 					</div>
 				</div>
 			</WrapContainer>
