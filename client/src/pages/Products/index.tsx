@@ -43,7 +43,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 
 	const productsQuery = useQuery(["productsQuery", limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue], () => getAllProductByCategoryAndSubcategory(limit, page, props.categoryTitle, props.subcategoryTitle, filterItemID, maxValue, minValue), {
 		onSuccess: ({ data }) => {
-			console.log("products", data);
+			console.log(data)
 			setProducts(data.rows);
 			setQueryStatus(false);
 			setCountProduct(data.count);
@@ -74,7 +74,6 @@ export const Products: React.FC<ProductsType> = (props) => {
 			setPage((state) => (state += 1));
 			setQueryStatus(true);
 		}
-		console.log(page);
 	}
 
 	function decrementPage() {
@@ -82,14 +81,13 @@ export const Products: React.FC<ProductsType> = (props) => {
 			setPage((state) => (state -= 1));
 			setQueryStatus(true);
 		}
-		console.log(page);
 	}
 
 	return (
 		<div>
 			<WrapContainer>
 				<div className="products__container">
-					<div className="products__title">{props.subcategoryTitle}</div>
+					<h1 className="products__title">{props.subcategoryTitle}</h1>
 					<div className="products__filters">
 						{
 							categoryFilterItemsQuery.isSuccess ? (
@@ -108,6 +106,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 						}
 					</div>
 					<div className="products__grid">
+						<ProductSkeleton/>
 						{
 							productsQuery.isSuccess ?
 								(
@@ -122,7 +121,7 @@ export const Products: React.FC<ProductsType> = (props) => {
 										</Link>
 									))
 								) : (
-									[1,2,3,4,5,6,7,8,9].map((item) => (
+									[1,2,3].map((item) => (
 										<ProductSkeleton key={item}/>
 									))
 								)

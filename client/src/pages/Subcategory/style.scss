@@ -46,18 +46,9 @@
 
   &__item-title {
     text-align: center;
-    font-size: 30px;
     text-transform: uppercase;
     color: #fff;
+    font-weight: 300;
     text-decoration: none;
   }
-}
-
-.testimg {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-height: 100%;
-  grid-row: 1;
-  grid-column: 1;
 }

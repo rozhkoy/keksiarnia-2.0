@@ -41,10 +41,16 @@
   height: 300px;
 }
 
-.skeleton-item.header4 {
-  height: 2.3rem;
+.skeleton-item.header-4 {
+  height: 2.4rem;
   border-radius: 5px;
   width: 100%;
+  margin: 2px 0;
+}
+.skeleton-item.text {
+  height: 1.6rem;
+  border-radius: 5px;
+  margin: 5px 0;
 }
 
 .skeleton-item.short-header-4 {
@@ -54,9 +60,10 @@
 }
 
 .skeleton-item.price {
-  height: 2.4rem;
+  height: 1.8rem;
   border-radius: 5px;
   width: 30%;
+  margin: 5px 0;
 }
 
 .skeleton-item.header6 {

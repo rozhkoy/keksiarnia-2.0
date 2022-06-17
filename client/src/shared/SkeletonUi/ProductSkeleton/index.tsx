@@ -6,8 +6,9 @@ export const ProductSkeleton = () => {
 		<div className='product-skeleton'>
 			<SkeletonItem type={"product-item-img"}/>
 			<div className="product-skeleton__text">
-				<SkeletonItem type={'header4'}/>
 				<SkeletonItem type={'price'}/>
+				<SkeletonItem type={'header-4'}/>
+				<SkeletonItem type={'text'}/>
 			</div>
 
 		</div>
