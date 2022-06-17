@@ -21,7 +21,7 @@ export const FilterItems: React.FC<FilterItemsType> = (props) => {
 
 	return (
 		<div className="filter-items">
-			<div className="filter-items__title">{props.data.title}</div>
+			<h3 className="filter-items__title">{props.data.title}</h3>
 			<div className="filter-items__items">
 				{props.data.categoryFilterItems.map((item, index) => (
 					<div key={item.filterItemID} className="filter-items__item">

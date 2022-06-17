@@ -27,7 +27,7 @@ export const DoubleRangeSlider: React.FC<DoubleRangeSliderType> = (props) => {
 
 	return (
 		<div className="double-range-slider">
-			<p className="double-range-slider__title">price</p>
+			<h3 className="double-range-slider__title">price</h3>
 			<div className="double-range-slider__inputs">
 				<input type="text" value={props.minValue} onChange={inputMin} className="double-range-slider__input" />
 				<input type="text" value={props.maxValue} onChange={inputMax} className="double-range-slider__input" />

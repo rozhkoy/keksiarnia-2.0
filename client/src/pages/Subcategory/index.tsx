@@ -38,7 +38,7 @@ export const Subcategory: React.FC<SubcategoryType> = (props) => {
 								<div key={item.subcategoryID} className="subcategory__item">
 									<img src={imgLink} alt="" className="subcategory__item-img" />
 									<div className="subcategory__item-title-background">
-										<p className="subcategory__item-title">{item.title}</p>
+										<h2 className="subcategory__item-title">{item.title}</h2>
 									</div>
 								</div>
 							</Link>
