@@ -45,6 +45,14 @@ export const ProductCard = () => {
 						<div className="product-card__some-info">
 							<h1 className="product-card__title">{productInfo.name}</h1>
 							<p className="product-card__price">{productInfo.productPrice.price}$</p>
+							<div className="product-card__property">
+								{productInfo.propertyProductItems.map((item) => (
+									<div className="product-card__item">
+										<div className="product-card__name">{item.productGroupItem.name}:</div>
+										<div className="product-card__value">{item.value}</div>
+									</div>
+								))}
+							</div>
 							<div className="product-card__add-to-cart">
 								<input type="number" value={'1'} className="product-card__count" />
 								<button className="product-card__add-to-card-btn">add to cart</button>
