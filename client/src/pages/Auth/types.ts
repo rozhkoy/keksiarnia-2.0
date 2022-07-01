@@ -17,12 +17,18 @@ export interface AuthResponse {
 
 export interface UserDTO {
 	email: string;
-	id: string;
+	id: number;
 	role: string;
+	lastName: string;
+	firstName: string;
 }
 
 export interface IAuthState {
 	auth: boolean;
+	userId: number;
+	firstName: string;
+	lastName: string;
+	isAdmin: boolean;
 }
 
 export type DataError = {

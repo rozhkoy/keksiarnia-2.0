@@ -5,6 +5,10 @@ import { IAuthState } from './types';
 
 const initialState: IAuthState = {
 	auth: false,
+	userId: 0,
+	firstName: '',
+	lastName: '',
+	isAdmin: false,
 };
 
 export const authState = createSlice({
@@ -18,17 +22,32 @@ export const authState = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(SingUp.fulfilled, (state, { payload }) => {
 			console.log(payload);
+			if (payload) {
+				state.firstName = payload.user.firstName;
+				state.lastName = payload.user.lastName;
+				state.userId = payload.user.id;
+				state.isAdmin = payload.user.role === 'ADMIN' ? true : false;
+				state.auth = true;
+			}
 		});
 		builder.addCase(SingIn.fulfilled, (state, { payload }) => {
 			console.log(payload);
 			if (payload) {
+				state.firstName = payload.user.firstName;
+				state.lastName = payload.user.lastName;
+				state.userId = payload.user.id;
+				state.isAdmin = payload.user.role === 'ADMIN' ? true : false;
 				state.auth = true;
 			}
 		});
 		builder.addCase(CheckAuth.fulfilled, (state, { payload }) => {
-			console.log(payload);
+			console.log('check', payload);
 			if (payload) {
 				state.auth = true;
+				state.firstName = payload.user.firstName;
+				state.lastName = payload.user.lastName;
+				state.userId = payload.user.id;
+				state.isAdmin = payload.user.role === 'ADMIN' ? true : false;
 			}
 		});
 		builder.addCase(Logout.fulfilled, (state, { payload }) => {

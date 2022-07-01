@@ -1,5 +1,4 @@
 .product-item {
-  border: 1px solid black;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 300px fit-content(100%);
@@ -67,16 +66,16 @@
 
   &__btn-add-to-cart {
     border: 1px solid #000000;
-    background: #fff;
-    color: #000000;
+    background: #000000;
+    color: #fff;
     padding: 5px 10px;
     transition: all .3s;
-    align-self: end;
     font-size: 1.6rem;
     margin: 15px  0 0 0;
+    width: 100%;
     &:hover {
-      background: #000000;
-      color: #fff;
+      background: #ffffff;
+      color: #000000;
       transition: all .3s;
     }
   }

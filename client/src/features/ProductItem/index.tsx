@@ -20,9 +20,9 @@ export const ProductItem: React.FC<ProductItemType> = (props) => {
 					)}
 				</div>
 				<h4 className="info__title">{props.name}</h4>
-				<p className="text info__description">{"kdjflksjfkljsalkjdflkasjfdlkjsalkdjflksajflk;ajs;ldfjl;asjdf;asjd;lfjasl;dfj;alsjdfl;ajdf"}</p>
+				<p className="text info__description">kdjflksjfkljsalkjdflkasjfdlkjsalkdjflksajflk;ajs;ldfjl;asjdf;asjd;lfjasl;dfj;alsjdfl;ajdf</p>
 				<div className="info__add-to-cart-wrap">
-					<button className="info__btn-add-to-cart">Add to Card</button>
+					<button className="info__btn-add-to-cart">Add to cart</button>
 				</div>
 			</div>
 		</div>
