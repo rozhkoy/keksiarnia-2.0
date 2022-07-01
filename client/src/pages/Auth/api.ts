@@ -6,7 +6,7 @@ import { AlertError } from '../../shared/lib/AlertError';
 
 export const SingUp = createAsyncThunk('SingUp', async (userData: IUserSingUp) => {
 	console.log(userData);
-	const response = await $host.post<IUser>('api/registration', userData).catch((e: AxiosError) => {
+	const response = await $host.post<AuthResponse>('api/registration', userData).catch((e: AxiosError) => {
 		AlertError(e);
 		throw e;
 	});

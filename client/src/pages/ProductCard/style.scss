@@ -1,7 +1,8 @@
 .product-card {
   width: 100%;
   min-height: 100vh;
-  padding: 50px 0;
+  padding: 100px 0;
+  font-size: 16px;
 
   &__container {
     display: grid;
@@ -14,6 +15,7 @@
     grid-column: 1;
     overflow: hidden;
     display: grid;
+    max-height: 480px;
   }
 
   &__some-info {
@@ -135,5 +137,6 @@
 
 .slideImg {
   object-fit: cover;
+  width: 100%;
   height: 100%;
 }

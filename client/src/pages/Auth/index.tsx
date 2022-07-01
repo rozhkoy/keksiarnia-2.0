@@ -68,9 +68,9 @@ const Auth = () => {
 						<input placeholder="Password" onChange={passwordHandler} value={password} type="password" className="auth__input" />
 						<div className="auth__button-group">
 							<Link className="auth__bttn auth__bttn--without-border" to={path.pathname == '/Sing_in' ? '/Sing_up' : '/Sing_in'}>
-								{path.pathname == '/Sing_up' ? 'Sing up' : 'Sing in'}
+								{path.pathname == '/Sing_in' ? 'Sing up' : 'Sing in'}
 							</Link>
-							<button className="auth__bttn auth__bttn--with-border">{path.pathname == '/Sing_up' ? 'Sing in' : 'Sing up'}</button>
+							<button className="auth__bttn auth__bttn--with-border">{path.pathname == '/Sing_in' ? 'Sing in' : 'Sing up'}</button>
 						</div>
 					</form>
 				</div>
