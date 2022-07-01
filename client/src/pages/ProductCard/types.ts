@@ -4,6 +4,7 @@ export interface IProductResponseByID {
 	description: string;
 	number: string;
 	tagOfFilterForProducts: Array<ITagOfFilterForProducts>;
+	propertyProductItems: Array<IPropertyProductItems>;
 	productPrice: {
 		priceID: string;
 		discountPrice: number;
@@ -31,4 +32,11 @@ interface ITagOfFilterForProducts {
 interface IProductPictureName {
 	pictureID: string;
 	name: string;
+}
+interface IPropertyProductItems {
+	propertyProductItemID: number;
+	value: string;
+	productGroupItem: {
+		name: string;
+	};
 }

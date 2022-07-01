@@ -117,6 +117,17 @@
   &__description-text {
     font-weight: 300;
   }
+
+  &__item {
+    display: flex;
+  }
+
+  &__name {
+    margin: 0 10px 0 0;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
 }
 
 
