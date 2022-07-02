@@ -11,6 +11,7 @@ import { getProductById } from './api';
 import { useState } from 'react';
 import { IProductResponseByID } from './types';
 import { createImgLink } from '../../shared/lib/createImgLink';
+import { ProductCardSkeleton } from '../../shared/SkeletonUi/ProductCardSkeleton';
 
 export const ProductCard = () => {
 	const params = useParams();
@@ -27,11 +28,11 @@ export const ProductCard = () => {
 
 	return (
 		<>
-			{productInfo && (
-				<div className={'product-card'}>
+			<div className={'product-card'}>
+				{productInfo ? (
 					<div className="container product-card__container">
 						<div className="product-card__slider">
-							<Swiper className="mySwiper2" modules={[Virtual]} navigation={true} slidesPerView={1}>
+							<Swiper className="mySwiper2" navigation={true} slidesPerView={1}>
 								{productInfo.productPictures.map((item) => {
 									const pictureLink = createImgLink(item.name);
 									return (
@@ -44,7 +45,7 @@ export const ProductCard = () => {
 						</div>
 						<div className="product-card__some-info">
 							<h1 className="product-card__title">{productInfo.name}</h1>
-							<p className="product-card__price">{productInfo.productPrice.price}$</p>
+							<h2 className="product-card__price">{productInfo.productPrice.price}$</h2>
 							<div className="product-card__property">
 								{productInfo.propertyProductItems.map((item) => (
 									<div className="product-card__item">
@@ -73,8 +74,10 @@ export const ProductCard = () => {
 							<p className="product-card__description-text">{productInfo.description}</p>
 						</div>
 					</div>
-				</div>
-			)}
+				) : (
+					<ProductCardSkeleton />
+				)}
+			</div>
 		</>
 	);
 };
