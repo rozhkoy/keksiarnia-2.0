@@ -8,3 +8,7 @@ export async function getProductById(productID: string) {
 		},
 	});
 }
+
+export async function addToCardByID() {
+	return await $host.post('api/cart/add', {});
+}
