@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Virtual } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -6,18 +6,21 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './style.scss';
-import { useQuery } from 'react-query';
-import { getProductById } from './api';
+import { useMutation, useQuery } from 'react-query';
+import { addToCardByID, getProductById } from './api';
 import { useState } from 'react';
 import { IProductResponseByID } from './types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { ProductCardSkeleton } from '../../shared/SkeletonUi/ProductCardSkeleton';
+import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
+import auth from '../Auth';
 
 export const ProductCard = () => {
 	const params = useParams();
-	console.log(params);
-
+	const authData = useAppSelector((state) => state.authState);
+	const dispatch = useAppDispatch();
 	const [productInfo, setProductInfo] = useState<IProductResponseByID>();
+	const navigate = useNavigate();
 
 	const productByIdQuery = useQuery(['productByIdQuery', params.productID], () => getProductById(String(params.productID)), {
 		onSuccess: ({ data }) => {
@@ -25,6 +28,17 @@ export const ProductCard = () => {
 			setProductInfo(data);
 		},
 	});
+
+	const cartMutation = useMutation(addToCardByID, {});
+
+	function addToCart() {
+		if (authData.auth) {
+			console.log('auth');
+		} else {
+			console.log('no auth');
+			navigate('/Sing_in');
+		}
+	}
 
 	return (
 		<>
@@ -56,7 +70,9 @@ export const ProductCard = () => {
 							</div>
 							<div className="product-card__add-to-cart">
 								<input type="number" value={'1'} className="product-card__count" />
-								<button className="product-card__add-to-card-btn">add to cart</button>
+								<button onClick={addToCart} className="product-card__add-to-card-btn">
+									add to cart
+								</button>
 							</div>
 							<div className="product-card__meta">
 								<div className="product-card__meta-item">

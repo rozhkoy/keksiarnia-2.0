@@ -110,6 +110,16 @@ class ProductController {
 					],
 				},
 				{
+					model: propertyProductItem,
+					attributes: ['propertyProductItemID','value'],
+					include: [
+						{
+							model: productGroupItem,
+							attributes: ['name']
+						}
+					]
+				},
+				{
 					model: productPrice,
 					attributes: ['priceID', 'discountPrice', 'isActiveID', 'price', 'discountPercent'],
 					include: [

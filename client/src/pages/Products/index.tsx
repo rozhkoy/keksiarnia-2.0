@@ -102,7 +102,6 @@ export const Products: React.FC<ProductsType> = (props) => {
 						)}
 					</div>
 					<div className="products__grid">
-						<ProductSkeleton />
 						{productsQuery.isSuccess
 							? products.length > 0 &&
 							  products.map((item) => (

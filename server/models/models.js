@@ -110,7 +110,6 @@ const cartItem = sequelize.define('cartItem', {
 	productID: { type: DataTypes.BIGINT, allowNull: false },
 	id_user:  { type: DataTypes.BIGINT, allowNull: false },
 	quantity: { type: DataTypes.BIGINT, allowNull: false },
-	order: {type: DataTypes.BIGINT, allowNull: false},
 });
 
 
@@ -203,6 +202,9 @@ productPicture.belongsTo(product, {foreignKey: "productID"})
 
 cartItem.hasMany(product, {foreignKey: "productID"})
 product.belongsTo(cartItem, {foreignKey: "productID"})
+
+product.hasMany(propertyProductItem, {foreignKey: "productID"})
+propertyProductItem.belongsTo(product, {foreignKey: "productID"})
 
 module.exports = {
 	category,

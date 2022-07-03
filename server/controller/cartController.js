@@ -2,8 +2,8 @@ const { cartItem, product } = require('../models/models');
 
 class CartController {
 	async addCardController(req, res) {
-		const { productID, quantity, id_user, order } = req.body;
-		const response = await cartItem.create({ productID, quantity, id_user, order });
+		const { productID, quantity, id_user} = req.body;
+		const response = await cartItem.create({ productID, quantity, id_user });
 		return res.json(response);
 	}
 
@@ -18,9 +18,9 @@ class CartController {
 	}
 
 	async updataCartItem(req, res) {
-		const { productID, quantity, id_user, order, cardItemID } = req.body;
+		const { productID, quantity, id_user, cardItemID } = req.body;
 		const response = await cartItem.update(
-			{ productID, quantity, id_user, order },
+			{ productID, quantity, id_user },
 			{
 				where: {
 					cardItemID: cardItemID,
