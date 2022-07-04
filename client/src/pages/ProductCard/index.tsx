@@ -7,13 +7,14 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './style.scss';
 import { useMutation, useQuery } from 'react-query';
-import { addToCardByID, getProductById } from './api';
+import { addToCartByID, getProductById } from './api';
 import { useState } from 'react';
 import { IProductResponseByID } from './types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { ProductCardSkeleton } from '../../shared/SkeletonUi/ProductCardSkeleton';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
 import auth from '../Auth';
+import { createFormData } from '../../shared/lib/createFormData';
 
 export const ProductCard = () => {
 	const params = useParams();
@@ -29,11 +30,21 @@ export const ProductCard = () => {
 		},
 	});
 
-	const cartMutation = useMutation(addToCardByID, {});
+	const cartMutation = useMutation(addToCartByID);
 
 	function addToCart() {
 		if (authData.auth) {
 			console.log('auth');
+			const formData = createFormData([
+				{ key: 'productID', value: String(params.productID) },
+				{ key: 'quantity', value: '1' },
+				{ key: 'id_user', value: String(authData.userId) },
+			]);
+			cartMutation.mutate(formData, {
+				onSuccess: ({ data }) => {
+					console.log(data);
+				},
+			});
 		} else {
 			console.log('no auth');
 			navigate('/Sing_in');

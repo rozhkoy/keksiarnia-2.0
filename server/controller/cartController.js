@@ -1,14 +1,14 @@
 const { cartItem, product } = require('../models/models');
 
 class CartController {
-	async addCardController(req, res) {
+	async addCard(req, res) {
 		const { productID, quantity, id_user} = req.body;
 		const response = await cartItem.create({ productID, quantity, id_user });
 		return res.json(response);
 	}
 
-	async deleteCardController(req, res) {
-		const { cartItemID } = req.query;
+	async deleteCartItem(req, res) {
+		const { cartItemID } = req.body;
 		const response = await cartItem.destroy({
 			where: {
 				cartItemID: cartItemID,

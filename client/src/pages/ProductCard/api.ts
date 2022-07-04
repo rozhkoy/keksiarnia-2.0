@@ -9,6 +9,6 @@ export async function getProductById(productID: string) {
 	});
 }
 
-export async function addToCardByID() {
-	return await $host.post('api/cart/add', {});
+export async function addToCartByID(formData: FormData) {
+	return await $host.post<IProductResponseByID>('api/cart/add', formData);
 }
