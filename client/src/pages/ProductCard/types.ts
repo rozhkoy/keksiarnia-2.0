@@ -1,3 +1,5 @@
+import { IProduct } from '../../features/AddProduct/types';
+
 export interface IProductResponseByID {
 	productID: string;
 	name: string;
@@ -33,10 +35,19 @@ interface IProductPictureName {
 	pictureID: string;
 	name: string;
 }
-interface IPropertyProductItems {
+
+export interface IPropertyProductItems {
 	propertyProductItemID: number;
 	value: string;
 	productGroupItem: {
 		name: string;
 	};
+}
+
+export interface ICartItem {
+	cartItemID: string;
+	productID: string;
+	id_user: string;
+	quantity: '1';
+	products: Array<IProduct>;
 }

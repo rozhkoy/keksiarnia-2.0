@@ -7,9 +7,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './style.scss';
 import { useMutation, useQuery } from 'react-query';
-import { addToCartByID, getProductById } from './api';
-import { useState } from 'react';
-import { IProductResponseByID } from './types';
+import { addToCartByID, getAllPositionOnCartByUserID, getProductById } from './api';
+import { ChangeEvent, useState } from 'react';
+import { ICartItem, IProductResponseByID } from './types';
 import { createImgLink } from '../../shared/lib/createImgLink';
 import { ProductCardSkeleton } from '../../shared/SkeletonUi/ProductCardSkeleton';
 import { useAppDispatch, useAppSelector } from '../../shared/lib/hooks';
@@ -22,6 +22,8 @@ export const ProductCard = () => {
 	const dispatch = useAppDispatch();
 	const [productInfo, setProductInfo] = useState<IProductResponseByID>();
 	const navigate = useNavigate();
+	const [productQuantity, setProductQuantity] = useState(1);
+	const [cartItems, setCartItems] = useState<Array<ICartItem>>([]);
 
 	const productByIdQuery = useQuery(['productByIdQuery', params.productID], () => getProductById(String(params.productID)), {
 		onSuccess: ({ data }) => {
@@ -30,24 +32,48 @@ export const ProductCard = () => {
 		},
 	});
 
+	const getAllPositionOnCartByUserIdQuery = useQuery(['getAllPositionOnCartByUserId', authData.userId], () => getAllPositionOnCartByUserID(authData.userId), {
+		onSuccess: ({ data }) => {
+			console.log(data);
+			setCartItems(data);
+		},
+	});
+
 	const cartMutation = useMutation(addToCartByID);
 
 	function addToCart() {
-		if (authData.auth) {
+		if (authData.auth && getAllPositionOnCartByUserIdQuery.isSuccess) {
 			console.log('auth');
-			const formData = createFormData([
-				{ key: 'productID', value: String(params.productID) },
-				{ key: 'quantity', value: '1' },
-				{ key: 'id_user', value: String(authData.userId) },
-			]);
-			cartMutation.mutate(formData, {
-				onSuccess: ({ data }) => {
-					console.log(data);
-				},
-			});
+			if (cartItems.find((item) => item.productID == params.productID)) {
+				alert('this product already is in a cart');
+			} else {
+				const formData = createFormData([
+					{ key: 'productID', value: String(params.productID) },
+					{ key: 'quantity', value: String(productQuantity) },
+					{ key: 'id_user', value: String(authData.userId) },
+				]);
+				cartMutation.mutate(formData, {
+					onSuccess: ({ data }) => {
+						console.log(data);
+					},
+				});
+			}
 		} else {
 			console.log('no auth');
 			navigate('/Sing_in');
+		}
+	}
+
+	function inputQuantityHandler(e: ChangeEvent<HTMLInputElement>) {
+		if (productInfo) {
+			if (+e.target.value <= 0) {
+				console.log('test');
+				setProductQuantity(1);
+			} else if (+e.target.value < +productInfo.number) {
+				setProductQuantity(+e.target.value);
+			} else {
+				setProductQuantity(+productInfo.number);
+			}
 		}
 	}
 
@@ -73,14 +99,14 @@ export const ProductCard = () => {
 							<h2 className="product-card__price">{productInfo.productPrice.price}$</h2>
 							<div className="product-card__property">
 								{productInfo.propertyProductItems.map((item) => (
-									<div className="product-card__item">
+									<div className="product-card__item" key={item.value}>
 										<div className="product-card__name">{item.productGroupItem.name}:</div>
 										<div className="product-card__value">{item.value}</div>
 									</div>
 								))}
 							</div>
 							<div className="product-card__add-to-cart">
-								<input type="number" value={'1'} className="product-card__count" />
+								<input type="number" onChange={inputQuantityHandler} value={productQuantity} className="product-card__count" />
 								<button onClick={addToCart} className="product-card__add-to-card-btn">
 									add to cart
 								</button>
