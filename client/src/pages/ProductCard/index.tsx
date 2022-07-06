@@ -24,6 +24,7 @@ export const ProductCard = () => {
 	const navigate = useNavigate();
 	const [productQuantity, setProductQuantity] = useState(1);
 	const [cartItems, setCartItems] = useState<Array<ICartItem>>([]);
+	const [cartFlag, setCartFlag] = useState<boolean>(true);
 
 	const productByIdQuery = useQuery(['productByIdQuery', params.productID], () => getProductById(String(params.productID)), {
 		onSuccess: ({ data }) => {
@@ -34,15 +35,18 @@ export const ProductCard = () => {
 
 	const getAllPositionOnCartByUserIdQuery = useQuery(['getAllPositionOnCartByUserId', authData.userId], () => getAllPositionOnCartByUserID(authData.userId), {
 		onSuccess: ({ data }) => {
-			console.log(data);
+			console.log('============================', data);
 			setCartItems(data);
+			setCartFlag(false);
 		},
+		enabled: !!cartFlag,
+		refetchOnMount: true,
 	});
 
 	const cartMutation = useMutation(addToCartByID);
 
 	function addToCart() {
-		if (authData.auth && getAllPositionOnCartByUserIdQuery.isSuccess) {
+		if (authData.auth) {
 			console.log('auth');
 			if (cartItems.find((item) => item.productID == params.productID)) {
 				alert('this product already is in a cart');
@@ -55,6 +59,7 @@ export const ProductCard = () => {
 				cartMutation.mutate(formData, {
 					onSuccess: ({ data }) => {
 						console.log(data);
+						setCartFlag(true);
 					},
 				});
 			}
